@@ -30,6 +30,11 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # Member system
 gem 'devise', '~> 4.2'
+gem 'omniauth', '~> 1.9', '>= 1.9.1'
+gem 'omniauth-facebook', '~> 6.0'
+gem 'omniauth-google-oauth2', '~> 0.8.0'
+gem 'figaro', '~> 1.2'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
