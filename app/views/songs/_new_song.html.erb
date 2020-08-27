@@ -1,0 +1,27 @@
+<% if song.errors.any? %>
+  <ul>
+    <% song.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: song, url: songs_path, method: 'psot', local: true do |f| %>
+<div>
+  <%= f.label :image %>
+  <%= f.file_field :image %>
+</div>
+<div>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+</div>
+<div>
+  <%= f.label :intro %>
+  <%= f.text_field :intro %>
+</div>
+<div>
+  <%= f.label :track %>
+  <%= f.file_field :track %>
+</div>
+  <%= f.submit %>
+<% end %>

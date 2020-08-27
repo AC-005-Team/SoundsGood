@@ -1,0 +1,4 @@
+<h1>profile</h1>
+<%= link_to 'edit', user_edit_path(current_user.id) %>
+<%= link_to 'go back', root_path %>
+<%= render 'profile', user: @user %>

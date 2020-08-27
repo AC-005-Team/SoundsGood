@@ -3,4 +3,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', omniauthcallbacks: 'users/omniauthcallbacks'}
   
   resources :songs, only: [:create, :index, :new]
+
+  get '/user/profile', to:'home#profile', as:'user_profile'
+  get '/user/:id/edit', to:'home#edit', as:'user_edit'
+  post'/user/:id/update', to:'home#update', as:'user_update'
 end
