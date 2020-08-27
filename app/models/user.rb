@@ -13,22 +13,36 @@ class User < ApplicationRecord
     # PORO plain old ruby object
     # Service Object, Form Object
     if existing_user.present?
-      existing_user.update(
-        google_uid: access_token.uid,
-        google_token: access_token.credentials.token
-      )
+      update_customer!(existing_user, access_token)
       existing_user
     else
-      User.create(
-        first_name: data["first_name"],
-        last_name: data["last_name"],
-        email: data["email"],
-        password: Devise.friendly_token[0,20],
-        google_token: access_token.credentials.token,
-        google_uid: access_token.uid
-      )
+      User.create_user!(access_token)
     end
   end
+
+  private
+  # 如果方法會更新資料，方法要加驚嘆號提醒其他使用這個方法的人
+  def self.update_customer!(user, access_token)
+    user.update(
+      google_uid: access_token.uid,
+      google_token: access_token.credentials.token
+    )
+  end
+
+  def self.create_user!(access_token)
+    data = access_token.info
+  
+    User.create(
+      first_name: data["first_name"],
+      last_name: data["last_name"],
+      email: data["email"],
+      password: Devise.friendly_token[0,20],
+      google_token: access_token.credentials.token,
+      google_uid: access_token.uid
+    )
+  end
+end
+
 
   # Facebook登入部分
   # def self.from_omniauth(auth)
@@ -58,23 +72,3 @@ class User < ApplicationRecord
   #   return user
   # end
   
-  private
-  # 如果方法會更新資料，方法要加驚嘆號提醒其他使用這個方法的人
-  def update_customer!(user, access_token)
-    user.update(
-      google_uid: access_token.uid,
-      google_token: access_token.credentials.token
-    )
-  end
-
-  def create_user(data, access_token)
-    User.create(
-      first_name: data["first_name"],
-      last_name: data["last_name"],
-      email: data["email"],
-      password: Devise.friendly_token[0,20],
-      google_token: access_token.credentials.token,
-      google_uid: access_token.uid
-    )
-  end
-end
