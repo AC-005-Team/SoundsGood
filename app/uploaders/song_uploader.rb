@@ -1,0 +1,3 @@
+class SongUploader < Shrine
+  
+end

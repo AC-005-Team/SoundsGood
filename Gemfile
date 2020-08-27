@@ -21,7 +21,8 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'shrine', '~> 3.2', '>= 3.2.2'
+gem 'aws-sdk-s3', '~> 1.78'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -39,6 +40,7 @@ gem 'figaro', '~> 1.2'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 end
 
 group :development do
