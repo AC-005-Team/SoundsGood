@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  include SongUploader::Attachment[:avatar]
+  include ImageUploader::Attachment[:avatar]
+  include ImageUploader::Attachment[:header]
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
