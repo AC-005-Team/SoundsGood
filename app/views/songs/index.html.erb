@@ -1,2 +1,12 @@
 <%= link_to 'new song',  new_song_path %>
-<%= render 'index', songs: @songs %>
+<%= link_to 'go back', root_path %>
+<% @songs.each do |song|%>
+<% if song.image_url %>
+    <ul>
+      <li><%= image_tag song.image_url, width: '200px' %></li>  
+      <li><%= song.name %></li>
+      <li><%= song.intro %></li>
+      <li><%= link_to '點擊', song.track_url %></li>
+    </ul>
+  <% end %>
+<% end %>
