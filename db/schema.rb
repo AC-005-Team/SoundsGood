@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_26_090525) do
+ActiveRecord::Schema.define(version: 2020_08_27_074708) do
 
   create_table "songs", force: :cascade do |t|
     t.string "name", null: false
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2020_08_26_090525) do
     t.text "bio"
     t.string "profile_url"
     t.text "avatar_data"
-    t.string "header_img"
+    t.text "header_data"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

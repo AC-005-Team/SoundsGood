@@ -1,6 +1,10 @@
 <h1>edit</h1>
 <%= form_with model: @user, url: user_update_path(current_user.id), method: 'post', local: true  do |f| %>
 <div>
+  <%= f.label :header %>
+  <%= f.file_field :header %>
+</div>
+<div>
   <%= f.label :avatar %>
   <%= f.file_field :avatar %>
 </div>
