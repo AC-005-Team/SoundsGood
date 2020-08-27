@@ -1,3 +1,43 @@
 <h1>edit</h1>
+<%= form_with model: @user, url: user_update_path(current_user.id), method: 'post', local: true  do |f| %>
+<div>
+  <%= f.label :avatar %>
+  <%= f.file_field :avatar %>
+</div>
+<div>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+</div>
+<div>
+  <%= f.label :nick_name %>
+  <%= f.text_field :display_name %>
+</div>
+<div>
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name %>
+</div>
+<div>
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name %>
+</div>
+<div>
+  <%= f.label :gender %>
+  <%= f.text_field :gender %>
+</div>
+<div>
+  <%= f.label :age %>
+  <%= f.number_field :age %>
+</div>
+<div>
+  <%= f.label :city %>
+  <%= f.text_field :city %>
+</div>
+<div>
+  <%= f.label :country %>
+  <%= f.text_field :country %>
+</div>
 
-<%= render 'edit', user: @user %>
+<%= f.submit %>
+<%= link_to 'go back', user_profile_path %>
+<% end %>
+
