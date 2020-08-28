@@ -28,7 +28,19 @@ class User < ApplicationRecord
       User.create_user!(access_token)
     end
   end
+  
+  def toggle_follow(followee)
+    if followed_users.exists?(followee.id)
+      followed_users.destroy(followee)
+    else
+      followed_users << followee
+    end
+  end
 
+  def followed_by?(follower)
+    favorited_users.include?(follower)
+  end
+  
   private
   # 如果方法會更新資料，方法要加驚嘆號提醒其他使用這個方法的人
   def self.update_customer!(user, access_token)
@@ -50,6 +62,8 @@ class User < ApplicationRecord
       google_uid: access_token.uid
     )
   end
+    
+
 end
 
 
