@@ -13,5 +13,9 @@
   "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"
-  }
+  },
+  "main": "index.js",
+  "repository": "git@github.com:AC-005-Team/SoundClown.git",
+  "author": "lee Helen <dzzzzzb@gmail.com>",
+  "license": "MIT"
 }
