@@ -1,7 +1,25 @@
-<h1>song</h1>
+<h1><%=@song.name%></h1>
 
-<%= image_tag @song.image_url %> <br>
-<%= @song.name %> <br>
-<%= @song.intro %> <br>
-<%= link_to 'song', @song.track_url %>
+  <ul>
+      <li>Name:<%= @song.name %></li>
+      <li><%= image_tag @song.image_url %> </li>
+      <li>Intro:<%= @song.intro %></li>
+      <li>Link:<%= link_to '點擊', @song.track_url %></li>
+  </ul>
+
+<div>
+  <%= form_with(model:@comments, url:song_comments_path(@song)) do |f|%>
+    <%= f.text_field :content %>
+    <%= f.submit :comment%>
+  <% end %>
+</div>
+
+
+  <% @comments.each do |comment| %>
+  <div>
+    <span> <%=comment.content%> </span>
+    <%= link_to "Reply", "#"%>
+    <%= link_to "Delete", song_comment_path(song_id: @song, id: comment),method: "delete", data: {confirm: "Do you really want to remove this comment?"}%>
+  </div>
+  <% end %>
 

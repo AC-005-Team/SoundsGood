@@ -19,7 +19,11 @@ class SongsController < ApplicationController
     end
   end
 
-  def show; end
+  def show 
+    @song = Song.find(params[:id])
+    @comment = @song.comments.new
+    @comments = @song.comments.order(id: :desc)
+  end
 
   def destroy
     @song.destroy
