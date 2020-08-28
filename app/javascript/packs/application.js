@@ -7,6 +7,16 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+// require("functions.js")
+// require("dist")
+//
+const images = require.context('../images', false)
+const imagePath = (name) => images(name, false)
+
+
+
+
+
 
 // require("aplayer")
 
