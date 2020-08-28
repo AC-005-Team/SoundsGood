@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%= link_to 'new song',  new_user_song_path(current_user.id) %>
 <%= link_to 'go back', root_path %>
 <% @songs.each do |song|%>
@@ -22,17 +21,3 @@
 <% end %>
 
   	<div id="player1" class="aplayer"></div>
-=======
-
-    <%= link_to 'new song',  new_song_path %>
-
-    <% @songs.each do |song|%>
-      <ul>
-          <li><%= song.name %></li>
-          <li><%= song.intro %></li>
-          <li><%= link_to '點擊', song.track_url %></li>
-      </ul>
-    <% end %>
-
-  	<div id="aplayer"></div> 
->>>>>>> 6c8207e... yarn add aplayer
