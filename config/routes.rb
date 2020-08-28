@@ -7,4 +7,7 @@ Rails.application.routes.draw do
   get '/user/profile', to:'home#profile', as:'user_profile'
   get '/user/:id/edit', to:'home#edit', as:'user_edit'
   post'/user/:id/update', to:'home#update', as:'user_update'
+
+ 
+  mount Shrine.presign_endpoint(:cache) => "/s3/params"
 end

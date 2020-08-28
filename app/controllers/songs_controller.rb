@@ -1,7 +1,7 @@
 class SongsController < ApplicationController
 
   def index
-    @songs = current_user.songs
+    @songs = Song.find_by(user_id: current_user)
   end
 
   def new

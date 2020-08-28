@@ -13,3 +13,17 @@
  *= require_tree .
  *= require_self
  */
+ .upload-preview img {
+  display: block;
+  max-width: 100%;
+}
+
+.upload-preview {
+  margin-bottom: 10px;
+  display: inline-block;
+  height: 300px;
+}
+
+img[src=""] {
+  visibility: hidden;
+}
