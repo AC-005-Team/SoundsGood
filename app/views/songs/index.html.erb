@@ -3,10 +3,11 @@
 <% @songs.each do |song|%>
 <% if song.image_url %>
     <ul>
-      <li><%= image_tag song.image_url, width: '200px' %></li>  
-      <li><%= song.name %></li>
+      <li><%= image_tag song.image_url, width: '200px' %></li>
+      <li><%= link_to song.name, song_path(song.id) %></li>
       <li><%= song.intro %></li>
       <li><%= link_to '點擊', song.track_url %></li>
+      <li><%= link_to '刪除', song_path(song.id), method: 'delete' %></li>
     </ul>
   <% end %>
 <% end %>
