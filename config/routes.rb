@@ -9,4 +9,9 @@ Rails.application.routes.draw do
   
   resources :songs, only: [:create, :index, :new]
 
+  resources :users, only: [:show] do
+    member do
+      post :follow
+    end
+  end
 end

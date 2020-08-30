@@ -33,12 +33,13 @@ class User < ApplicationRecord
     if followed_users.exists?(followee.id)
       followed_users.destroy(followee)
     else
+      # followed_users << followee
       followed_users << followee
     end
   end
 
   def followed_by?(follower)
-    favorited_users.include?(follower)
+    following_users.include?(follower)
   end
   
   private

@@ -1,10 +1,6 @@
 class FollowsController < ApplicationController
-  def follow
-    @user = User.find(params[:user_id])
-    current_user.toggle_follow(@user)
+  def index
+    @users = current_user.followed_users
   end
 
-  
-
-  
 end
