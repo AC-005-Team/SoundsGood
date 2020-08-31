@@ -12,6 +12,7 @@ require("channels")
 
 // require("fron-end")
 // require("functions.js")
+require('stylesheets')
 
 //
 const images = require.context('../images', false)
