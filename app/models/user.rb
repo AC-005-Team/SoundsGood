@@ -3,12 +3,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
   # 自己追蹤的人
-  has_many :followed_users, foreign_key: :follower_id, class_name: 'Follow'
-  has_many :followees, through: :followed_users
+  has_many :followed_users, foreign_key: :follower_id, class_name: "Follow"
+  has_many :followees, through: :followed_users, source: :followee
   # 追蹤自己的人
-  has_many :following_users, foreign_key: :followee_id, class_name: 'Follow'
-  has_many :followers, through: :following_users
-
+  has_many :following_users, foreign_key: :followee_id, class_name: "Follow"
+  has_many :followers, through: :following_users, source: :follower
+    
   has_many :songs
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
@@ -29,12 +29,11 @@ class User < ApplicationRecord
     end
   end
   
-  def toggle_follow(followee)
-    if followed_users.exists?(followee.id)
-      followed_users.destroy(followee)
+  def toggle_follow(f)
+    if followees.exists?(f.id)
+      followees.destroy(f)
     else
-      # followed_users << followee
-      followed_users << followee
+      followees << f
     end
   end
 
