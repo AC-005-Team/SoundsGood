@@ -6,7 +6,7 @@
         <li><%= image_tag song.image_url, width: '200px' %></li>
         <li><%= link_to song.name, song_path(song.id) %></li>
         <li><%= song.intro %></li>
-        <li><%= link_to '點擊', song.track_url %></li>
+        <li><%= link_to '點擊', song.track_url , class: 'getURL' %></li>
         <li><%= link_to '刪除', song_path(song.id), method: 'delete' %></li>
         <% if playlists_song?(song) %>
           <% song.playlists.each do |list| %>
@@ -20,8 +20,10 @@
   <% end %>
 <% end %>
 
-<<<<<<< HEAD
+
   	<div id="player1" class="aplayer"></div>
-=======
-  	<div id="player1" class="aplayer"> </div>
->>>>>>> ae5676d...  node_module_test
+  	<div id="player1" class="aplayer"></div>
+
+    <scirpt>
+
+    </scirpt>
