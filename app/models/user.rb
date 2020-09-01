@@ -37,8 +37,14 @@ class User < ApplicationRecord
     end
   end
 
-  def followed_by?(follower)
-    following_users.include?(follower)
+  #是否有被f追蹤
+  def followed_by?(f)
+    followers.include?(f)
+  end
+
+  #是否有追蹤f
+  def follows?(f)
+    followees.include?(f)
   end
   
   private
