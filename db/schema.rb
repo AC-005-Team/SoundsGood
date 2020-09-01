@@ -62,8 +62,12 @@ ActiveRecord::Schema.define(version: 2020_08_31_024134) do
     t.string "country"
     t.text "bio"
     t.string "profile_url"
-    t.text "avatar_data"
-    t.text "header_data"
+    t.string "avatar_img"
+    t.string "header_img"
+    t.string "fb_uid"
+    t.string "fb_token"
+    t.string "google_uid"
+    t.string "google_token"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

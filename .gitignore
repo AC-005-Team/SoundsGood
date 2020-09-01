@@ -39,5 +39,7 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+# 😱google金鑰，不可以上傳喔😱
+/config/application.yml
 .env
 *.dev
