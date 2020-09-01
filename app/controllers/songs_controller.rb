@@ -22,7 +22,7 @@ class SongsController < ApplicationController
   def show 
     @song = Song.find(params[:id])
     @comment = @song.comments.new
-    @comments = @song.comments.order(id: :desc)
+    @comments = @song.comments.order(id: :desc).includes(:replies)
   end
 
   def destroy
