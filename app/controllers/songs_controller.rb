@@ -1,4 +1,5 @@
 class SongsController < ApplicationController
+  before_action :authenticate_user!, only: [:show]
 
   before_action :find_song, only: [:show, :destroy]
 
@@ -21,8 +22,8 @@ class SongsController < ApplicationController
 
   def show 
     @song = Song.find(params[:id])
-    @comment = @song.comments.new
-    @comments = @song.comments.order(id: :desc).includes(:replies)
+    @comment = Comment.new
+    @comments = @song.comments.includes(:user, replies:[:user]).where(reply_id: 0).order(id: :desc)
   end
 
   def destroy
