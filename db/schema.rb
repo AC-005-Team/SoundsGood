@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_31_091327) do
+ActiveRecord::Schema.define(version: 2020_09_01_081136) do
 
   create_table "follows", force: :cascade do |t|
     t.integer "follower_id"
@@ -29,18 +29,6 @@ ActiveRecord::Schema.define(version: 2020_08_31_091327) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_songs_on_user_id"
-  end
-
-  create_table "tracks", force: :cascade do |t|
-    t.string "name"
-    t.text "intro"
-    t.string "link_key"
-    t.string "track_img"
-    t.string "state"
-    t.datetime "deleted_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["deleted_at"], name: "index_tracks_on_deleted_at"
   end
 
   create_table "users", force: :cascade do |t|
