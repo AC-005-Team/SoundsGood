@@ -42,7 +42,6 @@ class UsersController < ApplicationController
       render :new_play_list
     end
   end
-end
 
   private
 
