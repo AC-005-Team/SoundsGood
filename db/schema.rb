@@ -10,8 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+ActiveRecord::Schema.define(version: 2020_08_31_024134) do
 
-ActiveRecord::Schema.define(version: 2020_08_24_093007) do
+  create_table "play_list_songs", force: :cascade do |t|
+    t.integer "play_list_id", null: false
+    t.integer "song_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["play_list_id"], name: "index_play_list_songs_on_play_list_id"
+    t.index ["song_id"], name: "index_play_list_songs_on_song_id"
+  end
+
+  create_table "play_lists", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "intro"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_play_lists_on_user_id"
+  end
 
   create_table "songs", force: :cascade do |t|
     t.string "name", null: false
@@ -20,6 +37,7 @@ ActiveRecord::Schema.define(version: 2020_08_24_093007) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "image_data"
     t.index ["user_id"], name: "index_songs_on_user_id"
   end
 
@@ -55,5 +73,8 @@ ActiveRecord::Schema.define(version: 2020_08_24_093007) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "play_list_songs", "play_lists"
+  add_foreign_key "play_list_songs", "songs"
+  add_foreign_key "play_lists", "users"
   add_foreign_key "songs", "users"
 end

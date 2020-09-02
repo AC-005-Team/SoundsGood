@@ -1,7 +1,10 @@
 class User < ApplicationRecord
+  include ImageUploader::Attachment[:avatar]
+  include ImageUploader::Attachment[:header]
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :songs
+  has_many :play_lists
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
