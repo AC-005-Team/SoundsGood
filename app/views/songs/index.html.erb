@@ -4,9 +4,9 @@
   <% if song.image_url %>
       <ul>
         <li><%= image_tag song.image_url, width: '200px' %></li>
-        <li><%= link_to song.name, song_path(song.id) %></li>
-        <li><%= song.intro %></li>
-        <li><%= link_to '點擊', song.track_url , class: 'getURL' %></li>
+        <%= content_tag(:li,song.name, data: {value: song.name} ) %>
+        <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
+        <li><%= link_to '點擊', song.track_url , class: 'getURL', data: {title: song.name, author: song.intro, url: song.track_url} %></li>
         <li><%= link_to '刪除', song_path(song.id), method: 'delete' %></li>
         <% if playlists_song?(song) %>
           <% song.playlists.each do |list| %>
@@ -16,7 +16,9 @@
           <li>未加入清單</li>
         <% end %>
         <%= link_to '加入清單', list_add_path(song.id) %>
-      </ul>
+
+
+
   <% end %>
 <% end %>
 

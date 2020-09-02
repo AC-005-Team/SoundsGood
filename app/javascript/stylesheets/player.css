@@ -1,3 +1,11 @@
-body{
-  background-color: rgb(158, 45, 48);
+
+#player1{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  box-shadow: 0 -2px 2px #dadada;
+  background-color: #fff;
+  transition: all ease 0.5s;
 }

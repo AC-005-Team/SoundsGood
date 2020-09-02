@@ -22,7 +22,7 @@ class SongsController < ApplicationController
     end
   end
 
-  def show 
+  def show
     @comment = @song.comments.new
     @comments = @song.comments.includes(:user, replies:[:user]).where(reply_id: 0).order(id: :desc)
   end
@@ -38,7 +38,7 @@ class SongsController < ApplicationController
     else
       PlaylistsSong.create(playlist_id: params[:list_id], song_id: params[:id])
     end
-  
+
     redirect_to user_songs_path(current_user.id)
   end
 
@@ -53,11 +53,11 @@ class SongsController < ApplicationController
   def song_params
     params.require(:song).permit(:name, :intro, :track, :image)
   end
-  
+
   def find_song
     @song = Song.find(params[:id])
   end
-  
+
   def find_playlist_song
     @playlist_song = PlaylistsSong.find_by(
       playlist_id: params[:list_id],
