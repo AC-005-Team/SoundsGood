@@ -4,6 +4,7 @@ class SongsController < ApplicationController
 
   def index
     @songs = current_user.songs
+    @play_lists = current_user.play_lists
   end
 
   def new
@@ -26,6 +27,22 @@ class SongsController < ApplicationController
     redirect_to songs_path
   end
 
+  def list_toggle
+    if PlayListSong.find_by(play_list_id: params[:list_id], song_id: params[:id])
+      PlayListSong.find_by(play_list_id: params[:list_id], song_id: params[:id]).destroy
+      redirect_to songs_path
+    else
+      PlayListSong.create(play_list_id: params[:list_id], song_id: params[:id])
+      redirect_to songs_path
+    end
+  end
+
+  def lists
+    @play_lists = current_user.play_lists
+    @songs = current_user.songs
+    @song_id = params[:id]
+  end
+
   private
 
   def song_params
@@ -35,4 +52,5 @@ class SongsController < ApplicationController
   def find_song
     @song = Song.find(params[:id])
   end
+
 end

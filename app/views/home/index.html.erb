@@ -2,3 +2,9 @@
 <%= link_to 'song page', songs_path %>
 <%= link_to 'profile', user_profile_path %>
 <%= link_to 'play list', play_list_path %>
+
+<ul>
+  <% @songs.each do |song|%>
+    <li><%= song.name %></li>
+  <% end %>
+</ul>

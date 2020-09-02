@@ -21,4 +21,7 @@ Rails.application.routes.draw do
   get  '/user/play_list', to:'users#play_list', as:'play_list'
   get  '/user/:id/play_list/new', to:'users#new_play_list', as:'new_play_list'
   post '/user/:id/play_list/create', to:'users#create_play_list', as:'create_play_list'
+  post '/play_list/:list_id/song/:id/add', to: 'songs#list_toggle', as:'list_toggle'
+  get  '/play_list/song/:id/add', to: 'songs#lists', as: 'list_add'
+  
 end
