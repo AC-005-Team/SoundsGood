@@ -32,22 +32,22 @@ class User < ApplicationRecord
     end
   end
   
-  def toggle_follow(f)
-    if followees.exists?(f.id)
-      followees.destroy(f)
+  def toggle_follow(followee)
+    if follows?(followee)
+      followees.destroy(followee)
     else
-      followees << f
+      followees << followee
     end
   end
 
-  #是否有被f追蹤
-  def followed_by?(f)
-    followers.include?(f)
+  #是否有被follower追蹤
+  def followed_by?(follower)
+    followers.include?(follower)
   end
 
-  #是否有追蹤f
-  def follows?(f)
-    followees.include?(f)
+  #是否有追蹤followee
+  def follows?(followee)
+    followees.include?(followee)
   end
   
   private
