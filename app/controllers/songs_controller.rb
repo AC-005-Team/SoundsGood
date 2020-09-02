@@ -1,7 +1,9 @@
 class SongsController < ApplicationController
 
+  before_action :find_song, only: [:show, :destroy]
+
   def index
-    @songs = Song.all
+    @songs = current_user.songs
   end
 
   def new
@@ -17,10 +19,20 @@ class SongsController < ApplicationController
     end
   end
 
+  def show; end
+
+  def destroy
+    @song.destroy
+    redirect_to songs_path
+  end
+
   private
 
   def song_params
-    params.require(:song).permit(:name, :intro, :track)
+    params.require(:song).permit(:name, :intro, :track, :image)
   end
   
+  def find_song
+    @song = Song.find(params[:id])
+  end
 end

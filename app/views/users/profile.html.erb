@@ -1,0 +1,18 @@
+<h1>profile</h1>
+<%= link_to 'edit', user_edit_path(current_user.id) %>
+<%= link_to 'go back', root_path %>
+<ul>
+  <% if @user.header_url && @user.avatar_url %>
+  <li>header:<%= image_tag @user.header_url, width: '100px' %></li>
+  <li>avatar:<%= image_tag @user.avatar_url, width: '100px' %></li>
+  <% end%>
+  <li>email:<%= @user.email %></li>
+  <li>nick_name:<%= @user.display_name %></li>
+  <li>gender:<%= @user.gender %></li>
+  <li>age:<%= @user.age %></li>
+  <li>first_name:<%= @user.first_name %></li>
+  <li>last_name:<%= @user.last_name %></li>
+  <li>city:<%= @user.city %></li>
+  <li>country:<%= @user.country %></li>
+</ul>
+
