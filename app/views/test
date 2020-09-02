@@ -1,7 +1,0 @@
-
-
-正確命名方式 （圖片前要加media)
-<%= image_pack_tag "media/images/previous.svg"  %>
-<%= image_pack_tag "media/images/play.svg"  %>
-<%= image_pack_tag "media/images/pause.svg"  %>
-<%= image_pack_tag "media/images/next.svg" %>

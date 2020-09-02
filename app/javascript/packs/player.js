@@ -12,7 +12,7 @@ const ap = new APlayer({
   audio: [{
     autoplay: true,
     theme: '#f18b00',
-    fixed: true,
+    // fixed: true,
     cover: '', //required,
     title: 'yo', // Required, music title
     author: 'yo', // Required, music author
@@ -54,7 +54,7 @@ songs.forEach((song) => {
     const ap = new APlayer({
       container: document.getElementById('player1'),
       listFolded: true,
-      fixed: true,
+      // fixed: true,
       audio: [{
         autoplay: false,
         theme: '#f18b00',
