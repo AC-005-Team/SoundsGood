@@ -1,0 +1,11 @@
+<%= form_with(model: @play_list, url: create_play_list_path, method: 'post', local: true)  do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :intro %>
+    <%= f.text_field :intro %>
+  </div>
+  <%= f.submit %>
+<% end %>

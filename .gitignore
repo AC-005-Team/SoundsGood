@@ -42,3 +42,4 @@ yarn-debug.log*
 # 😱google金鑰，不可以上傳喔😱
 /config/application.yml
 .env
+*.dev

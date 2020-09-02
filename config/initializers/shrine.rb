@@ -9,10 +9,10 @@ s3_options = {
     bucket:             ENV['BUCKET']
 }
 
-Shrine.storages = {
-    cache: Shrine::Storage::FileSystem.new("tmp/uploads"),
-    store: Shrine::Storage::S3.new(upload_options: {acl: "public-read"}, prefix: "store",
-                                   **s3_options),
-}
+Shrine.storages = { 
+    cache: Shrine::Storage::S3.new(prefix: "cache", **s3_options), # temporary 
+    store: Shrine::Storage::S3.new(prefix: "store", **s3_options),     # permanent 
+  }
 
 Shrine.plugin :activerecord
+
