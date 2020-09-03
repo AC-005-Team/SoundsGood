@@ -14,7 +14,7 @@ class SongsController < ApplicationController
   def create
     @song =  current_user.songs.new(song_params)
     if @song.save
-      redirect_to songs_path
+      redirect_to user_songs_path
     else
       render :new
     end
@@ -24,16 +24,16 @@ class SongsController < ApplicationController
 
   def destroy
     @song.destroy
-    redirect_to songs_path
+    redirect_to user_songs_path(current_user.id)
   end
 
   def list_toggle
     if PlayListSong.find_by(play_list_id: params[:list_id], song_id: params[:id])
       PlayListSong.find_by(play_list_id: params[:list_id], song_id: params[:id]).destroy
-      redirect_to songs_path
+      redirect_to user_songs_path(current_user.id)
     else
       PlayListSong.create(play_list_id: params[:list_id], song_id: params[:id])
-      redirect_to songs_path
+      redirect_to user_songs_path(current_user.id)
     end
   end
 
