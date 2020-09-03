@@ -1,4 +1,4 @@
-<%= link_to 'new song',  new_song_path %>
+<%= link_to 'new song',  new_user_song_path(current_user.id) %>
 <%= link_to 'go back', root_path %>
 <% @songs.each do |song|%>
   <% if song.image_url %>
