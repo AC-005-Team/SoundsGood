@@ -3,6 +3,14 @@ class User < ApplicationRecord
   include ImageUploader::Attachment[:header]
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
+  # 自己追蹤的人
+  has_many :followed_users, foreign_key: :follower_id, class_name: "Follow"
+  has_many :followees, through: :followed_users, source: :followee
+  # 追蹤自己的人
+  has_many :following_users, foreign_key: :followee_id, class_name: "Follow"
+  has_many :followers, through: :following_users, source: :follower
+    
   has_many :songs
   has_many :play_lists
   devise :database_authenticatable, :registerable,
@@ -23,7 +31,25 @@ class User < ApplicationRecord
       User.create_user!(access_token)
     end
   end
+  
+  def toggle_follow(followee)
+    if follows?(followee)
+      followees.destroy(followee)
+    else
+      followees << followee
+    end
+  end
 
+  #是否有被follower追蹤
+  def followed_by?(follower)
+    followers.include?(follower)
+  end
+
+  #是否有追蹤followee
+  def follows?(followee)
+    followees.include?(followee)
+  end
+  
   private
   # 如果方法會更新資料，方法要加驚嘆號提醒其他使用這個方法的人
   def self.update_customer!(user, access_token)
@@ -45,6 +71,8 @@ class User < ApplicationRecord
       google_uid: access_token.uid
     )
   end
+    
+
 end
 
 

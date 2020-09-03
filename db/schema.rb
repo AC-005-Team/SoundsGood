@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_31_024134) do
+ActiveRecord::Schema.define(version: 2020_09_01_081136) do
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followee_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["followee_id"], name: "index_follows_on_followee_id"
+    t.index ["follower_id"], name: "index_follows_on_follower_id"
+  end
 
   create_table "play_list_songs", force: :cascade do |t|
     t.integer "play_list_id", null: false
@@ -73,6 +82,8 @@ ActiveRecord::Schema.define(version: 2020_08_31_024134) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "follows", "users", column: "followee_id"
+  add_foreign_key "follows", "users", column: "follower_id"
   add_foreign_key "play_list_songs", "play_lists"
   add_foreign_key "play_list_songs", "songs"
   add_foreign_key "play_lists", "users"

@@ -9,6 +9,12 @@ Rails.application.routes.draw do
   
   resources :songs, only: [:create, :index, :new, :destroy, :show]
 
+  resources :users, only: [:show] do
+    member do
+      post :follow
+    end
+  end
+
   get  '/user/profile', to:'users#profile', as:'user_profile'
   get  '/user/:id/edit', to:'users#edit', as:'user_edit'
   post '/user/:id/update', to:'users#update', as:'user_update'
