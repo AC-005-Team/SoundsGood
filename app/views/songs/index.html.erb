@@ -1,31 +1,28 @@
 <%= link_to 'new song', new_user_song_path(current_user.id) %>
 <%= link_to 'go back', root_path %>
-<% @songs.each do |song|%>
-  <% if song.image_url %>
-    <ul>
-      <li><%= image_tag song.image_url, width: '200px' %></li>
-      <%= content_tag(:li,song.name, data: {value: song.name} ) %>
-      <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
-      <li><%= link_to '點擊', song.track_url , class: 'getURL', data: {title: song.name, author: song.intro, url: song.track_url} %></li>
-      <li><%= link_to '刪除', song_path(song.id), method: 'delete' %></li>
-      <% if playlists_song?(song) %>
-        <% song.playlists.each do |list| %>
-          <li>歌單：<%= list.name %></li>
-        <% end %>
+ <% @songs.each do |song|%>
+ <% if song.image_url %>
+ <ul>
+    <li><%= image_tag song.image_url, width: '200px' %>
+    </li> <%= content_tag(:li,song.name, data: {value: song.name} ) %>
+    <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
+     <li><%= link_to 'playNow', song.track_url , class: 'getURL', data: {title: song.name, author: song.intro, url: song.track_url} %></li>
+     <li><%= link_to '刪除', song_path(song.id), method: 'delete' %></li> <% if playlists_song?(song) %>
+     <% song.playlists.each do |list| %>
+     <li>歌單：<%= list.name %></li>
+     <% end %>
       <% else %>
-        <li>未加入清單</li>
+      <li>未加入清單</li>
       <% end %>
       <%= link_to '加入清單', list_add_path(song.id) %>
-
-      <li><%= link_to 'playNow', song.track_url , class: 'getURL', data: {title: song.name, author: song.intro, url: song.track_url} %></li>
-      <%= content_tag(:button, "加到目前播放列表", id: 'addtoplay', data: {title: song.name, author: song.intro, url: song.track_url} ) %>
+       <li><%= link_to 'playNow', song.track_url , class: 'getURL', data: {title: song.name, author: song.intro, url: song.track_url} %>
+       </li>
+     <%= content_tag(:button, "加到目前播放列表", id: 'addtoplay', data: {title: song.name, author: song.intro, url: song.track_url} ) %>
     </ul>
-  <% end %>
-
-<% end %>
-
-
-<%= content_tag(:button, "播放整頁", id: 'play_playlist' ) %>
+     <% end %>
+     <% end %>
+     
+     <%= content_tag(:button, "播放整頁", id: 'play_playlist' ) %>
 
 <div id="player1" class="aplayer"></div>
 
