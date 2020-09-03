@@ -7,8 +7,9 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   } 
   
-<<<<<<< HEAD
-  resources :songs, only: [:create, :index, :new, :destroy, :show]
+  resources :songs, only: [:index, :new, :create, :show, :destroy] do
+    resources :comments, only: [:create, :destroy]
+  end
 
   resources :users, only: [:show] do
     member do
@@ -22,9 +23,4 @@ Rails.application.routes.draw do
   get  '/user/play_list', to:'users#play_list', as:'play_list'
   get  '/user/:id/play_list/new', to:'users#new_play_list', as:'new_play_list'
   post '/user/:id/play_list/create', to:'users#create_play_list', as:'create_play_list'
-=======
-  resources :songs, only: [:create, :index, :new, :show] do
-    resources :comments, only: [:create, :destroy]
-  end
->>>>>>> 6cb68cd... 1. Add action show to songs_controller
 end
