@@ -2,7 +2,7 @@
 
   <ul>
       <li>Name:<%= @song.name %></li>
-      <li><%= image_tag @song.image_url %> </li>
+      <li><%= image_tag @song.image_url, width: '200px'  %> </li>
       <li>Intro:<%= @song.intro %></li>
       <li>Link:<%= link_to '點擊', @song.track_url %></li>
   </ul>
@@ -33,4 +33,6 @@
       <% end %>
     </div>
   <% end %>
+
+  <div id="player1" class="aplayer"></div>
 
