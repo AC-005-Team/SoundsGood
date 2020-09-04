@@ -21,7 +21,6 @@ class SongsController < ApplicationController
   end
 
   def show 
-    @song = Song.find(params[:id])
     @comment = Comment.new
     @comments = @song.comments.includes(:user, replies:[:user]).where(reply_id: 0).order(id: :desc)
   end
