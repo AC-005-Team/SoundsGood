@@ -1,6 +1,7 @@
 class SongsController < ApplicationController
 
   before_action :find_song, only: [:show, :destroy]
+  before_action :find_playlist_song, only: [:list_toggle]
 
   def index
     @songs = current_user.songs
@@ -37,13 +38,6 @@ class SongsController < ApplicationController
     redirect_to user_songs_path(current_user.id)
   end
 
-  def find_playlist_song
-    @playlist_song = PlayListSong.find_by(
-      play_list_id: params[:list_id],
-      song_id: params[:id]
-    )
-  end
-
   def lists
     @play_lists = current_user.play_lists
     @songs = current_user.songs
@@ -60,4 +54,10 @@ class SongsController < ApplicationController
     @song = Song.find(params[:id])
   end
   
+  def find_playlist_song
+    @playlist_song = PlayListSong.find_by(
+      play_list_id: params[:list_id],
+      song_id: params[:id]
+    )
+  end
 end
