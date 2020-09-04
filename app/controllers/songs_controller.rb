@@ -28,13 +28,20 @@ class SongsController < ApplicationController
   end
 
   def list_toggle
-    if PlayListSong.find_by(play_list_id: params[:list_id], song_id: params[:id])
-      PlayListSong.find_by(play_list_id: params[:list_id], song_id: params[:id]).destroy
-      redirect_to user_songs_path(current_user.id)
+    if @playlist_song.present?
+      @playlist_song.destroy
     else
       PlayListSong.create(play_list_id: params[:list_id], song_id: params[:id])
-      redirect_to user_songs_path(current_user.id)
     end
+  
+    redirect_to user_songs_path(current_user.id)
+  end
+
+  def find_playlist_song
+    @playlist_song = PlayListSong.find_by(
+      play_list_id: params[:list_id],
+      song_id: params[:id]
+    )
   end
 
   def lists
@@ -52,5 +59,5 @@ class SongsController < ApplicationController
   def find_song
     @song = Song.find(params[:id])
   end
-
+  
 end
