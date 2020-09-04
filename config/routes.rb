@@ -39,4 +39,11 @@ Rails.application.routes.draw do
       get :history
     end
   end
+  defaults format: :json do
+    namespace :api do
+      namespace :soundclown do
+        resources :songs, only: [:index]
+      end
+    end
+  end
 end

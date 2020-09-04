@@ -9,8 +9,8 @@ const ap = new APlayer({
     autoplay: true,
     theme: '#f18b00',
     cover: '', //required,
-    title: 'yo', // Required, music title
-    author: 'yo', // Required, music author
+    title: '', // Required, music title
+    author: '', // Required, music author
     url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/Music_for_Video/Blue_Dot_Sessions/Fjell/Blue_Dot_Sessions_-_Kvelden_Trapp.mp3"
   }]
 });
@@ -67,9 +67,9 @@ playlistBtn.addEventListener('click', function(){
 
 
 
-// read our JSON
+// read song JSON
 async function getPlayList() {
-  let response = await fetch('http://127.0.0.1:3000/songs.json');
+  let response = await fetch('http://127.0.0.1:3000/api/soundclown/songs');
   let playlistTrack = await response.json();
   return playlistTrack;
 };
