@@ -45,4 +45,3 @@ yarn-debug.log*
 *.dev
 
 .Procfile.dev
-.vscode
