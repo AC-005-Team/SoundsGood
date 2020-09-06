@@ -1,10 +1,11 @@
 //於頁面點擊share時，出現蓋板遮罩與share視窗，share視窗會撈取本頁面網址並放置進各大網站的share link中
-document.addEventListener('DOMContentLoaded', () => {
   const body = document.querySelector('body')
   const shareBtn = document.getElementById('share-song')
-  const link = window.location.href
-
+  const thePageLink = window.location.href
+  var modalClosing
+  
   shareBtn.addEventListener('click', () => {
+    shareBtn.setAttribute('disabled', 'true')
     let scroll = window.scrollY
     document.body.style.position = 'fixed';
     document.body.style.top = `-${scroll}px`;
@@ -16,21 +17,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const mask = shareDiv.querySelector('.share-fade')
     const modal = shareDiv.querySelector('.share-modal')
 
-    modal.innerHTML = `${link}`
+    modal.innerHTML = `${thePageLink}`
 
     body.appendChild(shareDiv)
-    setTimeout(() => {modal.classList.toggle('modal-show')}, 10);
+    setTimeout(() => {modal.classList.toggle('modal-show')}, 300);
     setTimeout(()=>{mask.classList.toggle('mask-show')},10)
 
-    mask.addEventListener('click', () => {
-      console.log('close')
-      modal.classList.toggle('modal-show')
-      mask.classList.toggle('mask-show')
-      setTimeout(()=>{ body.removeChild(shareDiv) },1000)
-      document.body.style.position = ''
-      console.log(scroll)
-      document.body.style.top = ''
-      window.scrollTo(0, scroll || 0)
-    })
+      mask.addEventListener('click', () => {
+        if (!modalClosing) {
+          modalClosing = true
+          console.log('close')
+          setTimeout(() => {
+            modal.classList.toggle('modal-show')
+            mask.classList.toggle('mask-show')            
+          }, 300);
+          setTimeout(()=>{ 
+            body.removeChild(shareDiv)
+            modalClosing = false 
+          },1000)
+          document.body.style.position = ''
+          console.log(scroll)
+          document.body.style.top = ''
+          window.scrollTo(0, scroll || 0)
+          shareBtn.removeAttribute('disabled')
+          
+        } else {
+          return
+        }
+      })
+
   })
-})
