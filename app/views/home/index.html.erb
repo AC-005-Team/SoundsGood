@@ -5,8 +5,8 @@
   <%= link_to 'play list', user_playlists_path(current_user.id) %>
 <% end %>
 
-<ul>
-  <% @songs.each do |song|%>
-    <li><%= song.name %></li>
-  <% end %>
+<% @songs.each do |song| %>
+<ul> 
+  <li> <%= link_to song.name, song_path(song) %> </li>
 </ul>
+<% end %>
