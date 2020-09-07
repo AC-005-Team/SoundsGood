@@ -1,1 +1,1 @@
-import './ShareModal'
+import './modal'

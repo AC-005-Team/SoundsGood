@@ -4,13 +4,13 @@
   list-style: none;
 }
 
-.share-container {
+.modal-container {
   position: fixed;
   top: 0;
   height: 100%;
   width: 100%;
 }
-.share-fade {
+.modal-fade {
   height: 100%;
   width: 100%;
   opacity: 0;
@@ -18,12 +18,12 @@
   position: fixed;
   z-index: 1000;
 }
-.share-close-btn {
+.modal-close-btn {
   position: fixed;
   right: 20px;
   top: 20px;
 }
-.share-mask {
+.modal-mask {
   height: 100%;
   width: 100%;
   background-color: hsla(0,0%,94.9%,.9);
@@ -31,7 +31,7 @@
 .mask-show {
   opacity: 1;
 }
-.share-modal {
+.modal-content {
   width: 500px;
   height: 300px;
   background-color: #fff;

@@ -1,1 +1,1 @@
-import './share_modal.css'
+import './modal.css'
