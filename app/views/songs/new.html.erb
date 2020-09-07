@@ -1,4 +1,4 @@
-<%= link_to 'go back', songs_path %>
+<%= link_to 'go back', user_songs_path %>
 <% if @song.errors.any? %>
   <ul>
     <% @song.errors.full_messages.each do |message| %>
@@ -7,7 +7,7 @@
   </ul>
 <% end %>
 
-<%= form_with model: @song, url: songs_path, method: 'post', local: true do |f| %>
+<%= form_with model: @song, url: user_songs_path(current_user.id), local: true do |f| %>
 <div>
   <%= f.label :image %>
   <%= f.file_field :image %>

@@ -1,8 +1,0 @@
-<h1>play list</h1>
-<%= link_to 'new play list', new_play_list_path(current_user.id) %>
-<ul>
-  <% @play_lists.each do |list| %>
-    <li><%= list.name %></li>
-    <li><%= list.intro %></li>
-  <% end %> 
-</ul>
