@@ -1,0 +1,24 @@
+<h1>profile</h1>
+<div class="bg-white w-full bg-opacity-75">
+  <div class="container m-auto bg-white max-w-lg flex flex-col justify-center mt-12 rounded">
+    <div class="flex mt-3 mb-12 text-center">
+      <%= link_to '編輯我的頁面', user_edit_path(current_user.id), class: "w-full px-2 py-2 text-white rounded bg-orange-700" %>
+      <%= link_to '回首頁', root_path, class: "w-full px-2 py-2 text-white rounded bg-red-700" %>
+    </div>
+    <ul>
+      <% if @user.header_url && @user.avatar_url %>
+      <li>header:<%= image_tag @user.header_url, width: '100px' %></li>
+      <li>avatar:<%= image_tag @user.avatar_url, width: '100px' %></li>
+      <% end%>
+      <li>email:<%= @user.email %></li>
+      <li>nick_name:<%= @user.display_name %></li>
+      <li>gender:<%= @user.gender %></li>
+      <li>age:<%= @user.age %></li>
+      <li>first_name:<%= @user.first_name %></li>
+      <li>last_name:<%= @user.last_name %></li>
+      <li>city:<%= @user.city %></li>
+      <li>country:<%= @user.country %></li>
+    </ul>
+
+  </div>
+</div>

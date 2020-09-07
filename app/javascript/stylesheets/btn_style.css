@@ -3,5 +3,9 @@
 } */
 /* 
 .btn_S {
+<<<<<<< HEAD
   @apply px-2 py-2  bg-gray-200 border border-black rounded m-3
+=======
+  @apply px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded m-3
+>>>>>>> 6f54db2... Feature/tailwind/home
 } */
