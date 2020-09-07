@@ -32,7 +32,7 @@ class SongsController < ApplicationController
     if @playlist_song.present?
       @playlist_song.destroy
     else
-      PlayListSong.create(playlist_id: params[:list_id], song_id: params[:id])
+      PlaylistsSong.create(playlist_id: params[:list_id], song_id: params[:id])
     end
   
     redirect_to user_songs_path(current_user.id)
@@ -55,7 +55,7 @@ class SongsController < ApplicationController
   end
   
   def find_playlist_song
-    @playlist_song = PlaylistSong.find_by(
+    @playlist_song = PlaylistsSong.find_by(
       playlist_id: params[:list_id],
       song_id: params[:id]
     )
