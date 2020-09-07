@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :followers, through: :following_users, source: :follower
     
   has_many :songs
-  has_many :play_lists
+  has_many :playlists
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :google_oauth2]

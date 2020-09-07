@@ -1,5 +1,5 @@
-<% if @play_lists %>
-  <% @play_lists.each do |list| %>
+<% if @playlists %>
+  <% @playlists.each do |list| %>
     <li>
       <%= list.name %>
       <%= link_to "加入", list_toggle_path(list.id, @song_id ), :method => "post" %>

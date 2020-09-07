@@ -5,7 +5,7 @@ class SongsController < ApplicationController
 
   def index
     @songs = current_user.songs
-    @play_lists = current_user.play_lists
+    @playlists = current_user.playlists
   end
 
   def new
@@ -32,14 +32,14 @@ class SongsController < ApplicationController
     if @playlist_song.present?
       @playlist_song.destroy
     else
-      PlayListSong.create(play_list_id: params[:list_id], song_id: params[:id])
+      PlayListSong.create(playlist_id: params[:list_id], song_id: params[:id])
     end
   
     redirect_to user_songs_path(current_user.id)
   end
 
   def lists
-    @play_lists = current_user.play_lists
+    @playlists = current_user.playlists
     @songs = current_user.songs
     @song_id = params[:id]
   end
@@ -55,8 +55,8 @@ class SongsController < ApplicationController
   end
   
   def find_playlist_song
-    @playlist_song = PlayListSong.find_by(
-      play_list_id: params[:list_id],
+    @playlist_song = PlaylistSong.find_by(
+      playlist_id: params[:list_id],
       song_id: params[:id]
     )
   end

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       post :follow
     end
     resources :songs, shallow:true
-    resources :play_lists, shallow: true
+    resources :playlists, shallow: true
   end
 
 end
