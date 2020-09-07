@@ -13,7 +13,8 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = @song.comments.find(params[:id])
-    redirect_to @song if @comment.destroy
+    @comment.destroy
+    redirect_to @song
   end
 
   private 

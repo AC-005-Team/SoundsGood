@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
-  
-  def index; end
+
+  def index
+    @songs = Song.all
+  end
   
 end
