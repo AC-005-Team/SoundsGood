@@ -1,4 +1,5 @@
 class SongsController < ApplicationController
+  before_action :authenticate_user!, except: [:show]
 
   before_action :find_song, only: [:show, :destroy]
 
@@ -19,7 +20,10 @@ class SongsController < ApplicationController
     end
   end
 
-  def show; end
+  def show 
+    @comment = @song.comments.new
+    @comments = @song.comments.includes(:user, replies:[:user]).where(reply_id: 0).order(id: :desc)
+  end
 
   def destroy
     @song.destroy

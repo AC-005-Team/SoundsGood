@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   } 
   
-  resources :songs, only: [:create, :index, :new, :destroy, :show]
+  resources :songs, only: [:index, :new, :create, :show, :destroy] do
+    resources :comments, only: [:create, :destroy]
+  end
 
   resources :users, only: [:show] do
     member do

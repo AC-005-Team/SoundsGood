@@ -1,7 +1,38 @@
-<h1>song</h1>
+<h1><%=@song.name%></h1>
 
-<%= image_tag @song.image_url %> <br>
-<%= @song.name %> <br>
-<%= @song.intro %> <br>
-<%= link_to 'song', @song.track_url %>
+  <ul>
+      <li>Name:<%= @song.name %></li>
+      <li><%= image_tag @song.image_url, width: '200px'  %> </li>
+      <li>Intro:<%= @song.intro %></li>
+      <li>Link:<%= link_to '點擊', @song.track_url %></li>
+  </ul>
+
+<div>
+  <%= form_with(model:@comment, url:song_comments_path(@song)) do |f|%>
+    <%= f.text_field :content, placeholder: "Write a comment"%>
+    <%= f.submit%>
+  <% end %>
+</div>
+
+<div>--------------我是分隔線-------------------</div>
+  <% @comments.each do |comment| %>
+    <div>
+      <span> <%=comment.content%> </span>
+      <%= link_to "Delete", song_comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(comment.user)%> 
+      <% comment.replies.each do |reply| %>
+        <div>
+          <span> --I'm reply's content-- </span>
+          <span> <%=reply.content%> </span>
+            <%= link_to "Delete", song_comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%> 
+        </div>
+      <%end%>
+      <%= form_with(model: @comment, url:song_comments_path(@song)) do |f|%>
+        <%= f.text_field :content, placeholder: "Reply to this comment"%>
+        <%= f.hidden_field :reply_id, value: comment.id%>
+        <%= f.submit "Reply"%>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div id="player1" class="aplayer"></div>
 
