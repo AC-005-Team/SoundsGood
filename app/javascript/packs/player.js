@@ -19,42 +19,42 @@ const songs = document.querySelectorAll('.getURL');
 songs.forEach((song) => {
   song.addEventListener('click', function(e) {
     e.preventDefault();
-    const musicURL = e.currentTarget.dataset.url;
-    const author = e.currentTarget.dataset.author;
-    const title = e.currentTarget.dataset.title;
+    let id = e.currentTarget.dataset.id;
     ap.pause();
     ap.list.clear();
-    ap.list.add({
-      autoplay: false,
-      theme: '#f18b00',
-      cover: 'http://lorempixel.com/400/200', //required,
-      title: title,
-      author: author,
-      url: musicURL
+    getPlay(id).then(val => {
+      ap.list.add(val);
     });
     ap.play();
   });
 });
 
+//拿到本首歌的json
+async function getPlay(id) {
+  let response = await fetch(`http://127.0.0.1:3000/api/soundclown/songs/${id}`);
+  let playlistTrack = await response.json();
+  return playlistTrack;
+};
 
-//ADD TO PLAY NEXT
+
+
+
+
+//ADD TO PLAY NEXT by json
 const addbutton = document.querySelectorAll('#addtoplay');
 addbutton.forEach((song) => {
   song.addEventListener('click', function(e) {
-    let musicURL = e.currentTarget.dataset.url;
-    let author = e.currentTarget.dataset.author;
-    let title = e.currentTarget.dataset.title;
-    const obj = {};
-    obj['name'] = title;
-    obj['artist'] = author;
-    obj['cover'] = 'http://lorempixel.com/400/200';
-    obj['theme'] = '#ebd0c2';
-    obj['url'] = musicURL;
-    ap.list.add(obj);
+  let id = e.currentTarget.dataset.id;
+    getPlay(id).then(val => {
+      ap.list.add(val);
+    });
+    // ap.list.add(obj);
+    console.log('123');
   });
 });
 
-//play playlist
+
+//play playlist by json
 const playlistBtn = document.querySelector('#play_playlist');
 playlistBtn.addEventListener('click', function(){
   ap.pause();
@@ -73,3 +73,37 @@ async function getPlayList() {
   let playlistTrack = await response.json();
   return playlistTrack;
 };
+
+
+
+
+
+
+const dropbtn = document.querySelectorAll('.dropbtn');
+const dropDownbtn = document.querySelectorAll('#myDropdown');
+
+
+for(let i = 0;  i < dropbtn.length; i++) {
+  dropbtn[i].addEventListener('click', function(){
+    var select = i;
+    console.log(select);
+    dropDownbtn[select].classList.toggle('show');
+  });
+}
+
+
+
+
+
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
