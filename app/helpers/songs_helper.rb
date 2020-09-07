@@ -1,7 +1,7 @@
 module SongsHelper
 
   def playlists_song?(song)
-    song.play_lists.count > 0
+    song.playlists.count > 0 && song.playlists
   end
   
 end

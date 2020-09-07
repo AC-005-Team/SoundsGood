@@ -2,7 +2,7 @@
 <% if current_user %>
   <%= link_to 'song page', user_songs_path(current_user.id) %>
   <%= link_to 'profile', user_path(current_user.id) %>
-  <%= link_to 'play list', user_play_lists_path(current_user.id) %>
+  <%= link_to 'play list', user_playlists_path(current_user.id) %>
 <% end %>
 
 <ul>
