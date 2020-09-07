@@ -4,4 +4,6 @@ class Song < ApplicationRecord
   belongs_to :user
   has_many :playlists_songs
   has_many :playlists, through: :playlists_songs
+
+  has_many :comments
 end

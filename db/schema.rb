@@ -39,6 +39,18 @@ ActiveRecord::Schema.define(version: 2020_09_07_080918) do
     t.index ["song_id"], name: "index_playlists_songs_on_song_id"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "song_id", null: false
+    t.text "content", null: false
+    t.integer "reply_id", default: 0
+    t.string "timepoint"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["song_id"], name: "index_comments_on_song_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "songs", force: :cascade do |t|
     t.string "name", null: false
     t.text "intro"
@@ -87,5 +99,7 @@ ActiveRecord::Schema.define(version: 2020_09_07_080918) do
   add_foreign_key "playlists", "users"
   add_foreign_key "playlists_songs", "playlists"
   add_foreign_key "playlists_songs", "songs"
+  add_foreign_key "comments", "songs"
+  add_foreign_key "comments", "users"
   add_foreign_key "songs", "users"
 end
