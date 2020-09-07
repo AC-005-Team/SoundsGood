@@ -1,0 +1,14 @@
+<h1>play list</h1>
+<%= link_to 'new play list', new_user_playlist_path(current_user.id) %>
+<%= link_to 'go back', root_path %>
+
+<% if @playlists %>
+  <ul>
+    <% @playlists.each do |list| %>
+      <li><%= list.name %></li>
+      <li><%= list.intro %></li>
+    <% end %> 
+  </ul>
+<% else %>
+  <li>no list</li>
+<% end %>

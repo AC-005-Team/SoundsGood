@@ -1,5 +1,5 @@
 <h1>edit</h1>
-<%= form_with model: @user, url: user_update_path(current_user.id), method: 'post', local: true  do |f| %>
+<%= form_with model: @user, url: user_path(current_user.id), method: 'put', local: true  do |f| %>
 <div>
   <%= f.label :header %>
   <%= f.file_field :header %>
@@ -42,6 +42,6 @@
 </div>
 
 <%= f.submit %>
-<%= link_to 'go back', user_profile_path %>
+<%= link_to 'go back', user_path %>
 <% end %>
 

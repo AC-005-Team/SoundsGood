@@ -1,7 +1,9 @@
 <h1>這是首頁</h1>
-<%= link_to 'song page', songs_path %>
-<%= link_to 'profile', user_profile_path %>
-<%= link_to 'play list', play_list_path %>
+<% if current_user %>
+  <%= link_to 'song page', user_songs_path(current_user.id) %>
+  <%= link_to 'profile', user_path(current_user.id) %>
+  <%= link_to 'play list', user_playlists_path(current_user.id) %>
+<% end %>
 
 <% @songs.each do |song| %>
 <ul> 
