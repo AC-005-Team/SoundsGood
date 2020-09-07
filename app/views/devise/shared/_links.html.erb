@@ -1,13 +1,13 @@
-<%- if controller_name != 'sessions' %>
-  <%= link_to "Log in", new_session_path(resource_name) %><br />
-<% end %>
+<%#- if controller_name != 'sessions' %>
+  <%#= link_to "Log in", new_session_path(resource_name) %><br />
+<%# end %>
 
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Sign up", new_registration_path(resource_name) %><br />
-<% end %>
+<%#- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <%# = link_to "Sign up", new_registration_path(resource_name)<br /> %>
+<%# end %>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+  <%= link_to "Forgot your password?", new_password_path(resource_name) , class: "w-full px-2 py-2 text-white rounded bg-red-700 my-3 text-center"%><br />
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
@@ -20,6 +20,10 @@
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
+    <% if provider == :google_oauth2 %>
+      <%= link_to "Continue with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: 'w-full px-2 py-2 text-black rounded border border-gray-900 text-center'%><br />
+    <% elsif provider == :facebook%>
+      <%= link_to "Continue with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: 'w-full px-2 py-2 text-white rounded bg-blue-500 text-center' %><br />
+    <% end %>
   <% end %>
 <% end %>

@@ -1,12 +1,177 @@
-<h1>這是首頁</h1>
-<% if current_user %>
-  <%= link_to 'song page', user_songs_path(current_user.id) %>
-  <%= link_to 'profile', user_path(current_user.id) %>
-  <%= link_to 'play list', user_playlists_path(current_user.id) %>
-<% end %>
+<%#這是首頁旁邊的留白%>
+<div class="mx-6 bg-white">
 
-<% @songs.each do |song| %>
-<ul> 
-  <li> <%= link_to song.name, song_path(song) %> </li>
-</ul>
-<% end %>
+<%#這是首頁最上的大圖%>
+  <div class="soundcloud">
+    <div class="">
+      <nav class="container mx-auto py-3 flex items-center justify-between">
+        <h1 class="w-1/6 text-white ml-10">這是LOGO區塊</h1>
+        <div>
+          <button class="px-2 py-2 bg-sladock text-white rounded"><%= link_to "Sign in",new_user_session_path%></button>
+          <button class="px-4 py-2 bg-orange-600 text-white rounded"><%= link_to "Create account",new_user_registration_path%></button>
+          <button class="px-2 py-2 bg-sladock text-white rounded"><a href="#">for Creator</a></button>
+        </div>
+      </nav>
+    </div>
+    <div class="text-white text-4xl text-center m-10">Connect to SoundCloud</div>
+    <div class="text-white text-2xl text-center mx-auto max-w-xl">Discover, stream, and share a constantly expanding mix of music from emerging and major artists around the world.</div>
+    <div class="text-center content-center my-5 pb-5">
+      <button class="px-4 py-2 bg-orange-600 text-white rounded mb-12"><%= link_to "Sign up for Free",new_user_registration_path%></button>
+    </div>
+  </div>
+
+<%#這是搜尋or上傳自己的那邊%>
+  <div class="container mx-auto flex max-w-3xl items-center my-10">
+    <form action="" class="relative justify-center flex-grow">
+      <input type="search" class="w-full px-2 py-2 focus:outline-none bg-gray-200 rounded" placeholder="Search for artists, bands, tracks, podcasts">
+    </form>
+    <span class="px-4">or</span>
+    <button class="px-4 py-2 bg-orange-600 text-white rounded"><a href="#">Upload your own</a></button>
+  </div>
+
+  <div class="text-black text-center text-2xl m-10">
+    Hear what’s trending for free in the SoundCloud community
+  </div>
+
+<%#音樂區塊%>
+  <div class="grid gap-4 grid-cols-6">
+    <div class="">
+      <div class="songcover"></div>
+      <p class="text-sm">Lorem, ipsum dolor.</p>
+      <p class="text-xs text-gray-500">lorem</p>
+    </div>
+
+    <div class="">
+      <div class="songcover"></div>
+      <p class="text-sm">Lorem, ipsum dolor.</p>
+      <p class="text-xs text-gray-500">lorem</p>
+    </div>
+
+    <div class="">
+      <div class="songcover"></div>
+      <p class="text-sm">Lorem, ipsum dolor.</p>
+      <p class="text-xs text-gray-500">lorem</p>
+    </div>
+
+    <div class="">
+      <div class="songcover"></div>
+      <p class="text-sm">Lorem, ipsum dolor.</p>
+      <p class="text-xs text-gray-500">lorem</p>
+    </div>
+
+    <div class="">
+      <div class="songcover"></div>
+      <p class="text-sm">Lorem, ipsum dolor.</p>
+      <p class="text-xs text-gray-500">lorem</p>
+    </div>
+
+    <div class="">
+      <div class="songcover"></div>
+      <p class="text-sm">Lorem, ipsum dolor.</p>
+      <p class="text-xs text-gray-500">lorem</p>
+    </div>
+
+  </div>
+
+<%#音樂區塊%>
+  <div class="grid gap-4 grid-cols-6">
+    <div class="">
+      <div class="songcover"></div>
+      <p class="text-sm">Lorem, ipsum dolor.</p>
+      <p class="text-xs text-gray-500">lorem</p>
+    </div>
+
+    <div class="">
+      <div class="songcover"></div>
+      <p class="text-sm">Lorem, ipsum dolor.</p>
+      <p class="text-xs text-gray-500">lorem</p>
+    </div>
+
+    <div class="">
+      <div class="songcover"></div>
+      <p class="text-sm">Lorem, ipsum dolor.</p>
+      <p class="text-xs text-gray-500">lorem</p>
+    </div>
+
+    <div class="">
+      <div class="songcover"></div>
+      <p class="text-sm">Lorem, ipsum dolor.</p>
+      <p class="text-xs text-gray-500">lorem</p>
+    </div>
+
+    <div class="">
+      <div class="songcover"></div>
+      <p class="text-sm">Lorem, ipsum dolor.</p>
+      <p class="text-xs text-gray-500">lorem</p>
+    </div>
+
+    <div class="">
+      <div class="songcover"></div>
+      <p class="text-sm">Lorem, ipsum dolor.</p>
+      <p class="text-xs text-gray-500">lorem</p>
+    </div>
+
+  </div>
+
+<%#橘色按鈕%>
+  <div class="flex justify-center">
+    <button class="px-4 py-2 bg-orange-600 text-white rounded"><a href="#">explore trending playlists</a></button>
+  </div>
+
+<%#尋找創作者%>
+  <div class="songcover1">
+    <div class="w-1/2 m-10 p-10">
+      <div class="text-white text-4xl">Calling all creators</div>
+      <div class="text-white text-2xl">Get on SoundCloud to connect with fans, share your sounds, and grow your audience. What are you waiting for?</div>
+      <button class="px-6 py-2 my-6 bg-sladock text-white rounded border border-gray-200"><a href="#">Find out more</a></button>
+    </div>
+  </div>
+<%#再次逼你登入%>
+  <div class="flex flex-col items-center">
+    <div class="text-4xl text-center">Thanks for listening. Now join in.</div>
+    <div class="text-2xl text-center max-w-xl">Save tracks, follow artists and build playlists. All for free.</div>
+    <button class="px-4 py-2 bg-orange-600 text-white rounded m-4"><a href="#">explore trending playlists</a></button>
+    
+    <div class="">
+      Already have an account?
+      <button class="px-6 py-2 my-6 bg-sladock rounded border border-gray-200"><%= link_to "Sign in",new_user_session_path%></button>
+    </div>
+  </div>
+
+  <div class="my-2 w-full h-1 bg-gray-500">
+  </div>
+<%#底部更多選單%>
+  <div class="flex">
+    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Popular searches</a></div>
+      <div class="text-gray-500 text-sm">-</div>
+    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Directory</a></div>
+      <div class="text-gray-500 text-sm">-</div>
+    <div class="text-gray-500 text-sm hover:text-black"><a href="#">About us</a></div>
+      <div class="text-gray-500 text-sm">-</div>
+    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Creator Resources</a></div>
+      <div class="text-gray-500 text-sm">-</div>
+    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Blog</a></div>
+      <div class="text-gray-500 text-sm">-</div>
+    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Jobs</a></div>
+      <div class="text-gray-500 text-sm">-</div>
+    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Developers</a></div>
+      <div class="text-gray-500 text-sm">-</div>
+    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Help</a></div>
+      <div class="text-gray-500 text-sm">-</div>
+    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Legal</a></div>
+      <div class="text-gray-500 text-sm">-</div>
+    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Privacy</a></div>
+      <div class="text-gray-500 text-sm">-</div>
+    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Cookies</a></div>
+
+  </div>
+  
+<%#底部語言選擇%>
+  <div class="mb-20">
+    Language: English (US)
+  </div>
+</div>
+
+<%= link_to 'song page', songs_path %>
+<%= link_to 'profile', user_profile_path %>
+<%= link_to 'play list', play_list_path %>
