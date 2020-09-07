@@ -19,5 +19,18 @@ Rails.application.routes.draw do
     end
     resources :playlists, shallow: true
   end
+  
+  resources :discover, only: [:index]
 
+  resources :you, only: [:index] do
+    collection do
+      get :library 
+      get :likes
+      get :sets
+      get :albums
+      get :stations
+      get :following
+      get :history
+    end
+  end
 end
