@@ -1,7 +1,7 @@
 class SongsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
 
-  before_action :find_song, only: [:show, :destroy]
+  before_action :find_song, only: [:show, :destroy, :like]
   before_action :find_playlist_song, only: [:list_toggle]
 
   def index
@@ -47,7 +47,12 @@ class SongsController < ApplicationController
     @songs = current_user.songs
     @song_id = params[:id]
   end
-
+  
+  def like 
+    current_user.toggle_like_song(@song)
+    # current_user.like_songs << @song
+    redirect_to @song
+  end
   private
 
   def song_params

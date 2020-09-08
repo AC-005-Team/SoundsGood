@@ -8,5 +8,8 @@ class Song < ApplicationRecord
   
   has_many :favorite_songs
   has_many :liked_users, through: :favorite_songs, source: :user
-
+  
+  def favorited_by?(user)
+    liked_users.include?(user)
+  end
 end
