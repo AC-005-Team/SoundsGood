@@ -1,4 +1,4 @@
-<h1>Library</h1>
+<h1>Likes</h1>
 
 <%= link_to "Overview", library_you_index_path%>
 <%= link_to "Likes", likes_you_index_path%>
@@ -7,3 +7,14 @@
 <%= link_to "Stations", stations_you_index_path%>
 <%= link_to "Following", following_you_index_path%>
 <%= link_to "History", history_you_index_path%>
+
+<% if @like_songs.any? %>
+  <% @like_songs.each do |like_song| %>
+  <ul>
+    <li><%=like_song.name%></li>
+  </ul>
+  <% end %>
+
+<% else %>
+  <p>has not like any song yet</p>
+<% end %>
