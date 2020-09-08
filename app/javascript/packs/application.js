@@ -13,7 +13,7 @@ require("channels")
 // require("fron-end")
 // require("functions.js")
 require('stylesheets')
-
+require("packs/heart.js")
 //
 const images = require.context('../images', false)
 const imagePath = (name) => images(name, false)

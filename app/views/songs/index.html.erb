@@ -1,3 +1,38 @@
+<<<<<<< HEAD
+=======
+<style>
+  .heart{
+    fill: rgb(119, 117, 118);
+  }
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 3px 3px;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+}
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #18689d;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  left: 20px;
+  top:0;
+  background-color: rgba(#f1f1f1, 0.55);
+  min-width: 100px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+>>>>>>> 6bef974...  add like icon & animation // playlist dropdown menu
 
 <style>
   .dropbtn {
@@ -64,18 +99,25 @@
     <li><%= link_to 'playNow', song.track_url , class: 'getURL', data: {title: song.name, author: song.intro, url: song.track_url} %>
     </li>
     <%= content_tag(:button, "加到目前播放列表", id: 'addtoplay', data: {id: song.id}  )%>
-   </ul>
-   <div class="dropdown">
-   <button class="dropbtn">+</button>
-   <div id="myDropdown" class="dropdown-content">
-    <%= link_to "add to play next", id: 'addtoplay', data: {title: song.name, author: song.intro, url: song.track_url}  %>
-    <%= link_to "add to playlist", id: 'play_playlist', data: {title: song.name, author: song.intro, url: song.track_url}  %>
-   </div>
-   </div>
-     <% end %>
+  </ul>
 
+  <div class="dropdown">
+  <button class="dropbtn">+</button>
+  <div id="myDropdown" class="dropdown-content">
+   <%= link_to "add to play next", '###' , id: 'addtoplay', data: {id: song.id}  %>
+   <%= link_to "add to playlist", id: 'play_playlist', data: {title: song.name, author: song.intro, url: song.track_url}  %>
+  </div>
+  </div>
+  <!-- 愛心 -->
+  <svg class="heart" width="25px" viewBox="0 0 500 500" >
+      <path d="M295.706,35.522C295.706,35.522,295.706,35.522,295.706,35.522c-34.43-0.184-67.161,14.937-89.339,41.273
+      c-22.039-26.516-54.861-41.68-89.339-41.273C52.395,35.522,0,87.917,0,152.55C0,263.31,193.306,371.456,201.143,375.636
+      c3.162,2.113,7.286,2.113,10.449,0c7.837-4.18,201.143-110.759,201.143-223.086C412.735,87.917,360.339,35.522,295.706,35.522z"/>
+  </svg>
 
- <%= content_tag(:button, "播放整頁", id: 'play_playlist' ) %>
+<% end %>
+
+<%= content_tag(:button, "播放整頁", id: 'play_playlist' ) %>
 
 <div id="player1" class="aplayer"></div>
 

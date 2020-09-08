@@ -84,10 +84,9 @@ const dropDownbtn = document.querySelectorAll('#myDropdown');
 
 
 for(let i = 0;  i < dropbtn.length; i++) {
-  dropbtn[i].addEventListener('click', function(){
-    var select = i;
-    console.log(select);
-    dropDownbtn[select].classList.toggle('show');
+  dropbtn[i].addEventListener('click', function(e){
+    const $dropDown = e.currentTarget.parentNode
+    $dropDown.querySelector('#myDropdown').classList.toggle('show')
   });
 }
 
