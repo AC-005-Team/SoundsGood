@@ -10,7 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_07_080918) do
+ActiveRecord::Schema.define(version: 2020_09_08_043354) do
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "song_id", null: false
+    t.text "content", null: false
+    t.integer "reply_id", default: 0
+    t.string "timepoint"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["song_id"], name: "index_comments_on_song_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "favorite_songs", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "song_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["song_id"], name: "index_favorite_songs_on_song_id"
+    t.index ["user_id"], name: "index_favorite_songs_on_user_id"
+  end
 
   create_table "follows", force: :cascade do |t|
     t.integer "follower_id"
@@ -19,6 +40,15 @@ ActiveRecord::Schema.define(version: 2020_09_07_080918) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["followee_id"], name: "index_follows_on_followee_id"
     t.index ["follower_id"], name: "index_follows_on_follower_id"
+  end
+
+  create_table "like_songs", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "song_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["song_id"], name: "index_like_songs_on_song_id"
+    t.index ["user_id"], name: "index_like_songs_on_user_id"
   end
 
   create_table "playlists", force: :cascade do |t|
@@ -37,18 +67,6 @@ ActiveRecord::Schema.define(version: 2020_09_07_080918) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["playlist_id"], name: "index_playlists_songs_on_playlist_id"
     t.index ["song_id"], name: "index_playlists_songs_on_song_id"
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "song_id", null: false
-    t.text "content", null: false
-    t.integer "reply_id", default: 0
-    t.string "timepoint"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["song_id"], name: "index_comments_on_song_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "songs", force: :cascade do |t|
@@ -94,12 +112,16 @@ ActiveRecord::Schema.define(version: 2020_09_07_080918) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "songs"
+  add_foreign_key "comments", "users"
+  add_foreign_key "favorite_songs", "songs"
+  add_foreign_key "favorite_songs", "users"
   add_foreign_key "follows", "users", column: "followee_id"
   add_foreign_key "follows", "users", column: "follower_id"
+  add_foreign_key "like_songs", "songs"
+  add_foreign_key "like_songs", "users"
   add_foreign_key "playlists", "users"
   add_foreign_key "playlists_songs", "playlists"
   add_foreign_key "playlists_songs", "songs"
-  add_foreign_key "comments", "songs"
-  add_foreign_key "comments", "users"
   add_foreign_key "songs", "users"
 end
