@@ -13,6 +13,11 @@ Rails.application.routes.draw do
   resources :users, only: [:edit, :update, :show] do
     member do
       post :follow
+      get :reposts
+      get :followers
+      get :following
+      get :comments
+      get :likes
     end
     resources :songs, shallow:true do
       resources :comments, only: [:create, :destroy]
@@ -21,6 +26,7 @@ Rails.application.routes.draw do
   end
   
   resources :discover, only: [:index]
+  resources :stream, only: [:index]
 
   resources :you, only: [:index] do
     collection do
