@@ -141,20 +141,21 @@
         <div class="" id="comments">
           <% @comments.each do |comment| %>
             <div class="flex main-comment">
-              <img class="w-1/12 rounded-full" src="https://i1.sndcdn.com/avatars-Y57TiYzkrpCtP0pD-w8fdEA-t120x120.jpg" alt="">
+              <% if comment.user.avatar_url %>
+                <%= image_tag comment.user.avatar_url, class: 'w-1/12 rounded-full' %>
               <div class="w-9/12 mx-2">
                 <div class="flex">
                   <button> <%=comment.user.display_name%></button>
                   <p class ="mx-1"> at</p>
                   <p> 0:00</p>
                 </div>
-                <p class=""> <%=comment.content%> </p>
+                <p class=""><%=comment.content%></p>
               </div>
               <div class="w-2/12 text-gray-400">
-                <p> <%=comment.created_at%> </p>
-                <button class="border border-gray-400 p-1 rounded"> <i class="fas fa-reply"></i> Reply </button>
+                <p><%=comment.created_at%></p>
+                <button class="border border-gray-400 p-1 rounded"><i class="fas fa-reply"></i> Reply </button>
                 <%if is_current_user?(comment.user)%>
-                  <button class="border border-gray-400 p-1 rounded"> <%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"}%> </button> 
+                  <button class="border border-gray-400 p-1 rounded"><%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"}%></button> 
                 <%end%>
               </div>
             </div>
@@ -162,7 +163,7 @@
             <div id= <%=comment.id%>>
               <% comment.replies.each do |reply| %>
               <div class="flex mt-4 ml-6">
-                <img class="w-1/12 rounded-full" src="https://i1.sndcdn.com/avatars-Y57TiYzkrpCtP0pD-w8fdEA-t120x120.jpg" alt="">
+                <%= image_tag reply.user.image_url, class: 'w-1/12 rounded-full' %>
                 <div class="w-9/12 mx-2">
                   <div class="flex">
                     <button> <%=reply.user.display_name%></button>
