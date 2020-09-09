@@ -53,14 +53,14 @@ class User < ApplicationRecord
     followees.include?(followee)
   end
   
-  def toggle_like_song(song)
-    if like_songs.exists?(song.id)
+  def toggle_like(song)
+    if like_songs.include?(song)
       like_songs.destroy(song)
     else
       like_songs << song
     end
   end
-
+  
   private
   # 如果方法會更新資料，方法要加驚嘆號提醒其他使用這個方法的人
   def self.update_customer!(user, access_token)

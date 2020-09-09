@@ -5,4 +5,6 @@
       <%= link_to "加入", list_toggle_path(list.id, @song_id ), :method => "post" %>
     </li>
   <% end %>
+<% else %>
+  <p>No playlist</p>  
 <% end %>

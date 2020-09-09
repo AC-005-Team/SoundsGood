@@ -9,7 +9,7 @@ class PlaylistsController < ApplicationController
   end
 
   def create
-    @playlist = current_user.playlists.new(list_params)
+    @playlist = current_user.playlists.new(playlist_params)
     if @playlist.save
       redirect_to user_playlists_path
     else
@@ -19,7 +19,7 @@ class PlaylistsController < ApplicationController
 
   private
 
-  def list_params
+  def playlist_params
     params.require(:playlist).permit(:name, :intro)
   end
 
