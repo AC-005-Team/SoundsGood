@@ -49,9 +49,8 @@
     </div>
     <div class="modal-item">
       share
-      <button class="share-twitter">Share to Twitter</button>
-      <button class="share-facebook">Share to Facebook</button>
+      <%= content_tag(:button, 'Share to Twitter', class:'share-twitter', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
+      <%= content_tag(:button, 'Share to Facebook', class:'share-facebook', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
     </div>
   </div>
-</template>
->>>>>>> modify to fix many modal btn on same page
+</template>>>>>>>> modify to fix many modal btn on same page
