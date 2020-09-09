@@ -17,7 +17,7 @@ require('stylesheets')
 //
 const images = require.context('../images', false)
 const imagePath = (name) => images(name, false)
-
+import './preview'
 
 
 
