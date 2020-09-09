@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       const modalDiv = document.createElement('div')
       modalDiv.innerHTML = document.querySelector(`.${btnTemplate}`).innerHTML
-      modalDiv.querySelector('.modal-container').innerHTML = '  <div class="modal-fade"><div class="modal-mask"></div><button class="modal-close-btn"> X </button>'
+      modalDiv.querySelector('.modal-container').innerHTML = '<div class="modal-fade"><div class="modal-mask"></div><button class="modal-close-btn"> X </button>'
       const mask = modalDiv.querySelector('.modal-fade')
       const modal = modalDiv.querySelector('.modal-content')
 
