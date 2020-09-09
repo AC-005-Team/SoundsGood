@@ -13,48 +13,6 @@ require("channels")
 // require("fron-end")
 // require("functions.js")
 require('stylesheets')
-require("packs/heart.js")
-//
+
 const images = require.context('../images', false)
 const imagePath = (name) => images(name, false)
-
-
-
-
-
-
-// require("aplayer")
-
-// require("fron-end")
-// require("functions.js")
-require('stylesheets')
-
-//
-const images = require.context('../images', false)
-const imagePath = (name) => images(name, false)
-
-
-
-
-
-
-// require("aplayer")
-
-// require("fron-end")
-// require("functions.js")
-require('stylesheets')
-
-//
-const images = require.context('../images', false)
-const imagePath = (name) => images(name, false)
-
-
-
-
-
-
-
-// Uncomment to copy all static images under ../images to the output folder and reference
-// them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
-// or the `imagePath` JavaScript helper below.
-//

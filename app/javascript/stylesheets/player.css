@@ -4,20 +4,20 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  margin: 0;
   box-shadow: 0 -2px 2px #dadada;
   background-color: #fff;
   transition: all ease 0.5s;
 }
 
-#player_withplaylist{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  margin: 0;
-  box-shadow: 0 -2px 2px #dadada;
-  background-color: #fff;
-  color: rgb(8, 8, 8);
-  transition: all ease 0.5s;
+
+.getURL{
+  color: rgb(255, 191, 0);
+  display: inline-block;
+}
+.getURL:hover{
+  cursor: pointer;
+  color: black;
+  padding: 0.3rem;
+  transform: scale(1);
+  background-color: rgba(252, 163, 11, 0.51)
 }

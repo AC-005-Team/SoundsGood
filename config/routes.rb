@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     namespace :api do
       namespace :soundclown do
         resources :songs, only: [:index, :show]
+        resources :playlists, only: [:show]
       end
     end
   end

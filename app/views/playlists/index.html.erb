@@ -5,10 +5,12 @@
 <% if @playlists %>
   <ul>
     <% @playlists.each do |list| %>
-      <li><%= list.name %></li>
-      <li><%= list.intro %></li>
-    <% end %> 
+    <%= link_to list.name, playlist_path(list.id) %>
+    <li><%= list.intro %></li>
+    <%= content_tag(:li, list.id , data: {id: list.id} ) %>
+
+    <% end %>
   </ul>
 <% else %>
-  <li>no list</li>
+  <li>you have no list</li>
 <% end %>
