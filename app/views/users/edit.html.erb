@@ -2,11 +2,13 @@
 <%= form_with model: @user, url: user_path(current_user.id), method: 'put', local: true  do |f| %>
 <div>
   <%= f.label :header %>
-  <%= f.file_field :header %>
+  <input type="file" name=user[header] onchange="showMyImage(this)" >
+  <img id="thumbnil" src="" >
 </div>
 <div>
   <%= f.label :avatar %>
-  <%= f.file_field :avatar %>
+  <input type="file" name=user[avatar] onchange="showMyAvatar(this)" >
+  <img id="avatar" src="" >
 </div>
 <div>
   <%= f.label :email %>
