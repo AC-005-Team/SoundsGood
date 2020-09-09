@@ -12,4 +12,8 @@ class Song < ApplicationRecord
   def favorited_by?(user)
     liked_users.include?(user)
   end
+
+  def added_by?(playlist)
+    playlists.include?(playlist)
+  end
 end

@@ -1,7 +1,7 @@
 class SongsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
 
-  before_action :find_song, only: [:show, :destroy, :like]
+  before_action :find_song, only: [:show, :destroy, :like, :add_to_playlist]
   before_action :find_playlist_song, only: [:list_toggle]
 
   def index
@@ -25,6 +25,7 @@ class SongsController < ApplicationController
   def show 
     @comment = @song.comments.new
     @comments = @song.comments.includes(:user, replies:[:user]).where(reply_id: 0).order(id: :desc)
+    @playlists = current_user.playlists
   end
 
   def destroy
@@ -32,25 +33,30 @@ class SongsController < ApplicationController
     redirect_to user_songs_path(current_user.id)
   end
 
-  def list_toggle
-    if @playlist_song.present?
-      @playlist_song.destroy
-    else
-      PlaylistsSong.create(playlist_id: params[:list_id], song_id: params[:id])
-    end
+  # def list_toggle
+  #   if @playlist_song.present?
+  #     @playlist_song.destroy
+  #   else
+  #     PlaylistsSong.create(playlist_id: params[:list_id], song_id: params[:id])
+  #   end
   
-    redirect_to user_songs_path(current_user.id)
-  end
+  #   redirect_to user_songs_path(current_user.id)
+  # end
 
-  def lists
-    @playlists = current_user.playlists
-    @songs = current_user.songs
-    @song_id = params[:id]
+  # def lists
+  #   @playlists = current_user.playlists
+  #   @songs = current_user.songs
+  #   @song_id = params[:id]
+  # end
+
+  def add_to_playlist
+    @playlist = current_user.playlists.find(params[:playlist_id])
+    @playlist.toggle_add(@song)
+    redirect_to @song
   end
   
   def like 
-    current_user.toggle_like_song(@song)
-    # current_user.like_songs << @song
+    current_user.toggle_like(@song)
     redirect_to @song
   end
   private
@@ -63,10 +69,10 @@ class SongsController < ApplicationController
     @song = Song.find(params[:id])
   end
   
-  def find_playlist_song
-    @playlist_song = PlaylistsSong.find_by(
-      playlist_id: params[:list_id],
-      song_id: params[:id]
-    )
-  end
+  # def find_playlist_song
+  #   @playlist_song = PlaylistsSong.find_by(
+  #     playlist_id: params[:list_id],
+  #     song_id: params[:id]
+  #   )
+  # end
 end

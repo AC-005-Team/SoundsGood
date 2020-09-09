@@ -15,10 +15,11 @@ Rails.application.routes.draw do
       post :follow
     end
     resources :songs, shallow: true do
-      resources :comments, only: [:create, :destroy]
       member do 
         post :like
+        post :add_to_playlist
       end
+      resources :comments, only: [:create, :destroy]
     end
     resources :playlists, shallow: true
   end
