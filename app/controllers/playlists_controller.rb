@@ -1,5 +1,6 @@
 class PlaylistsController < ApplicationController
-  
+  before_action :find_playlist, only: [:show, :like]
+
   def index
     @playlists = current_user.playlists
   end
@@ -17,10 +18,23 @@ class PlaylistsController < ApplicationController
     end
   end
 
+  def show
+    # @playlist = current_user.playlists.find(params[:id])
+  end
+  
+  def like 
+    current_user.toggle_like_playlist(@playlist)
+    redirect_to @playlist
+  end
+
   private
 
   def playlist_params
     params.require(:playlist).permit(:name, :intro)
+  end
+
+  def find_playlist
+    @playlist = current_user.playlists.find(params[:id])
   end
 
 end

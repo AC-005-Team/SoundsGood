@@ -1,0 +1,15 @@
+<h1><%= @playlist.name%></h1>
+
+<h2>playlist - song list</h2>
+<% if @playlist.favorited_by?(current_user) %>
+    <i class="fas fa-heart"></i>
+    <%= link_to "Liked", like_playlist_path(@playlist), method: "post" %>
+  <% else %>
+    <i class="far fa-heart"></i>
+    <%= link_to "Like", like_playlist_path(@playlist), method: "post" %>
+  <% end%>  
+<% @playlist.songs.each do |song| %>
+  <ul>
+    <li><%= song.name %> ,Link:<%= link_to '點擊', song.track_url %></li>
+  </ul>
+<% end %>
