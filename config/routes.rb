@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   end
   defaults format: :json do
     namespace :api do
-      namespace :soundclown do
+      namespace :v1 do
         resources :songs, only: [:index, :show]
         resources :playlists, only: [:show]
       end

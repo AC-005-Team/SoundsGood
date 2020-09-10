@@ -7,11 +7,6 @@ class SongsController < ApplicationController
   def index
     @songs = current_user.songs
     @playlists = current_user.playlists
-
-    respond_to do |format|
-    format.json
-    format.html
-    end
   end
 
   def new
