@@ -18,9 +18,7 @@ class PlaylistsController < ApplicationController
     end
   end
 
-  def show
-    # @playlist = current_user.playlists.find(params[:id])
-  end
+  def show;end
   
   def like 
     current_user.toggle_like_playlist(@playlist)
