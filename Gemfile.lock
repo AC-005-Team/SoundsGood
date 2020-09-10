@@ -276,7 +276,6 @@ DEPENDENCIES
   figaro (~> 1.2)
   foreman (~> 0.87.1)
   hirb (~> 0.7.3)
-  foreman (~> 0.87.1)
   jbuilder (~> 2.7)
   listen (~> 3.2)
   omniauth (~> 1.9, >= 1.9.1)

@@ -5,16 +5,23 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-
+    <%= javascript_pack_tag 'hello_vue' %>
   </head>
 
-  <body>
+   <body>
+     <div id='hello'>
+       {{message}}
+       <app></app>
+
+      </div>
+
     <%= render "shared/navbar" %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
     <%= render "shared/aplayer" %>
   </body>
+
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'false' %>
   <%= javascript_pack_tag 'player', 'data-turbolinks-track': 'false' %>
 </html>

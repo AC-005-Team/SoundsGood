@@ -9,7 +9,10 @@
     "animejs": "^3.2.0",
     "aplayer": "^1.10.1",
     "resolve-url-loader": "^3.1.1",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "vue": "^2.6.12",
+    "vue-loader": "^15.9.3",
+    "vue-template-compiler": "^2.6.12"
   },
   "version": "0.1.0",
   "devDependencies": {
