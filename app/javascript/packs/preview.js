@@ -1,8 +1,8 @@
 showMyImage = function(fileInput) {
-  var file = fileInput.files[0];
-  var img=document.getElementById("thumbnil");
+  let file = fileInput.files[0];
+  let img=document.getElementById("thumbnil");
   img.file = file;
-  var reader = new FileReader();
+  let reader = new FileReader();
   reader.onload = (function(aImg) {
     return function(e) {
       aImg.src = e.target.result;
@@ -11,10 +11,10 @@ showMyImage = function(fileInput) {
   reader.readAsDataURL(file);
 }
 showMyAvatar = function(fileInput) {
-  var file = fileInput.files[0];
-  var img=document.getElementById("avatar");
+  let file = fileInput.files[0];
+  let img=document.getElementById("avatar");
   img.file = file;
-  var reader = new FileReader();
+  let reader = new FileReader();
   reader.onload = (function(aImg) {
     return function(e) {
       aImg.src = e.target.result;
