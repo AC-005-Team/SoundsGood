@@ -17,12 +17,12 @@ require('stylesheets')
 //
 const images = require.context('../images', false)
 const imagePath = (name) => images(name, false)
-
+import './preview'
 import "tailwindcss/base";
 import "tailwindcss/components";
 import "tailwindcss/utilities";
 // require('./style.css')
-import './preview'
+
 
 
 
