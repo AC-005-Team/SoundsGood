@@ -51,12 +51,12 @@ class SongsController < ApplicationController
 
   def add_to_playlist
     @playlist = current_user.playlists.find(params[:playlist_id])
-    @playlist.toggle_add(@song)
+    @playlist.toggle_add_to_playlist(@song)
     redirect_to @song
   end
   
   def like 
-    current_user.toggle_like(@song)
+    current_user.toggle_like_song(@song)
     redirect_to @song
   end
   private

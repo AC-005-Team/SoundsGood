@@ -20,6 +20,9 @@ class User < ApplicationRecord
   has_many :favorite_songs
   has_many :like_songs, through: :favorite_songs, source: :song
 
+  has_many :favorite_playlists
+  has_many :like_playlists, through: :favorite_playlists, source: :playlist
+
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
     user = User.find_by(google_token: access_token.credentials.token, google_uid: access_token.uid )
@@ -53,11 +56,19 @@ class User < ApplicationRecord
     followees.include?(followee)
   end
   
-  def toggle_like(song)
+  def toggle_like_song(song)
     if like_songs.include?(song)
       like_songs.destroy(song)
     else
       like_songs << song
+    end
+  end
+
+  def toggle_like_playlist(playlist)
+    if like_playlists.include?(playlist)
+      like_playlists.destroy(playlist)
+    else
+      like_playlists << playlist
     end
   end
   
