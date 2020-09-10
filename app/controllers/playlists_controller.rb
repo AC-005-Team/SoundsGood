@@ -34,7 +34,7 @@ class PlaylistsController < ApplicationController
   end
 
   def find_playlist
-    @playlist = current_user.playlists.find(params[:id])
+    @playlist = Playlist.find(params[:id])
   end
 
 end

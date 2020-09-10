@@ -8,8 +8,12 @@
     <i class="far fa-heart"></i>
     <%= link_to "Like", like_playlist_path(@playlist), method: "post" %>
   <% end%>  
+  <i class="fas fa-heart"> <%=@playlist.liked_users.count %> </i>
 <% @playlist.songs.each do |song| %>
   <ul>
-    <li><%= song.name %> ,Link:<%= link_to '點擊', song.track_url %></li>
+    <li>
+      <%= link_to song.name, song_path(song)%> ,
+      Play:<%= link_to '點擊', song.track_url %>
+    </li>
   </ul>
 <% end %>
