@@ -6,4 +6,6 @@ class Song < ApplicationRecord
   has_many :playlists, through: :playlists_songs
 
   has_many :comments
+  has_many :songs_tags
+  has_many :tags, through: :songs_tags
 end
