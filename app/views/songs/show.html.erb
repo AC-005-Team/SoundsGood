@@ -15,15 +15,12 @@
 </div>
 
 <div>
-  <!-- <button data-action="click->heart#favorite"> -->
   <% if @song.favorited_by?(current_user) %>
-    <i class="fas fa-heart" data-target="heart.output"></i>
-    <%= link_to "Liked", like_song_path(@song), method: "post" %>
+    <i class="fas fa-heart"> <%= link_to "Liked", like_song_path(@song), method: "post" %> </i>
   <% else %>
-    <i class="far fa-heart" data-target="heart.output"></i>
-    <%= link_to "Like", like_song_path(@song), method: "post" %>
+    <i class="far fa-heart"> <%= link_to "Like", like_song_path(@song), method: "post" %> </i>
   <% end%>  
-  </button>
+    <i class="fas fa-heart"> <%=@song.liked_users.count %> </i>
 </div>
 <div>
   <h3>Add to playlist</h3>
