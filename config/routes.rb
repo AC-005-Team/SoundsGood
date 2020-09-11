@@ -21,6 +21,9 @@ Rails.application.routes.draw do
     end
     resources :songs, shallow:true do
       resources :comments, only: [:create, :destroy]
+      member do
+        get :share
+      end
     end
     resources :playlists, shallow: true
   end
