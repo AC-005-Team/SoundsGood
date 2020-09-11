@@ -6,9 +6,7 @@
     <%= csp_meta_tag %>
 
     <%= javascript_pack_tag 'hello_vue' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'player', 'data-turbolinks-track': 'reload' %>
-
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'false' %>
   </head>
 
    <body>
@@ -22,4 +20,6 @@
     <%= yield %>
     <%= render "shared/aplayer" %>
   </body>
+    <%= javascript_pack_tag 'player', 'data-turbolinks-track': 'false' %>
+
 </html>
