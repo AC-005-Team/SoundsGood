@@ -1,8 +1,9 @@
 class SongsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
 
-  before_action :find_song, only: [:show, :destroy]
+  before_action :find_song, only: [:show, :destroy, :share]
   before_action :find_playlist_song, only: [:list_toggle]
+
 
   def index
     @songs = current_user.songs
@@ -22,7 +23,7 @@ class SongsController < ApplicationController
     end
   end
 
-  def show
+  def show 
     @comment = @song.comments.new
     @comments = @song.comments.includes(:user, replies:[:user]).where(reply_id: 0).order(id: :desc)
   end
@@ -46,6 +47,9 @@ class SongsController < ApplicationController
     @playlists = current_user.playlists
     @songs = current_user.songs
     @song_id = params[:id]
+  end
+
+  def share
   end
 
   private

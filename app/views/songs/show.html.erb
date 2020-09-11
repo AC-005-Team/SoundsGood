@@ -1,4 +1,7 @@
 <h1><%=@song.name%></h1>
+<button class="modal-btn share-btn">Share</button><br>
+<button class="modal-btn addlist-btn">Add to List</button><br>
+
 
   <ul>
       <li>Name:<%= @song.name %></li>
@@ -35,3 +38,19 @@
   <% end %>
 
   <div id="player1" class="aplayer"></div>
+
+<% #以下之後用Vue藏內容應該可以 %>
+<template class="share-template">
+  <div class="modal-container share-container">
+  </div>
+  <div class="modal-content">
+    <div class="modal-item">
+      <h1>Share</h1>
+    </div>
+    <div class="modal-item">
+      share
+      <%= content_tag(:button, 'Share to Twitter', class:'share-twitter', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
+      <%= content_tag(:button, 'Share to Facebook', class:'share-facebook', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
+    </div>
+  </div>
+</template>>>>>>>> modify to fix many modal btn on same page
