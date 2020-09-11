@@ -9,6 +9,9 @@
       <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: @song.id} ) %>
   </ul>
 
+<%= content_tag(:div, '', id:['waveform'], class:['song-waveform'], data:{ path: @song.track_url }) %>
+<div class="waveform"></div>
+
 <div>
   <%= form_with(model:@comment, url:song_comments_path(@song)) do |f|%>
     <%= f.text_field :content, placeholder: "Write a comment"%>

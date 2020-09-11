@@ -18,7 +18,8 @@
     "vue-loader": "^15.9.3",
     "vue-template-compiler": "^2.6.12",
     "tailwindcss": "^1.7.6",
-    "select2": "^4.0.13"
+    "select2": "^4.0.13",
+    "wavesurfer.js": "^4.0.1"
   },
   "version": "0.1.0",
   "devDependencies": {
