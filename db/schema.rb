@@ -12,9 +12,12 @@
 
 ActiveRecord::Schema.define(version: 2020_09_07_080918) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "comments", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "song_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "song_id", null: false
     t.text "content", null: false
     t.integer "reply_id", default: 0
     t.string "timepoint"
@@ -25,8 +28,8 @@ ActiveRecord::Schema.define(version: 2020_09_07_080918) do
   end
 
   create_table "follows", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "followee_id"
+    t.bigint "follower_id"
+    t.bigint "followee_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["followee_id"], name: "index_follows_on_followee_id"
@@ -36,15 +39,15 @@ ActiveRecord::Schema.define(version: 2020_09_07_080918) do
   create_table "playlists", force: :cascade do |t|
     t.string "name", null: false
     t.text "intro"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_playlists_on_user_id"
   end
 
   create_table "playlists_songs", force: :cascade do |t|
-    t.integer "playlist_id", null: false
-    t.integer "song_id", null: false
+    t.bigint "playlist_id", null: false
+    t.bigint "song_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["playlist_id"], name: "index_playlists_songs_on_playlist_id"
@@ -55,7 +58,7 @@ ActiveRecord::Schema.define(version: 2020_09_07_080918) do
     t.string "name", null: false
     t.text "intro"
     t.text "track_data", null: false
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "image_data"
