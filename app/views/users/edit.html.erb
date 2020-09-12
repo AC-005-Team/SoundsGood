@@ -1,47 +1,63 @@
-<h1>edit</h1>
-<%= form_with model: @user, url: user_path(current_user.id), method: 'put', local: true  do |f| %>
-<div>
-  <%= f.label :header %>
-  <%= f.file_field :header %>
-</div>
-<div>
-  <%= f.label :avatar %>
-  <%= f.file_field :avatar %>
-</div>
-<div>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-</div>
-<div>
-  <%= f.label :nick_name %>
-  <%= f.text_field :display_name %>
-</div>
-<div>
-  <%= f.label :first_name %>
-  <%= f.text_field :first_name %>
-</div>
-<div>
-  <%= f.label :last_name %>
-  <%= f.text_field :last_name %>
-</div>
-<div>
-  <%= f.label :gender %>
-  <%= f.text_field :gender %>
-</div>
-<div>
-  <%= f.label :age %>
-  <%= f.number_field :age %>
-</div>
-<div>
-  <%= f.label :city %>
-  <%= f.text_field :city %>
-</div>
-<div>
-  <%= f.label :country %>
-  <%= f.text_field :country %>
-</div>
+<div class="bg-white w-full bg-opacity-75">
+  <div class="container m-auto bg-white max-w-lg flex flex-col justify-center mt-12 rounded">
+    <%= form_with model: @user, url: edit_user_path(current_user.id), method: 'post', local: true  do |f| %>
+      <div>
+        <%= f.label :header %>
+        <input type="file" name=user[header] onchange="showMyImage(this)" class= 'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3'>
+        <img id="thumbnil" src="" >
+      </div>
+      
+      <div>
+        <%= f.label :avatar %>
+        <input type="file" name=user[avatar] onchange="showMyAvatar(this)" class= 'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3'>
+        <img id="avatar" src="" >
+      </div>
 
-<%= f.submit %>
-<%= link_to 'go back', user_path %>
-<% end %>
+      <div>
+        <%= f.label :email %>
+        <%= f.text_field :email, class: 'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3'%>
+      </div>
 
+      <div>
+        <%= f.label :nick_name %>
+        <%= f.text_field :display_name, class: 'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3'%>
+      </div>
+
+      <div>
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, class: 'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3'%>
+      </div>
+
+      <div>
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, class: 'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3'%>
+      </div>
+
+      <div>
+        <%= f.label :gender %>
+        <%= f.text_field :gender, class: 'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3'%>
+      </div>
+
+      <div>
+        <%= f.label :age %>
+        <%= f.number_field :age, class: 'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3'%>
+      </div>
+
+      <div>
+        <%= f.label :city %>
+        <%= f.text_field :city, class: 'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3'%>
+      </div>
+
+      <div>
+        <%= f.label :country %>
+        <%= f.text_field :country, class: 'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3'%>
+      </div>
+
+      <div class="flex mt-3 mb-12 text-center">
+        <%= f.submit '更新狀態囉', class: "w-full px-2 py-2 text-white rounded bg-orange-700"%>
+        <%= link_to '我不想更新了', user_path, class: "w-full px-2 py-2 text-white rounded bg-red-700"%>
+      </div>
+
+    <% end %>
+  </div>
+</div>

@@ -6,8 +6,10 @@
   <ul>
     <% @playlists.each do |playlist| %>
       <li>Name: <%= link_to playlist.name, playlist_path(playlist) %></li>
-    <% end %> 
+    <%= content_tag(:li, playlist.id , data: {id: playlist.id} ) %>
+
+    <% end %>
   </ul>
 <% else %>
-  <li>no playlist</li>
+  <li>you have no playlist</li>
 <% end %>

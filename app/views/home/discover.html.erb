@@ -1,0 +1,8 @@
+<h1>這是Discover</h1>
+
+<h2> Song List </h2>
+<% @songs.each do |song| %>
+<ul> 
+  <li> <%= link_to song.name, song_path(song), data: { turbolinks: false } %> </li>
+</ul>
+<% end %>

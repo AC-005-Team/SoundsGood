@@ -1,4 +1,4 @@
-class YouController < ApplicationController
+class LibraryController < ApplicationController
   before_action :authenticate_user!, only: [:likes]
 
   def library;end
