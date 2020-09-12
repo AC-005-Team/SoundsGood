@@ -43,5 +43,3 @@ yarn-debug.log*
 /config/application.yml
 .env
 *.dev
-
-.Procfile.dev

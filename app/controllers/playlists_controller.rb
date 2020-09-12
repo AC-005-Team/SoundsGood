@@ -1,11 +1,16 @@
 class PlaylistsController < ApplicationController
-  
+
   def index
     @playlists = current_user.playlists
   end
 
   def new
     @playlist = current_user.playlists.new
+  end
+
+  def show
+    @playlist = Playlist.find(params[:id])
+    @songs = @playlist.songs
   end
 
   def create

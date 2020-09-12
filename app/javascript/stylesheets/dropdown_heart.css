@@ -1,0 +1,84 @@
+.heart{
+    fill: rgb(119, 117, 118);
+    margin: auto;
+    transition: 0.4 ease;
+  }
+
+.like_btn{
+  fill: rgb(236, 57, 57);
+  transition: 0.4 ease;
+  animation: heartbeat 0.5s ease;
+}
+
+.like_btn_reverse{
+  fill: rgb(119, 117, 118);
+  animation: heartbeat-re 0.7s ease;
+}
+
+@keyframes heartbeat {
+  0%{
+    transform: scale(1);
+  }
+  25%{
+    transform: scale(1.2);
+  }
+  60%{
+    transform: scale(.8);
+  }
+  100%{
+    transform: scale(1);
+  }
+
+}
+
+@keyframes heartbeat-re {
+  100%{
+    transform: scale(1);
+  }
+  60%{
+    transform: scale(0.8);
+  }
+  40%{
+    transform: scale(1.1);
+  }
+  0%{
+    transform: scale(1);
+  }
+
+}
+
+  .dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 3px 3px;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+  }
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #18689d;
+  }
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    left: 20px;
+    top:0;
+    background-color: rgba(#f1f1f1, 0.55);
+    min-width: 100px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  .dropdown-content a {
+    color: black;
+    padding: 5px;
+    font-size: 12px;
+    text-align: center;
+    display: block;
+  }
+  .dropdown a:hover {background-color: #f0c543;}
+  .show {display: block;}

@@ -1,10 +1,13 @@
 <h1><%=@song.name%></h1>
+<button class="modal-btn share-btn">Share</button><br>
+<button class="modal-btn addlist-btn">Add to List</button><br>
+
 
   <ul>
       <li>Name:<%= @song.name %></li>
       <li><%= image_tag @song.image_url, width: '200px'  %> </li>
       <li>Intro:<%= @song.intro %></li>
-      <li>Link:<%= link_to '點擊', @song.track_url %></li>
+      <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: @song.id} ) %>
   </ul>
 
 <div>
@@ -18,12 +21,12 @@
   <% @comments.each do |comment| %>
     <div>
       <span> <%=comment.content%> </span>
-      <%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(comment.user)%> 
+      <%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(comment.user)%>
       <% comment.replies.each do |reply| %>
         <div>
           <span> --I'm reply's content-- </span>
           <span> <%=reply.content%> </span>
-            <%= link_to "Delete", comment_path(song_id: @song.id, id: reply.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%> 
+            <%= link_to "Delete", comment_path(song_id: @song.id, id: reply.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%>
         </div>
       <%end%>
       <%= form_with(model: @comment, url:song_comments_path(@song)) do |f|%>
@@ -36,3 +39,18 @@
 
   <div id="player1" class="aplayer"></div>
 
+<% #以下之後用Vue藏內容應該可以 %>
+<template class="share-template">
+  <div class="modal-container share-container">
+  </div>
+  <div class="modal-content">
+    <div class="modal-item">
+      <h1>Share</h1>
+    </div>
+    <div class="modal-item">
+      share
+      <%= content_tag(:button, 'Share to Twitter', class:'share-twitter', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
+      <%= content_tag(:button, 'Share to Facebook', class:'share-facebook', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
+    </div>
+  </div>
+</template>>>>>>>> modify to fix many modal btn on same page
