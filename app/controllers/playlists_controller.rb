@@ -9,6 +9,11 @@ class PlaylistsController < ApplicationController
     @playlist = current_user.playlists.new
   end
 
+  def show
+    @playlist = Playlist.find(params[:id])
+    @songs = @playlist.songs
+  end
+
   def create
     @playlist = current_user.playlists.new(playlist_params)
     if @playlist.save

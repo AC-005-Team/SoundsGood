@@ -1,9 +1,24 @@
-<nav>
+<% unless params[:controller]=="home" && params[:action]=="index"%>
+
+<div class="bg-gray-800 w-full flex fix">
+  <div class="text-gray-400 hover:text-white w-1/12 py-4 pt-2 pl-2">這是LOGO</div>
+  <div class="text-gray-400 hover:text-white w-1/12 pt-2 border-r border-black text-center"><%= link_to "Home", discover_path%></div>
+  <div class="text-gray-400 hover:text-white w-1/12 pt-2 border-r border-black text-center"><%= link_to "Stream", stream_path%></div>
+  <div class="text-gray-400 hover:text-white w-1/12 pt-2 border-r border-black text-center"><%= link_to "Library", library_library_index_path%></div>
+  <input type="search" class="px-2 m-2 bg-gray-200 rounded w-4/12 focus:outline-none" placeholder="Search">
+  <div class="text-gray-400 hover:text-white w-1/12 pt-2 text-center"><%= link_to "Upload", new_user_song_path(current_user) if current_user%></div>
+ 
     <% if user_signed_in? %>
-      <%= current_user.display_name%>
-      <%= link_to "Sign out",destroy_user_session_path, method: "delete"%> 
+      <div class="text-gray-400 hover:text-white w-1/12 pt-2 text-center"><%= link_to current_user.display_name, user_path(current_user)%></div>
+      <div class="text-gray-400 hover:text-white w-1/12 pt-2 text-center"><%= link_to "Sign out",destroy_user_session_path, method: "delete"%></div>
     <% else %>
-      <%= link_to "Sign in",new_user_session_path%> 
-      <%= link_to "Create account",new_user_registration_path%>
+      <div class="text-gray-400 hover:text-white w-1/12 pt-2 text-center"><%= link_to "Sign in",new_user_session_path%></div>
+      <div class="text-gray-400 hover:text-white w-1/12 pt-2 text-center"><%= link_to "Create",new_user_registration_path%></div>
     <% end %>
-</nav>
+
+  <div class="text-gray-400 hover:text-white pt-2 text-center">鈴</div>
+  <div class="text-gray-400 hover:text-white pt-2 text-center">信</div>
+  <div class="text-gray-400 hover:text-white pt-2 pr-2 text-center ">。。。</div>
+</div>
+
+<% end %>

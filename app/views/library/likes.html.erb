@@ -1,0 +1,20 @@
+<h1>Likes</h1>
+
+<%= link_to "Overview", library_library_index_path%>
+<%= link_to "Likes", likes_library_index_path%>
+<%= link_to "Platlists", sets_library_index_path%>
+<%= link_to "Albums", albums_library_index_path%>
+<%= link_to "Stations", stations_library_index_path%>
+<%= link_to "Following", following_library_index_path%>
+<%= link_to "History", history_library_index_path%>
+
+<% if @like_songs.any? %>
+  <% @like_songs.each do |like_song| %>
+  <ul>
+    <li><%=like_song.name%></li>
+  </ul>
+  <% end %>
+
+<% else %>
+  <p>has not like any song yet</p>
+<% end %>
