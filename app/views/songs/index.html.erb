@@ -4,10 +4,10 @@
   <% if song.image_url %>
       <ul>
         <li><%= image_tag song.image_url, width: '200px' %></li>
-        <%= content_tag(:li,song.name, data: {value: song.name} ) %>
+        <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
         <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
         <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: song.id} ) %>
-        <li><%= link_to '刪除', song_path(song.id), method: 'delete' %></li>
+        <li><%= link_to 'Delete', song_path(song.id), method: 'delete' %></li>
         
         <!-- 愛心 -->
         <svg class="heart" width="25px" viewBox="0 0 500 500" >

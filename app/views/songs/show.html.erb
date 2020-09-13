@@ -36,15 +36,15 @@
 <div class="dropdown">
   <button class="dropbtn">+</button>
   <div id="myDropdown" class="dropdown-content">
-    <%= link_to "add to play next", '###' , id: 'addtoplay', data: {id: song.id}  %>
-    <%= link_to "add to playlist",list_add_path(song.id), data: {}  %>
+    <%= link_to "add to play next", '###' , id: 'addtoplay', data: {id: @song.id}  %>
+    <%#= link_to "add to playlist",add_to_playlist_song_path(@song), data: {}  %>
   </div>
 </div>
 
 <div>
   <h3>Add to playlist</h3>
     <% @playlists.each do |playlist| %>
-      <li>Playlist：<%= playlist.name %>
+      <li>Playlist：<%= link_to playlist.name, playlist_path(playlist) %>
       <% if @song.added_by?(playlist) %>
         <%= link_to "Added", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
       <% else %>
@@ -89,4 +89,4 @@
       <%= content_tag(:button, 'Share to Facebook', class:'share-facebook', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
     </div>
   </div>
-</template>>>>>>>> modify to fix many modal btn on same page
+</template>
