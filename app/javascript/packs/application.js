@@ -21,6 +21,7 @@ const imagePath = (name) => images(name, false)
 import "tailwindcss/base";
 import "tailwindcss/components";
 import "tailwindcss/utilities";
+import "@fortawesome/fontawesome-free/js/all";
 // require('./style.css')
 
 
