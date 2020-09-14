@@ -25,7 +25,7 @@
   <div>
     <%= f.label :tag_list %>
     <select name="song[tag_items][]" multiple= "multiple" class= "tag_list">
-      <%= options_for_select(@song.tags) %>
+      <%= options_for_select(@tags) %>
     </select>
   </div>
   <div>
