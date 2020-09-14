@@ -17,16 +17,52 @@
   <% end %>
 </div>
 
+<div>
+  <% if @song.favorited_by?(current_user) %>
+    <i class="fas fa-heart"> <%= link_to "Liked", like_song_path(@song), method: "post" %> </i>
+  <% else %>
+    <i class="far fa-heart"> <%= link_to "Like", like_song_path(@song), method: "post" %> </i>
+  <% end%>  
+    <i class="fas fa-heart"> <%=@song.liked_users.count %> </i>
+</div>
+
+<!-- 愛心 -->
+<svg class="heart" width="25px" viewBox="0 0 500 500" >
+  <path d="M295.706,35.522C295.706,35.522,295.706,35.522,295.706,35.522c-34.43-0.184-67.161,14.937-89.339,41.273
+  c-22.039-26.516-54.861-41.68-89.339-41.273C52.395,35.522,0,87.917,0,152.55C0,263.31,193.306,371.456,201.143,375.636
+  c3.162,2.113,7.286,2.113,10.449,0c7.837-4.18,201.143-110.759,201.143-223.086C412.735,87.917,360.339,35.522,295.706,35.522z"/>
+</svg>
+
+<div class="dropdown">
+  <button class="dropbtn">+</button>
+  <div id="myDropdown" class="dropdown-content">
+    <%= link_to "add to play next", '###' , id: 'addtoplay', data: {id: @song.id}  %>
+    <%#= link_to "add to playlist",add_to_playlist_song_path(@song), data: {}  %>
+  </div>
+</div>
+
+<div>
+  <h3>Add to playlist</h3>
+    <% @playlists.each do |playlist| %>
+      <li>Playlist：<%= link_to playlist.name, playlist_path(playlist) %>
+      <% if @song.added_by?(playlist) %>
+        <%= link_to "Added", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
+      <% else %>
+        <%= link_to "Add to playlist", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
+      <% end %>
+    <% end %> 
+</div>
+
 <div>--------------我是分隔線-------------------</div>
   <% @comments.each do |comment| %>
     <div>
       <span> <%=comment.content%> </span>
-      <%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(comment.user)%>
+      <%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(comment.user)%> 
       <% comment.replies.each do |reply| %>
         <div>
           <span> --I'm reply's content-- </span>
           <span> <%=reply.content%> </span>
-            <%= link_to "Delete", comment_path(song_id: @song.id, id: reply.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%>
+            <%= link_to "Delete", comment_path(song_id: @song.id, id: reply.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%> 
         </div>
       <%end%>
       <%= form_with(model: @comment, url:song_comments_path(@song)) do |f|%>
@@ -53,4 +89,4 @@
       <%= content_tag(:button, 'Share to Facebook', class:'share-facebook', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
     </div>
   </div>
-</template>>>>>>>> modify to fix many modal btn on same page
+</template>
