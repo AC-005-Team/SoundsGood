@@ -4,4 +4,9 @@ class HomeController < ApplicationController
     @songs = Song.all
   end
   
+  def discover
+    @songs = Song.all
+  end
+
+  def stream;end
 end

@@ -1,16 +1,15 @@
-<h1>play list</h1>
+<h1>Playlist</h1>
 <%= link_to 'new play list', new_user_playlist_path(current_user.id) %>
 <%= link_to 'go back', root_path %>
 
 <% if @playlists %>
   <ul>
-    <% @playlists.each do |list| %>
-    <%= link_to list.name, playlist_path(list.id) %>
-    <li><%= list.intro %></li>
-    <%= content_tag(:li, list.id , data: {id: list.id} ) %>
+    <% @playlists.each do |playlist| %>
+      <li>Name: <%= link_to playlist.name, playlist_path(playlist) %></li>
+    <%= content_tag(:li, playlist.id , data: {id: playlist.id} ) %>
 
     <% end %>
   </ul>
 <% else %>
-  <li>you have no list</li>
+  <li>you have no playlist</li>
 <% end %>

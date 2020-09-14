@@ -1,6 +1,8 @@
 import "tailwindcss/base";
 import "tailwindcss/components";
 import "tailwindcss/utilities";
-require('./style.css')
-require('./btn_style.css')
-require('./index.css')
+import "@fortawesome/fontawesome-free/css/all.css";
+
+require("./style.css");
+require("./btn_style.css");
+require("./index.css");
