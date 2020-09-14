@@ -4,7 +4,7 @@ class SongsController < ApplicationController
   before_action :find_song, only: [:show, :destroy, :like, :add_to_playlist, :share]
 
   def index
-    @songs = current_user.songs
+    @songs = current_user.songs.includes(:tags)
     @playlists = current_user.playlists
   end
 
