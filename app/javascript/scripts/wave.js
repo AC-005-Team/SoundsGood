@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const playingNowPath = document.querySelector("#waveform").dataset.path
     var wavesurfer = WaveSurfer.create({
       container: '#waveform',
-      barWidth: 2,
-      barHeight: 5,
+      barWidth: 3,
+      barHeight: 1,
       barGap: null
     })
     wavesurfer.load(proxyurl+playingNowPath)
