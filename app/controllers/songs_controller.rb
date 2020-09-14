@@ -1,10 +1,7 @@
 class SongsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-
   before_action :find_song, only: [:show, :destroy, :share]
   before_action :find_playlist_song, only: [:list_toggle]
-
-  # before_action :tag_permit, only: [:create, :update]
 
   def index
     @songs = current_user.songs
