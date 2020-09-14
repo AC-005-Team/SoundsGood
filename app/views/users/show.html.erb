@@ -3,7 +3,7 @@
   <button>Follow</button>
 <% end %>
 <h1>profile</h1>
-<%= link_to 'edit', edit_user_path(current_user.id) %>
+<%= link_to 'edit', edit_user_path(current_user) if current_user%>
 <%= link_to 'go back', root_path %>
 <ul>
   <% if @user.header_url && @user.avatar_url %>
