@@ -4,6 +4,7 @@ class SongsController < ApplicationController
   before_action :find_song, only: [:show, :destroy, :share]
   before_action :find_playlist_song, only: [:list_toggle]
 
+  # before_action :tag_permit, only: [:create, :update]
 
   def index
     @songs = current_user.songs
@@ -55,7 +56,7 @@ class SongsController < ApplicationController
   private
 
   def song_params
-    params.require(:song).permit(:name, :intro, :track, :image)
+    params.require(:song).permit(:name, :intro, :track, :image, tag_items: [])
   end
 
   def find_song
