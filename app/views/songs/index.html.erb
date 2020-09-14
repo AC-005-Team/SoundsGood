@@ -1,38 +1,45 @@
-  <%= link_to 'new song', new_user_song_path(current_user.id) %>
-  <%= link_to 'go back', root_path %>
-  <% @songs.each do |song|%>
+<%= link_to 'new song', new_user_song_path(current_user.id) %>
+<%= link_to 'go back', root_path %>
+<% @songs.each do |song|%>
   <% if song.image_url %>
-  <ul>
-    <li><%= image_tag song.image_url, width: '200px' %></li>
-    <%= content_tag(:li,song.name, data: {value: song.name} ) %>
-    <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
-    <% if song.tags.length > 0 %>
-      <% song.tags.each do |tag| %>
-        <li><%= tag.name %></li>
-      <% end %>
-    <% end %>
-    <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: song.id} ) %>
-    <li><%= link_to '刪除', song_path(song.id), method: 'delete' %></li>
-    <% song.playlists.each do |list| %>
-    <li>歌單：<%= list.name %> </li>
-    <% end %>
-    <% else %>
-    <li>未加入清單</li>
-    <% end %>
-  </ul>
+      <ul>
+        <li><%= image_tag song.image_url, width: '200px' %></li>
+        <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
+        <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
+        <% if song.tags.length > 0 %>
+          <% song.tags.each do |tag| %>
+            <li><%= tag.name %></li>
+          <% end %>
+        <% end %>
+        <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: song.id} ) %>
+        <li><%= link_to 'Delete', song_path(song.id), method: 'delete' %></li>
+        
+        <!-- 愛心 -->
+        <svg class="heart" width="25px" viewBox="0 0 500 500" >
+          <path d="M295.706,35.522C295.706,35.522,295.706,35.522,295.706,35.522c-34.43-0.184-67.161,14.937-89.339,41.273
+          c-22.039-26.516-54.861-41.68-89.339-41.273C52.395,35.522,0,87.917,0,152.55C0,263.31,193.306,371.456,201.143,375.636
+          c3.162,2.113,7.286,2.113,10.449,0c7.837-4.18,201.143-110.759,201.143-223.086C412.735,87.917,360.339,35.522,295.706,35.522z"/>
+        </svg>
+        
+        <div class="dropdown">
+          <button class="dropbtn">+</button>
+          <div id="myDropdown" class="dropdown-content">
+            <%= link_to "add to play next", '###' , id: 'addtoplay', data: {id: song.id}  %>
+            <%#= link_to "add to playlist",list_add_path(song.id), data: {}  %>
+          </div>
+        </div>
 
-  <!-- 愛心 -->
-  <svg class="heart" width="25px" viewBox="0 0 500 500" >
-    <path d="M295.706,35.522C295.706,35.522,295.706,35.522,295.706,35.522c-34.43-0.184-67.161,14.937-89.339,41.273
-    c-22.039-26.516-54.861-41.68-89.339-41.273C52.395,35.522,0,87.917,0,152.55C0,263.31,193.306,371.456,201.143,375.636
-    c3.162,2.113,7.286,2.113,10.449,0c7.837-4.18,201.143-110.759,201.143-223.086C412.735,87.917,360.339,35.522,295.706,35.522z"/>
-  </svg>
-
-  <div class="dropdown">
-    <button class="dropbtn">+</button>
-    <div id="myDropdown" class="dropdown-content">
-      <%= link_to "add to play next", '###' , id: 'addtoplay', data: {id: song.id}  %>
-      <%= link_to "add to playlist",list_add_path(song.id), data: {}  %>
-    </div>
-  </div>
+        <div>
+          <h3>Add to playlist</h3>
+            <% @playlists.each do |playlist| %>
+              <li>Playlist：<%= playlist.name %>
+              <% if @song.added_by?(playlist) %>
+                <%= link_to "Added", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
+              <% else %>
+                <%= link_to "Add to playlist", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
+              <% end %>
+            <% end %> 
+        </div>
+      </ul>
   <% end %>
+<% end %>

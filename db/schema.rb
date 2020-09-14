@@ -10,19 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_10_092321) do
-
-  create_table "comments", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "song_id", null: false
-    t.text "content", null: false
-    t.integer "reply_id", default: 0
-    t.string "timepoint"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["song_id"], name: "index_comments_on_song_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
-  end
+ActiveRecord::Schema.define(version: 2020_09_10_041647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +25,24 @@ ActiveRecord::Schema.define(version: 2020_09_10_092321) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["song_id"], name: "index_comments_on_song_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "favorite_playlists", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "playlist_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["playlist_id"], name: "index_favorite_playlists_on_playlist_id"
+    t.index ["user_id"], name: "index_favorite_playlists_on_user_id"
+  end
+
+  create_table "favorite_songs", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "song_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["song_id"], name: "index_favorite_songs_on_song_id"
+    t.index ["user_id"], name: "index_favorite_songs_on_user_id"
   end
 
   create_table "follows", force: :cascade do |t|
@@ -126,6 +132,10 @@ ActiveRecord::Schema.define(version: 2020_09_10_092321) do
 
   add_foreign_key "comments", "songs"
   add_foreign_key "comments", "users"
+  add_foreign_key "favorite_playlists", "playlists"
+  add_foreign_key "favorite_playlists", "users"
+  add_foreign_key "favorite_songs", "songs"
+  add_foreign_key "favorite_songs", "users"
   add_foreign_key "follows", "users", column: "followee_id"
   add_foreign_key "follows", "users", column: "follower_id"
   add_foreign_key "playlists", "users"
