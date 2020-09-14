@@ -24,7 +24,6 @@ import "tailwindcss/base";
 import "tailwindcss/components";
 import "tailwindcss/utilities";
 // require('./style.css')
-// import "bootstrap"
 import "bootstrap/dist/css/bootstrap.css"
 import "select2/dist/css/select2.css"
 import "./tag"
