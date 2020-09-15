@@ -75,6 +75,22 @@ class User < ApplicationRecord
       like_playlists << playlist
     end
   end
+
+  def toggle_repost_song(song)
+    if repost_songs.include?(song)
+      repost_songs.destroy(song)
+    else
+      repost_songs << song
+    end
+  end
+
+  def toggle_repost_playlist(playlist)
+    if repost_playlists.include?(playlist)
+      repost_playlists.destroy(playlist)
+    else
+      repost_playlists << playlist
+    end
+  end
   
   private
   # 如果方法會更新資料，方法要加驚嘆號提醒其他使用這個方法的人
