@@ -1,16 +1,26 @@
 <h1><%= @playlist.name%></h1>
-
-<h2>playlist - song list</h2>
-<% if @playlist.favorited_by?(current_user) %>
+<div>
+  <% if @playlist.favorited_by?(current_user) %>
     <i class="fas fa-heart"></i>
     <%= link_to "Liked", like_playlist_path(@playlist), method: "post" %>
   <% else %>
     <i class="far fa-heart"></i>
     <%= link_to "Like", like_playlist_path(@playlist), method: "post" %>
   <% end%>  
-  <i class="fas fa-heart"> <%=@playlist.liked_users.count %> </i>
 
-  
+  <% if @playlist.reposted_by?(current_user) %>
+    <i class="fas fa-retweet"> <%= link_to "Reposted", repost_playlist_path(@playlist), method: "post" %>  </i>
+  <% else %>
+    <i class="fas fa-retweet"> <%= link_to "Repost", repost_playlist_path(@playlist), method: "post" %> </i>
+  <% end%>  
+</div>
+
+<div>
+  <i class="fas fa-heart"> <%=@playlist.liked_users.count %> </i>
+  <i class="fas fa-retweet"> <%=@playlist.reposted_users.count %> </i>
+</div>
+
+<h2>playlist - song list</h2>
 
 <% @playlist.songs.each do |song| %>
   <ul>

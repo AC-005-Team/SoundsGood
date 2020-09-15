@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       member do 
         post :like
         post :add_to_playlist
+        post :repost
       end
       resources :comments, only: [:create, :destroy]
       member do
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
     resources :playlists, shallow: true do
       member do 
         post :like
+        post :repost
       end  
     end
   end

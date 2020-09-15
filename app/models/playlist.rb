@@ -8,10 +8,6 @@ class Playlist < ApplicationRecord
 
   has_many :reposts, as: :repostable
   has_many :reposted_users, through: :reposts, source: :user
-  
-  def favorited_by?(user)
-    liked_users.include?(user)
-  end
 
   def toggle_add_to_playlist(song)
     if songs.include?(song)
@@ -19,5 +15,13 @@ class Playlist < ApplicationRecord
     else
       songs << song
     end
+  end
+  
+  def favorited_by?(user)
+    liked_users.include?(user)
+  end
+
+  def reposted_by?(user)
+    reposted_users.include?(user)
   end
 end

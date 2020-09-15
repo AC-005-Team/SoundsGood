@@ -1,5 +1,5 @@
 class PlaylistsController < ApplicationController
-  before_action :find_playlist, only: [:show, :like]
+  before_action :find_playlist, only: [:show, :like, :repost]
 
   def index
     @playlists = current_user.playlists
@@ -27,6 +27,11 @@ class PlaylistsController < ApplicationController
   
   def like 
     current_user.toggle_like_playlist(@playlist)
+    redirect_to @playlist
+  end
+
+  def repost
+    current_user.toggle_repost_playlist(@playlist)
     redirect_to @playlist
   end
 
