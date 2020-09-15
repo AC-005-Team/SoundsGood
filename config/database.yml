@@ -6,6 +6,7 @@ default: &default
 development:
   <<: *default
   database: SoundClown_development
+  password: 123456
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

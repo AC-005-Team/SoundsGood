@@ -4,7 +4,7 @@
 <div class="bg-gray-800 text-gray-400 w-full flex justify-between text-center items-center text-sm sticky top-0">
 <%#=Logo區域%>  
   <button class="hover:text-white w-48">
-    <%= link_to discover_index_path do %>
+    <%= link_to discover_path do %>
     <%= image_pack_tag('logo_14.png') %>
     <% end %>
   </button>
@@ -17,7 +17,7 @@
   <button class=""><i class="fas fa-search"></i></button>
   
   <div class="hover:text-white">
-    <%= link_to new_user_song_path(current_user) if current_user do %>
+    <%= link_to new_user_song_path(current_user) do %>
       <i class="fas fa-arrow-alt-circle-up"></i>
     <% end %>
   </div>
