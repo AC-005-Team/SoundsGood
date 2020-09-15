@@ -9,15 +9,15 @@
     <% end %>
   </button>
 
-  <button class="hover:text-white mx-2"><%= link_to "Home", discover_index_path%></button>
-  <button class="hover:text-white mx-2"><%= link_to "Stream", "#"%></button>
-  <button class="hover:text-white mx-2"><%= link_to "Library", library_you_index_path%></button>
+  <button class="hover:text-white mx-2"><%= link_to "Home", discover_path%></button>
+  <button class="hover:text-white mx-2"><%= link_to "Stream", stream_path%></button>
+  <button class="hover:text-white mx-2"><%= link_to "Library", library_library_index_path%></button>
 <%#=搜尋區域%>    
   <input class="bg-gray-200 rounded w-5/12 focus:outline-none p-1" type="search" placeholder="Search">
   <button class=""><i class="fas fa-search"></i></button>
   
   <div class="hover:text-white">
-    <%= link_to new_user_song_path(current_user) do %>
+    <%= link_to new_user_song_path(current_user) if current_user do %>
       <i class="fas fa-arrow-alt-circle-up"></i>
     <% end %>
   </div>

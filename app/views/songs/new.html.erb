@@ -10,7 +10,8 @@
     <%= form_with model: @song, url: user_songs_path(current_user.id), local: true do |f| %>
     <div>
       <%= f.label :image %>
-      <%= f.file_field :image%>
+      <input type="file" name=song[image] onchange="showMyImage(this)" >
+      <img id="thumbnil" src="" >
     </div>
 
     <div>
