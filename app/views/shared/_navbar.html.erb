@@ -1,31 +1,42 @@
 <% unless params[:controller]=="home" && params[:action]=="index"%>
+<div class="bg-black"></div>
 
-<div class="bg-gray-800 w-full flex fix">
-  <button class="text-gray-400 hover:text-white w-1/12 py-4 pt-2 pl-2">這是LOGO</button>
-  <button class="text-gray-400 hover:text-white w-1/12 pt-2 border-r border-black text-center"><%= link_to "Home", discover_index_path%></button>
-  <button class="text-gray-400 hover:text-white w-1/12 pt-2 border-r border-black text-center"><%= link_to "Stream", "#"%></button>
-  <button class="text-gray-400 hover:text-white w-1/12 pt-2 border-r border-black text-center"><%= link_to "Library", library_you_index_path%></button>
-  <input type="search" class="px-2 m-2 bg-gray-200 rounded w-4/12 focus:outline-none" placeholder="Search">
+<div class="bg-gray-800 text-gray-400 w-full flex justify-between text-center items-center text-sm sticky top-0">
+<%#=Logo區域%>  
+  <button class="hover:text-white w-48">
+    <%= link_to discover_index_path do %>
+    <%= image_pack_tag('logo_14.png') %>
+    <% end %>
+  </button>
+
+  <button class="hover:text-white mx-2"><%= link_to "Home", discover_index_path%></button>
+  <button class="hover:text-white mx-2"><%= link_to "Stream", "#"%></button>
+  <button class="hover:text-white mx-2"><%= link_to "Library", library_you_index_path%></button>
+<%#=搜尋區域%>    
+  <input class="bg-gray-200 rounded w-5/12 focus:outline-none p-1" type="search" placeholder="Search">
+  <button class=""><i class="fas fa-search"></i></button>
   
-  <div class="text-gray-400 hover:text-white pt-2 text-center mx-3">
+  <div class="hover:text-white">
     <%= link_to new_user_song_path(current_user) do %>
       <i class="fas fa-arrow-alt-circle-up"></i>
     <% end %>
   </div>
-
-    <% if user_signed_in? %>
-      <%# <img class="w-1/6 h-1/6 mx-2 rounded-full" src="https://i1.sndcdn.com/artworks-48wHUXnYlyIAyhPm-kAqlLQ-t500x500.jpg" alt=""> %>
-      <div class="text-gray-400 hover:text-white w-1/12 pt-2 text-center"><%= link_to current_user.display_name, user_path(current_user)%></div>
-      <div class="text-gray-400 hover:text-white w-1/12 pt-2 text-center"><%= link_to "Sign out",destroy_user_session_path, method: "delete"%></div>
-      
-    <% else %>
-      <div class="text-gray-400 hover:text-white w-1/12 pt-2 text-center"><%= link_to "Sign in",new_user_session_path%></div>
-      <div class="text-gray-400 hover:text-white w-1/12 pt-2 text-center"><%= link_to "Create",new_user_registration_path%></div>
-    <% end %>
-
-  <div class="text-gray-400 hover:text-white pt-2 text-center mx-3"><i class="fas fa-bell"></i></div>
-  <div class="text-gray-400 hover:text-white pt-2 text-center mx-3"><i class="fas fa-envelope-open"></i></div>
-  <div class="text-gray-400 hover:text-white pt-2 pr-2 text-center mx-3"><i class="far fa-address-card"></i></div>
+<%#=使用者大頭貼、名稱區域%>
+  <% if user_signed_in? %>
+    <div class="flex justify-between items-center hover:text-white w-1/12">
+      <img class="w-1/4 rounded-full" src="https://i1.sndcdn.com/artworks-48wHUXnYlyIAyhPm-kAqlLQ-t500x500.jpg" alt="">
+      <div class=""><%= link_to current_user.display_name, user_path(current_user)%></div>
+      <i class="fas fa-arrow-down"></i>
+    </div>
+    <div class="hover:text-white"><%= link_to "Sign out",destroy_user_session_path, method: "delete"%></div>
+  <% else %>
+    <div class="hover:text-white"><%= link_to "Sign in",new_user_session_path%></div>
+    <div class="hover:text-white"><%= link_to "Create",new_user_registration_path%></div>
+  <% end %>
+<%#=後面三點點區域%>  
+  <button class="hover:text-white px-1"><i class="fas fa-bell"></i></button>
+  <button class="hover:text-white px-1"><i class="fas fa-envelope-open"></i></button>
+  <button class="hover:text-white px-1"><i class="fas fa-ellipsis-h"></i></i></button>
 </div>
 
 <% end %>

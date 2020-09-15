@@ -7,14 +7,14 @@
 <%= link_to "Following", "#"%>
 <%= link_to "History", "#"%>
   
-<div class="flex text-3xl m-4 border-b border-gray-400">
-  <button class="mr-2 hover:text-orange-500">Overview</button>
-  <button class="mr-2 hover:text-orange-500">Likes</button>
-  <button class="mr-2 hover:text-orange-500">Platlists</button>
-  <button class="mr-2 hover:text-orange-500">Albums</button>
-  <button class="mr-2 hover:text-orange-500">Stations</button>
-  <button class="mr-2 hover:text-orange-500">Following</button>
-  <button class="mr-2 hover:text-orange-500">History</button>
+<div class="flex text-2xl m-4 border-b border-gray-400 p-2">
+  <button class="mr-4 text-orange-600 hover:text-orange-500">Overview</button>
+  <button class="mr-4 hover:text-orange-500"><%= link_to "Likes", likes_you_index_path%></button>
+  <button class="mr-4 hover:text-orange-500">Platlists</button>
+  <button class="mr-4 hover:text-orange-500">Albums</button>
+  <button class="mr-4 hover:text-orange-500">Stations</button>
+  <button class="mr-4 hover:text-orange-500">Following</button>
+  <button class="mr-4 hover:text-orange-500">History</button>
 </div>
 
 <div class="col-span-9 bg-white">
