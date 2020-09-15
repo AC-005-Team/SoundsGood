@@ -5,6 +5,9 @@ class Playlist < ApplicationRecord
 
   has_many :favorite_playlists
   has_many :liked_users, through: :favorite_playlists, source: :user
+
+  has_many :reposts, as: :repostable
+  has_many :reposted_users, through: :reposts, source: :user
   
   def favorited_by?(user)
     liked_users.include?(user)
