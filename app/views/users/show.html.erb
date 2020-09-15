@@ -1,8 +1,9 @@
+<%#=這是User資訊頁面%>
 
 <%#=圖區一%>
 <div class="flex mx-4 bg-gradient-to-r from-red-500 via-white to-orange-700">
   <img class="w-1/6 m-4 rounded-full" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
-  <div class="flex">
+  <div class="flex justify-between w-5/6 items-start">
     <div class="m-4">
       <div class="bg-black rounded p-1 text-xl text-white m-1">
         <%= @user.display_name %>
@@ -12,10 +13,10 @@
         <div class="text-xl text-orange-700 m-auto mr-2"><%= @user.last_name %></div>
       </div>
     </div>
-    <div class="m-4">
+    <button class="text-white bg-orange-600 p-2 rounded">
       <i class="fas fa-camera"></i>
       Upload header image
-    </div>
+    </button>
   </div>
 </div>
 
@@ -42,39 +43,51 @@
 <div class="flex mx-4 ">
   <div class="w-3/4 mx-4">
     <div class="text-2xl">Recent</div>
-  
+<%#=左邊專輯專區%>
     <div class="flex my-4">
       <img class="w-1/5" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">    
-      <div class="w-4/5">
-        <div class="flex">
-          <i class="fas fa-arrow-circle-right"></i>
+      <div class="my-auto w-4/5">
+        <div class="flex justify-between">
+          <i class="fas fa-arrow-circle-right fa-3x"></i>
           <div class="">
-
+            <p>SongName<%= @user.display_name %></p>
+            <p>Link_to SongName</p>
           </div>
-          <div class="">
-
+          <div>
+            5 days ago
+            ###Tag###
           </div>
         </div>
+
+
+<%#=超難的音波專區%>
         <div class="">萱大の音波專區</div>
-        <div class=""></div>
+<%#=留言專區%>
+        <div class="flex m-4">
+          <img class="w-8" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
+          <input class="w-full mx-2" type="text" placeholder="Write a comment">
+        </div>
+
+
+<%#=歌曲功能專區%>
         <div class="">
-          <div class="flex w-1/2 my-4 p-2 justify-around ">
-            <div class="">
+          <div class="flex w-2/3 my-4 p-2 justify-around">
+            <button class="border border-gray-300 px-3 rounded">
               <i class="fas fa-heart"></i>
               like
-            </div>
-            <div class="">
+            </button>
+            <button class="border border-gray-300 px-3 rounded">
               <i class="fas fa-share-square"></i>
               share
-            </div>
-            <div class="">
+            </button>
+            <button class="border border-gray-300 px-3 rounded">
               <i class="fas fa-balance-scale-left"></i>
               Add to Next Up
-            </div>
-            <div class="">
+            </button>
+            <button class="border border-gray-300 px-3 rounded">
               <i class="fas fa-bolt"></i>
               More
-            </div>
+            </button>
           </div>
         </div>
       </div>
@@ -90,9 +103,9 @@
   <div class="w-1/4 border-l border-gray-400 px-2">
 
       <div class="flex text-gray-500 mx-4">
-        <div class="">Follower</div>
-        <div class="">Following</div>
-        <div class="">Tracks</div>
+        <button class="mx-2">Follower</button>
+        <button class="mx-2">Following</button>
+        <button class="mx-2">Tracks</button>
       </div>
 
       <div class="p-2">
