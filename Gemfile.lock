@@ -162,6 +162,7 @@ GEM
       oauth2 (~> 1.4)
       omniauth (~> 1.9)
     orm_adapter (0.5.0)
+    pg (1.2.3)
     public_suffix (4.0.5)
     puma (4.3.5)
       nio4r (~> 2.0)
@@ -232,7 +233,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -281,6 +281,7 @@ DEPENDENCIES
   omniauth (~> 1.9, >= 1.9.1)
   omniauth-facebook (~> 6.0)
   omniauth-google-oauth2 (~> 0.8.0)
+  pg
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.2)
   sass-rails (>= 6)
@@ -288,7 +289,6 @@ DEPENDENCIES
   shrine (~> 3.2, >= 3.2.2)
   spring
   spring-watcher-listen (~> 2.0.0)
-  sqlite3 (~> 1.4)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 3.3.0)

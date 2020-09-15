@@ -3,7 +3,9 @@ class User < ApplicationRecord
   include ImageUploader::Attachment[:header]
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
   # 自己追蹤的人
   has_many :followed_users, foreign_key: :follower_id, class_name: "Follow"
   has_many :followees, through: :followed_users, source: :followee
@@ -14,9 +16,12 @@ class User < ApplicationRecord
   has_many :songs
   has_many :playlists
   has_many :comments
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
+
+  has_many :favorite_songs
+  has_many :like_songs, through: :favorite_songs, source: :song
+
+  has_many :favorite_playlists
+  has_many :like_playlists, through: :favorite_playlists, source: :playlist
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
@@ -49,6 +54,22 @@ class User < ApplicationRecord
   #是否有追蹤followee
   def follows?(followee)
     followees.include?(followee)
+  end
+  
+  def toggle_like_song(song)
+    if like_songs.include?(song)
+      like_songs.destroy(song)
+    else
+      like_songs << song
+    end
+  end
+
+  def toggle_like_playlist(playlist)
+    if like_playlists.include?(playlist)
+      like_playlists.destroy(playlist)
+    else
+      like_playlists << playlist
+    end
   end
   
   private
