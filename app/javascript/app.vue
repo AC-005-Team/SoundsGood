@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <p>{{ message }}</p>
+    <header-component />
+    <footer-component />
   </div>
 </template>
 
 <script>
+import HeaderComponent from './components/shared/header';
+import FooterComponent from './components/shared/footer';
+
 export default {
-  data: function () {
-    return {
-      message: "分離的components寫法"
-    }
-  }
+  components: {
+  HeaderComponent,
+  FooterComponent,
+},
 }
 </script>
 

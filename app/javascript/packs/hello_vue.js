@@ -1,6 +1,7 @@
 
 
 //分離component寫法  APP為在這個vue裡使用的名稱 可以置換
+
 // import Vue from 'vue'
 // import App from '../app.vue'
 //
@@ -12,6 +13,25 @@
 //
 //   console.log(app)
 // })
+
+import Vue from 'vue'
+import App from '../app.vue'
+import Vuex from 'vuex';
+import VueRouter from 'vue-router';
+import router from './routes.js';
+// import store from '../store';
+
+Vue.use(Vuex);
+Vue.use(VueRouter);
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const app = new Vue({
+    render: h => h(App)
+  }).$mount("#hello")
+})
+
 
 // 記得  Add <%= javascript_pack_tag 'hello_vue' %> to your layout
 // Then add this markup to your html template:

@@ -11,12 +11,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
    <body>
-    <%= render "shared/navbar" %>
-    <p class="notice text-center"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
-    <div class="pb-20">
-    <%= render "shared/aplayer" %>
+
+      <div id="hello">
+      </div>
+
+
+
+       <%= render "shared/navbar" %>
+       <p class="notice text-center"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+       <%= yield %>
+       <%= render "shared/aplayer" %>
+
+
+
+
+
+
   </body>
     <%= javascript_pack_tag 'player', 'data-turbolinks-track': 'false' %>
 </html>
