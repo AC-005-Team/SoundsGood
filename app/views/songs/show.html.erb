@@ -28,7 +28,7 @@
   <% else %>
     <i class="fas fa-retweet"> <%= link_to "Repost", repost_song_path(@song), method: "post" %> </i>
   <% end%>  
-  <i class="fas fa-share-square modal-btn share-btn"><button class="modal-btn share-btn">Share</button></i>
+  <i class="fas fa-share-square"><button class="modal-btn share-btn">Share</button></i>
 </div>
 <div>
   <i class="fas fa-heart"> <%=@song.liked_users.count %> </i>
