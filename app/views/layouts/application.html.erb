@@ -8,12 +8,23 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'false' %>
   </head>
    <body>
-    <%= render "shared/navbar" %>
-    <p class="notice text-center"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
-    <div class="pb-20">
-    <%= render "shared/aplayer" %>
+
+      <div id="hello">
+      </div>
+
+
+
+       <%= render "shared/navbar" %>
+       <p class="notice text-center"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+       <%= yield %>
+       <%= render "shared/aplayer" %>
+
+
+
+
+
+
   </body>
     <%= javascript_pack_tag 'player', 'data-turbolinks-track': 'false' %>
 </html>

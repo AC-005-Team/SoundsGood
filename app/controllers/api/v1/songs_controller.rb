@@ -6,6 +6,4 @@ class Api::V1::SongsController < ApplicationController
   def show
     @song = Song.find(params[:id])
   end
-
-
 end
