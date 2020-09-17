@@ -32,9 +32,7 @@ class Song < ApplicationRecord
       Tag.where(name: item.strip).first_or_create!
     end.compact
   end
-
-  def added_by?(playlist)
-    playlists.include?(playlist)
+  
   def reposted_by?(user)
     reposted_users.include?(user)
   end
