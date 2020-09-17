@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
       barHeight: 0.9,
       barGap: null,
     })
-    const songDataName = '0d3472029727d0bc76e129de33bda4df' // @todo: let songDataName be dynamic
-    const peakStorageRoot = 'http://34.67.190.190/api/v1/song_peaks/'
+    const songDataName = 'default' // @todo: let songDataName be dynamic
+    const peakStorageRoot = 'http://34.67.190.190/'
     fetch(proxyurl+peakStorageRoot+songDataName+'.json')
     .then(response => {
       if (!response.ok) {
