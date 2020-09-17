@@ -43,4 +43,3 @@ yarn-debug.log*
 /config/application.yml
 .env
 *.dev
-/config/database.yml
