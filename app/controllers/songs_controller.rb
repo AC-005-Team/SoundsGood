@@ -10,7 +10,7 @@ class SongsController < ApplicationController
 
   def new
     @song = Song.new
-    @tags = Tag.all.map(&:name)
+    @tags = Tag.all.map(&:name)||[]
   end
 
   def create
