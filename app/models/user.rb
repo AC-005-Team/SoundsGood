@@ -23,6 +23,10 @@ class User < ApplicationRecord
   has_many :favorite_playlists
   has_many :like_playlists, through: :favorite_playlists, source: :playlist
 
+  has_many :reposts
+  has_many :repost_songs, through: :reposts, source: :repostable, source_type: "Song"
+  has_many :repost_playlists, through: :reposts, source: :repostable, source_type: "Playlist"
+
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
     user = User.find_by(google_token: access_token.credentials.token, google_uid: access_token.uid )
@@ -69,6 +73,22 @@ class User < ApplicationRecord
       like_playlists.destroy(playlist)
     else
       like_playlists << playlist
+    end
+  end
+
+  def toggle_repost_song(song)
+    if repost_songs.include?(song)
+      repost_songs.destroy(song)
+    else
+      repost_songs << song
+    end
+  end
+
+  def toggle_repost_playlist(playlist)
+    if repost_playlists.include?(playlist)
+      repost_playlists.destroy(playlist)
+    else
+      repost_playlists << playlist
     end
   end
   
