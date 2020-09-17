@@ -6,9 +6,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const playingNowPath = document.querySelector("#waveform").dataset.path
     var wavesurfer = WaveSurfer.create({
       container: '#waveform',
-      barWidth: 3,
-      barHeight: 1,
-      barGap: null
+      barWidth: 3.5,
+      barHeight: 0.9,
+      barGap: null,
+    })
+    const songDataName = '0d3472029727d0bc76e129de33bda4df' // @todo: let songDataName be dynamic
+    const peakStorageRoot = 'http://34.67.190.190/api/v1/song_peaks/'
+    fetch(proxyurl+peakStorageRoot+songDataName+'.json')
+    .then(response => {
+      if (!response.ok) {
+          throw new Error("HTTP error " + response.status)
+      }
+      return response.json()
+    })
+    .then(peaks => {
+      console.log('------------------------------')
+      console.log('loaded peaks! sample_rate: ' + peaks.sample_rate)
+      console.log('------------------------------')
+      // load peaks into wavesurfer.js
+      wavesurfer.load(proxyurl+playingNowPath, peaks.data)
+    })
+    .catch((e) => {
+      console.error('error', e)
     })
     wavesurfer.load(proxyurl+playingNowPath)
   }
