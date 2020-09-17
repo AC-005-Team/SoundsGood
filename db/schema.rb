@@ -93,6 +93,21 @@ ActiveRecord::Schema.define(version: 2020_09_14_070146) do
     t.index ["user_id"], name: "index_songs_on_user_id"
   end
 
+  create_table "songs_tags", force: :cascade do |t|
+    t.bigint "song_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["song_id"], name: "index_songs_tags_on_song_id"
+    t.index ["tag_id"], name: "index_songs_tags_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -138,4 +153,6 @@ ActiveRecord::Schema.define(version: 2020_09_14_070146) do
   add_foreign_key "playlists_songs", "songs"
   add_foreign_key "reposts", "users"
   add_foreign_key "songs", "users"
+  add_foreign_key "songs_tags", "songs"
+  add_foreign_key "songs_tags", "tags"
 end
