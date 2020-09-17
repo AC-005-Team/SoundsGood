@@ -1,7 +1,7 @@
 class SongsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
 
-  before_action :find_song, only: [:show, :destroy, :like, :add_to_playlist, :share]
+  before_action :find_song, only: [:show, :destroy, :like, :repost, :add_to_playlist, :share]
 
   def index
     @songs = current_user.songs.includes(:tags)
@@ -41,6 +41,11 @@ class SongsController < ApplicationController
   
   def like 
     current_user.toggle_like_song(@song)
+    redirect_to @song
+  end
+
+  def repost
+    current_user.toggle_repost_song(@song)
     redirect_to @song
   end
   
