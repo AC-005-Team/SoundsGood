@@ -43,6 +43,13 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
   gem 'hirb', '~> 0.7.3'
+  gem 'capistrano', '3.14.1'
+  gem 'capistrano-bundler', '2.0'
+  gem 'capistrano-rails', '1.6'
+  gem 'capistrano-passenger', '0.2.0'
+  gem 'net-ssh', '~> 6.1'
+  gem 'ed25519', '1.2'
+  gem 'bcrypt_pbkdf', '1.0'
 end
 
 group :development do

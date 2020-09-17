@@ -1,5 +1,10 @@
 # Note: You must restart bin/webpack-dev-server for changes to take effect
-
+staging:
+  <<: *default
+  compile: false
+  extract_css: true
+  cache_manifest: true
+  
 default: &default
   source_path: app/javascript
   source_entry_path: packs

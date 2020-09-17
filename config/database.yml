@@ -17,3 +17,9 @@ test:
 production:
   <<: *default
   database: SoundClown
+
+staging:
+  <<: *default
+  database: SoundClown_staging
+  username: deploy
+  password: <%= ENV['DATABASE_PASSWORD'] %>
