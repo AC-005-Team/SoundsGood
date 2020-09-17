@@ -11,6 +11,7 @@ class Song < ApplicationRecord
 
   has_many :reposts, as: :repostable
   has_many :reposted_users, through: :reposts, source: :user
+  after_save :create_peak_data
   
   has_many :songs_tags, dependent: :destroy
   has_many :tags, through: :songs_tags
@@ -39,5 +40,15 @@ class Song < ApplicationRecord
   
   def reposted_by?(user)
     reposted_users.include?(user)
+
+  def get_filename #拿到本首歌曲的s3檔案名，用來取得音波圖
+    self.track_data.match(/[a-zA-Z0-9]{32}/)[0]
+  end
+
+  private
+  def create_peak_data #上傳歌曲時，打api到GCP node.js server
+    p '------calling node.js------'
+    HTTP.post("http://34.67.190.190/api/v1/soundwavify", :json => { :filetype => "song_peaks", :filepath => self.track_url })
+    p '------------end------------'
   end
 end
