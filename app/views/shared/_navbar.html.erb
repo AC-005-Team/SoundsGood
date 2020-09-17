@@ -5,7 +5,11 @@
   <div class="text-gray-400 hover:text-white w-1/12 pt-2 border-r border-black text-center"><%= link_to "Home", discover_path%></div>
   <div class="text-gray-400 hover:text-white w-1/12 pt-2 border-r border-black text-center"><%= link_to "Stream", stream_path%></div>
   <div class="text-gray-400 hover:text-white w-1/12 pt-2 border-r border-black text-center"><%= link_to "Library", library_library_index_path%></div>
-  <input type="search" class="px-2 m-2 bg-gray-200 rounded w-4/12 focus:outline-none" placeholder="Search">
+  <%= form_with model: @user, url: search_user_path(current_user.id), method: 'get', id: 'search_bar' do |f| %>
+  <%= f.text_field :search, class: "px-2 m-2 bg-gray-200 rounded w-12/12 ", placeholder: "Search" %>
+  <%= f.submit %>
+  <% end %>
+  <div class='search-result'></div>
   <div class="text-gray-400 hover:text-white w-1/12 pt-2 text-center"><%= link_to "Upload", new_user_song_path(current_user) if current_user%></div>
  
     <% if user_signed_in? %>

@@ -18,6 +18,8 @@ Rails.application.routes.draw do
       get :following
       get :comments
       get :likes
+      get :search
+      get :search_result
     end
     resources :songs, shallow: true do
       member do 

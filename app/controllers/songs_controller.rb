@@ -44,8 +44,7 @@ class SongsController < ApplicationController
     redirect_to @song
   end
   
-  def share
-  end
+  def share;end
 
   private
 

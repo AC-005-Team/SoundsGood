@@ -1,0 +1,63 @@
+<% @users.each do|f|%>
+  <%= f.display_name %>
+<% end %>
+
+<% @songs.each do|f|%>
+ <div class="w-3/4 mx-4">
+    <div class="text-2xl">Recent</div>
+<%#=左邊專輯專區%>
+    <div class="flex my-4">
+      <img class="w-1/5" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">    
+      <div class="my-auto w-4/5">
+        <div class="flex justify-between">
+          <i class="fas fa-arrow-circle-right fa-3x"></i>
+          <div class="">
+            <p>SongName:<%= f.name %></p>
+            <p>songpage:<%= link_to f.name, song_path(f.id) %></p>
+          </div>
+          <div>
+            5 days ago
+            <% f.tags.each do |tag|%>
+             <%= tag %>
+            <% end %> 
+          </div>
+        </div>
+
+
+<%#=超難的音波專區%>
+        <div class="">萱大の音波專區</div>
+<%#=留言專區%>
+        <div class="flex m-4">
+          <img class="w-8" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
+          <input class="w-full mx-2" type="text" placeholder="Write a comment">
+        </div>
+
+
+<%#=歌曲功能專區%>
+        <div class="">
+          <div class="flex w-2/3 my-4 p-2 justify-around">
+            <button class="border border-gray-300 px-3 rounded">
+              <i class="fas fa-heart"></i>
+              like
+            </button>
+            <button class="border border-gray-300 px-3 rounded">
+              <i class="fas fa-share-square"></i>
+              share
+            </button>
+            <button class="border border-gray-300 px-3 rounded">
+              <i class="fas fa-balance-scale-left"></i>
+              Add to Next Up
+            </button>
+            <button class="border border-gray-300 px-3 rounded">
+              <i class="fas fa-bolt"></i>
+              More
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+<% end %>
+<% @tags.each do|f|%>
+  <%= f.name %>
+<% end %>
