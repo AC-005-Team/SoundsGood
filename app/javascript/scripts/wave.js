@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
       barHeight: 0.9,
       barGap: null,
     })
-    const songDataName = 'default' // @todo: let songDataName be dynamic
-    const peakStorageRoot = 'http://34.67.190.190/'
-    fetch(proxyurl+peakStorageRoot+songDataName+'.json')
+    const songDataName = document.querySelector("#waveform").dataset.filename
+    const peakStorageRoot = 'http://34.67.190.190/api/v1/getjson/song_peaks/'
+    fetch(proxyurl+peakStorageRoot+songDataName)
     .then(response => {
       if (!response.ok) {
           throw new Error("HTTP error " + response.status)

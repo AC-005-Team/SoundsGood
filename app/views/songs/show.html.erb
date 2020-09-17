@@ -6,7 +6,7 @@
       <li>Name:<%= @song.name %></li>
       <li class="flex">
         <%= image_tag @song.image_url, width: '200px'  %>
-        <%= content_tag(:div, '', id:['waveform'], class:['song-waveform w-3/6'], data:{ path: @song.track_url }) %>
+        <%= content_tag(:div, '', id:['waveform'], class:['song-waveform w-3/6'], data:{ path: @song.track_url, filename: @song.get_filename }) %>
       </li>
       <li>Intro:<%= @song.intro %></li>
       <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: @song.id} ) %>
