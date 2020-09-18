@@ -40,7 +40,8 @@ class Song < ApplicationRecord
   
   def reposted_by?(user)
     reposted_users.include?(user)
-
+  end
+  
   def get_filename #拿到本首歌曲的s3檔案名，用來取得音波圖
     self.track_data.match(/[a-zA-Z0-9]{32}/)[0]
   end
