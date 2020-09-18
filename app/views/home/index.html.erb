@@ -2,10 +2,16 @@
 <div class="mx-6 bg-white">
 
 <%#這是首頁最上的大圖%>
-  <div class="soundcloud">
+  <div class="soundcloud w-full h-full bg-cover" style="background-image: url(https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_b@2x-7e5ff471.jpg)">
     <div class="">
       <nav class="container mx-auto py-3 flex items-center justify-between">
-        <h1 class="w-1/6 text-white ml-10">這是LOGO區塊</h1>
+
+        <button class="hover:text-white w-48">
+          <%= link_to discover_path do %>
+          <%= image_pack_tag('logo_14.png') %>
+          <% end %>
+        </button>
+
         <div>
           <button class="px-2 py-2 bg-sladock text-white rounded"><%= link_to "Sign in",new_user_session_path%></button>
           <button class="px-4 py-2 bg-orange-600 text-white rounded"><%= link_to "Create account",new_user_registration_path%></button>
@@ -141,28 +147,28 @@
   <div class="my-2 w-full h-1 bg-gray-500">
   </div>
 <%#底部更多選單%>
-  <div class="flex">
-    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Popular searches</a></div>
-      <div class="text-gray-500 text-sm">-</div>
-    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Directory</a></div>
-      <div class="text-gray-500 text-sm">-</div>
-    <div class="text-gray-500 text-sm hover:text-black"><a href="#">About us</a></div>
-      <div class="text-gray-500 text-sm">-</div>
-    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Creator Resources</a></div>
-      <div class="text-gray-500 text-sm">-</div>
-    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Blog</a></div>
-      <div class="text-gray-500 text-sm">-</div>
-    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Jobs</a></div>
-      <div class="text-gray-500 text-sm">-</div>
-    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Developers</a></div>
-      <div class="text-gray-500 text-sm">-</div>
-    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Help</a></div>
-      <div class="text-gray-500 text-sm">-</div>
-    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Legal</a></div>
-      <div class="text-gray-500 text-sm">-</div>
-    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Privacy</a></div>
-      <div class="text-gray-500 text-sm">-</div>
-    <div class="text-gray-500 text-sm hover:text-black"><a href="#">Cookies</a></div>
+  <div class="flex text-gray-500 text-sm">
+    <span class="hover:text-black mx-1"><a href="#">Popular searches</a></span>
+      -
+    <span class="hover:text-black mx-1"><a href="#">Directory</a></span>
+      -
+    <span class="hover:text-black mx-1"><a href="#">About us</a></span>
+      -
+    <span class="hover:text-black mx-1"><a href="#">Creator Resources</a></span>
+      -
+    <span class="hover:text-black mx-1"><a href="#">Blog</a></span>
+      -
+    <span class="hover:text-black mx-1"><a href="#">Jobs</a></span>
+      -
+    <span class="hover:text-black mx-1"><a href="#">Developers</a></span>
+      -
+    <span class="hover:text-black mx-1"><a href="#">Help</a></span>
+      -
+    <span class="hover:text-black mx-1"><a href="#">Legal</a></span>
+      -
+    <span class="hover:text-black mx-1"><a href="#">Privacy</a></span>
+      -
+    <span class="hover:text-black mx-1"><a href="#">Cookies</a></span>
 
   </div>
   
