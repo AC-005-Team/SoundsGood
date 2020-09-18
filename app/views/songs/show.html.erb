@@ -21,12 +21,14 @@
   <% end %>
 </div>
 
-<div>
-  <% if @song.favorited_by?(current_user) %>
-    <i class="fas fa-heart"> <%= link_to "Liked", like_song_path(@song), method: "post" %> </i>
-  <% else %>
-    <i class="far fa-heart"> <%= link_to "Like", like_song_path(@song), method: "post" %> </i>
-  <% end%>  
+<div data-controller="heart" data-heart-song="<%= @song.id %>">
+  <button data-action="click->heart#favorite">
+    <% if @song.favorited_by?(current_user) %>
+      <i class="fas fa-heart" data-target="heart.output"> <%= link_to "Liked", like_song_path(@song), method: "post" %> </i>
+    <% else %>
+      <i class="far fa-heart" data-target="heart.output"> <%= link_to "Like", like_song_path(@song), method: "post" %> </i>
+    <% end%>  
+  </button>
 
   <% if @song.reposted_by?(current_user) %>
     <i class="fas fa-retweet"> <%= link_to "Reposted", repost_song_path(@song), method: "post" %>  </i>
