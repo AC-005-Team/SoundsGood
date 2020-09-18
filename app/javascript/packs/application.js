@@ -23,6 +23,7 @@ import './preview'
 import "tailwindcss/base";
 import "tailwindcss/components";
 import "tailwindcss/utilities";
+import "@fortawesome/fontawesome-free/js/all";
 // require('./style.css')
 import "bootstrap/dist/css/bootstrap.css"
 import "select2/dist/css/select2.css"
