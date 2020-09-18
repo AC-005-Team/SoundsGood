@@ -35,6 +35,8 @@ class Song < ApplicationRecord
 
   def added_by?(playlist)
     playlists.include?(playlist)
+  end
+  
   def reposted_by?(user)
     reposted_users.include?(user)
   end
