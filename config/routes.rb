@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks'
+<<<<<<< HEAD
   } 
   
   resource :search, only: [:show] do
@@ -14,6 +15,10 @@ Rails.application.routes.draw do
       get :result
     end
   end
+=======
+  }
+
+>>>>>>> 1b96625...  playlists component
 
   resources :users, only: [:edit, :update, :show] do
     member do
@@ -27,7 +32,7 @@ Rails.application.routes.draw do
       # get :search_result
     end
     resources :songs, shallow: true do
-      member do 
+      member do
         post :like
         post :add_to_playlist
         post :repost
@@ -38,10 +43,14 @@ Rails.application.routes.draw do
       end
     end
     resources :playlists, shallow: true do
-      member do 
+      member do
         post :like
+<<<<<<< HEAD
         post :repost
       end  
+=======
+      end
+>>>>>>> 1b96625...  playlists component
     end
   end
   
@@ -63,7 +72,7 @@ Rails.application.routes.draw do
     namespace :api do
       namespace :v1 do
         resources :songs, only: [:index, :show]
-        resources :playlists, only: [:show]
+        resources :playlists, only: [:index, :show]
       end
     end
   end

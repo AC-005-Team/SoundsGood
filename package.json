@@ -9,19 +9,28 @@
     "@rails/webpacker": "4.2.2",
     "animejs": "^3.2.0",
     "aplayer": "^1.10.1",
+<<<<<<< HEAD
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
+=======
+    "axios": "^0.20.0",
+>>>>>>> 1b96625...  playlists component
     "resolve-url-loader": "^3.1.1",
     "stimulus": "^1.1.1",
     "turbolinks": "^5.2.0",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.3",
+    "vue-router": "^3.4.3",
     "vue-template-compiler": "^2.6.12",
+<<<<<<< HEAD
     "tailwindcss": "^1.7.6",
     "select2": "^4.0.13",
     "wavesurfer-peakbuilder": "^1.0.3",
     "wavesurfer.js": "^4.0.1"
+=======
+    "vuex": "^3.5.1"
+>>>>>>> 1b96625...  playlists component
   },
   "version": "0.1.0",
   "devDependencies": {

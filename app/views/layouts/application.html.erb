@@ -4,27 +4,19 @@
     <title>SoundClown</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= javascript_pack_tag 'hello_vue' %>
+
+    <%= javascript_pack_tag 'hello_vue', 'data-turbolinks-track': 'false'  %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'false' %>
   </head>
    <body>
 
-      <div id="hello">
-      </div>
-
-
-
-       <%= render "shared/navbar" %>
-       <p class="notice text-center"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
-       <%= yield %>
-       <%= render "shared/aplayer" %>
-
-
-
-
-
-
-  </body>
+    <div id="hello"></div>
+    <%# <%= render "shared/navbar" %> %>
+    <!-- <p class="notice text-center"><%= notice %></p> -->
+    <!-- <p class="alert"><%= alert %></p> -->
+    <%# <%= yield %> %>
+    <%= render "shared/aplayer" %> %>
     <%= javascript_pack_tag 'player', 'data-turbolinks-track': 'false' %>
+   </body>
+
 </html>
