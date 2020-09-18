@@ -1,26 +1,39 @@
 <template>
-  <div id="app">
-    <header-component />
-    <footer-component />
-  </div>
+<div>
+<HeaderComponent />
+<router-view/>
+<!-- <playlist /> -->
+
+
+<!-- <Player :songs="songs" :play="play" /> -->
+
+</div>
+
+
 </template>
 
 <script>
 import HeaderComponent from './components/shared/header';
-import FooterComponent from './components/shared/footer';
+import axios from 'axios';
+import playlistitems from './components/playlistItem';
+import playlist from './components/playlist';
+import router from './router'
+
+// import Player from './components/shared/player';
+
 
 export default {
+  data() {
+    return {
+      songs: [],
+      play: false
+    }
+  },
+  router,
   components: {
-  HeaderComponent,
-  FooterComponent,
-},
+    HeaderComponent,
+    playlist
+
+  },
 }
 </script>
-
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-  color: rgb(124, 107, 231);
-}
-</style>

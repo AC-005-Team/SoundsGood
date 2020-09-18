@@ -2,13 +2,13 @@ Rails.application.routes.draw do
   root to: "home#index"
   get '/discover', to: "home#discover"
   get '/stream', to: "home#stream"
-  
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks'
-  } 
-  
+  }
+
   resources :rooms do
     collection do
       post :vonage, to: 'rooms#signal'
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
       # get :search_result
     end
     resources :songs, shallow: true do
-      member do 
+      member do
         post :like
         post :add_to_playlist
         post :repost
@@ -47,13 +47,13 @@ Rails.application.routes.draw do
       end
     end
     resources :playlists, shallow: true do
-      member do 
+      member do
         post :like
         post :repost
-      end  
+      end
     end
   end
-  
+
   resources :stream, only: [:index]
 
   resources :library, path: "you", only: [] do

@@ -14,11 +14,12 @@
 //   console.log(app)
 // })
 
+
 import Vue from 'vue'
 import App from '../app.vue'
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
-import router from './routes.js';
+// import router from './routes.js';
 // import store from '../store';
 
 Vue.use(Vuex);
@@ -28,7 +29,8 @@ Vue.use(VueRouter);
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
-    render: h => h(App)
+    render: h => h(App),
+    // router,
   }).$mount("#hello")
 })
 
