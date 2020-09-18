@@ -21,22 +21,22 @@ class UsersController < ApplicationController
   end
 
   def search
-    if params[:search].blank? 
-      return  
-    else  
-      @content = params[:search].downcase
-      @users = User.name_search("display_name", @content).map(&:display_name)
-      @songs = Song.name_search("name", @content).map(&:name)
-      @tags = Tag.name_search("name", @content).map(&:name)
-      @result = @users|@songs|@tags
-    end 
+    return if params[:search].blank?
+
+    @content = params[:search].downcase
+    @users = User.name_search("display_name", @content).map(&:display_name)
+    @songs = Song.name_search("name", @content).map(&:name)
+    @Playlists = Playlist.name_search("name", @content).map(&:name)
+    @result = @users | @songs | @Playlists
   end
 
   def search_result
+    return if params[:name].blank? 
+    
     @name = params[:name].downcase
     @users = User.name_search("display_name", @name)
-    @songs = Song.name_search("name", @name)
-    @tags = Tag.name_search("name", @name)
+    @songs = Song.name_search("name", @name).includes(:tags)
+    @Playlists = Playlist.name_search("name", @name)
   end
 
   private

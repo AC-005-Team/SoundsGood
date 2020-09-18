@@ -1,7 +1,9 @@
-<% @users.each do|f|%>
-  <%= f.display_name %>
+<% if @users  %>
+  <% @users.each do|f|%>
+    <%= f.display_name %>
+  <% end %>
 <% end %>
-
+<% if @songs %>
 <% @songs.each do|f|%>
  <div class="w-3/4 mx-4">
     <div class="text-2xl">Recent</div>
@@ -18,7 +20,7 @@
           <div>
             5 days ago
             <% f.tags.each do |tag|%>
-             <%= tag %>
+             tag:<%= tag.name %>
             <% end %> 
           </div>
         </div>
@@ -58,6 +60,10 @@
     </div>
   </div> 
 <% end %>
-<% @tags.each do|f|%>
-  <%= f.name %>
+<% end %>
+
+<% if @playlists%>
+  <% @playlists.each do|f|%>
+    <%= f.name %>
+  <% end %>
 <% end %>
