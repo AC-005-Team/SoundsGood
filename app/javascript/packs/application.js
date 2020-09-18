@@ -16,6 +16,7 @@ require("styles")
 // require("functions.js")
 require('stylesheets')
 
+
 const images = require.context('../images', false)
 const imagePath = (name) => images(name, false)
 import './preview'
@@ -24,8 +25,9 @@ import "tailwindcss/components";
 import "tailwindcss/utilities";
 import "@fortawesome/fontawesome-free/js/all";
 // require('./style.css')
-
-
+import "bootstrap/dist/css/bootstrap.css"
+import "select2/dist/css/select2.css"
+import "./tag"
 
 
 

@@ -1,5 +1,4 @@
 <h1><%=@song.name%></h1>
-<button class="modal-btn share-btn">Share</button><br>
 <button class="modal-btn addlist-btn">Add to List</button><br>
 
 
@@ -23,7 +22,17 @@
   <% else %>
     <i class="far fa-heart"> <%= link_to "Like", like_song_path(@song), method: "post" %> </i>
   <% end%>  
-    <i class="fas fa-heart"> <%=@song.liked_users.count %> </i>
+
+  <% if @song.reposted_by?(current_user) %>
+    <i class="fas fa-retweet"> <%= link_to "Reposted", repost_song_path(@song), method: "post" %>  </i>
+  <% else %>
+    <i class="fas fa-retweet"> <%= link_to "Repost", repost_song_path(@song), method: "post" %> </i>
+  <% end%>  
+  <i class="fas fa-share-square"><button class="modal-btn share-btn">Share</button></i>
+</div>
+<div>
+  <i class="fas fa-heart"> <%=@song.liked_users.count %> </i>
+  <i class="fas fa-retweet"> <%=@song.reposted_users.count %> </i>
 </div>
 
 <!-- 愛心 -->
