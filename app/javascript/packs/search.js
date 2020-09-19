@@ -22,7 +22,7 @@ function search(){
         const class_list = ["px-2", "m-2", "bg-gray-200", "rounded", "w-12/12"]
         const a_tag = document.createElement('a')
               a_tag.classList.add(...class_list)
-              a_tag.href = 'result_search_path'
+              a_tag.href = `http://127.0.0.1:3000/search/result?search=${element}`
               a_tag.textContent = `${element}`
         console.log(element)
         search_recommend.appendChild(a_tag)
