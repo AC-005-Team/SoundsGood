@@ -2,13 +2,18 @@ Rails.application.routes.draw do
   root to: "home#index"
   get '/discover', to: "home#discover"
   get '/stream', to: "home#stream"
-
+  
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks'
   } 
   
+  resource :search, only: [:show] do
+    collection do
+      get :result
+    end
+  end
 
   resources :users, only: [:edit, :update, :show] do
     member do
@@ -18,8 +23,8 @@ Rails.application.routes.draw do
       get :following
       get :comments
       get :likes
-      get :search
-      get :search_result
+      # get :search
+      # get :search_result
     end
     resources :songs, shallow: true do
       member do 
@@ -39,7 +44,7 @@ Rails.application.routes.draw do
       end  
     end
   end
-
+  
   resources :stream, only: [:index]
 
   resources :library, path: "you", only: [] do
@@ -62,4 +67,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+
 end
