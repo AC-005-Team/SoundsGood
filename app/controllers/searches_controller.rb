@@ -16,7 +16,7 @@ class SearchesController < ApplicationController
 
   def result
     return if params[:search].blank? 
-
+    puts params
     @name = params[:search].downcase
     @users = User.name_search("display_name", @name)
     @songs = Song.name_search("name", @name).includes(:tags)
