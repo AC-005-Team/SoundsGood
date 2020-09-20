@@ -4,15 +4,13 @@
   <div class="flex bg-gradient-to-r from-red-500 via-white to-orange-700">
     <div class="w-2/3 flex-col-reverse space-y-64 m-5">
       <div class="flex">
-        <i class="fas fa-arrow-alt-circle-right fa-4x"></i>
+        <%= content_tag(:li, '▶', class:'getURL fa-4x', data: {id: @song.id} ) %>
         <div class="">
           <div class="bg-black rounded p-1 text-white m-1">
             <%=@song.user.display_name%>
           </div>
           <div class="flex bg-gray-900 rounded">
             <div class="text-2xl text-white m-2"><%= @song.name %></div>
-            <div class="text-orange-700 m-auto mr-2"><i class="fas fa-unlock"></i></div>
-            <div class="text-orange-700 m-auto mr-2">Private</div>
           </div>
         </div>
         <div class="m-4 text-xl text-white">
@@ -33,7 +31,7 @@
     </div>
 <%#=右邊大圖區%>
     <div class="w-1/3 p-4">
-      <img class="" src="https://i1.sndcdn.com/artworks-48wHUXnYlyIAyhPm-kAqlLQ-t500x500.jpg" alt="">
+      <%= image_tag @song.image_url%> 
     </div>
   </div>
 </div>
@@ -45,7 +43,10 @@
     <div class="border-b border-gray-400">
       <div class="flex ">
         <img class="w-auto h-10 " src="https://i1.sndcdn.com/artworks-48wHUXnYlyIAyhPm-kAqlLQ-t500x500.jpg" alt="">
-        <input class="w-11/12 mx-4 border border-gray-400 rounded" type="text" placeholder="Write a comment">
+        <%= form_with(model:@comment, url:song_comments_path(@song), class: "w-11/12 mx-4 border border-gray-400 rounded") do |f|%>
+          <%= f.text_field :content, placeholder: "Write a comment", class: "w-10/12 py-2 px-4 border border-gray-400 rounded"%>
+          <%= f.submit class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"%>
+        <% end %>
       </div>
       <div class="flex my-2 p-2 justify-around text-sm" data-controller="toggle" data-toggle-song="<%= @song.id %>">
         <% if @song.favorited_by?(current_user) %>
@@ -127,37 +128,48 @@
                     </div>
   <%#=顯示正中間留言區那%>
         <div class="">
+          <% @comments.each do |comment| %>
           <div class="flex">
             <img class="w-1/12 rounded-full" src="https://i1.sndcdn.com/avatars-Y57TiYzkrpCtP0pD-w8fdEA-t120x120.jpg" alt="">
             <div class="w-9/12 mx-2">
               <div class="flex">
-                <button>user names</button>
-                <p>at</p>
-                <p>time</p>
+                <button> <%=comment.user.display_name%></button>
+                <p class ="mx-1"> at</p>
+                <p> 0:00</p>
               </div>
-              <p class="">Ls assumeicas, commodi nostrum enim minima? A quas ut consequatur suscipit, cum quae dolore.</p>
+              <p class=""> <%=comment.content%> </p>
             </div>
             <div class="w-2/12 text-gray-400">
-              21 hours ago
+              <p> <%=comment.created_at%> </p>
+              <button> <%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(comment.user)%> </button>
             </div>
           </div>
-<%#=顯示正中間針對留言的留言那%>
-          <div class="flex mt-4 ml-6">
-            <img class="w-1/12 rounded-full" src="https://i1.sndcdn.com/avatars-Y57TiYzkrpCtP0pD-w8fdEA-t120x120.jpg" alt="">
-            <div class="w-9/12 mx-2">
-              <div class="flex">
-                <button>user names</button>
-                <p>at</p>
-                <p>time</p>
+            <%#=顯示正中間針對留言的留言那%>
+            <% comment.replies.each do |reply| %>
+            <div class="flex mt-4 ml-6">
+              <img class="w-1/12 rounded-full" src="https://i1.sndcdn.com/avatars-Y57TiYzkrpCtP0pD-w8fdEA-t120x120.jpg" alt="">
+              <div class="w-9/12 mx-2">
+                <div class="flex">
+                  <button> <%=reply.user.display_name%></button>
+                  <p class ="mx-1"> at</p>
+                  <p> 0:00</p>
+                </div>
+                <p class=""> <%=reply.content%> </p>
               </div>
-              <p class="">Ls assumeicas, commodi nostrum enim minima? A quas ut consequatur suscipit, cum quae dolore.</p>
+              <div class="w-2/12 text-gray-400">
+                <p> <%=reply.created_at%> </p>
+                <button> <%= link_to "Delete", comment_path(song_id: @song.id, id: reply.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%> </button>
+              </div>
             </div>
-            <div class="w-2/12 text-gray-400">
-              21 hours ago
+            <% end %>
+            <div class="flex mt-4 ml-6">
+            <%= form_with(model: @comment, url:song_comments_path(song_id: @song, reply_id: comment.id), class: "w-11/12 mx-4") do |f|%>
+              <%= f.text_field :content, placeholder: "Reply to this comment", class: "w-10/12 py-2 px-4 border border-gray-400 rounded"%>
+              <%= f.submit "Reply", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"%>
+            <% end %>
             </div>
-          </div>
 
-
+          <% end %>
         </div>
       </div>
     </div>
@@ -244,52 +256,13 @@
   
 </div>
 
-<h1><%=@song.name%></h1>
 <button class="modal-btn addlist-btn">Add to List</button><br>
 
-
-  <ul>
-      <li>Name:<%= @song.name %></li>
-      <li><%= image_tag @song.image_url, width: '200px'  %> </li>
-      <li>Intro:<%= @song.intro %></li>
-      <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: @song.id} ) %>
-  </ul>
-
-<div>
-  <%= form_with(model:@comment, url:song_comments_path(@song)) do |f|%>
-    <%= f.text_field :content, placeholder: "Write a comment"%>
-    <%= f.submit%>
-  <% end %>
-</div>
-
-<div data-controller="heart" data-heart-song="<%= @song.id %>">
-  <button data-action="click->heart#favorite">
-    <% if @song.favorited_by?(current_user) %>
-      <i class="fas fa-heart" data-target="heart.output"></i> <span>Liked</span>
-    <% else %>
-      <i class="far fa-heart" data-target="heart.output"></i> <span>Like</span>
-    <% end%>  
-  </button>
-
-  <% if @song.reposted_by?(current_user) %>
-    <i class="fas fa-retweet"> <%= link_to "Reposted", repost_song_path(@song), method: "post" %>  </i>
-  <% else %>
-    <i class="fas fa-retweet"> <%= link_to "Repost", repost_song_path(@song), method: "post" %> </i>
-  <% end%>  
-  <i class="fas fa-share-square"><button class="modal-btn share-btn">Share</button></i>
-</div>
 <div>
   <i class="fas fa-heart"> <%=@song.liked_users.count %> </i>
   <i class="fas fa-retweet"> <%=@song.reposted_users.count %> </i>
   <i class="fas fa-search"></i>
 </div>
-
-<!-- 愛心 -->
-<svg class="heart" width="25px" viewBox="0 0 500 500" >
-  <path d="M295.706,35.522C295.706,35.522,295.706,35.522,295.706,35.522c-34.43-0.184-67.161,14.937-89.339,41.273
-  c-22.039-26.516-54.861-41.68-89.339-41.273C52.395,35.522,0,87.917,0,152.55C0,263.31,193.306,371.456,201.143,375.636
-  c3.162,2.113,7.286,2.113,10.449,0c7.837-4.18,201.143-110.759,201.143-223.086C412.735,87.917,360.339,35.522,295.706,35.522z"/>
-</svg>
 
 <div class="dropdown">
   <button class="dropbtn">+</button>
@@ -323,9 +296,8 @@
             <%= link_to "Delete", comment_path(song_id: @song.id, id: reply.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%> 
         </div>
       <%end%>
-      <%= form_with(model: @comment, url:song_comments_path(@song)) do |f|%>
+      <%= form_with(model: @comment, url:song_comments_path(song_id: @song, reply_id: comment.id)) do |f|%>
         <%= f.text_field :content, placeholder: "Reply to this comment"%>
-        <%= f.hidden_field :reply_id, value: comment.id%>
         <%= f.submit "Reply"%>
       <% end %>
     </div>
@@ -342,9 +314,8 @@
       <h1>Share</h1>
     </div>
     <div class="modal-item">
-      share
-      <%= content_tag(:button, 'Share to Twitter', class:'share-twitter', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
-      <%= content_tag(:button, 'Share to Facebook', class:'share-facebook', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
+      <%= content_tag(:button, 'Twitter', class:'share-twitter', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
+      <%= content_tag(:button, 'Facebook', class:'share-facebook', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
     </div>
   </div>
 </template>
