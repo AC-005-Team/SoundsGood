@@ -30,12 +30,9 @@ class Song < ApplicationRecord
   def tag_items=(names)
     self.tags = names.map do|item|
       next if item.blank?
+      
       Tag.where(name: item.strip).first_or_create!
     end.compact
-  end
-
-  def added_by?(playlist)
-    playlists.include?(playlist)
   end
   
   def reposted_by?(user)
