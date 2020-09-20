@@ -11,6 +11,13 @@
             <li><%= tag.name %></li>
           <% end %>
         <% end %>
+        <li><%= link_to '點擊', song.track_url %></li>
+        <li><%= link_to '刪除', song_path(song.id), method: 'delete' %></li>
+        <% if playlists_song?(song) %>
+          <% song.playlists.each do |list| %>
+            <li>歌單：<%= list.name %></li>
+          <% end %>
+        <% end %>
         <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: song.id} ) %>
         <li><%= link_to 'Delete', song_path(song.id), method: 'delete' %></li>
         
