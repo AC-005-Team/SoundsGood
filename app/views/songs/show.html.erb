@@ -4,10 +4,15 @@
 
   <ul>
       <li>Name:<%= @song.name %></li>
-      <li><%= image_tag @song.image_url, width: '200px'  %> </li>
+      <li class="flex">
+        <%= image_tag @song.image_url, width: '200px'  %>
+        <%= content_tag(:div, '', id:['waveform'], class:['song-waveform w-3/6'], data:{ path: @song.track_url, filename: @song.get_filename }) %>
+      </li>
       <li>Intro:<%= @song.intro %></li>
       <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: @song.id} ) %>
   </ul>
+
+
 
 <div>
   <%= form_with(model:@comment, url:song_comments_path(@song)) do |f|%>
