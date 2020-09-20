@@ -1,113 +1,3 @@
-<h1><%=@song.name%></h1>
-<button class="modal-btn addlist-btn">Add to List</button><br>
-
-
-  <ul>
-      <li>Name:<%= @song.name %></li>
-      <li class="flex">
-        <%= image_tag @song.image_url, width: '200px'  %>
-        <%= content_tag(:div, '', id:['waveform'], class:['song-waveform w-3/6'], data:{ path: @song.track_url, filename: @song.get_filename }) %>
-      </li>
-      <li>Intro:<%= @song.intro %></li>
-      <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: @song.id} ) %>
-  </ul>
-
-
-
-<div>
-  <%= form_with(model:@comment, url:song_comments_path(@song)) do |f|%>
-    <%= f.text_field :content, placeholder: "Write a comment111"%>
-    <%= f.submit%>
-  <% end %>
-</div>
-
-<div data-controller="heart" data-heart-song="<%= @song.id %>">
-  <button data-action="click->heart#favorite">
-    <% if @song.favorited_by?(current_user) %>
-      <i class="fas fa-heart" data-target="heart.output"> <%= link_to "Liked", like_song_path(@song), method: "post" %> </i>
-    <% else %>
-      <i class="far fa-heart" data-target="heart.output"> <%= link_to "Like", like_song_path(@song), method: "post" %> </i>
-    <% end%>  
-  </button>
-
-  <% if @song.reposted_by?(current_user) %>
-    <i class="fas fa-retweet"> <%= link_to "Reposted", repost_song_path(@song), method: "post" %>  </i>
-  <% else %>
-    <i class="fas fa-retweet"> <%= link_to "Repost", repost_song_path(@song), method: "post" %> </i>
-  <% end%>  
-  <i class="fas fa-share-square"><button class="modal-btn share-btn">Share</button></i>
-</div>
-<div>
-  <i class="fas fa-heart"> <%=@song.liked_users.count %> </i>
-  <i class="fas fa-retweet"> <%=@song.reposted_users.count %> </i>
-</div>
-
-<!-- 愛心 -->
-<svg class="heart" width="25px" viewBox="0 0 500 500" >
-  <path d="M295.706,35.522C295.706,35.522,295.706,35.522,295.706,35.522c-34.43-0.184-67.161,14.937-89.339,41.273
-  c-22.039-26.516-54.861-41.68-89.339-41.273C52.395,35.522,0,87.917,0,152.55C0,263.31,193.306,371.456,201.143,375.636
-  c3.162,2.113,7.286,2.113,10.449,0c7.837-4.18,201.143-110.759,201.143-223.086C412.735,87.917,360.339,35.522,295.706,35.522z"/>
-</svg>
-
-<div class="dropdown">
-  <button class="dropbtn">+</button>
-  <div id="myDropdown" class="dropdown-content">
-    <%= link_to "add to play next", '###' , id: 'addtoplay', data: {id: @song.id}  %>
-    <%#= link_to "add to playlist",add_to_playlist_song_path(@song), data: {}  %>
-  </div>
-</div>
-
-<div>
-  <h3>Add to playlist</h3>
-    <% @playlists.each do |playlist| %>
-      <li>Playlist：<%= link_to playlist.name, playlist_path(playlist) %>
-      <% if @song.added_by?(playlist) %>
-        <%= link_to "Added", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
-      <% else %>
-        <%= link_to "Add to playlist", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
-      <% end %>
-    <% end %> 
-</div>
-
-<div>--------------我是分隔線-------------------</div>
-  <% @comments.each do |comment| %>
-    <div>
-      <span> <%=comment.content%> </span>
-      <%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(comment.user)%> 
-      <% comment.replies.each do |reply| %>
-        <div>
-          <span> --I'm reply's content-- </span>
-          <span> <%=reply.content%> </span>
-            <%= link_to "Delete", comment_path(song_id: @song.id, id: reply.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%> 
-        </div>
-      <%end%>
-      <%= form_with(model: @comment, url:song_comments_path(@song)) do |f|%>
-        <%= f.text_field :content, placeholder: "Reply to this comment"%>
-        <%= f.hidden_field :reply_id, value: comment.id%>
-        <%= f.submit "Reply"%>
-      <% end %>
-    </div>
-  <% end %>
-
-  <div id="player1" class="aplayer"></div>
-
-<% #以下之後用Vue藏內容應該可以 %>
-<template class="share-template">
-  <div class="modal-container share-container">
-  </div>
-  <div class="modal-content">
-    <div class="modal-item">
-      <h1>Share</h1>
-    </div>
-    <div class="modal-item">
-      share
-      <%= content_tag(:button, 'Share to Twitter', class:'share-twitter', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
-      <%= content_tag(:button, 'Share to Facebook', class:'share-facebook', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
-    </div>
-  </div>
-</template>
-
-
 <%#=專輯播放頁面%>
 <%#=第一背景色區%>
 <div class="mx-4">
@@ -117,10 +7,10 @@
         <i class="fas fa-arrow-alt-circle-right fa-4x"></i>
         <div class="">
           <div class="bg-black rounded p-1 text-white m-1">
-            Made for Username
+            <%=@song.user.display_name%>
           </div>
           <div class="flex bg-gray-900 rounded">
-            <div class="text-2xl text-white m-2">The Upload</div>
+            <div class="text-2xl text-white m-2"><%= @song.name %></div>
             <div class="text-orange-700 m-auto mr-2"><i class="fas fa-unlock"></i></div>
             <div class="text-orange-700 m-auto mr-2">Private</div>
           </div>
@@ -137,7 +27,8 @@
 
 <%#=萱大大專區%>
       <div class="">
-        <i class="fab fa-twitter fa-2x"></i>
+        <%= image_tag @song.image_url, width: '200px'  %>
+        <%= content_tag(:div, '', id:['waveform'], class:['song-waveform w-3/6'], data:{ path: @song.track_url, filename: @song.get_filename }) %>
       </div>
     </div>
 <%#=右邊大圖區%>
@@ -156,18 +47,31 @@
         <img class="w-auto h-10 " src="https://i1.sndcdn.com/artworks-48wHUXnYlyIAyhPm-kAqlLQ-t500x500.jpg" alt="">
         <input class="w-11/12 mx-4 border border-gray-400 rounded" type="text" placeholder="Write a comment">
       </div>
-      <div class="flex my-2 p-2 justify-around text-sm">
-        <button class="border border-gray-400 p-1 rounded">
-          <i class="fas fa-heart"></i>
-          like
-        </button>
-        <button class="border border-gray-400 p-1 rounded">
-          <i class="fab fa-gg-circle"></i>
-          Repost
-        </button>
-        <button class="border border-gray-400 p-1 rounded">
+      <div class="flex my-2 p-2 justify-around text-sm" data-controller="toggle" data-toggle-song="<%= @song.id %>">
+        <% if @song.favorited_by?(current_user) %>
+          <button class="border border-orange-500 text-red-600 p-1 rounded" data-target="toggle.likeBtn" data-action="click->toggle#like">
+            <i class="fas fa-heart" data-target="toggle.heart"></i> <span>Liked</span>
+          </button>
+        <% else %>
+          <button class="border border-gray-400 p-1 rounded" data-target="toggle.likeBtn" data-action="click->toggle#like">
+            <i class="far fa-heart" data-target="toggle.heart"></i> <span>Like</span>
+          </button>
+        <% end%>
+
+        <% if @song.reposted_by?(current_user) %>
+          <button class="border border-orange-500 text-red-600 p-1 rounded" data-target="toggle.repostBtn" data-action="click->toggle#repost">
+            <i class="fas fa-retweet"></i>
+            <span>Reposted</span>
+          </button>
+        <% else %>
+          <button class="border border-gray-400 p-1 rounded" data-target="toggle.repostBtn" data-action="click->toggle#repost">
+            <i class="fas fa-retweet"></i>
+            <span>Repost</span>
+          </button>
+        <% end%> 
+        <button class="modal-btn share-btn border border-gray-400 p-1 rounded">
           <i class="fas fa-share-square"></i>
-          share
+          Share
         </button>
         <button class="border border-gray-400 p-1 rounded">
           <i class="fas fa-balance-scale-left"></i>
@@ -339,3 +243,108 @@
 
   
 </div>
+
+<h1><%=@song.name%></h1>
+<button class="modal-btn addlist-btn">Add to List</button><br>
+
+
+  <ul>
+      <li>Name:<%= @song.name %></li>
+      <li><%= image_tag @song.image_url, width: '200px'  %> </li>
+      <li>Intro:<%= @song.intro %></li>
+      <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: @song.id} ) %>
+  </ul>
+
+<div>
+  <%= form_with(model:@comment, url:song_comments_path(@song)) do |f|%>
+    <%= f.text_field :content, placeholder: "Write a comment"%>
+    <%= f.submit%>
+  <% end %>
+</div>
+
+<div data-controller="heart" data-heart-song="<%= @song.id %>">
+  <button data-action="click->heart#favorite">
+    <% if @song.favorited_by?(current_user) %>
+      <i class="fas fa-heart" data-target="heart.output"></i> <span>Liked</span>
+    <% else %>
+      <i class="far fa-heart" data-target="heart.output"></i> <span>Like</span>
+    <% end%>  
+  </button>
+
+  <% if @song.reposted_by?(current_user) %>
+    <i class="fas fa-retweet"> <%= link_to "Reposted", repost_song_path(@song), method: "post" %>  </i>
+  <% else %>
+    <i class="fas fa-retweet"> <%= link_to "Repost", repost_song_path(@song), method: "post" %> </i>
+  <% end%>  
+  <i class="fas fa-share-square"><button class="modal-btn share-btn">Share</button></i>
+</div>
+<div>
+  <i class="fas fa-heart"> <%=@song.liked_users.count %> </i>
+  <i class="fas fa-retweet"> <%=@song.reposted_users.count %> </i>
+  <i class="fas fa-search"></i>
+</div>
+
+<!-- 愛心 -->
+<svg class="heart" width="25px" viewBox="0 0 500 500" >
+  <path d="M295.706,35.522C295.706,35.522,295.706,35.522,295.706,35.522c-34.43-0.184-67.161,14.937-89.339,41.273
+  c-22.039-26.516-54.861-41.68-89.339-41.273C52.395,35.522,0,87.917,0,152.55C0,263.31,193.306,371.456,201.143,375.636
+  c3.162,2.113,7.286,2.113,10.449,0c7.837-4.18,201.143-110.759,201.143-223.086C412.735,87.917,360.339,35.522,295.706,35.522z"/>
+</svg>
+
+<div class="dropdown">
+  <button class="dropbtn">+</button>
+  <div id="myDropdown" class="dropdown-content">
+    <%= link_to "add to play next", '###' , id: 'addtoplay', data: {id: @song.id}  %>
+    <%#= link_to "add to playlist",add_to_playlist_song_path(@song), data: {}  %>
+  </div>
+</div>
+
+<div>
+  <h3>Add to playlist</h3>
+    <% @playlists.each do |playlist| %>
+      <li>Playlist：<%= link_to playlist.name, playlist_path(playlist) %>
+      <% if @song.added_by?(playlist) %>
+        <%= link_to "Added", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
+      <% else %>
+        <%= link_to "Add to playlist", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
+      <% end %>
+    <% end %> 
+</div>
+
+<div>--------------我是分隔線-------------------</div>
+  <% @comments.each do |comment| %>
+    <div>
+      <span> <%=comment.content%> </span>
+      <%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(comment.user)%> 
+      <% comment.replies.each do |reply| %>
+        <div>
+          <span> --I'm reply's content-- </span>
+          <span> <%=reply.content%> </span>
+            <%= link_to "Delete", comment_path(song_id: @song.id, id: reply.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%> 
+        </div>
+      <%end%>
+      <%= form_with(model: @comment, url:song_comments_path(@song)) do |f|%>
+        <%= f.text_field :content, placeholder: "Reply to this comment"%>
+        <%= f.hidden_field :reply_id, value: comment.id%>
+        <%= f.submit "Reply"%>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div id="player1" class="aplayer"></div>
+
+<% #以下之後用Vue藏內容應該可以 %>
+<template class="share-template">
+  <div class="modal-container share-container">
+  </div>
+  <div class="modal-content">
+    <div class="modal-item">
+      <h1>Share</h1>
+    </div>
+    <div class="modal-item">
+      share
+      <%= content_tag(:button, 'Share to Twitter', class:'share-twitter', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
+      <%= content_tag(:button, 'Share to Facebook', class:'share-facebook', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
+    </div>
+  </div>
+</template>

@@ -49,7 +49,10 @@ class SongsController < ApplicationController
 
   def repost
     current_user.toggle_repost_song(@song)
-    redirect_to @song
+    respond_to do |format|
+      format.html {redirect_to @song}
+      format.json {render json: {status: @song.reposted_by?(current_user)}}
+    end
   end
   
   def share;end
