@@ -2,65 +2,51 @@
 <div class="bg-gray-100 grid grid-cols-12 mx-5">
 <%#=左邊區域左邊區域左邊區域左邊區域左邊區域左邊區域左邊區域左邊區域左邊區域%>
   <div class="col-span-9 bg-white">
-<%#=左邊區域-3%>
+<%#=左邊區域-橫的-套完了%>
+
     <div class="border-b border-gray-200 m-4">
       <div class="text-2xl">Charts: New & hot</div>
       <div class="text-xs text-gray-500 my-2">Up-and-coming tracks on SoundCloud</div>
-      <div class="flex my-4 overflow-scroll">
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
+      <div class="flex overflow-scroll text-gray-500 text-xs">
 
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
+        <% @songs.each do |song|%>
+          <% if song.image_url %>
 
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
+            <div class="my-2 mr-2">
+              <%# <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt=""> %>
+              <%= image_tag song.image_url, class:'h-32 max-w-xl mr-4' %>
 
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
+              <%# <div class="">All music genres</div>
+              <div class="text-xs text-gray-500">New & Hot</div> %>
+             
+                <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
+              
+             
+                <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
+              
+             
+                <% if song.tags.length > 0 %>
+                  <% song.tags.each do |tag| %>
+                    <%= tag.name %>
+                  <% end %>
+                <% end %>
+              
+            </div>
 
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
+          <% end %>
+        <% end %>  
+        
       </div>
     </div>
 
-
-<%#=左邊區域-1%>
+<%#=左邊區域-直的%>
     <div class="border-b border-gray-200 m-4">
       <div class="text-2xl">More of what you like</div>
       <div class="text-xs text-gray-500 my-2">Suggestions based on what you've liked or played</div>
       <div class="flex justify-around p-5 bg-gradient-to-r from-red-500 via-orange-400 to-black rounded-lg"> <%#=專輯內圖、取名、hover愛心、播放%>
         <div class="w-1/4 bg-cover" style="background-image: url(https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg)"></div>
-        
         <div class="w-3/4 overflow-auto h-48"> <%#=曲名區域%>
+          
           <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
             <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia & Geena Fontanella - Psychic</div>
             <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
@@ -97,7 +83,61 @@
       <button class="text-center p-1 border border-gray-400 ml-auto my-3 block rounded text-xs">Go to Playlist</button>
     </div>
 
-<%#=左邊區域-2%>
+<%#=左邊區域-橫的%>
+    <div class="border-b border-gray-200 m-4">
+      <div class="text-2xl">Charts: Top 50</div>
+      <div class="text-xs text-gray-500 my-2">The most played tracks on SoundCloud this week</div>
+      <div class="flex my-4 overflow-scroll">
+      
+        <div class="my-2 mr-2">
+          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
+          <div class="">All music genres</div>
+          <div class="text-xs text-gray-500">New & Hot</div>
+        </div>
+
+        <div class="my-2 mr-2">
+          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
+          <div class="">All music genres</div>
+          <div class="text-xs text-gray-500">New & Hot</div>
+        </div>
+
+        <div class="my-2 mr-2">
+          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
+          <div class="">All music genres</div>
+          <div class="text-xs text-gray-500">New & Hot</div>
+        </div>
+
+        <div class="my-2 mr-2">
+          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
+          <div class="">All music genres</div>
+          <div class="text-xs text-gray-500">New & Hot</div>
+        </div>
+
+        <div class="my-2 mr-2">
+          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
+          <div class="">All music genres</div>
+          <div class="text-xs text-gray-500">New & Hot</div>
+        </div>
+
+        <div class="my-2 mr-2">
+          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
+          <div class="">All music genres</div>
+          <div class="text-xs text-gray-500">New & Hot</div>
+        </div>
+
+        <div class="my-2 mr-2">
+          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
+          <div class="">All music genres</div>
+          <div class="text-xs text-gray-500">New & Hot</div>
+        </div>
+
+      </div>
+    </div>
+    
+
+
+
+<%#=左邊區域-直的%>
     <div class="border-b border-gray-200 m-4">
       <div class="text-2xl">The Upload</div>
       <div class="text-xs text-gray-500 my-2">Newly posted tracks. Just for you</div>
@@ -143,8 +183,7 @@
       <button class="text-center p-1 border border-gray-400 ml-auto my-3 block rounded text-xs">Go to Playlist</button>
     </div>
 
-
-<%#=左邊區域-4%>
+<%#=左邊區域-直的%>
     <div class="border-b border-gray-200 m-4">
       <div class="text-2xl">SoundCloud Weekly</div>
       <div class="text-xs text-gray-500 my-2">All of SoundCloud. Just for you</div>
@@ -190,106 +229,7 @@
       <button class="text-center p-1 border border-gray-400 ml-auto my-3 block rounded text-xs">Go to Playlist</button>
     </div>
 
-<%#=左邊區域-5%>
-    <div class="border-b border-gray-200 m-4">
-      <div class="text-2xl">Party</div>
-      <div class="text-xs text-gray-500 my-2">Popular playlists from the SoundCloud community</div>
-      <div class="flex my-4 overflow-scroll">
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-      </div>
-    </div>
-
-<%#=左邊區域-6%>
-    <div class="border-b border-gray-200 m-4">
-      <div class="text-2xl">Charts: Top 50</div>
-      <div class="text-xs text-gray-500 my-2">The most played tracks on SoundCloud this week</div>
-      <div class="flex my-4 overflow-scroll">
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-      </div>
-    </div>
-<%#=左邊區域-7%>
+<%#=左邊區域-橫的%>
     <div class="p-5">
       <div class="text-2xl">Relax</div>
       <div class="text-xs text-gray-500 my-2">Popular playlists from the SoundCloud community</div>
@@ -339,7 +279,7 @@
       </div>
     </div>
 
-<%#=左邊區域-8%>
+<%#=左邊區域-橫的%>
     <div class="border-b border-gray-200 m-4">
       <div class="text-2xl">Chill</div>
       <div class="text-xs text-gray-500 my-2">Popular playlists from the SoundCloud community</div>
@@ -389,56 +329,7 @@
       </div>
     </div>
 
-<%#=左邊區域-9%>
-    <div class="border-b border-gray-200 m-4">
-      <div class="text-2xl">Sleep</div>
-      <div class="text-xs text-gray-500 my-2">Popular playlists from the SoundCloud community</div>
-      <div class="flex my-4 overflow-scroll">
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
-
-      </div>
-    </div>
-
+<%#=左邊區域-橫的%>
 <%#=左邊區域-10%>
 <%#=左邊區域-11%>
 <%#=左邊區域-12%>

@@ -1,69 +1,172 @@
-<% if @users  %>
-  <% @users.each do|f|%>
-    <%= f.display_name %>
-  <% end %>
-<% end %>
-<% if @songs %>
-<% @songs.each do|f|%>
- <div class="w-3/4 mx-4">
-    <div class="text-2xl">Recent</div>
-<%#=左邊專輯專區%>
-    <div class="flex my-4">
-      <img class="w-1/5" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">    
-      <div class="my-auto w-4/5">
-        <div class="flex justify-between">
-          <i class="fas fa-arrow-circle-right fa-3x"></i>
+
+<div class="m-4">
+  <%#= 搜尋結果顯示TAG區域 %>
+  <%# <div class="flex m-4">
+    <button class="flex items-center mx-2 border border-gray-500 bg-gray-300 rounded text-white p-1">
+      <p class="px-1">tag_name</p> 
+    </button>
+    <button class="flex items-center mx-2 border border-gray-500 bg-gray-300 rounded text-white p-1">
+      <p class="px-1">tag_name</p> 
+    </button>
+    <button class="flex items-center mx-2 border border-gray-500 bg-gray-300 rounded text-white p-1">
+      <p class="px-1">tag_name</p> 
+    </button>
+  </div> %>
+
+  <div class="flex text-2xl border-b border-gray-200 m-4">
+    <p class="">Search result for</p>
+    <p class="">'jazz'</p>
+  </div>
+
+  <div class="flex m-4">
+  <%#= 左邊的篩選器 %>
+    <div class="w-1/5 m-6">
+      <div class="flex items-center bg-orange-500 text-white py-1 px-2 rounded">
+        <i class="fas fa-search"></i>
+        <button class="mx-4">Everything</button>
+      </div>
+      <div class="flex items-center">
+        <i class="fab fa-soundcloud"></i>
+        <button class="mx-4 my-1">Tracks</button>
+      </div>
+      <div class="flex items-center">
+        <i class="fas fa-user-friends"></i>
+        <button class="mx-4 my-1">People</button>
+      </div>
+      <div class="flex items-center">
+        <i class="fas fa-book"></i>
+        <button class="mx-4 my-1">Albums</button>
+      </div>
+      <div class="flex items-center">
+        <i class="fas fa-book"></i>
+        <button class="mx-4 my-1">Playlists</button>
+      </div>
+      <div class="flex">
+        <div class="my-3 text-xs table-row-group border-t border-gray-300 py-2">
           <div class="">
-            <p>SongName:<%= f.name %></p>
-            <p>songpage:<%= link_to f.name, song_path(f.id) %></p>
+            <span class="text-gray-500  hover:text-black"><a href="#">Legal</a></span>
+            <span class="text-gray-500  hover:text-black"><a href="#">Privacy</a></span>
+            <span class="text-gray-500  hover:text-black"><a href="#">Cookies</a></span>
+            <span class="text-gray-500  hover:text-black"><a href="#">Imprint</a></span>
+            <span class="text-gray-500  hover:text-black"><a href="#">Creator Resources</a></span>
+            <span class="text-gray-500  hover:text-black"><a href="#">Blog</a></span>
+            <span class="text-gray-500  hover:text-black"><a href="#">Charts</a></span>
+            <span class="text-gray-500  hover:text-black"><a href="#">Popular Search</a></span>
           </div>
-          <div>
-            5 days ago
-            <% f.tags.each do |tag|%>
-             tag:<%= tag.name %>
-            <% end %> 
-          </div>
-        </div>
-
-
-<%#=超難的音波專區%>
-        <div class="">萱大の音波專區</div>
-<%#=留言專區%>
-        <div class="flex m-4">
-          <img class="w-8" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
-          <input class="w-full mx-2" type="text" placeholder="Write a comment">
-        </div>
-
-
-<%#=歌曲功能專區%>
-        <div class="">
-          <div class="flex w-2/3 my-4 p-2 justify-around">
-            <button class="border border-gray-300 px-3 rounded">
-              <i class="fas fa-heart"></i>
-              like
-            </button>
-            <button class="border border-gray-300 px-3 rounded">
-              <i class="fas fa-share-square"></i>
-              share
-            </button>
-            <button class="border border-gray-300 px-3 rounded">
-              <i class="fas fa-balance-scale-left"></i>
-              Add to Next Up
-            </button>
-            <button class="border border-gray-300 px-3 rounded">
-              <i class="fas fa-bolt"></i>
-              More
-            </button>
-          </div>
+            <div class="flex mt-2 mb-20">
+              <button class="text-blue-500 hover:text-black pr-2">Language:</button>
+                English (US)
+            </div>
         </div>
       </div>
     </div>
-  </div> 
-<% end %>
+
+  <%#= 右邊的搜尋結果 %>
+    <div class="w-4/5">
+      <div class="flex text-sm text-gray-400 my-4">
+        Found 
+        <button class="">
+          搜尋到的結果數量+ 
+          tracks,
+        </button>
+        <button class="">
+          搜尋到的結果數量+ 
+          playlists,
+        </button>
+        <button class="">
+          搜尋到的結果數量+ 
+          people
+        </button>      
+      </div>
+
+      <%#=音樂資料部分%>
+        <% if @users  %>
+          <% @users.each do|f|%>
+            <%= f.display_name %>
+          <% end %>
+        <% end %>
+        
+        <% if @songs %>
+        <% @songs.each do|f|%>
+      <div class="flex mb-6">
+        <%# <img class="w-1/6" src="https://i1.sndcdn.com/artworks-000380943291-ngvvrc-t500x500.jpg" alt="">     %>
+        <div class="w-1/6">
+          <%= image_tag f.image_url%>
+        </div>
+
+        <div class="w-5/6 mx-4">
+          <div class="flex items-center text-sm text-gray-500">
+
+            <button class="text-orange-500 mr-2">
+              <i class="fas fa-play fa-2x"></i>
+            </button>
+  
+            <div class="flex-col w-9/12">
+              <%# <div>link_to user_name</div>
+              <div class="text-black text-lg">link_to song_name</div> %>
+
+              <p>SongName:<%= f.name %></p>
+              <p>songpage:<%= link_to f.name, song_path(f.id) %></p>
+
+            </div>
+
+            <div class="w-3/12 text-white text-sm bg-gray-400 rounded-full text-center">
+              <% f.tags.each do |tag|%>
+                <%= tag.name %>
+              <% end %> 
+            </div>
+
+          </div>
+
+          <%#=超難的音波專區%>
+          <div class="">萱大の音波專區</div>
+          <%#=留言專區%>
+          <%# <div class="flex my-2">
+            <img class="w-8" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
+            <input class="w-full mx-2" type="text" placeholder="Write a comment">
+          </div> %>
+
+
+          <%#=歌曲功能專區%>
+          <div class="flex text-sm">
+            <div class="flex w-2/3 my-2 justify-start">
+              <button class="border border-gray-300 px-3 mx-1 rounded">
+                <i class="fas fa-heart"></i>
+                30K
+              </button>
+              <button class="border border-gray-300 px-3 mx-1 rounded">
+                <i class="fas fa-redo-alt"></i>
+                3,300
+              </button>
+              <button class="border border-gray-300 px-3 mx-1 rounded">
+                <i class="fas fa-share"></i>
+                Share
+              </button>
+              <button class="border border-gray-300 px-3 mx-1 rounded">
+                <i class="fas fa-ellipsis-h"></i>
+                More
+              </button>
+            </div>
+
+            <div class="flex w-1/3 justify-end text-gray-400">
+              <button class="">
+                <i class="fas fa-play"></i>
+                31.5M
+              </button>
+              <button class="">
+                <i class="fas fa-comments"></i>
+                3000
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
 <% end %>
 
-<% if @playlists%>
-  <% @playlists.each do|f|%>
-    <%= f.name %>
-  <% end %>
-<% end %>
+    </div>
+
+  </div>
+
+</div>
