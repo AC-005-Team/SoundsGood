@@ -36,7 +36,10 @@ class SongsController < ApplicationController
   def add_to_playlist
     @playlist = current_user.playlists.find(params[:playlist_id])
     @playlist.toggle_add_to_playlist(@song)
-    redirect_to @song
+    respond_to do |format|
+      # format.html {redirect_to @song}
+      format.json {render json: {status: @song.added_by?(@playlist)}}
+    end
   end
   
   def like 

@@ -4,10 +4,14 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @song.comments.new(comment_params)
-    if @comment.save
-      # redirect_to @song
-    else
-      redirect_to @song
+
+    respond_to do |format|
+      if @comment.save
+        format.html {redirect_to @song}
+        format.js
+      else
+        format.html {redirect_to @song}
+      end
     end
   end
 

@@ -78,9 +78,9 @@
           <i class="fas fa-balance-scale-left"></i>
           Add to Next Up
         </button>
-          <button class="border border-gray-400 p-1 rounded">
+        <button class="modal-btn addplaylist-btn border border-gray-400 p-1 rounded">
           <i class="fas fa-bolt"></i>
-          More
+          Add to playlist
         </button>
         <button class="p-1">
           Stream everywhere
@@ -299,5 +299,31 @@
       <%= content_tag(:button, 'Twitter', class:'share-twitter', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
       <%= content_tag(:button, 'Facebook', class:'share-facebook', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
     </div>
+  </div>
+</template>
+
+<template class="addplaylist-template">
+  <div class="modal-container addplaylist-container">
+  </div>
+  <div class="modal-content">
+    <div class="modal-item">
+      <h2>Add to playlist</h2>
+    </div>
+    <div class="modal-item" data-controller="playlist" data-playlist-song="<%= @song.id %>">
+    <% @playlists.each do |playlist| %>
+      <li>Playlist：<%= link_to playlist.name, playlist_path(playlist) %>
+      <% if @song.added_by?(playlist) %>
+        <button class="border border-orange-500 text-red-600 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
+          <span>Added</span>
+        </button>
+      </li>
+      <% else %>
+        <button class="border border-gray-400 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
+          <span>Add to playlist</span>
+        </button>
+      </li>
+      <% end %>
+    <% end %> 
+   </div>
   </div>
 </template>
