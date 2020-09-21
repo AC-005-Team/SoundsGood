@@ -17,7 +17,6 @@
     <%= f.text_field :search, class: "px-2 m-2 bg-gray-200 rounded w-12/12", placeholder: "Search" %>
     <%= f.submit %>
   <% end %>
-  <div class='search-result'></div>
   <div class="hover:text-white">
     <%= link_to "Upload", new_user_song_path(current_user) if current_user %>
   </div>
@@ -40,3 +39,4 @@
 </div>
 
 <% end %>
+  <div class="search-result px-2 m-2 bg-gray-200 rounded w-12/12"></div>
