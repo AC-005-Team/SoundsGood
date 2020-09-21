@@ -66,13 +66,14 @@
     <%#=左邊歌曲列表專區%>
     <div class="text-sm border-b border-gray-200">
       <div class="flex flex-col items-between">
+
         <% @songs.each do |song|%>
           <div class="flex py-1 items-center hover:bg-gray-100">
             <% if song.image_url %>
             <div class="rounded-full w-10 mx-2">
               <%= image_tag song.image_url %>
             </div>
-
+            <% end %>
             <button class="text-gray-500 hover:text-black mx-2">
               <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
             </button>
@@ -92,6 +93,7 @@
               <% end %>          
 
               <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: song.id} ) %>
+              
               <button>
                 <%= link_to 'Delete', song_path(song.id), method: 'delete' %>
               </button>
@@ -115,17 +117,15 @@
                     <% end %>
                   <% end %> 
               </div>
+
             </div>
           </div>
-
-          <% end %>
         <% end %>
       </div>
     </div> 
   
   </div>
-</div>
-  <%#=右邊使用者專區%>
+    <%#=右邊使用者專區%>
   <div class="w-1/4 1111111">
     <div class="p-2">
       <div class="">
@@ -186,3 +186,4 @@
       </div>
     </div>
   </div>
+</div>
