@@ -79,9 +79,14 @@
   <div class="mt-2 m-auto w-2/3 border border-gray-400 p-4">
     <div class="text-center">
       <p class="py-2 text-2xl">Drag and drop your tracks & albums here</p>
-      <button class="text-white bg-orange-600 rounded py-2 px-10">Choose image to Upload
-      </button>
-      <button class="text-white bg-orange-600 rounded py-2 px-10">Choose files to Upload</button><br>
+
+      <%#= 上傳神秘小按鈕 %>
+      <button class="text-white bg-orange-600 rounded py-2 px-20 relative">
+        Choose image to Upload
+        <%# <input class="bg-black opacity-0 absolute top-0 left-0 h-10" type="file" name=song[image] onchange="showMyImage(this)" > %>
+        <%= f.file_field :track, class: 'bg-black opacity-0 absolute top-0 left-0 h-10'%>
+
+      </button><br>
       
       <button class="text-orange-600 bg-white rounded py-2 px-10">
       </button><br>
