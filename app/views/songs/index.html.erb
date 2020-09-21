@@ -3,7 +3,7 @@
 <% @songs.each do |song|%>
   <% if song.image_url %>
       <ul>
-        <li><%= image_tag song.image_url, width: '200px' %></li>
+        <%= image_tag song.image_url, width: '100px' %>
         <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
         <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
         <% if song.tags.length > 0 %>
@@ -11,8 +11,10 @@
             <li><%= tag.name %></li>
           <% end %>
         <% end %>
+
         <li><%= link_to '點擊', song.track_url %></li>
         <li><%= link_to '刪除', song_path(song.id), method: 'delete' %></li>
+
         <% if playlists_song?(song) %>
           <% song.playlists.each do |list| %>
             <li>歌單：<%= list.name %></li>
