@@ -25,7 +25,6 @@
 
 <%#=萱大大專區%>
       <div class="">
-        <%= image_tag @song.image_url, width: '200px'  %>
         <%= content_tag(:div, '', id:['waveform'], class:['song-waveform w-3/6'], data:{ path: @song.track_url, filename: @song.get_filename }) %>
       </div>
     </div>
