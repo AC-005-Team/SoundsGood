@@ -6,12 +6,10 @@
       <li>Name:<%= @song.name %></li>
       <li class="flex">
         <%= image_tag @song.image_url, width: '200px'  %>
-        <div class="w-3/6 waveform-wrap">
-          <%= content_tag(:div, '', class:['waveform song-waveform'], data:{ path: @song.track_url, filename: @song.get_filename }) %> 
-          <div class="waveform-dummy-trigger">
-          </div>
+        <%= content_tag(:div, '', class:['w-3/6 waveform-wrap'], data:{ path: @song.track_url, filename: @song.get_filename }) do %> 
+          <div class="waveform-dummy-trigger"></div>
           <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
-        </div>
+        <% end %>
         
       </li>
       <li>Intro:<%= @song.intro %></li>
