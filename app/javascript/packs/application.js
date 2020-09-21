@@ -14,7 +14,9 @@ require("styles")
 
 // require("fron-end")
 // require("functions.js")
+
 require('stylesheets')
+require('scripts')
 
 
 const images = require.context('../images', false)
@@ -24,11 +26,12 @@ import "tailwindcss/base";
 import "tailwindcss/components";
 import "tailwindcss/utilities";
 import "@fortawesome/fontawesome-free/js/all";
+import WaveSurfer from 'wavesurfer.js'
 // require('./style.css')
 // import "bootstrap/dist/css/bootstrap.css"
 import "select2/dist/css/select2.css"
 import "./tag"
-
+import "./search"
 
 
 
