@@ -6,7 +6,13 @@
       <li>Name:<%= @song.name %></li>
       <li class="flex">
         <%= image_tag @song.image_url, width: '200px'  %>
-        <%= content_tag(:div, '', id:['waveform'], class:['song-waveform w-3/6'], data:{ path: @song.track_url, filename: @song.get_filename }) %>
+        <div class="w-3/6 waveform-wrap">
+          <%= content_tag(:div, '', class:['waveform song-waveform'], data:{ path: @song.track_url, filename: @song.get_filename }) %> 
+          <div class="waveform-dummy-trigger">
+          </div>
+          <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
+        </div>
+        
       </li>
       <li>Intro:<%= @song.intro %></li>
       <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: @song.id} ) %>
@@ -32,8 +38,8 @@
     <i class="fas fa-retweet"> <%= link_to "Reposted", repost_song_path(@song), method: "post" %>  </i>
   <% else %>
     <i class="fas fa-retweet"> <%= link_to "Repost", repost_song_path(@song), method: "post" %> </i>
-  <% end%>  
-  <i class="fas fa-share-square"><button class="modal-btn share-btn">Share</button></i>
+  <% end%>
+    <i class="fas fa-share-square"></i>
 </div>
 <div>
   <i class="fas fa-heart"> <%=@song.liked_users.count %> </i>
@@ -98,7 +104,6 @@
       <h1>Share</h1>
     </div>
     <div class="modal-item">
-      share
       <%= content_tag(:button, 'Share to Twitter', class:'share-twitter', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
       <%= content_tag(:button, 'Share to Facebook', class:'share-facebook', data:{name: @song.name, artist: @song.user.display_name, link: song_path}) %>
     </div>
@@ -163,7 +168,7 @@
           <i class="fab fa-gg-circle"></i>
           Repost
         </button>
-        <button class="border border-gray-400 p-1 rounded">
+        <button class="modal-btn share-btn border border-gray-400 p-1 rounded">
           <i class="fas fa-share-square"></i>
           share
         </button>
