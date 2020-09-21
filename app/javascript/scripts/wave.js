@@ -1,10 +1,17 @@
 import WaveSurfer from 'wavesurfer.js'
 import CursorPlugin from 'wavesurfer.js/src/plugin/cursor.js'
 document.addEventListener('DOMContentLoaded', () => {
-  const wavePlace = document.querySelector(".waveform")
+  const wavePlace = document.querySelector(".waveform-wrap") // see if at least a waveform div is present
+  const peakStorageRoot = 'http://34.67.190.190/api/v1/getjson/song_peaks/'
+
   if(wavePlace){
     const proxyurl = "https://cors-anywhere.herokuapp.com/"
-    const playingNowPath = document.querySelector(".waveform").dataset.path
+    const playingNowPath = document.querySelectorAll(".waveform-wrap")
+    playingNowPath.forEach(songEl => {
+      renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl)
+    });
+
+    /*
     var wavesurfer = WaveSurfer.create({
       container: '.waveform',
       waveColor: '#666666', //@todo: change color
@@ -29,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
       ]
     })
+
     var wavesurferDummy = WaveSurfer.create({
       container: '.waveform-dummy',
       waveColor: '#c45514', //@todo: change color
@@ -42,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dummyWidth = () => { return document.querySelector('cursor').style['left'] }
     const dummyTrigger = document.querySelector('.waveform-dummy-trigger')
     const dummy = document.querySelector('.waveform-dummy')
+    
     
     dummyTrigger.addEventListener('mouseenter', (e) => {
       dummy.classList.toggle('wave-effect-show')
@@ -59,36 +68,39 @@ document.addEventListener('DOMContentLoaded', () => {
     dummyTrigger.addEventListener('click', (e)=>{
       
     })
+    */
     
  
-    const songDataName = document.querySelector(".waveform").dataset.filename
-    const peakStorageRoot = 'http://34.67.190.190/api/v1/getjson/song_peaks/'
+    // const songDataName = document.querySelector(".waveform").dataset.filename
 
-    fetch(proxyurl+peakStorageRoot+songDataName)
-    .then(response => {
-      if (!response.ok) {
-        loadDefaultPeak()
-        return
-      }
-      return response.json()
-    })
-    .then(peaks => {
-      if(peaks.sample_rate == 0){
-        loadDefaultPeak()
-        return
-      }
-      console.log('------------------------------')
-      console.log('loaded peaks! sample_rate: ' + peaks.sample_rate)
-      console.log('------------------------------')
-      // load peaks into wavesurfer.js
-      wavesurferDummy.load(proxyurl+playingNowPath, peaks.data)
-      wavesurfer.load(proxyurl+playingNowPath, peaks.data)
-    })
-    .catch((e) => {
-      console.error('error', e)
-    })
+    function getPeak(url, songDataName, wavesurfer) {
+      fetch(proxyurl+peakStorageRoot+songDataName)
+      .then(response => {
+        if (!response.ok) {
+          loadDefaultPeak(url, wavesurfer)
+          return
+        }
+        return response.json()
+      })
+      .then(peaks => {
+        if(peaks.length == 0){
+          loadDefaultPeak(url, wavesurfer)
+          return
+        }
+        console.log('------------------------------')
+        console.log('loaded peaks! sample_rate: ' + peaks.sample_rate)
+        console.log('------------------------------')
+        // load peaks into wavesurfer.js
+        // wavesurferDummy.load(proxyurl+url, peaks.data)
+        wavesurfer.load(proxyurl+url, peaks.data)
+      })
+      .catch((e) => {
+        console.log(songDataName)
+        console.error('error', e)
+      })
+    }
     
-    const loadDefaultPeak = () => fetch(proxyurl+peakStorageRoot+'default')
+    const loadDefaultPeak = (url,wavesurfer) => fetch(proxyurl+peakStorageRoot+'default')
     .then(response => {
       if(!response.ok) {
         throw new Error("HTTP error " + response.status)
@@ -100,20 +112,21 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('loaded default! sample_rate: ' + peaks.sample_rate)
       console.log('------------------------------')
       // load peaks into wavesurfer.js
-      wavesurferDummy.load(proxyurl+playingNowPath, peaks.data)
-      wavesurfer.load(proxyurl+playingNowPath, peaks.data)
+      // wavesurferDummy.load(proxyurl+url, peaks.data)
+      wavesurfer.load(proxyurl+url, peaks.data)
     })
     .catch((e) => {
       console.error('error', e)
-      wavesurfer.load(proxyurl+playingNowPath)
+      wavesurfer.load(proxyurl+url)
     })
 
-    function renderWaveForm(url, parentSelector) {
+    function renderWaveForm(url, songDataName, parentSelector) {
       var domEl = document.createElement('div')
-      document.querySelector(parentSelector).appendChild(domEl)
+      domEl.classList.add('.waveform')
+      parentSelector.appendChild(domEl)
       
       var wavesurfer = WaveSurfer.create({
-        container: '.waveform',
+        container: domEl,
         waveColor: '#666666', //@todo: change color
         progressColor: '#ff7626',
         cursorColor: '',
@@ -136,8 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
           })
         ]
       });
-      wavesurfer.load(url);
-      console.log('hey');
+      getPeak(url, songDataName, wavesurfer);
+      console.log('ok');
       
       return wavesurfer;
     }
