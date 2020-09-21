@@ -85,17 +85,17 @@
         <button class="p-1">
           Stream everywhere
         </button>
-        <button class="p-1 text-gray-400">
+        <button class="p-1 text-gray-600">
           <i class="fas fa-chevron-circle-right"></i>
           10.2K
         </button>
-        <button class="p-1 text-gray-400">
+        <button class="p-1 text-gray-600">
           <i class="fas fa-heart"></i>
-          1,336
+          <%=@song.liked_users.count %> 
         </button>
-        <button class="p-1 text-gray-400">
-          <i class="fab fa-gg-circle"></i>
-          Repost
+        <button class="p-1 text-gray-600">
+          <i class="fas fa-retweet"></i>
+          <%=@song.reposted_users.count %> 
         </button>
 
       </div>
@@ -123,11 +123,11 @@
       <div class="w-4/5 ">
                     <div class="flex text-gray-400 m-4 p-2 border-b border-gray-400">
                       <i class="fas fa-comments"></i>
-                      <p class="mx-1">2253</p> 
+                      <p class="mx-1"><%=@comments.count%></p> 
                       <p class="mx-1">comments</p>
                     </div>
   <%#=顯示正中間留言區那%>
-        <div class="">
+        <div class="" id="comments">
           <% @comments.each do |comment| %>
           <div class="flex">
             <img class="w-1/12 rounded-full" src="https://i1.sndcdn.com/avatars-Y57TiYzkrpCtP0pD-w8fdEA-t120x120.jpg" alt="">
@@ -284,24 +284,6 @@
     <% end %> 
 </div>
 
-<div>--------------我是分隔線-------------------</div>
-  <% @comments.each do |comment| %>
-    <div>
-      <span> <%=comment.content%> </span>
-      <%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(comment.user)%> 
-      <% comment.replies.each do |reply| %>
-        <div>
-          <span> --I'm reply's content-- </span>
-          <span> <%=reply.content%> </span>
-            <%= link_to "Delete", comment_path(song_id: @song.id, id: reply.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%> 
-        </div>
-      <%end%>
-      <%= form_with(model: @comment, url:song_comments_path(song_id: @song, reply_id: comment.id)) do |f|%>
-        <%= f.text_field :content, placeholder: "Reply to this comment"%>
-        <%= f.submit "Reply"%>
-      <% end %>
-    </div>
-  <% end %>
 
   <div id="player1" class="aplayer"></div>
 
