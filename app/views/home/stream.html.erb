@@ -1,10 +1,69 @@
 <h1>這是Stream</h1>
 <div class="flex">
-  <div class="m-4 w-3/4">  
-    <div class="text-xl text-gray-500">Hear the latest posts from the people you’re following:</div>
-  </div>
-  <div class="m-4 w-1/4 text-gray-500">
+  <%#左邊區域%>
+  <div class="m-4 w-3/4">
+    <div class="text-lg text-gray-600 mb-4">Hear the latest posts from the people you’re following:</div>
+    <div class="flex flex-start items-center">
+      <img class="w-8 rounded-full mr-4" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
+      <button class="mr-4">user_name</button>
+      <span class="text-gray-500">posted 1 month ago</span>
+    </div>
+    <div class="flex">
+      <img class="w-1/5 rounded-full mr-4" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
+      <div class="w-4/5 flex flex-col justify-around mx-2">
+        <div class="flex items-center">
+          <i class="fas fa-play fa-2x"></i>
+          <div class="mx-4 text-sm">
+            <button>user_name</button>
+            <p>song_name</p>
+          </div>
+        </div>
+        <div class="">萱大の音波專區</div>
+        <div class="flex">
+          <img class="w-8" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
+          <input class="w-full bg-gray-200 p-2" type="text" placeholder="Write a comment">
+        </div>
+        <div class="flex justify-between">
+          <div class="flex">
+            <button class="border border-gray-300 px-3 rounded">
+              <i class="fas fa-heart"></i>
+              like
+            </button>
+            <button class="border border-gray-300 px-3 rounded">
+              <i class="fas fa-share-square"></i>
+              share
+            </button>
+            <button class="border border-gray-300 px-3 rounded">
+              <i class="fas fa-balance-scale-left"></i>
+              Add to Next Up
+            </button>
+            <button class="border border-gray-300 px-3 rounded">
+              <i class="fas fa-bolt"></i>
+              More
+            </button>
+          </div>
+          <div class="flex">
+            <button class="">
+              <i class="fas fa-play"></i>
+              12.5M
+            </button>
+            <button class="">
+              <i class="fas fa-comments"></i>
+              2325
+            </button>
+          </div>
+        </div>
 
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+  <%#右邊邊區域%>
+  <div class="m-4 w-1/4 text-gray-600 text-sm">
     <div class="flex justify-between">
       <div class="">
         <i class="fas fa-user-friends"></i>
@@ -15,7 +74,6 @@
         Refresh
       </div>
     </div>
-
     <div class="m-4 flex">
       <img class="w-1/5 rounded-full" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
       <div class="flex-col items-end">
@@ -34,6 +92,6 @@
         </div>
       </div>
     </div>
-
   </div>
+
 </div>
