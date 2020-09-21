@@ -20,7 +20,7 @@ function search(){
     .then(response => response.json())
     .then(result => result.forEach(
       element => {
-        const class_list = ["px-2", "m-2", "bg-gray-200", "rounded", "w-12/12"]
+        const class_list = ["block", "text-sm", "rounded-full", "bg-gray-100", "text-black"]
         const a_tag = document.createElement('a')
               a_tag.classList.add(...class_list)
               a_tag.href = `${rootPath}/search/result?search=${element}`

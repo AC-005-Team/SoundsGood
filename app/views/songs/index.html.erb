@@ -1,58 +1,3 @@
-<%= link_to 'new song', new_user_song_path(current_user.id) %>
-<%= link_to 'go back', root_path %>
-<% @songs.each do |song|%>
-  <% if song.image_url %>
-      <ul>
-        <li><%= image_tag song.image_url, width: '200px' %></li>
-        <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
-        <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
-        <% if song.tags.length > 0 %>
-          <% song.tags.each do |tag| %>
-            <li><%= tag.name %></li>
-          <% end %>
-        <% end %>
-        <li><%= link_to '點擊', song.track_url %></li>
-        <li><%= link_to '刪除', song_path(song.id), method: 'delete' %></li>
-        <% if playlists_song?(song) %>
-          <% song.playlists.each do |list| %>
-            <li>歌單：<%= list.name %></li>
-          <% end %>
-        <% end %>
-        <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: song.id} ) %>
-        <li><%= link_to 'Delete', song_path(song.id), method: 'delete' %></li>
-        
-        <!-- 愛心 -->
-        <svg class="heart" width="25px" viewBox="0 0 500 500" >
-          <path d="M295.706,35.522C295.706,35.522,295.706,35.522,295.706,35.522c-34.43-0.184-67.161,14.937-89.339,41.273
-          c-22.039-26.516-54.861-41.68-89.339-41.273C52.395,35.522,0,87.917,0,152.55C0,263.31,193.306,371.456,201.143,375.636
-          c3.162,2.113,7.286,2.113,10.449,0c7.837-4.18,201.143-110.759,201.143-223.086C412.735,87.917,360.339,35.522,295.706,35.522z"/>
-        </svg>
-        
-        <div class="dropdown">
-          <button class="dropbtn">+</button>
-          <div id="myDropdown" class="dropdown-content">
-            <%= link_to "add to play next", '###' , id: 'addtoplay', data: {id: song.id}  %>
-            <%#= link_to "add to playlist",list_add_path(song.id), data: {}  %>
-          </div>
-        </div>
-
-        <div>
-          <h3>Add to playlist</h3>
-            <% @playlists.each do |playlist| %>
-              <li>Playlist：<%= playlist.name %>
-              <% if @song.added_by?(playlist) %>
-                <%= link_to "Added", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
-              <% else %>
-                <%= link_to "Add to playlist", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
-              <% end %>
-            <% end %> 
-        </div>
-      </ul>
-  <% end %>
-<% end %>
-
-<div id="player1" class="aplayer"></div>
-
 <%#=圖區暫時保留起來%>
 <%#=圖區%>
 <div class="mx-4">
@@ -62,7 +7,7 @@
         <i class="fas fa-arrow-alt-circle-right fa-4x"></i>
         <div class="">
           <div class="bg-black rounded p-1 text-white m-1">
-            Made for Username
+            Made for <%= link_to current_user.display_name, user_path(current_user)%>
           </div>
           <div class="flex bg-gray-900 rounded">
             <div class="text-2xl text-white m-2">The Upload</div>
@@ -72,7 +17,7 @@
         </div>
       </div>
 
-<%#=萱大大專區%>
+  <%#=萱大大專區%>
       <div class="">
         <i class="fab fa-twitter fa-2x"></i>
       </div>
@@ -84,13 +29,17 @@
   </div>
 </div>
 
-<div class="flex mx-4 text-sm">
-  <div class="w-3/4 mx-4">
-<%#=左邊分享、使用者功能專區%>
+<div class="flex  mx-4 text-sm">
+  <div class="w-3/4">
+    <%#=左邊分享、使用者功能專區%>
     <div class="flex border-b border-gray-400">
-      <div class="flex w-1/2 my-2 p-2 justify-around ">
-        <button class="border border-gray-300 px-3 rounded">
-          <i class="fas fa-heart"></i>
+      <div class="flex w-1/2 my-2 justify-around ">
+        <button class="flex items-center border border-gray-300 px-3 rounded">
+          <svg class="heart" width="15px" viewBox="0 0 500 500" >
+            <path d="M295.706,35.522C295.706,35.522,295.706,35.522,295.706,35.522c-34.43-0.184-67.161,14.937-89.339,41.273
+            c-22.039-26.516-54.861-41.68-89.339-41.273C52.395,35.522,0,87.917,0,152.55C0,263.31,193.306,371.456,201.143,375.636
+            c3.162,2.113,7.286,2.113,10.449,0c7.837-4.18,201.143-110.759,201.143-223.086C412.735,87.917,360.339,35.522,295.706,35.522z"/>
+          </svg>
           like
         </button>
         <button class="border border-gray-300 px-3 rounded">
@@ -106,65 +55,80 @@
           More
         </button>
       </div>
+
       <div class="flex w-1/2 justify-end">
-        <div class="my-5 mx-4">
+        <div class="my-2 mx-4">
           Last Uploaded 2 day ago
         </div>
       </div>
     </div>
-<%#=左邊歌曲列表專區%>
-    <div class="text-sm">
-      <div class="p-1 hover:bg-gray-100 border-b border-gray-200">
-        <div class="flex justify-between items-center">
-          <div class="flex py-1 items-center">
-            <img class="rounded w-10 mx-2" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
-            <div class="mx-2">1</div>
-            <div class="mx-2">Tipsy Records — Toniia & Geena Fontanella - Psychic</div>
+    
+    <%#=左邊歌曲列表專區%>
+    <div class="text-sm border-b border-gray-200">
+      <div class="flex flex-col items-between">
+
+        <% @songs.each do |song|%>
+          <div class="flex py-1 items-center hover:bg-gray-100">
+            <% if song.image_url %>
+            <div class="rounded-full w-10 mx-2">
+              <%= image_tag song.image_url %>
+            </div>
+            <% end %>
+            <button class="text-gray-500 hover:text-black mx-2">
+              <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
+            </button>
+
+            <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
+
+            <div class="flex justify-end ml-auto">
+
+              <% if song.tags.length > 0 %>
+              <% song.tags.each do |tag| %>
+                <div class="flex"> 
+                  <div class=" bg-gray-300 rounded-full p-1 mx-1">
+                    <%= tag.name %>
+                  </div>
+                </div>
+                <% end %>
+              <% end %>          
+
+              <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: song.id} ) %>
+              
+              <button>
+                <%= link_to 'Delete', song_path(song.id), method: 'delete' %>
+              </button>
+          
+              <div class="dropdown"><%#= +號%>
+                <button class="dropbtn">+</button>
+                <div id="myDropdown" class="dropdown-content">
+                  <%= link_to "add to play next", '###' , id: 'addtoplay', data: {id: song.id}  %>
+                  <%#= link_to "add to playlist",list_add_path(song.id), data: {}  %>
+                </div>
+              </div>
+
+              <div class="">
+                <%# <h3>Add to playlist</h3> %>
+                  <% @playlists.each do |playlist| %>
+                    <li>Playlist：<%= playlist.name %>
+                    <% if @song.added_by?(playlist) %>
+                      <%= link_to "Added", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
+                    <% else %>
+                      <%= link_to "Add to playlist", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
+                    <% end %>
+                  <% end %> 
+              </div>
+
+            </div>
           </div>
-          <div class="justify-end ">
-            <i class="fas fa-angle-right"></i>
-            463K
-          </div>
-        </div>
+        <% end %>
       </div>
-
-      <div class="p-1 hover:bg-gray-100 border-b border-gray-200">
-        <div class="flex justify-between items-center">
-          <div class="flex py-1 items-center">
-            <img class="rounded w-10 mx-2" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
-            <div class="mx-2">1</div>
-            <div class="mx-2">Tipsy Records — Toniia & Geena Fontanella - Psychic</div>
-          </div>
-          <div class="justify-end ">
-            <i class="fas fa-angle-right"></i>
-            463K
-          </div>
-        </div>
-      </div>
-
-      <div class="p-1 hover:bg-gray-100 border-b border-gray-200">
-        <div class="flex justify-between items-center">
-          <div class="flex py-1 items-center">
-            <img class="rounded w-10 mx-2" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
-            <div class="mx-2">1</div>
-            <div class="mx-2">Tipsy Records — Toniia & Geena Fontanella - Psychic</div>
-          </div>
-          <div class="justify-end ">
-            <i class="fas fa-angle-right"></i>
-            463K
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div> 
-
-
-
-<%#=右邊使用者專區%>
-  <div class="w-1/4 border-l border-gray-400">
+    </div> 
+  
+  </div>
+    <%#=右邊使用者專區%>
+  <div class="w-1/4 1111111">
     <div class="p-2">
-      <div class="m-4">
+      <div class="">
         Based on Tipsy Records - Toniia & Geena Fontanella - Psychic
       </div>
       <div class="flex m-4">
@@ -193,8 +157,6 @@
               <i class="fab fa-soundcloud"></i>
               33          
             </button>
-
-
           </div>
           <button class="border border-gray-400 text-black p-1 rounded">
             <i class="fas fa-user-check"></i>
@@ -203,36 +165,25 @@
         </div>
       </div>
     </div>
-<%#=底部灰色小型字體區  %>
+    <%#=底部灰色小型字體區  %>
     <div class="flex border-t border-gray-400 m-4">
       <div class="my-3 text-xs table-row-group">
-
         <div class="text-gray-500">
-          <span class="hover:text-black"><a href="#">Legal</a></span>
--            
-          <span class="hover:text-black"><a href="#">Privacy</a></span>
--            
-          <span class="hover:text-black"><a href="#">Cookies</a></span>
--            
-          <span class="hover:text-black"><a href="#">Imprint</a></span>
--
-          <span class="hover:text-black"><a href="#">Creator Resources</a></span>
--            
-          <span class="hover:text-black"><a href="#">Blog</a></span>
--            
-          <span class="hover:text-black"><a href="#">Charts</a></span>
--            
-          <span class="hover:text-black"><a href="#">Popular Search</a></span>
--        </div>
-        
-          <div class="mt-2 mb-20">
-            <button class="text-blue-700 hover:text-black">Language: </button> 
-            English (US)
-          </div>
+          <span class="hover:text-black"><a href="#">Legal</a></span>-            
+          <span class="hover:text-black"><a href="#">Privacy</a></span>-            
+          <span class="hover:text-black"><a href="#">Cookies</a></span>-            
+          <span class="hover:text-black"><a href="#">Imprint</a></span>-
+          <span class="hover:text-black"><a href="#">Creator Resources</a></span>-            
+          <span class="hover:text-black"><a href="#">Blog</a></span>-            
+          <span class="hover:text-black"><a href="#">Charts</a></span>-            
+          <span class="hover:text-black"><a href="#">Popular Search</a></span>-     
+        </div>
+        <div class="mt-2 mb-20">
+          <button class="text-blue-700 hover:text-black">Language: </button> 
+          English (US)
+        </div>
 
       </div>
     </div>
-  </div>  
+  </div>
 </div>
-
-
