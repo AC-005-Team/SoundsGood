@@ -34,7 +34,7 @@ if(songs){
 }
 
 //拿到本首歌的json
-const rootPath = window.location.host
+const rootPath = 'https://ac-sounds-good-test.herokuapp.com'
 async function getPlay(id) {
   let response = await fetch(`${rootPath}/api/v1/songs/${id}`);
   let playlistTrack = await response.json();
