@@ -33,7 +33,6 @@ import WaveSurfer from 'wavesurfer.js'
 import "select2/dist/css/select2.css"
 import "./tag"
 import "./search"
-import "./player"
 
 
 
