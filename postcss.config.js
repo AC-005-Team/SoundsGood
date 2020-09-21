@@ -32,7 +32,7 @@ module.exports = {
       },
       stage: 3
     }),
-    ...process.env.RAILS_ENV === 'production'
+    ...process.env.RAILS_ENV === 'production_real'
     ? [purgecss]
     : []
   ]
