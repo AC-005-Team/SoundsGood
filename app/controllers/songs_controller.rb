@@ -21,7 +21,7 @@ class SongsController < ApplicationController
     end
   end
 
-  def show 
+  def show
     @comment = @song.comments.new
     @comments = @song.comments.includes(:user, replies:[:user]).where(reply_id: nil).order(id: :desc)
     @related_song = Song.all.limit(3)
@@ -46,8 +46,8 @@ class SongsController < ApplicationController
       format.json {render json: {status: @song.added_by?(@playlist)}}
     end
   end
-  
-  def like 
+
+  def like
     current_user.toggle_like_song(@song)
     respond_to do |format|
       format.html {redirect_to @song}
@@ -62,7 +62,7 @@ class SongsController < ApplicationController
       format.json {render json: {status: @song.reposted_by?(current_user)}}
     end
   end
-  
+
   def share;end
 
   private
@@ -74,5 +74,5 @@ class SongsController < ApplicationController
   def find_song
     @song = Song.find(params[:id])
   end
-    
+
 end

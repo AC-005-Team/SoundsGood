@@ -1,28 +1,30 @@
 <template>
-  <div>music player</div>
-  <div id="player1" class="aplayer"></div>
+  <div>
+    <div id="player1" class="aplayer"></div>
+  </div>
 
 </template>
 
 <script>
-
 import 'aplayer/dist/APlayer.min.css';
 import APlayer from 'aplayer';
+import { mapGetters } from 'vuex'
+
 
 export default {
-  props: {
-    songs: { type: Array },
-    play: { type: Boolean, default: false }
-  },
-  watch: {
-    play(newValue, oldValue) {
-      if (newValue) {
-        this.ap.play()
-      } else {
-        this.ap.stop()
-      }
-    }
-  },
+  // props: {
+  //   songs: { type: Array },
+  //   play: { type: Boolean, default: false }
+  // },
+  // watch: {
+  //   play(newValue, oldValue) {
+  //     if (newValue) {
+  //       this.ap.play()
+  //     } else {
+  //       this.ap.stop()
+  //     }
+  //   }
+  // },
   data() {
     return {
       ap: null
@@ -42,7 +44,24 @@ export default {
         url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/Music_for_Video/Blue_Dot_Sessions/Fjell/Blue_Dot_Sessions_-_Kvelden_Trapp.mp3"
       }]
     });
+  },
+  computed: {
+  //檢視現在播放的
+  getSong() {
+    return this.$store.getters.songs
   }
+},
+watch:{
+    getSong(newValue,oldValue) {
+      console.log(newValue)
+      this.ap.pause();
+      this.ap.list.clear();
+      this.ap.list.add(newValue);
+      this.ap.play();
+    }
+}
+
+
 }
 
 

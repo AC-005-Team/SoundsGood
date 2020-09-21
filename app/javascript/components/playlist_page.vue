@@ -5,7 +5,6 @@
       <img :src="song.cover ">
       <li>name: {{ song.name }} artist: {{ song.artist }} </li>
       <button> play ▶  </button>
-
     </ol>
   </div>
 </template>
