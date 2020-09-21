@@ -28,7 +28,7 @@ import "tailwindcss/utilities";
 import "@fortawesome/fontawesome-free/js/all";
 import WaveSurfer from 'wavesurfer.js'
 // require('./style.css')
-import "bootstrap/dist/css/bootstrap.css"
+// import "bootstrap/dist/css/bootstrap.css"
 import "select2/dist/css/select2.css"
 import "./tag"
 import "./search"
