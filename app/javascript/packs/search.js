@@ -10,7 +10,7 @@ document.addEventListener('turbolinks:load', function (){
 })
 
 function search(){
-  const rootPath = window.location.host
+  const rootPath = 'https://ac-sounds-good-test.herokuapp.com'
   const search = document.querySelector('#search')
   const search_value = search.value
   console.log(search_value)
