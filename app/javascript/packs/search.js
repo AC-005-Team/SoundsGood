@@ -19,7 +19,7 @@ function search(){
     .then(response => response.json())
     .then(result => result.forEach(
       element => {
-        const class_list = []
+        const class_list = ["block", "text-sm", "rounded-full", "bg-gray-100", "text-black"]
         const a_tag = document.createElement('a')
               a_tag.classList.add(...class_list)
               a_tag.href = `http://127.0.0.1:3000/search/result?search=${element}`
