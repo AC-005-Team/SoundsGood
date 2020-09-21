@@ -23,9 +23,9 @@ class PlaylistsController < ApplicationController
     end
   end
 
-  def show;end
-  
-  def like 
+
+
+  def like
     current_user.toggle_like_playlist(@playlist)
     redirect_to @playlist
   end

@@ -11,7 +11,7 @@ const ap = new APlayer({
     cover: '', //required,
     title: '', // Required, music title
     author: '', // Required, music author
-    url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/Music_for_Video/Blue_Dot_Sessions/Fjell/Blue_Dot_Sessions_-_Kvelden_Trapp.mp3"
+    url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/suRRism-Phonoethics/Lomz__Lezet/Mother_Brain/Lomz__Lezet_-_08_-_Cod.mp3"
   }]
 });
 //立即點播放單首歌

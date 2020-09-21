@@ -4,13 +4,18 @@
   <li>playlist: {{ playlist.name }} </li>
   <button @click="playThelist" :id="playlist.id">play ▶</button>
   <router-link :to="`playlist/${playlist.id}`">show playlist</router-link>
+  <div class="dropdown">
+    <button class="dropbtn">+</button>
+    <div id="myDropdown" class="dropdown-content">
+    </div>
+  </div>
 </div>
+
 
 </template>
 
 <script>
 import axios from 'axios';
-
 
 export default{
   data(){
@@ -28,16 +33,23 @@ export default{
     .catch(function (error) {
       console.log(error);
     });
-
 },
 
   methods: {
-    playThelist: function () {
-     console.log(this.playlist.id)
+    playThelist(){
+      this.$store.commit('playSong', this.songs)
+    }
+
   },
 
 }
-}
+
+
+
+
+
+
+
 </script>
 
 <style lang="css" scoped>

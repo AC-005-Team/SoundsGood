@@ -5,7 +5,7 @@
 <!-- <playlist /> -->
 
 
-<!-- <Player :songs="songs" :play="play" /> -->
+<Player :songs="songs" :play="play" />
 
 </div>
 
@@ -15,11 +15,11 @@
 <script>
 import HeaderComponent from './components/shared/header';
 import axios from 'axios';
+import { store } from './store/store'
 import playlistitems from './components/playlistItem';
 import playlist from './components/playlist';
 import router from './router'
-
-// import Player from './components/shared/player';
+import Player from './components/shared/player';
 
 
 export default {
@@ -30,9 +30,11 @@ export default {
     }
   },
   router,
+  store,
   components: {
     HeaderComponent,
-    playlist
+    playlist,
+    Player
 
   },
 }
