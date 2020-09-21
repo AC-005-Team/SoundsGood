@@ -1,5 +1,5 @@
-
 import "bootstrap"
+// import "bootstrap/dist/css/bootstrap.css"
 import "select2"
 
 $(document).on('turbolinks:load', function() {
