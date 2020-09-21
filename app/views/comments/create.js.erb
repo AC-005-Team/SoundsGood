@@ -1,1 +1,4 @@
-alert('hi')
+var comments = document.querySelector("#comments");
+comments.innerHTML = "<%= j render("comments/comment", comment: @comment ,song: @song) %>" + comments.innerHTML
+
+document.querySelector("#comment_content").value = "";

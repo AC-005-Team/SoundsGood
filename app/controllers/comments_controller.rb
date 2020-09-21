@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   def create
     @comment = @song.comments.new(comment_params)
     if @comment.save
-      redirect_to @song
+      # redirect_to @song
     else
       redirect_to @song
     end
