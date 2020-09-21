@@ -8,11 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const proxyurl = "https://cors-anywhere.herokuapp.com/"
     const playingNowPath = document.querySelectorAll(".waveform-wrap")
     playingNowPath.forEach(songEl => {
+      renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl)
       renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl)
     });
 
     function getPeak(url, songDataName, wavesurfer) {
-      fetch(proxyurl+peakStorageRoot+songDataName)
+      fetch(peakStorageRoot+songDataName)
       .then(response => {
         if (!response.ok) {
           loadDefaultPeak(url, wavesurfer)
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     }
     
-    const loadDefaultPeak = (url,wavesurfer) => fetch(proxyurl+peakStorageRoot+'default')
+    const loadDefaultPeak = (url,wavesurfer) => fetch(peakStorageRoot+'default')
     .then(response => {
       if(!response.ok) {
         throw new Error("HTTP error " + response.status)
@@ -73,6 +74,40 @@ document.addEventListener('DOMContentLoaded', () => {
         height: 150,
         barRadius: 2,
         cursorWidth: 1,
+        barGap: 2,
+        plugins: [
+          CursorPlugin.create({
+            showTime: true,
+            opacity: 0,
+            customShowTimeStyle: {
+              'background-color': '#000',
+              color: '#fff',
+              padding: '2px',
+              'font-size': '10px'
+            }
+          })
+        ]
+      });
+      getPeak(url, songDataName, wavesurfer);
+      console.log('ok');
+      
+      return wavesurfer;
+    }
+
+    function renderCommentSpace(url, songDataName, parentSelector) {
+      var domEl = document.createElement('div')
+      domEl.classList.add('waveform-comment-space')
+      parentSelector.appendChild(domEl)
+      
+      var wavesurfer = WaveSurfer.create({
+        container: domEl,
+        waveColor: '#cccccc', //@todo: change color
+        progressColor: '#ffcfb5',
+        barWidth: 3,
+        barHeight: 0.32,
+        height: 150,
+        barRadius: 2,
+        cursorWidth: 0,
         barGap: 2,
         plugins: [
           CursorPlugin.create({
