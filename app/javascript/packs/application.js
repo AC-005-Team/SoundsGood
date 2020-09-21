@@ -9,6 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 require("scripts")
 require("styles")
+require("jquery-ujs")
 
 // require("aplayer")
 
