@@ -97,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderCommentSpace(url, songDataName, parentSelector) {
       var domEl = document.createElement('div')
       domEl.classList.add('waveform-comment-space')
+      domEl.setAttribute('data-id', parentSelector.dataset.id)
       parentSelector.appendChild(domEl)
       
       var wavesurfer = WaveSurfer.create({

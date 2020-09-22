@@ -24,10 +24,10 @@
       </div>
 
         <div> <%#=萱大大專區%>
-          <div class="w-3/6 waveform-wrap" data-path="<%= @song.track_url %>" data-filename="<%= @song.get_filename %>">
-            <div class="waveform-dummy song-waveform">
-            </div>
-          </div>
+          <%= content_tag(:div, '', class:['w-3/6 waveform-wrap'], data:{ path: @song.track_url, filename: @song.get_filename, id: @song.id }) do %> 
+          <div class="waveform-dummy-trigger"></div>
+          <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
+        <% end %>
         </div>
 
     </div>
