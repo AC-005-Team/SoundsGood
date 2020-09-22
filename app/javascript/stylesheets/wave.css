@@ -1,5 +1,6 @@
 .waveform-wrap {
   position: relative;
+  height: 150px;
 }
 .waveform {
   position: absolute;
