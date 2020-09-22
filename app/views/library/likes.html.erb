@@ -26,7 +26,19 @@
       </div>
       
       
-      <div class="grid grid-cols-12 gap-4">
+      <div class="flex my-4 overflow-scroll">
+        <% @like_songs.each do |song| %>
+          <div class="my-2 mr-2">
+            <img class="h-48 max-w-3xl" src="<%= song.image_url %>" alt="">
+            <div class=""><%= song.name %></div>
+            <div class="text-xs text-gray-500"><%= song.user.display_name %></div>
+          </div>
+        <% end %>
+        <div class="my-2 mr-2">
+          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
+          <div class="">All music genres</div>
+          <div class="text-xs text-gray-500">New & Hot</div>
+        </div>
 
         <% @songs.each do |song|%>
           <% if song.image_url %>

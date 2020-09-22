@@ -7,3 +7,9 @@
   <button class="mr-4 text-orange-600 hover:text-orange-500"><%= link_to "Following", following_library_index_path%></button>
   <button class="mr-4 hover:text-orange-500"><%= link_to "History", history_library_index_path%></button>
 </div>
+
+<% @followees.each do |followee| %>
+          <div class="my-2 mr-2">
+            <div class=""><%= followee.display_name %></div>
+          </div>
+<% end %>
