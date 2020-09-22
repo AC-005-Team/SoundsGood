@@ -24,7 +24,7 @@ class SongsController < ApplicationController
 
   def show 
     @comment = @song.comments.new
-    @comments = @song.comments.includes(:user, replies:[:user]).where(reply_id: 0).order(id: :desc)
+    @comments = @song.comments.includes(:user, replies:[:user]).where(reply_id: nil).order(id: :desc)
     @playlists = current_user.playlists
   end
 
@@ -36,17 +36,26 @@ class SongsController < ApplicationController
   def add_to_playlist
     @playlist = current_user.playlists.find(params[:playlist_id])
     @playlist.toggle_add_to_playlist(@song)
-    redirect_to @song
+    respond_to do |format|
+      # format.html {redirect_to @song}
+      format.json {render json: {status: @song.added_by?(@playlist)}}
+    end
   end
   
   def like 
     current_user.toggle_like_song(@song)
-    redirect_to @song
+    respond_to do |format|
+      format.html {redirect_to @song}
+      format.json {render json: {status: @song.favorited_by?(current_user)}}
+    end
   end
 
   def repost
     current_user.toggle_repost_song(@song)
-    redirect_to @song
+    respond_to do |format|
+      format.html {redirect_to @song}
+      format.json {render json: {status: @song.reposted_by?(current_user)}}
+    end
   end
   
   def share;end
