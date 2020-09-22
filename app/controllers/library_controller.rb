@@ -6,5 +6,21 @@ class LibraryController < ApplicationController
   def likes
     @like_songs = current_user.like_songs
   end
+
+  def sets
+  end
   
+  def albums
+  end
+
+  def stations
+  end
+
+  def following
+    @followees = current_user.followees
+  end
+
+  def history
+  end
+
 end
