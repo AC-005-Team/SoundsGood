@@ -23,6 +23,10 @@ class Song < ApplicationRecord
     liked_users.include?(user)
   end
 
+  def reposted_by?(user)
+    reposted_users.include?(user)
+  end
+
   def tag_items
     tags.map(&:name)
   end
@@ -30,18 +34,11 @@ class Song < ApplicationRecord
   def tag_items=(names)
     self.tags = names.map do|item|
       next if item.blank?
+      
       Tag.where(name: item.strip).first_or_create!
     end.compact
   end
 
-  def added_by?(playlist)
-    playlists.include?(playlist)
-  end
-  
-  def reposted_by?(user)
-    reposted_users.include?(user)
-  end
-  
   def get_filename #拿到本首歌曲的s3檔案名，用來取得音波圖
     self.track_data.match(/[a-zA-Z0-9]{32}/)[0]
   end

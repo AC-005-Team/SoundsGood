@@ -45,20 +45,21 @@
     <div class="text-2xl">Recent</div>
 <%#=左邊專輯專區%>
     <div class="flex my-4">
-      <img class="w-1/5" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">    
+      <img class="w-1/5 rounded-full" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">    
       <div class="my-auto w-4/5">
         <div class="flex justify-between">
-          <i class="fas fa-arrow-circle-right fa-3x"></i>
-          <div class="">
-            <p>SongName<%= @user.display_name %></p>
+          <div class="w-1/12">
+            <i class="fas fa-arrow-circle-right fa-3x"></i>
+          </div>
+          <div class="w-9/12">
+            <p class="text-gray-400 text-xs"><%= @user.display_name %></p>
             <p>Link_to SongName</p>
           </div>
-          <div>
+          <div class="w-2/12 text-gray-400 text-xs">
             5 days ago
             ###Tag###
           </div>
         </div>
-
 
 <%#=超難的音波專區%>
         <div class="">萱大の音波專區</div>

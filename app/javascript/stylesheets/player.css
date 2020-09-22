@@ -1,5 +1,4 @@
-
-#player1{
+#player1 {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -10,15 +9,15 @@
   z-index: 1000;
 }
 
-
-.getURL{
-  color: rgb(255, 191, 0);
+.getURL {
+  background-color: rgb(255, 111, 0);
+  color: white;
   display: inline-block;
 }
-.getURL:hover{
+.getURL:hover {
   cursor: pointer;
   color: black;
   padding: 0.3rem;
   transform: scale(1);
-  background-color: rgba(252, 163, 11, 0.51)
+  background-color: rgba(252, 163, 11, 0.51);
 }
