@@ -8,19 +8,19 @@
     <% end %>
 
     <%= form_with model: @song, url: user_songs_path(current_user.id), local: true do |f| %>
-    <div>
-      <%= f.label :image %>
-      <input type="file" name=song[image] onchange="showMyImage(this)" >
+    <%# <div>
+      <%= f.label :image %> 
+      <%# <input type="file" name=song[image] onchange="showMyImage(this)" >
       <img id="thumbnil" src="" >
-    </div>
+    </div> %>
 
     <div>
       <%= f.label :name %>
-      <%= f.text_field :name%>
+      <%# <%= f.text_field :name%> %>
     </div>
     <div>
       <%= f.label :intro %>
-      <%= f.text_field :intro%>
+      <%# <%= f.text_field :intro%> %>
     </div>
     <div>
       <%= f.label :tag_list %>
@@ -29,8 +29,8 @@
       </select>
     </div>
     <div>
-      <%= f.label :track %>
-      <%= f.file_field :track%>
+      <%# <%= f.label :track %> %>
+      <%# <%= f.file_field :track %> %>
     </div>
       <%= f.submit %>
     <% end %>
@@ -80,19 +80,16 @@
     <div class="text-center">
       <p class="py-2 text-2xl">Drag and drop your tracks & albums here</p>
 
-      <%#= 上傳神秘小按鈕 %>
-      <button class="text-white bg-orange-600 rounded py-2 px-20 relative">
-        Choose image to Upload
-        <%# <input class="bg-black opacity-0 absolute top-0 left-0 h-10" type="file" name=song[image] onchange="showMyImage(this)" > %>
-        <%= f.file_field :track, class: 'bg-black opacity-0 absolute top-0 left-0 h-10'%>
-
-      </button><br>
+      <%#= 上傳『音樂』神秘小按鈕 %>
+      <div class="text-white bg-orange-600 rounded py-2 px-10 relative w-2/5 m-auto">
+        Choose Music to Upload
+        <%= f.file_field :track, class: 'song_value bg-black opacity-50 absolute top-0 left-0 h-10'%>
+      </div><br>
+      <div class="text-2xl" id="music"></div>
       
       <button class="text-orange-600 bg-white rounded py-2 px-10">
       </button><br>
 
-        
-      
       <input type="checkbox">
       <span class="py-2 text-xs"> Make a playlist when multiple files are selected</span>
           
@@ -148,12 +145,15 @@
       </div>
 
       <div class="flex my-2">
-        <div class="w-1/3 h-48 bg-gradient-to-b from-gray-500 via-white to-orange-300">
-          <img class="" src="" alt="">
-          <button class="rounded p-2 bg-gray-200">
+        <div class="w-1/3 max-h-full bg-gradient-to-b from-gray-500 via-white to-orange-300">
+
+          <%#= 上傳『圖片』神秘小按鈕 %>
+          <div class="w-full max-h-full rounded p-2 bg-gray-200 relative">
+            <input class="bg-black opacity-0 absolute top-0 left-0 h-10" type="file" name=song[image] onchange="showMyImage(this)" >
             <i class="fas fa-camera-retro"></i>
             Upload Image
-          </button>
+            <img class="" id="thumbnil" src="" >
+          </div>
         </div>
         <div class="w-2/3 mx-4 text-sm">
           <%# <p class="mb-4">Title</p> %>
