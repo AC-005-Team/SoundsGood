@@ -5,12 +5,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const peakStorageRoot = 'http://34.67.190.190/api/v1/getjson/song_peaks/'
 
   if(wavePlace){
-    const proxyurl = "https://cors-anywhere.herokuapp.com/"
+    const proxyurl = "https://cors-anywhere.herokuapp.com/" // for accessing s3
     const playingNowPath = document.querySelectorAll(".waveform-wrap")
-    playingNowPath.forEach(songEl => {
-      renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl)
-      renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl)
-    });
+    if(wavePlace.classList.contains('waveform-light')){
+      // light
+      playingNowPath.forEach(songEl => {
+        renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb')
+        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#ffffff')
+      });
+    } else {
+      // dark
+      playingNowPath.forEach(songEl => {
+        renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb')
+        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#555555')
+      });
+  }
 
     function getPeak(url, songDataName, wavesurfer) {
       fetch(peakStorageRoot+songDataName)
@@ -59,14 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
       wavesurfer.load(proxyurl+url)
     })
 
-    function renderWaveForm(url, songDataName, parentSelector) {
+    function renderWaveForm(url, songDataName, parentSelector, waveColor) {
       var domEl = document.createElement('div')
       domEl.classList.add('waveform')
       parentSelector.appendChild(domEl)
       
       var wavesurfer = WaveSurfer.create({
         container: domEl,
-        waveColor: '#666666', //@todo: change color
+        waveColor: waveColor, //@todo: change color
         progressColor: '#ff7626',
         cursorColor: '',
         barWidth: 3,
@@ -94,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return wavesurfer;
     }
 
-    function renderCommentSpace(url, songDataName, parentSelector) {
+    function renderCommentSpace(url, songDataName, parentSelector, waveColor) {
       var domEl = document.createElement('div')
       domEl.classList.add('waveform-comment-space')
       domEl.setAttribute('data-id', parentSelector.dataset.id)
@@ -102,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       var wavesurfer = WaveSurfer.create({
         container: domEl,
-        waveColor: '#cccccc', //@todo: change color
+        waveColor: waveColor, //@todo: change color
         progressColor: '#ffcfb5',
         barWidth: 3,
         barHeight: 0.32,

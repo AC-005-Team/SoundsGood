@@ -1,6 +1,12 @@
 .waveform-wrap {
   position: relative;
   height: 150px;
+  opacity: .75;
+  transition: .25s;
+  cursor: pointer;
+}
+.waveform-wrap:hover {
+  opacity: 1;
 }
 .waveform {
   position: absolute;
