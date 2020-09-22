@@ -1,40 +1,3 @@
-<%= link_to 'go back', user_songs_path%>
-    <% if @song.errors.any? %>
-      <ul>
-        <% @song.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    <% end %>
-
-    <%= form_with model: @song, url: user_songs_path(current_user.id), local: true do |f| %>
-    <%# <div>
-      <%= f.label :image %> 
-      <%# <input type="file" name=song[image] onchange="showMyImage(this)" >
-      <img id="thumbnil" src="" >
-    </div> %>
-
-    <div>
-      <%= f.label :name %>
-      <%# <%= f.text_field :name%> %>
-    </div>
-    <div>
-      <%= f.label :intro %>
-      <%# <%= f.text_field :intro%> %>
-    </div>
-    <div>
-      <%= f.label :tag_list %>
-      <select name="song[tag_items][]" multiple= "multiple" class= "tag_list">
-        <%= options_for_select(@tags) %>
-      </select>
-    </div>
-    <div>
-      <%# <%= f.label :track %> %>
-      <%# <%= f.file_field :track %> %>
-    </div>
-      <%= f.submit %>
-    <% end %>
-
 
 <%#=UpLoad、Mastering、Your Tracks區域%>
 <div class="flex justify-between text-sm m-4 border-b border-gray-400">
@@ -83,12 +46,11 @@
       <%#= 上傳『音樂』神秘小按鈕 %>
       <div class="text-white bg-orange-600 rounded py-2 px-10 relative w-2/5 m-auto">
         Choose Music to Upload
-        <%= f.file_field :track, class: 'song_value bg-black opacity-50 absolute top-0 left-0 h-10'%>
+        <%= f.file_field :track, class: 'song_value bg-black opacity-0 absolute top-0 left-0 h-10'%>
       </div><br>
       <div class="text-2xl" id="music"></div>
       
-      <button class="text-orange-600 bg-white rounded py-2 px-10">
-      </button><br>
+     
 
       <input type="checkbox">
       <span class="py-2 text-xs"> Make a playlist when multiple files are selected</span>
@@ -168,9 +130,9 @@
           </div>
           <%#= 這邊還有一個歌曲類型選擇的 %>
           <%# <p class="mb-4">Genre</p> %>
-
           <%# <p class="mb-4">Additional Tags</p> %>
           <%# <input class="mb-4 border border-gray-400 rounded w-full p-1" type="text" placeholder="Add tags to describe the genre and mood of your track"> %>
+          
           <%= f.label :tag_list %>
           <select name="song[tag_items][]" multiple= "multiple" class= "tag_list mb-4 border border-gray-400 rounded w-full p-1">
             <%= options_for_select(@tags) %>
@@ -197,9 +159,10 @@
         <p class="">Required fields</p>
       </div>
       <div class="text-sm">
-        <button class="">Cancel</button>
-        <button class="text-white bg-orange-500 rounded py-1 px-3 mx-2">Save</button>
+        <button class="mr-2">Cancel</button>
+        
         <%= f.submit %>
+
       </div>
     </div>
     <div class="flex m-6 border-b border-gray-300 py-2">
@@ -210,15 +173,15 @@
     <%#=底部灰色字體區%>
     <div class="flex m-6">
       <div class="my-3 text-xs table-row-group">
-        <div class="">
-          <span class="text-gray-500  hover:text-black"><a href="#">Legal</a></span>
-          <span class="text-gray-500  hover:text-black"><a href="#">Privacy</a></span>
-          <span class="text-gray-500  hover:text-black"><a href="#">Cookies</a></span>
-          <span class="text-gray-500  hover:text-black"><a href="#">Imprint</a></span>
-          <span class="text-gray-500  hover:text-black"><a href="#">Creator Resources</a></span>
-          <span class="text-gray-500  hover:text-black"><a href="#">Blog</a></span>
-          <span class="text-gray-500  hover:text-black"><a href="#">Charts</a></span>
-          <span class="text-gray-500  hover:text-black"><a href="#">Popular Search</a></span>
+        <div class="text-gray-500">
+          <span class="hover:text-black"><a href="#">Legal</a></span>
+          <span class="hover:text-black"><a href="#">Privacy</a></span>
+          <span class="hover:text-black"><a href="#">Cookies</a></span>
+          <span class="hover:text-black"><a href="#">Imprint</a></span>
+          <span class="hover:text-black"><a href="#">Creator Resources</a></span>
+          <span class="hover:text-black"><a href="#">Blog</a></span>
+          <span class="hover:text-black"><a href="#">Charts</a></span>
+          <span class="hover:text-black"><a href="#">Popular Search</a></span>
         </div>
           <div class="flex mt-2 mb-20">
             <button class="text-blue-500 hover:text-black pr-2">Language:</button>
@@ -230,4 +193,3 @@
 </div>
 
 <% end %>
-
