@@ -7,6 +7,6 @@ function song_value(){
     console.log(123)
       const song_value = document.querySelector('#song_track').value
       const last_value = song_value.split('\\').slice(-1)
-      console.log(last_value)
+        document.querySelector('#music').textContent = last_value
   }
 }
