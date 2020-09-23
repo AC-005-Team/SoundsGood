@@ -25,12 +25,22 @@
   </div>
 <%#=使用者大頭貼、名稱區域%>
   <% if user_signed_in? %>
-    <div class="flex justify-between items-center hover:text-white w-1/12">
-      <img class="w-1/4 rounded-full" src="https://i1.sndcdn.com/artworks-48wHUXnYlyIAyhPm-kAqlLQ-t500x500.jpg" alt="">
-      <div class=""><%= link_to current_user.display_name, user_path(current_user)%></div>
-      <i class="fas fa-arrow-down"></i>
+
+
+    <div class="">
+      <div class="dropdown inline-block relative">
+        <button class="text-gray-300 bg-gray-800 py-2 px-4 rounded inline-flex items-center">
+          <span class="mr-1"><%= link_to current_user.display_name, user_path(current_user)%></span>
+        </button>
+        <ul class="dropdown-menu absolute hidden text-gray-700">
+          <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-t"><%= link_to current_user.display_name, user_path(current_user)%></li>
+          <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap"><%= link_to "User Upload", user_songs_path(current_user) %></li>
+          <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap"><%= link_to 'Edit', edit_user_path(current_user.id) %></li>
+          <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-b"><%= link_to "Sign out", destroy_user_session_path, method: "delete"%></li>
+        </ul>
+      </div>
     </div>
-    <div class="hover:text-white"><%= link_to "Sign out",destroy_user_session_path, method: "delete"%></div>
+
   <% else %>
     <div class="hover:text-white"><%= link_to "Sign in",new_user_session_path%></div>
     <div class="hover:text-white"><%= link_to "Create",new_user_registration_path%></div>

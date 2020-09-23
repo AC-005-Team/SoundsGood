@@ -33,7 +33,7 @@ import "select2/dist/css/select2.css"
 import "./tag"
 import "./search"
 import "./upload_button"
-
+import "./navbar_button"
 
 
 

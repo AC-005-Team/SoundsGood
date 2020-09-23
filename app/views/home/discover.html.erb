@@ -13,18 +13,12 @@
           <% if song.image_url %>
 
             <div class="my-2 mr-2">
-              <%# <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt=""> %>
+              <%#= 歌曲圖片 %>
               <%= image_tag song.image_url, class:'h-32 max-w-xl mr-4' %>
-
-              <%# <div class="">All music genres</div>
-              <div class="text-xs text-gray-500">New & Hot</div> %>
-             
                 <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
               
-             
                 <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
-              
-             
+              <%#= 歌曲TAG區 %>                           
                 <% if song.tags.length > 0 %>
                   <% song.tags.each do |tag| %>
                     <%= tag.name %>
