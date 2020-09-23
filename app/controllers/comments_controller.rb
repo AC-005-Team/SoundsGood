@@ -4,10 +4,14 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @song.comments.new(comment_params)
-    if @comment.save
-      redirect_to @song
-    else
-      redirect_to @song
+
+    respond_to do |format|
+      if @comment.save
+        format.html {redirect_to @song}
+        format.js
+      else
+        format.html {redirect_to @song}
+      end
     end
   end
 
@@ -23,6 +27,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:content, :reply_id).merge(user: current_user)
+    params.require(:comment).permit(:content).merge(user: current_user, reply_id: params[:reply_id])
   end
 end
