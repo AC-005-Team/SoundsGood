@@ -26,7 +26,7 @@
 <%#=使用者大頭貼、名稱區域%>
   <% if user_signed_in? %>
     <div class="flex justify-between items-center hover:text-white w-1/12">
-      <img class="w-1/4 rounded-full" src="https://i1.sndcdn.com/artworks-48wHUXnYlyIAyhPm-kAqlLQ-t500x500.jpg" alt="">
+      <img class="current_user-avatar w-1/4 rounded-full" src="https://i1.sndcdn.com/artworks-48wHUXnYlyIAyhPm-kAqlLQ-t500x500.jpg" alt="">
       <div class=""><%= link_to current_user.display_name, user_path(current_user)%></div>
       <i class="fas fa-arrow-down"></i>
     </div>
