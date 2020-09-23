@@ -99,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       getPeak(url, songDataName, wavesurfer);
       console.log('ok');
-      
       return wavesurfer;
     }
 
