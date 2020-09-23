@@ -40,44 +40,36 @@
   </div>
 
 <%#音樂區塊%>
-  <div class="grid gap-4 grid-cols-6">
-    <div class="">
-      <div class="songcover"></div>
-      <p class="text-sm">Lorem, ipsum dolor.</p>
-      <p class="text-xs text-gray-500">lorem</p>
-    </div>
+  <div class="grid grid-cols-12 gap-4 text-xs">
 
-    <div class="">
-      <div class="songcover"></div>
-      <p class="text-sm">Lorem, ipsum dolor.</p>
-      <p class="text-xs text-gray-500">lorem</p>
-    </div>
+    <% @songs.each do |song|%>
+      <% if song.image_url %>
 
-    <div class="">
-      <div class="songcover"></div>
-      <p class="text-sm">Lorem, ipsum dolor.</p>
-      <p class="text-xs text-gray-500">lorem</p>
-    </div>
+        <div class="col-span-2 my-2 mr-2 flex flex-col justify-between">
+          <%#= 歌曲圖片 %>
+            <div class="align-top w-full">
+              <%= link_to image_tag(song.image_url), song_path(song.id), class:'block' %>
+            </div>
+          <%#= 歌曲名稱、介紹、TAG標籤 %>
+            <div class="">
+              <%#= 歌曲名稱 %>
+              <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
+              <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
+              <%#= 歌曲TAG區 %>                           
+              <% if song.tags.length > 0 %>
+                <% song.tags.each do |tag| %>
+                  <%= tag.name %>
+                <% end %>
+              <% end %>
+            </div>
+          
+        </div>
 
-    <div class="">
-      <div class="songcover"></div>
-      <p class="text-sm">Lorem, ipsum dolor.</p>
-      <p class="text-xs text-gray-500">lorem</p>
-    </div>
-
-    <div class="">
-      <div class="songcover"></div>
-      <p class="text-sm">Lorem, ipsum dolor.</p>
-      <p class="text-xs text-gray-500">lorem</p>
-    </div>
-
-    <div class="">
-      <div class="songcover"></div>
-      <p class="text-sm">Lorem, ipsum dolor.</p>
-      <p class="text-xs text-gray-500">lorem</p>
-    </div>
+      <% end %>
+    <% end %>  
 
   </div>
+
 
 <%#音樂區塊%>
   <div class="grid gap-4 grid-cols-6">
