@@ -6,7 +6,11 @@
   box-shadow: 0 -2px 2px #dadada;
   background-color: #fff;
   transition: all ease 0.5s;
+<<<<<<< HEAD
   z-index: 1000;
+=======
+  margin: 0;
+>>>>>>> 36404cf...  vuex api
 }
 
 .getURL {

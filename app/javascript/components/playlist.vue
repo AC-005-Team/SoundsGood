@@ -1,5 +1,5 @@
 <template>
-  
+
   <div>
   <playlistItem v-for="playlist in playlists" :playlist="playlist"></playlistItem>
   </div>

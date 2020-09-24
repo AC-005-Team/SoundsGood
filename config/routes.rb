@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root to: "home#index"
+  # get '/playlists', to: 'home#index'
+  # get '/playlists/:id', to: 'home#index'
   get '/discover', to: "home#discover"
   get '/stream', to: "home#stream"
 
@@ -82,6 +84,5 @@ Rails.application.routes.draw do
       end
     end
   end
-
 
 end
