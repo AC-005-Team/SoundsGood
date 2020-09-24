@@ -1,2 +1,6 @@
 @import 'player.css';
 @import 'dropdown_heart.css';
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
