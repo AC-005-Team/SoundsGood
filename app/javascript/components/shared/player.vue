@@ -12,23 +12,9 @@ import { mapGetters } from 'vuex'
 
 
 export default {
-  // props: {
-  //   songs: { type: Array },
-  //   play: { type: Boolean, default: false }
-  // },
-  // watch: {
-  //   play(newValue, oldValue) {
-  //     if (newValue) {
-  //       this.ap.play()
-  //     } else {
-  //       this.ap.stop()
-  //     }
-  //   }
-  // },
   data() {
     return {
-      ap: null
-    }
+      ap: null}
   },
   mounted() {
     //畫面一開始的播放器
@@ -46,24 +32,33 @@ export default {
     });
   },
   computed: {
-  //檢視現在播放的
-  getSong() {
-    return this.$store.getters.songs
+    // ...mapGetters({
+    //   isPLAY: 'songs/isPLAY',
+    //   playerTracks:'songs/playerTracks'
+    // })
+  // getSong() {
+  //   return this.$store.getters['playing'];
+  // },
+},
+methods:{
+  handlePlayPause(){
+    if(this.isPLAY){
+      this.ap.pause();
+      this.ap.list.clear();
+      this.ap.list.add(playerTracks.audio);
+      this.ap.play();
+    }else{
+      this.ap.pause();
+    }
   }
 },
 watch:{
-    getSong(newValue,oldValue) {
-      console.log(newValue)
-      this.ap.pause();
-      this.ap.list.clear();
-      this.ap.list.add(newValue);
-      this.ap.play();
+    isPLAY(newValue, oldValue) {
+      if(newVaule !== oldValue)
+        this.handlePlayPause();
+      }
     }
 }
-
-
-}
-
 
 
 

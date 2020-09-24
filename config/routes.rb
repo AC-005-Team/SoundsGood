@@ -1,24 +1,24 @@
 Rails.application.routes.draw do
   root to: "home#index"
+  # get '/playlists', to: 'home#index'
+  # get '/playlists/:id', to: 'home#index'
   get '/discover', to: "home#discover"
   get '/stream', to: "home#stream"
-  
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks'
-<<<<<<< HEAD
-  } 
-  
+  }
+
   resource :search, only: [:show] do
     collection do
       get :result
     end
   end
-=======
-  }
 
->>>>>>> 1b96625...  playlists component
+
+
 
   resources :users, only: [:edit, :update, :show] do
     member do
@@ -45,15 +45,11 @@ Rails.application.routes.draw do
     resources :playlists, shallow: true do
       member do
         post :like
-<<<<<<< HEAD
         post :repost
-      end  
-=======
       end
->>>>>>> 1b96625...  playlists component
     end
   end
-  
+
   resources :stream, only: [:index]
 
   resources :library, path: "you", only: [] do
@@ -76,6 +72,5 @@ Rails.application.routes.draw do
       end
     end
   end
-
 
 end

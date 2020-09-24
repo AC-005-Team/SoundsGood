@@ -3,9 +3,7 @@
 <HeaderComponent />
 <router-view/>
 <!-- <playlist /> -->
-
-
-<Player :songs="songs" :play="play" />
+<Player />
 
 </div>
 
