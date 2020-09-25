@@ -57,8 +57,9 @@ $(document).on('turbolinks:load', function() {
       })
     })
     commentShowOnWave.on('click', () => {
-      //record time, append avatar, cursor to comment text field
+      // @todo: record time, append avatar, cursor to comment text field, other comment avatar opacity .3
     })
+    // @todo: hover avatar and show comment
   }
   function appendCommentsToSong(song, comments, duration){
     comments.forEach(comment => {
