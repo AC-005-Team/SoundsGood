@@ -1,5 +1,6 @@
 @import 'player.css';
 @import 'dropdown_heart.css';
-.navbar-main {
-  z-index: 1000;
+
+.dropdown:hover .dropdown-menu {
+  display: block;
 }

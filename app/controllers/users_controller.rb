@@ -6,6 +6,11 @@ class UsersController < ApplicationController
 
   def follow
     current_user.toggle_follow(@user)
+    @song = Song.find(params[:song_id])
+    respond_to do |format|
+      # format.html {redirect_to @song}
+      format.json {render json: {status: @song.user.followed_by?(current_user)}}
+    end
   end
 
   def edit
