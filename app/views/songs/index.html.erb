@@ -17,7 +17,11 @@
             <li><%= tag.name %></li>
           <% end %>
         <% end %>
+<<<<<<< HEAD
         <%= content_tag(:li, 'play ▶', class:['getURL song-place'], data: {id: song.id} ) %>
+=======
+        <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: song.id} ) %>
+>>>>>>> master
         <li><%= link_to 'Delete', song_path(song.id), method: 'delete' %></li>
         
         <!-- 愛心 -->

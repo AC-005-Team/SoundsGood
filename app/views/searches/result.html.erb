@@ -1,17 +1,4 @@
-
 <div class="m-4">
-  <%#= 搜尋結果顯示TAG區域 %>
-  <%# <div class="flex m-4">
-    <button class="flex items-center mx-2 border border-gray-500 bg-gray-300 rounded text-white p-1">
-      <p class="px-1">tag_name</p> 
-    </button>
-    <button class="flex items-center mx-2 border border-gray-500 bg-gray-300 rounded text-white p-1">
-      <p class="px-1">tag_name</p> 
-    </button>
-    <button class="flex items-center mx-2 border border-gray-500 bg-gray-300 rounded text-white p-1">
-      <p class="px-1">tag_name</p> 
-    </button>
-  </div> %>
 
   <div class="flex text-2xl border-b border-gray-200 m-4">
     <p class="">Search result for</p>
@@ -89,9 +76,9 @@
         <% if @songs %>
         <% @songs.each do|f|%>
       <div class="flex mb-6">
-        <%# <img class="w-1/6" src="https://i1.sndcdn.com/artworks-000380943291-ngvvrc-t500x500.jpg" alt="">     %>
         <div class="w-1/6">
-          <%= image_tag f.image_url%>
+          <%#= 搜尋結果的Song圖片 %>
+          <%= link_to image_tag(f.image_url), song_path(f.id) %>
         </div>
 
         <div class="w-5/6 mx-4">
@@ -102,15 +89,13 @@
             </button>
   
             <div class="flex-col w-9/12">
-              <%# <div>link_to user_name</div>
-              <div class="text-black text-lg">link_to song_name</div> %>
-
-              <p>SongName:<%= f.name %></p>
-              <p>songpage:<%= link_to f.name, song_path(f.id) %></p>
-
+            <%#= 歌曲名稱 %>
+              <p><%= f.name %></p>
+              <p class="text-lg"><%= link_to f.name, song_path(f.id) %></p>
             </div>
 
             <div class="w-3/12 text-white text-sm bg-gray-400 rounded-full text-center">
+            <%#= 歌曲TAG名稱 %>              
               <% f.tags.each do |tag|%>
                 <%= tag.name %>
               <% end %> 
@@ -127,7 +112,7 @@
           </div> %>
 
 
-          <%#=歌曲功能專區%>
+          <%#=歌曲功能專區、按讚、重播%>
           <div class="flex text-sm">
             <div class="flex w-2/3 my-2 justify-start">
               <button class="border border-gray-300 px-3 mx-1 rounded">
