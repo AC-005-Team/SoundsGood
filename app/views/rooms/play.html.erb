@@ -1,0 +1,49 @@
+
+<h1>publisher</h1>
+<p>
+  <strong>Name:</strong>
+  <%= @room.name %>
+</p>
+<p>
+  <strong>Session:</strong>
+  <%= @room.session_id %>
+</p>
+<div id="videos">
+  <div id="publisher"></div>
+</div>
+<%= link_to 'Back', rooms_path %>
+
+<script>
+  let apiKey ="<%= Rails.application.credentials.vonage_api_key %>"
+  let sessionId ="<%= @room.session_id %>"
+  let token="<%= @token %>"
+
+// Handling all of our errors here by alerting them
+  function handleError(error) {
+    if (error) {
+      alert(error.message);
+    }
+  }
+
+  // (optional) add server code here
+  initializeSession();
+
+  function initializeSession() {
+    var session = OT.initSession(apiKey, sessionId);
+    var pubOptions = {videoSource: null};
+
+    // Create a publisher
+    var publisher = OT.initPublisher('publisher', pubOptions);
+
+    // Connect to the session
+    session.connect(token, function(error) {
+      // If the connection is successful, initialize a publisher and publish to the session
+      if (error) {
+        handleError(error);
+      } else {
+        session.publish(publisher, handleError);
+      }
+    });
+  }
+
+</script>
