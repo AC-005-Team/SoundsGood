@@ -1,5 +1,5 @@
 export function shareWindow(){
-  const rootPath = window.location.host
+  const rootPath = 'https://'+window.location.host
   const shareTwitter = document.querySelector('.share-twitter')
   const shareFacebook = document.querySelector('.share-facebook')
 
