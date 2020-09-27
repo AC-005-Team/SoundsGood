@@ -7,7 +7,7 @@
 
   <div class="flex m-4">
   <%#= 左邊的篩選器 %>
-    <div class="w-1/5 m-6">
+    <div class="hidden sm:block m-6">
       <div class="flex items-center bg-orange-500 text-white py-1 px-2 rounded">
         <i class="fas fa-search"></i>
         <button class="mx-4">Everything</button>
@@ -30,15 +30,15 @@
       </div>
       <div class="flex">
         <div class="my-3 text-xs table-row-group border-t border-gray-300 py-2">
-          <div class="">
-            <span class="text-gray-500  hover:text-black"><a href="#">Legal</a></span>
-            <span class="text-gray-500  hover:text-black"><a href="#">Privacy</a></span>
-            <span class="text-gray-500  hover:text-black"><a href="#">Cookies</a></span>
-            <span class="text-gray-500  hover:text-black"><a href="#">Imprint</a></span>
-            <span class="text-gray-500  hover:text-black"><a href="#">Creator Resources</a></span>
-            <span class="text-gray-500  hover:text-black"><a href="#">Blog</a></span>
-            <span class="text-gray-500  hover:text-black"><a href="#">Charts</a></span>
-            <span class="text-gray-500  hover:text-black"><a href="#">Popular Search</a></span>
+          <div class="text-gray-500">
+            <span class="hover:text-black"><a href="#">Legal</a></span>
+            <span class="hover:text-black"><a href="#">Privacy</a></span>
+            <span class="hover:text-black"><a href="#">Cookies</a></span>
+            <span class="hover:text-black"><a href="#">Imprint</a></span>
+            <span class="hover:text-black"><a href="#">Creator Resources</a></span>
+            <span class="hover:text-black"><a href="#">Blog</a></span>
+            <span class="hover:text-black"><a href="#">Charts</a></span>
+            <span class="hover:text-black"><a href="#">Popular Search</a></span>
           </div>
             <div class="flex mt-2 mb-20">
               <button class="text-blue-500 hover:text-black pr-2">Language:</button>
@@ -49,7 +49,7 @@
     </div>
 
   <%#= 右邊的搜尋結果 %>
-    <div class="w-4/5">
+    <div class="">
       <div class="flex text-sm text-gray-400 my-4">
         Found 
         <button class="">
@@ -105,6 +105,7 @@
 
           <%#=超難的音波專區%>
           <div class="">萱大の音波專區</div>
+          
           <%#=留言專區%>
           <%# <div class="flex my-2">
             <img class="w-8" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
@@ -115,21 +116,22 @@
           <%#=歌曲功能專區、按讚、重播%>
           <div class="flex text-sm">
             <div class="flex w-2/3 my-2 justify-start">
-              <button class="border border-gray-300 px-3 mx-1 rounded">
+              <button class="flex border border-gray-300 px-3 mx-1 rounded">
                 <i class="fas fa-heart"></i>
-                30K
+                <p class="hidden md:block">30K</p> 
               </button>
-              <button class="border border-gray-300 px-3 mx-1 rounded">
+              <button class="flex border border-gray-300 px-3 mx-1 rounded">
                 <i class="fas fa-redo-alt"></i>
-                3,300
+                <p class="hidden md:block">3,300</p>
               </button>
-              <button class="border border-gray-300 px-3 mx-1 rounded">
+              <button class="flex border border-gray-300 px-3 mx-1 rounded">
                 <i class="fas fa-share"></i>
-                Share
+                <p class="hidden md:block">Share</p> 
+                
               </button>
-              <button class="border border-gray-300 px-3 mx-1 rounded">
+              <button class="flex border border-gray-300 px-3 mx-1 rounded">
                 <i class="fas fa-ellipsis-h"></i>
-                More
+                <p class="hidden md:block">More</p>
               </button>
             </div>
 
