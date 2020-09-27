@@ -12,11 +12,13 @@
         <% @songs.each do |song|%>
           <% if song.image_url %>
 
-    <div class="flex">
+    <div class="flex xl:max-h-full">
 
       <%#= 歌曲封面 %>
-      <%= link_to image_tag(song.image_url), song_path(song.id), class:'xl:max-h-full w-1/5 mr-4 mb-4' %>
-      <div class="w-4/5 flex flex-col justify-around mx-2">
+      <div class="w-1/6 mr-4 mb-4">
+        <%= link_to image_tag(song.image_url), song_path(song.id), class:'' %>      
+      </div>
+      <div class="w-5/6 flex flex-col justify-around mx-2">
         <div class="flex justify-between">
           <div class="text-sm flex">
             <%#= 小型播放鍵 %>
@@ -32,10 +34,12 @@
           </div>
 
           <%#= 歌曲Tag標籤區 %>
-          <div class="bg-gray-400 rounded text-xs text-white h-4">
+          <div class="flex">
             <% if song.tags.length > 0 %>
               <% song.tags.each do |tag| %>
-                <%= tag.name %>
+                <div class="bg-gray-400 rounded text-xs text-white text-center p-1">
+                  <%= tag.name %>
+                </div>
               <% end %>
             <% end %> 
           </div>         
