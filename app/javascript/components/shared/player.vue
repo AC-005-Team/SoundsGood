@@ -32,10 +32,10 @@ export default {
     });
   },
   computed: {
-    // ...mapGetters({
-    //   isPLAY: 'songs/isPLAY',
-    //   playerTracks:'songs/playerTracks'
-    // })
+    ...mapGetters({
+      isPLAY: 'songs/isPLAY',
+      playerTracks:'songs/playerTracks'
+    })
   // getSong() {
   //   return this.$store.getters['playing'];
   // },
@@ -45,7 +45,7 @@ methods:{
     if(this.isPLAY){
       this.ap.pause();
       this.ap.list.clear();
-      this.ap.list.add(playerTracks.audio);
+      this.ap.list.add(this.playerTracks.audio);
       this.ap.play();
     }else{
       this.ap.pause();
@@ -54,8 +54,9 @@ methods:{
 },
 watch:{
     isPLAY(newValue, oldValue) {
-      if(newVaule !== oldValue)
+      if(newValue !== oldValue){
         this.handlePlayPause();
+      }
       }
     }
 }

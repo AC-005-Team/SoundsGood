@@ -1,73 +1,74 @@
-
 <%#=UpLoad、Mastering、Your Tracks區域%>
-<div class="flex justify-between text-sm m-4 border-b border-gray-400">
-  <div class="flex m-2">
-    <button class="m-2 hover:text-orange-500">UpLoad</button>
-    <button class="m-2 hover:text-orange-500">Mastering</button>
-    <button class="m-2 hover:text-orange-500">Your Tracks</button>
-    <button class="m-2 hover:text-orange-500">Insights</button>
-    <button class="m-2 hover:text-orange-500">Pro Plan</button>
-    <button class="m-2 hover:text-orange-500">Pulse</button>
+  <div class="flex justify-between text-sm m-4 border-b border-gray-400">
+    <div class="flex m-2">
+      <button class="m-2 hover:text-orange-500">UpLoad</button>
+      <button class="m-2 hover:text-orange-500">Mastering</button>
+      <button class="m-2 hover:text-orange-500">Your Tracks</button>
+      <button class="m-2 hover:text-orange-500">Insights</button>
+      <button class="m-2 hover:text-orange-500">Pro Plan</button>
+      <button class="m-2 hover:text-orange-500">Pulse</button>
+    </div>
+    <div class="flex items-center">
+      <i class="fas fa-share-square"></i>
+      <button class="m-2">Creators on SoundsGood</button>
+    </div>
   </div>
-  <div class="flex items-center">
-    <i class="fas fa-share-square"></i>
-    <button class="m-2">Creators on SoundsGood</button>
-  </div>
-</div>
 
-<div class="m-4">
-  <%#=UpLoad進度條、TryPro區域%>
-  <%= form_with model: @song, url: user_songs_path(current_user.id), local: true do |f| %>
+  <div class="m-4">
+    <%#=UpLoad進度條、TryPro區域%>
+      <%= form_with model: @song, url: user_songs_path(current_user.id), local: true do |f| %>
 
-  <div class="m-auto w-2/3 border border-gray-400 p-4">
-    <div class="flex justify-between items-center">    
-      <div class="">
+      <div class="m-auto w-2/3 border border-gray-400 p-4">
         <div class="flex justify-between items-center">
-          <div class="pr-2">0% of free Uploads used</div> 
-          
-          <button><i class="fas fa-arrow-down"></i></button> 
-        </div>
-        <div>進度條</div>
-        <div class="flex">
-          <button class="text-blue-500 hover:text-black">Try Pro Unlimited</button>
-          <p class="px-2">for unlimited uploads.</p>
+          <div class="">
+            <div class="flex justify-between items-center">
+              <div class="pr-2">0% of free Uploads used</div>
+
+              <button>
+                <i class="fas fa-arrow-down"></i>
+              </button>
+            </div>
+            <div>進度條</div>
+            <div class="flex">
+              <button class="text-blue-500 hover:text-black">Try Pro Unlimited</button>
+              <p class="px-2">for unlimited uploads.</p>
+            </div>
+          </div>
+
+          <button class="text-orange-500 border border-orange-600 rounded p-2 hover:bg-orange-600 hover:text-white">Try Pro Unlimited</button>
+
         </div>
       </div>
+      <%#=Drag and drop your tracks區域%>
+        <div class="mt-2 m-auto w-2/3 border border-gray-400 p-4">
+          <div class="text-center">
+            <p class="py-2 text-2xl">Drag and drop your tracks & albums here</p>
 
-      <button class="text-orange-500 border border-orange-600 rounded p-2 hover:bg-orange-600 hover:text-white">Try Pro Unlimited</button>
-      
-    </div>
-  </div>
-  <%#=Drag and drop your tracks區域%>
-  <div class="mt-2 m-auto w-2/3 border border-gray-400 p-4">
-    <div class="text-center">
-      <p class="py-2 text-2xl">Drag and drop your tracks & albums here</p>
+            <%#= 上傳『音樂』神秘小按鈕 %>
+              <div class="text-white bg-orange-600 rounded py-2 px-10 relative w-2/5 m-auto">
+                Choose Music to Upload
+                <%= f.file_field :track, class: 'song_value bg-black opacity-0 absolute top-0 left-0 h-10'%>
+              </div><br>
+              <div class="text-2xl" id="music"></div>
 
-      <%#= 上傳『音樂』神秘小按鈕 %>
-      <div class="text-white bg-orange-600 rounded py-2 px-10 relative w-2/5 m-auto">
-        Choose Music to Upload
-        <%= f.file_field :track, class: 'song_value bg-black opacity-0 absolute top-0 left-0 h-10'%>
-      </div><br>
-      <div class="text-2xl" id="music"></div>
-      
-     
+              <input type="checkbox">
+              <span class="py-2 text-xs">
+                Make a playlist when multiple files are selected</span>
 
-      <input type="checkbox">
-      <span class="py-2 text-xs"> Make a playlist when multiple files are selected</span>
-          
-        <div class="text-xs">
-          <span class="py-2 ">Privacy: </span>
-          <input type="radio" value="Public" name="Privacy" id="Public">
-          <label for="Public">Public</label>
-          <input type="radio" value="Private" name="Privacy" id="Private">
-          <label for="Private">Private</label>
-        </div>
-      <p class="py-2 text-xs">Provide FLAC, WAV, ALAC, or AIFF for highest audio quality.</p>
-      <%# <button class="py-2 text-blue-500 hover:text-black text-xs">Learn more about lossless HD.</button> %>
-    </div>
-  </div>
+              <div class="text-xs">
+                <span class="py-2 ">Privacy:
+                </span>
+                <input type="radio" value="Public" name="Privacy" id="Public">
+                <label for="Public">Public</label>
+                <input type="radio" value="Private" name="Privacy" id="Private">
+                <label for="Private">Private</label>
+              </div>
+              <p class="py-2 text-xs">Provide FLAC, WAV, ALAC, or AIFF for highest audio quality.</p>
+              <%# <button class="py-2 text-blue-500 hover:text-black text-xs">Learn more about lossless HD.</button> %>
+              </div>
+            </div>
 
-  <%# <div class="mt-2 m-auto w-2/3 p-4 text-xs">
+            <%# <div class="mt-2 m-auto w-2/3 p-4 text-xs">
     <div class="flex">
       <button class="text-blue-500 hover:text-black">Supported file types and sizes</button>⁃
       <button class="text-blue-500 hover:text-black px-2">Upload troubleshooting tips</button>⁃
@@ -80,116 +81,161 @@
     </div>
   </div> %>
 
-  <div class="w-2/3 m-auto text-xs">
-    <div class="flex justify-between items-center bg-gray-200 p-2 border border-gray-300 rounded">
-        <div class="flex">
-          <p class="">Provide FLAC, WAV, ALAC, or AIFF for highest audio quality.</p>
-          <button class="text-blue-600 hover:text-black">Learn more about lossless HD.</button>
-        </div>
-      <button class="bg-white rounded p-1 border border-gray-400">Replace File</button>
-    </div>
+              <div class="w-2/3 m-auto text-xs">
+                <div class="flex justify-between items-center bg-gray-200 p-2 border border-gray-300 rounded">
+                  <div class="flex">
+                    <p class="">Provide FLAC, WAV, ALAC, or AIFF for highest audio quality.</p>
+                    <button class="text-blue-600 hover:text-black">Learn more about lossless HD.</button>
+                  </div>
+                  <button class="bg-white rounded p-1 border border-gray-400">Replace File</button>
+                </div>
 
-    <div class="flex justify-between text-xs text-gray-600 my-2">
-      <p class="">Name of songs</p>
-      <p class="">Ready. Click Save to post this track.</p>
-    </div>
+                <div class="flex justify-between text-xs text-gray-600 my-2">
+                  <p class="">Name of songs</p>
+                  <p class="">Ready. Click Save to post this track.</p>
+                </div>
 
-    <div class="flex justify-between h-2">
-      <div class="w-1/2 bg-blue-600"></div>
-      <div class="w-1/2 bg-orange-600"></div>
-    </div>
+                <div class="flex justify-between h-2">
+                  <div class="w-1/2 bg-blue-600"></div>
+                  <div class="w-1/2 bg-orange-600"></div>
+                </div>
 
-    <div class="px-6 py-2 border border-gray-200">
-      <div class="flex text-2xl border-b border-gray-400 mb-6">
-        <button class="mx-2 text-orange-600">Basic Info</button>
-        <button class="mx-2">Meta Data</button>
-        <button class="mx-2">Permissions</button>
-      </div>
+                <div class="px-6 py-2 border border-gray-200">
+                  <div class="flex text-2xl border-b border-gray-400 mb-6">
+                    <button class="mx-2 text-orange-600">Basic Info</button>
+                    <button class="mx-2">Meta Data</button>
+                    <button class="mx-2">Permissions</button>
+                  </div>
 
-      <div class="flex my-2">
-        <div class="w-1/3 max-h-full bg-gradient-to-b from-gray-500 via-white to-orange-300">
+                  <div class="flex my-2">
+                    <div class="w-1/3 max-h-full bg-gradient-to-b from-gray-500 via-white to-orange-300">
 
-          <%#= 上傳『圖片』神秘小按鈕 %>
-          <div class="w-full max-h-full rounded p-2 bg-gray-200 relative">
-            <input class="bg-black opacity-0 absolute top-0 left-0 h-10" type="file" name=song[image] onchange="showMyImage(this)" >
-            <i class="fas fa-camera-retro"></i>
-            Upload Image
-            <img class="" id="thumbnil" src="" >
-          </div>
-        </div>
-        <div class="w-2/3 mx-4 text-sm">
-          <%# <p class="mb-4">Title</p> %>
-          <%# <input class="mb-4 border border-gray-400 rounded w-full p-1" type="text" placeholder="songsname">             %>
-          <%= f.label :name %>
-          <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'mb-4 border border-gray-400 rounded w-full p-1'%>
-          
-          <div class="mb-4 flex">
-            <p class="text-gray-500">Soundsgood.com/aabbccdd/</p>
-            <input class="w-full" type="text" placeholder="songsname">     
-            <button class=""><i class="fas fa-pencil-alt"></i></button>
-          </div>
-          <%#= 這邊還有一個歌曲類型選擇的 %>
-          <%# <p class="mb-4">Genre</p> %>
-          <%# <p class="mb-4">Additional Tags</p> %>
-          <%# <input class="mb-4 border border-gray-400 rounded w-full p-1" type="text" placeholder="Add tags to describe the genre and mood of your track"> %>
-          
-          <%= f.label :tag_list %>
-          <select name="song[tag_items][]" multiple= "multiple" class= "tag_list mb-4 border border-gray-400 rounded w-full p-1">
-            <%= options_for_select(@tags) %>
-          </select><br>
-          <%# <p class="mb-4">Description</p> %>
-          <%# <input class="mb-4 border border-gray-400 rounded w-full p-1" type="text" placeholder="Describe your tracks"> %>
-          <%= f.label :intro %>
-          <%= f.text_field :intro, class:'mb-4 border border-gray-400 rounded w-full p-1'%>
+                      <%#= 上傳『圖片』神秘小按鈕 %>
+                        <div class="w-full max-h-full rounded p-2 bg-gray-200 relative">
+                          <input class="bg-black opacity-0 absolute top-0 left-0 h-10" type="file" name="song[image]" onchange="showMyImage(this)">
+                          <i class="fas fa-camera-retro"></i>
+                          Upload Image
+                          <img class="" id="thumbnil" src="">
+                        </div>
+                      </div>
+                      <div class="w-2/3 mx-4 text-sm">
+                        <%# <p class="mb-4">Title</p> %>
+                          <%# <input class="mb-4 border border-gray-400 rounded w-full p-1" type="text" placeholder="songsname">             %>
+                            <%= f.label :name %>
+                            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'mb-4 border border-gray-400 rounded w-full p-1'%>
 
-          <div class="text-xs">
-            <span class="py-2 ">Privacy: </span>
-            <input type="radio" value="Public" name="Privacy" id="Public">
-            <label for="Public">Public</label>
-            <input type="radio" value="Private" name="Privacy" id="Private">
-            <label for="Private">Private</label>
-          </div>
-        </div>
-      </div>
-    </div>
+                            <div class="mb-4 flex">
+                              <p class="text-gray-500">Soundsgood.com/aabbccdd/</p>
+                              <input class="w-full" type="text" placeholder="songsname">
+                              <button class="">
+                                <i class="fas fa-pencil-alt"></i>
+                              </button>
+                            </div>
+                            <%#= 這邊還有一個歌曲類型選擇的 %>
+                              <%# <p class="mb-4">Genre</p> %>
+                                <%# <p class="mb-4">Additional Tags</p> %>
+                                  <%# <input class="mb-4 border border-gray-400 rounded w-full p-1" type="text" placeholder="Add tags to describe the genre and mood of your track"> %>
 
-    <div class="flex justify-between items-center p-6 border border-gray-200 rounded">
-      <div class="flex">
-        <p class="text-orange-600">*</p>
-        <p class="">Required fields</p>
-      </div>
-      <div class="text-sm">
-        <button class="mr-2">Cancel</button>
-        
-        <%= f.submit %>
+                                    <%= f.label :tag_list %>
+                                    <select name="song[tag_items][]" multiple="multiple" class="tag_list mb-4 border border-gray-400 rounded w-full p-1">
+                                      <%= options_for_select(@tags) %>
+                                    </select><br>
+                                    <%# <p class="mb-4">Description</p> %>
+                                      <%# <input class="mb-4 border border-gray-400 rounded w-full p-1" type="text" placeholder="Describe your tracks"> %>
+                                        <%= f.label :intro %>
+                                        <%= f.text_field :intro, class:'mb-4 border border-gray-400 rounded w-full p-1'%>
 
-      </div>
-    </div>
-    <div class="flex m-6 border-b border-gray-300 py-2">
-      <p class="">By uploading, you confirm that your sounds comply with our</p>
-      <button class="text-blue-600 hover:text-black">Terms of Use</button>
-      <p class="">and you don't infringe anyone else's rights.</p>
-    </div>
-    <%#=底部灰色字體區%>
-    <div class="flex m-6">
-      <div class="my-3 text-xs table-row-group">
-        <div class="text-gray-500">
-          <span class="hover:text-black"><a href="#">Legal</a></span>
-          <span class="hover:text-black"><a href="#">Privacy</a></span>
-          <span class="hover:text-black"><a href="#">Cookies</a></span>
-          <span class="hover:text-black"><a href="#">Imprint</a></span>
-          <span class="hover:text-black"><a href="#">Creator Resources</a></span>
-          <span class="hover:text-black"><a href="#">Blog</a></span>
-          <span class="hover:text-black"><a href="#">Charts</a></span>
-          <span class="hover:text-black"><a href="#">Popular Search</a></span>
-        </div>
-          <div class="flex mt-2 mb-20">
-            <button class="text-blue-500 hover:text-black pr-2">Language:</button>
-              English (US)
-          </div>
-      </div>
-    </div>
-  </div>
-</div>
+                                        <div class="text-xs">
+                                          <span class="py-2 ">Privacy:
+                                          </span>
+                                          <input type="radio" value="Public" name="Privacy" id="Public">
+                                          <label for="Public">Public</label>
+                                          <input type="radio" value="Private" name="Privacy" id="Private">
+                                          <label for="Private">Private</label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
 
-<% end %>
+                                  <div class="flex justify-between items-center p-6 border border-gray-200 rounded">
+                                    <div class="flex">
+                                      <p class="text-orange-600">*</p>
+                                      <p class="">Required fields</p>
+                                    </div>
+                                    <div class="text-sm">
+                                      <button class="mr-2">Cancel</button>
+                                      <div class="animation">
+
+                                        <div class="loader">
+                                          <span></span>
+                                          <span></span>
+                                          <span></span>
+                                          <span></span>
+                                          <span></span>
+                                          <span></span>
+                                          <span></span>
+                                          <span></span>
+                                          <span></span>
+                                          <span></span>
+                                          <span></span>
+                                          <span></span>
+                                          <span></span>
+                                          <span></span>
+                                          <span></span>
+                                        </div>
+                                      </div>
+
+                                      <%= f.submit %>
+
+                                    </div>
+                                  </div>
+                                  <div class="flex m-6 border-b border-gray-300 py-2">
+                                    <p class="">By uploading, you confirm that your sounds comply with our</p>
+                                    <button class="text-blue-600 hover:text-black">Terms of Use</button>
+                                    <p class="">and you don't infringe anyone else's rights.</p>
+                                  </div>
+                                  <%#=底部灰色字體區%>
+                                    <div class="flex m-6">
+                                      <div class="my-3 text-xs table-row-group">
+                                        <div class="text-gray-500">
+                                          <span class="hover:text-black">
+                                            <a href="#">Legal</a>
+                                          </span>
+                                          <span class="hover:text-black">
+                                            <a href="#">Privacy</a>
+                                          </span>
+                                          <span class="hover:text-black">
+                                            <a href="#">Cookies</a>
+                                          </span>
+                                          <span class="hover:text-black">
+                                            <a href="#">Imprint</a>
+                                          </span>
+                                          <span class="hover:text-black">
+                                            <a href="#">Creator Resources</a>
+                                          </span>
+                                          <span class="hover:text-black">
+                                            <a href="#">Blog</a>
+                                          </span>
+                                          <span class="hover:text-black">
+                                            <a href="#">Charts</a>
+                                          </span>
+                                          <span class="hover:text-black">
+                                            <a href="#">Popular Search</a>
+                                          </span>
+                                        </div>
+                                        <div class="flex mt-2 mb-20">
+                                          <button class="text-blue-500 hover:text-black pr-2">Language:</button>
+                                          English (US)
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              <% end %>
+
+                              <script>
+                              
+
+                                // var animation = document.getElementsByClassName('animation'); animation.classList.remove("display");
+                              </script>

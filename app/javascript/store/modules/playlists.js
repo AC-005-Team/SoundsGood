@@ -19,11 +19,12 @@ const playlists = {
     // }
   },
   actions: {
-      ...mapActions('songs', ['setPlayerTracks']),
-    async loadSongs({commit}, id ) {
+      ...mapActions('songs', ['setPlayerTracks','play']),
+    async loadSongs({dispatch, commit}, id ) {
       let response = await Api().get(`/api/v1/playlists/${id}`);
       // commit('SET_PLAYLIST', response.data); //塞到state
-      commit('songs/setPlayerTracks', response.data, {root:true}); //塞到module tracks方法
+      dispatch('songs/setPlayerTracks', response.data, {root:true}); //塞到module tracks方法
+      dispatch('songs/play',response.data,  {root:true});
     }
  }
 }

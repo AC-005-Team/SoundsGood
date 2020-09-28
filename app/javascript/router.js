@@ -6,15 +6,16 @@ import playlist_page from './components/playlist_page';
 Vue.use(VueRouter)
 
 export default new VueRouter({
-  routes: [
-    {
+  routes: [{
       path: '/playlists',
       component: playlist
     },
     {
       path: '/playlist/:id',
       component: playlist_page,
-      props: true
-    },
-  ]
+      props: true,
+
+    }
+
+]
 })
