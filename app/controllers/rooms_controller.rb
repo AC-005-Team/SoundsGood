@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy, :play]
+  before_action :find_token_key, only: [:show, :play]
 
   # GET /rooms
   # GET /rooms.json
@@ -9,14 +10,13 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1
   # GET /rooms/1.json
-  def show
-    opentok = OpenTok::OpenTok.new Rails.application.credentials.vonage_api_key, Rails.application.credentials.vonage_api_secret
-    @token = opentok.generate_token @room.session_id
-  end
+  def show;end
 
   def play
-    opentok = OpenTok::OpenTok.new Rails.application.credentials.vonage_api_key, Rails.application.credentials.vonage_api_secret
-    @token = opentok.generate_token @room.session_id
+    respond_to do |format|
+      format.html
+      format.json { render json: [@token, @vonage_api_key, @room.session_id]}
+    end
   end
 
   # GET /rooms/new
@@ -76,6 +76,12 @@ class RoomsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def room_params
-      params.require(:room).permit(:name, :session_id).merge(user: current_user)
+      params.require(:room).permit(:name, :session_id).merge(user_id: current_user.id)
+    end
+
+    def find_token_key
+      opentok = OpenTok::OpenTok.new Rails.application.credentials.vonage_api_key, Rails.application.credentials.vonage_api_secret
+      @token = opentok.generate_token @room.session_id
+      @vonage_api_key = Rails.application.credentials.vonage_api_key
     end
 end
