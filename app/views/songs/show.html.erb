@@ -23,12 +23,15 @@
         </div>
       </div>
 
-<%#=萱大大專區%>
-      <div class="">
-        <%= content_tag(:div, '', id:['waveform'], class:['song-waveform w-3/6'], data:{ path: @song.track_url, filename: @song.get_filename }) %>
-      </div>
+        <div> <%#=萱大大專區%>
+          <div class="w-3/6 waveform-wrap" data-path="<%= @song.track_url %>" data-filename="<%= @song.get_filename %>">
+            <div class="waveform-dummy song-waveform">
+            </div>
+          </div>
+        </div>
+
     </div>
-<%#=右邊大圖區%>
+      <%#=右邊大圖區%>
     <div class="w-1/3 p-4">
       <%= image_tag @song.image_url%> 
     </div>
