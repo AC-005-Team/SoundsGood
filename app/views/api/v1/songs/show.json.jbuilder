@@ -1,3 +1,5 @@
+json.song_id @song.id
+json.audio do
 json.name @song.name
 json.artist @song.intro
 json.cover @song.image_url

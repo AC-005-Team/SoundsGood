@@ -203,20 +203,20 @@ window.onclick = function(event) {
 }
 
 
-const heart = document.querySelectorAll(".heart");
-for(var i =0, len = heart.length; i<len; i++)
-{
-  heart[i].onclick = function(){
-  if(this.classList.contains('like_btn')){
-    this.classList.remove('like_btn');
-    this.classList.add('like_btn_reverse');
-  } else {
-
-    this.classList.remove('like_btn_reverse');
-    this.classList.add('like_btn');
-  }
-}
-
-
-
-}
+// const heart = document.querySelectorAll(".heart");
+// for(var i =0, len = heart.length; i<len; i++)
+// {
+//   heart[i].onclick = function(){
+//   if(this.classList.contains('like_btn')){
+//     this.classList.remove('like_btn');
+//     this.classList.add('like_btn_reverse');
+//   } else {
+//
+//     this.classList.remove('like_btn_reverse');
+//     this.classList.add('like_btn');
+//   }
+// }
+//
+//
+//
+// }
