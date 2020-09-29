@@ -52,6 +52,8 @@ group :development, :test do
   gem 'capistrano-bundler', '2.0'
   gem 'capistrano-rails', '1.6'
   gem 'capistrano-passenger', '0.2.0'
+  gem 'capistrano-upload-config'
+  gem 'capistrano-rvm'
   gem 'net-ssh', '~> 6.1'
   gem 'ed25519', '1.2'
   gem 'bcrypt_pbkdf', '1.0'
