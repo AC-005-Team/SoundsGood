@@ -10,7 +10,7 @@
             <%=@song.user.display_name%>
           </div>
           <div class="flex bg-gray-900 rounded">
-            <div class="text-2xl text-white m-2"><%= @song.name %></div>
+            <div class="text-2xl text-white m-2"><%= title @song.name %></div>
           </div>
         </div>
         <div class="m-4 text-xl text-white">
@@ -326,3 +326,10 @@
    </div>
   </div>
 </template>
+<% set_meta_tags og: {
+  title:    @song.name,
+  type:     'audio',
+  url:      song_path(params[:id]),
+  image:    @song.image_url,
+  description: "Listen to #{@song.name} by #{@song.user.display_name} #np on #SoundsGood"
+} %>

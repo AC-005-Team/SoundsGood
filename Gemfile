@@ -41,6 +41,8 @@ gem 'pg'
 # Send request
 gem 'http', '~> 4.4', '>= 4.4.1'
 
+# Meta-tag helper
+gem 'meta-tags', '~> 2.13'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
