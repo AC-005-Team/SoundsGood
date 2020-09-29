@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded',()=>{
-  document.querySelector('#song_track').addEventListener('change', song_value)
+  if(document.querySelector('#song_track')){
+    document.querySelector('#song_track').addEventListener('change', song_value)
+  }
 })
 
 function song_value(){

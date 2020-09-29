@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded',function() {
-  const h1 = document.querySelector('h1').textContent
-  if( h1 === 'publisher' ){
-    initializeSessionP()
-  }else if( h1 === 'subscriber'){
-    initializeSessionS()
+  if (document.querySelector('h1')){
+    const h1 = document.querySelector('h1').textContent
+    if( h1 === 'publisher' ){
+      initializeSessionP()
+    }else if( h1 === 'subscriber'){
+      initializeSessionS()
+    }
   }
 })
 

@@ -1,12 +1,14 @@
 document.addEventListener('turbolinks:load', function (){
-  document.querySelector('#search').addEventListener('keyup', function(e){
-    if( e.key === "Enter" ){
-      result()
-    }else{
-      document.querySelector('.search-result').innerHTML = ""
-      search()
-    }
-  })
+  if(document.querySelector('#search')){
+    document.querySelector('#search').addEventListener('keyup', function(e){
+      if( e.key === "Enter" ){
+        result()
+      }else{
+        document.querySelector('.search-result').innerHTML = ""
+        search()
+      }
+    })
+  }
 })
 
 function search(){
