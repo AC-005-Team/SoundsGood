@@ -24,10 +24,10 @@
       </div>
 
         <div> <%#=萱大大專區%>
-          <div class="w-3/6 waveform-wrap" data-path="<%= @song.track_url %>" data-filename="<%= @song.get_filename %>">
-            <div class="waveform-dummy song-waveform">
-            </div>
-          </div>
+          <%= content_tag(:div, '', class:['waveform-wrap waveform-light'], data:{ path: @song.track_url, filename: @song.get_filename, id: @song.id }) do %> 
+          <div class="waveform-dummy-trigger"></div>
+          <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
+        <% end %>
         </div>
 
     </div>
@@ -44,9 +44,9 @@
   <%#=左邊專區：最上面的Comment區域%>
     <div class="border-b border-gray-400">
       <div class="flex ">
-        <img class="w-auto h-10 " src="https://i1.sndcdn.com/artworks-48wHUXnYlyIAyhPm-kAqlLQ-t500x500.jpg" alt="">
-        <%= form_with(model:@comment, url:song_comments_path(@song), class: "w-11/12 mx-4 border border-gray-400 rounded") do |f|%>
-          <%= f.text_field :content, placeholder: "Write a comment", class: "w-10/12 py-2 px-4 border border-gray-400 rounded"%>
+        <img class="w-auto h-10 current_user-avatar" src="https://i1.sndcdn.com/artworks-48wHUXnYlyIAyhPm-kAqlLQ-t500x500.jpg" alt="">
+        <%= form_with(model:@comment, url:song_comments_path(song_id: @song, timepoint: 0), class: "song-comment-form w-11/12 mx-4 border border-gray-400 rounded") do |f|%>
+          <%= f.text_field :content, placeholder: "Write a comment", class: "song-main-comment w-10/12 py-2 px-4 border border-gray-400 rounded", data: {id: @song.id} %>
           <%= f.submit class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"%>
         <% end %>
       </div>

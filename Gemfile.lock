@@ -259,6 +259,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    streamio-ffmpeg (3.0.2)
+      multi_json (~> 1.8)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -320,6 +322,7 @@ DEPENDENCIES
   shrine (~> 3.2, >= 3.2.2)
   spring
   spring-watcher-listen (~> 2.0.0)
+  streamio-ffmpeg (~> 3.0, >= 3.0.2)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 3.3.0)

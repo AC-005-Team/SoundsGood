@@ -1,2 +1,3 @@
 import './modal'
-import"./wave"
+import './wave'
+import './comment'
