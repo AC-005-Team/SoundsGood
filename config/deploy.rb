@@ -40,11 +40,4 @@ set :repo_url, "git@github.com:AC-005-Team/SoundClown.git"
 
 before 'deploy:check:linked_files', 'config:push'
 
-# Figure out the name of the current local branch
-def current_git_branch
-  branch = `git symbolic-ref HEAD 2> /dev/null`.strip.gsub(/^refs\/heads\//, '')
-  branch
-end
- 
-# Set the deploy branch to the current branch
-set :branch, fetch(:branch, current_git_branch)
+set :branch, ENV['BRANCH'] if ENV['BRANCH']
