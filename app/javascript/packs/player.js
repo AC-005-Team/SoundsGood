@@ -1,6 +1,6 @@
 import 'aplayer/dist/APlayer.min.css';
 import APlayer from 'aplayer';
-
+const hostPath = 'http://'+window.location.host
 //畫面一開始的播放器
 const ap = new APlayer({
   container: document.getElementById('player1'),
@@ -35,7 +35,7 @@ if(songs){
 
 //拿到本首歌的json
 async function getPlay(id) {
-  let response = await fetch(`http://127.0.0.1:3000/api/v1/songs/${id}`);
+  let response = await fetch(`${hostPath}/api/v1/songs/${id}`);
   let playlistTrack = await response.json();
   return playlistTrack;
 };
@@ -63,7 +63,7 @@ if (addbutton){
 
 // read playlists JSON
 async function getPlayList(id) {
-  let response = await fetch(`http://127.0.0.1:3000/api/v1/playlists/${id}`);
+  let response = await fetch(`${hostPath}/api/v1/playlists/${id}`);
   let playlistTrack = await response.json();
   return playlistTrack;
 };
