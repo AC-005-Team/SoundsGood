@@ -6,13 +6,15 @@ document.addEventListener('DOMContentLoaded',function() {
     }else if( h1 === 'subscriber'){
       initializeSessionS()
     }
+  }else{
+    return
   }
 })
 
 
 function initializeSessionP() {
   const room_number = window.location.pathname.split('/')[2]
-  fetch(`http://localhost:3000/rooms/${room_number}/play.json`)
+  fetch(`http://127.0.0.1:3000/rooms/${room_number}/play.json`)
   .then(response => response.json())
   .then(result => {
     const token = result[0]
@@ -38,7 +40,7 @@ function initializeSessionP() {
 
 function initializeSessionS() {
   const room_number = window.location.pathname.split('/')[2]
-  fetch(`http://localhost:3000/rooms/${room_number}/play.json`)
+  fetch(`http://127.0.0.1:3000/rooms/${room_number}/play.json`)
   .then(response => response.json())
   .then(result => {
     const token = result[0]

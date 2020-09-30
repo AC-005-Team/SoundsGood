@@ -1,4 +1,5 @@
 class Room < ApplicationRecord
+  validates :user_id, uniqueness: true
   belongs_to :user
 
   before_create do

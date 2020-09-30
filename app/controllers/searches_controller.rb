@@ -15,6 +15,7 @@ class SearchesController < ApplicationController
   def result
     return if params[:search].blank? 
 
+    @params_search = params[:search] 
     @users = User.name_search("display_name", params[:search])
     @songs = Song.name_search("name", params[:search]).includes(:tags)
     @Playlists = Playlist.name_search("name", params[:search])
