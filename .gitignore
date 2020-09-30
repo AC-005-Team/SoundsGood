@@ -42,5 +42,7 @@ yarn-debug.log*
 # 😱google金鑰，不可以上傳喔😱
 /config/application.yml
 /config/secrets.yml
+/config/credentials.yml.enc
+/config/credentials/staging.key  
 .env
 *.dev
