@@ -7,6 +7,7 @@
   background-color: #fff;
   transition: all ease 0.5s;
   margin: 0;
+  z-index: 1000;
 }
 
 .getURL {

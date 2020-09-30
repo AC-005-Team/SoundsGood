@@ -67,8 +67,16 @@ Rails.application.routes.draw do
   defaults format: :json do
     namespace :api do
       namespace :v1 do
+<<<<<<< HEAD
         resources :songs, only: [:index, :show]
         resources :playlists, only: [:index, :show]
+=======
+        resources :songs, only: [:index, :show] do
+          resources :comments, only: [:index]
+        end
+        resources :playlists, only: [:show]
+        
+>>>>>>> feture/spa
       end
     end
   end
