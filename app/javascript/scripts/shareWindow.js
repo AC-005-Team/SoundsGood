@@ -1,20 +1,21 @@
 export function shareWindow(){
   const rootPath = 'http://'+window.location.host
-  const shareTwitter = document.querySelector('.share-twitter')
-  const shareFacebook = document.querySelector('.share-facebook')
+  const shareTwitter = document.querySelectorAll('.share-twitter')
+  const shareFacebook = document.querySelectorAll('.share-facebook')
 
-  shareTwitter.addEventListener('click', (e) => {
-    console.log('clicked') // @todo: remove
+  shareTwitter.forEach( shareBtn => {
+    shareBtn.addEventListener('click', (e) => {
     let dataSet = e.target.dataset
     openWindow(getTwitterUrl(rootPath, dataSet.link, dataSet.name,dataSet.artist),'',600,400)
   })
+})
 
-  shareFacebook.addEventListener('click', (e) => {
-    console.log('clicked') // @todo: remove
+  shareFacebook.forEach( shareBtn => {
+    shareBtn.addEventListener('click', (e) => {
     let dataSet = e.target.dataset
     openWindow(getFacebookUrl(rootPath, dataSet.link),'',600,400)
-
   })
+})
 
   function openWindow(url, name, width, height){
     var screenLeft=0, screenTop=0;
@@ -38,9 +39,9 @@ export function shareWindow(){
 
   function getFacebookUrl(root, link){
     return `https://www.facebook.com/sharer/sharer.php?u=${root}${link}`
-  }
+  } // automatically use meta tag infos from link
   
   function  getTwitterUrl(root, link, name, artist) {
-    return `https://twitter.com/intent/tweet?url=${root}${link}&text=Have%20you%20heard%20%E2%80%98${name}%E2%80%99%20by%20${artist}%20on%20%23SoundCloud%3F%20%23np&related=soundcloud`
+    return `https://twitter.com/intent/tweet?url=${root}${link}&text=Have%20you%20heard%20%E2%80%98${name}%E2%80%99%20by%20${artist}%20on%20%23SoundsGood%3F%20%23np&related=soundsgood`
   }
 }

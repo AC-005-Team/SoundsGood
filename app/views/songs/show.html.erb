@@ -86,7 +86,7 @@
         </button>
         <button class="border border-gray-400 p-1 rounded">
           <i class="fas fa-bolt"></i>
-          <%=link_to "Create Playlist", new_user_playlist_path(current_user)%>
+          <%=link_to "Create Playlist", new_user_playlist_path(current_user) if current_user %>
         </button>
         <button class="p-1 text-gray-600">
           <i class="fas fa-chevron-circle-right"></i>
@@ -309,20 +309,22 @@
       <h2>Add to playlist</h2>
     </div>
     <div class="modal-item" data-controller="playlist" data-playlist-song="<%= @song.id %>">
-    <% @playlists.each do |playlist| %>
-      <li>Playlist：<%= link_to playlist.name, playlist_path(playlist) %>
-      <% if @song.added_by?(playlist) %>
-        <button class="border border-orange-500 text-red-600 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
-          <span>Added</span>
-        </button>
-      </li>
-      <% else %>
-        <button class="border border-gray-400 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
-          <span>Add to playlist</span>
-        </button>
-      </li>
-      <% end %>
-    <% end %> 
+    <% if @playlist %>
+      <% @playlists.each do |playlist| %>
+        <li>Playlist：<%= link_to playlist.name, playlist_path(playlist) %>
+        <% if @song.added_by?(playlist) %>
+          <button class="border border-orange-500 text-red-600 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
+            <span>Added</span>
+          </button>
+        </li>
+        <% else %>
+          <button class="border border-gray-400 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
+            <span>Add to playlist</span>
+          </button>
+        </li>
+        <% end %>
+      <% end %> 
+    <% end %>
    </div>
   </div>
 </template>
