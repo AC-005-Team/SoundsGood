@@ -4,13 +4,13 @@ export function shareWindow(){
   const shareFacebook = document.querySelector('.share-facebook')
 
   shareTwitter.addEventListener('click', (e) => {
-    console.log('clicked')
+    console.log('clicked') // @todo: remove
     let dataSet = e.target.dataset
     openWindow(getTwitterUrl(rootPath, dataSet.link, dataSet.name,dataSet.artist),'',600,400)
   })
 
   shareFacebook.addEventListener('click', (e) => {
-    console.log('clicked')
+    console.log('clicked') // @todo: remove
     let dataSet = e.target.dataset
     openWindow(getFacebookUrl(rootPath, dataSet.link),'',600,400)
 

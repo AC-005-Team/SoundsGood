@@ -16,48 +16,37 @@
     <div class="p-5">
       <div class="text-2xl">Charts: New & hot</div>
       <div class="text-xs text-gray-500 my-2">Up-and-coming tracks on SoundCloud</div>
+      
       <div class="flex my-4 overflow-scroll">
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
 
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
 
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
 
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
+        <% @songs.each do |song|%>
+          <% if song.image_url %>
 
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
+            <div class="my-2 mr-2 flex flex-col justify-between">
+              <%#= 歌曲圖片 %>
+                <div class="align-top w-full">
+                  <%= link_to image_tag(song.image_url), song_path(song.id), class:'' %>
+                </div>
+              <%#= 歌曲名稱、介紹、TAG標籤 %>
+                <div class="">
+                  <%#= 歌曲名稱 %>
+                  <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
+                  <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
+                  <%#= 歌曲TAG區 %>                           
+                  <% if song.tags.length > 0 %>
+                    <% song.tags.each do |tag| %>
+                      <%= tag.name %>
+                    <% end %>
+                  <% end %>
+                </div>
+              
+            </div>
 
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
+          <% end %>
+        <% end %>  
 
-        <div class="my-2 mr-2">
-          <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-          <div class="">All music genres</div>
-          <div class="text-xs text-gray-500">New & Hot</div>
-        </div>
 
       </div>
     </div>

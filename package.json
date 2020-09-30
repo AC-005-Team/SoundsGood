@@ -17,6 +17,8 @@
     "select2": "^4.0.13",
     "tailwindcss": "^1.7.6",
     "stimulus": "^1.1.1",
+    "select2": "^4.0.13",
+    "tailwindcss": "^1.7.6",
     "turbolinks": "^5.2.0",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.3",

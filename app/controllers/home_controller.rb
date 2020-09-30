@@ -1,12 +1,15 @@
 class HomeController < ApplicationController
-
-  def index
-    @songs = Song.all
-  end
+  before_action :find_song
   
-  def discover
-    @songs = Song.all
-  end
+  def index;end
+  
+  def discover;end
 
   def stream;end
+  
+  private
+  
+  def find_song
+    @songs = Song.all.includes(:tags)
+  end
 end

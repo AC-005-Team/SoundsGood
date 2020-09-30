@@ -1,15 +1,40 @@
 .waveform-wrap {
   position: relative;
+<<<<<<< HEAD
 }
 .waveform {
   position: absolute;
   z-index: 1;
   width: 100%;
+=======
+  height: 150px;
+  opacity: 0.75;
+  transition: 0.25s;
+  cursor: pointer;
+}
+.waveform-wrap:hover {
+  opacity: 1;
+}
+.waveform {
+  position: absolute;
+  width: 100%;
+  height: 75px;
+  overflow: hidden;
+}
+.waveform-comment-space {
+  position: absolute;
+  width: 100%;
+  height: 75px;
+>>>>>>> 21d2a90d23a6f07c77a63cb69523f0ee679cbc2d
 }
 .waveform-dummy-trigger {
   position: absolute;
   opacity: 0;
+<<<<<<< HEAD
   height: 150px;
+=======
+  height: 75px;
+>>>>>>> 21d2a90d23a6f07c77a63cb69523f0ee679cbc2d
   width: 100%;
   /* z-index: 100; */
 }
@@ -18,9 +43,24 @@
   /* z-index: 1; */
   opacity: 0;
   width: 100%;
+<<<<<<< HEAD
   background-color: #555;
+=======
+  height: 75px;
+  background-color: #555;
+  overflow: hidden;
+>>>>>>> 21d2a90d23a6f07c77a63cb69523f0ee679cbc2d
 }
 
 .waveform-dummy.wave-effect-show {
   opacity: 1;
 }
+<<<<<<< HEAD
+=======
+
+.comment-avatar {
+  position: absolute;
+  top: 75px;
+  z-index: 99;
+}
+>>>>>>> 21d2a90d23a6f07c77a63cb69523f0ee679cbc2d

@@ -27,6 +27,8 @@ if(songs){
         ap.list.add(val);
       });
       ap.play();
+      console.log(ap)
+      ap.container.setAttribute('data-playing', id)
     });
   });
 }
