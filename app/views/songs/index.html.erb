@@ -5,7 +5,7 @@
       <ul>
         <li class="flex">
           <%= image_tag song.image_url, width: '200px' %>
-            <%= content_tag(:div, '', class:['w-3/6 waveform-wrap'], data:{ path: song.track_url, filename: song.get_filename }) do %> 
+            <%= content_tag(:div, '', class:['w-3/6 waveform-wrap'], data:{ path: song.track_url, filename: song.get_filename, id: song.id}) do %> 
               <div class="waveform-dummy-trigger"></div>
               <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
             <% end %>
@@ -17,7 +17,7 @@
             <li><%= tag.name %></li>
           <% end %>
         <% end %>
-        <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: song.id} ) %>
+        <%= content_tag(:li, 'play ▶', class:['getURL song-place'], data: {id: song.id} ) %>
         <li><%= link_to 'Delete', song_path(song.id), method: 'delete' %></li>
         
         <!-- 愛心 -->
