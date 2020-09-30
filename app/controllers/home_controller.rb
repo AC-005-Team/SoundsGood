@@ -1,12 +1,9 @@
 class HomeController < ApplicationController
   before_action :find_song
   
-  def index
-    byebug
-  end
+  def index;end
   
-  def discover
-  end
+  def discover;end
   
   def stream;end
   
