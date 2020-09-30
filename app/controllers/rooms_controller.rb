@@ -1,5 +1,4 @@
 class RoomsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: :create
   before_action :set_room, only: [:show, :edit, :update, :destroy, :play]
   before_action :find_token_key, only: [:show, :play]
 
@@ -32,7 +31,6 @@ class RoomsController < ApplicationController
   # POST /rooms
   # POST /rooms.json
   def create
-    byebug
     @room = Room.new(room_params)
 
     respond_to do |format|
