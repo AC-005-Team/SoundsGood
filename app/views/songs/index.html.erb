@@ -83,8 +83,8 @@
   </div>
 </div>
 
-<div class="flex  mx-4 text-sm">
-  <div class="w-3/4">
+<div class="flex mx-4 text-sm">
+  <div class="w-full">
     <%#=左邊分享、使用者功能專區%>
     <div class="flex border-b border-gray-400">
       <div class="flex w-1/2 my-2 justify-around ">
@@ -94,25 +94,25 @@
             c-22.039-26.516-54.861-41.68-89.339-41.273C52.395,35.522,0,87.917,0,152.55C0,263.31,193.306,371.456,201.143,375.636
             c3.162,2.113,7.286,2.113,10.449,0c7.837-4.18,201.143-110.759,201.143-223.086C412.735,87.917,360.339,35.522,295.706,35.522z"/>
           </svg>
-          like
+          <p class="hidden md:block">Like</p> 
         </button>
-        <button class="border border-gray-300 px-3 rounded">
+        <button class="flex border border-gray-300 px-3 rounded">
           <i class="fas fa-share-square"></i>
-          share
+          <p class="hidden md:block">Share</p> 
         </button>
-        <button class="border border-gray-300 px-3 rounded">
+        <button class="flex border border-gray-300 px-3 rounded">
           <i class="fas fa-balance-scale-left"></i>
-          Add to Next Up
+          <p class="hidden md:block">Add to Next up</p> 
         </button>
-        <button class="border border-gray-300 px-3 rounded">
+        <button class="flex border border-gray-300 px-3 rounded">
           <i class="fas fa-bolt"></i>
-          More
+          <p class="hidden md:block">More</p> 
         </button>
       </div>
 
       <div class="flex w-1/2 justify-end">
         <div class="my-2 mx-4">
-          Last Uploaded 2 day ago
+          <p class="hidden md:block">Last Uploaded 2 day ago</p> 
         </div>
       </div>
     </div>
@@ -125,14 +125,20 @@
           <div class="flex py-1 items-center hover:bg-gray-100">
             <% if song.image_url %>
             <div class="rounded-full w-10 mx-2">
-              <%= image_tag song.image_url %>
+              <%= image_tag song.image_url %>             
             </div>
             <% end %>
+            
             <button class="text-gray-500 hover:text-black mx-2">
               <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
             </button>
 
             <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
+
+            <%= content_tag(:div, '', class:['w-3/6 waveform-wrap'], data:{ path: song.track_url, filename: song.get_filename }) do %> 
+              <div class="waveform-dummy-trigger"></div>
+              <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
+            <% end %>         
 
             <div class="flex justify-end ml-auto">
 
@@ -180,7 +186,7 @@
   
   </div>
     <%#=右邊使用者專區%>
-  <div class="w-1/4 1111111">
+  <div class="w-1/4 hidden md:block">
     <div class="p-2">
       <div class="">
         Based on Tipsy Records - Toniia & Geena Fontanella - Psychic

@@ -13,7 +13,7 @@
 
             <div class="my-2 mr-2">
               <%#= 歌曲圖片 %>
-              <%= image_tag song.image_url, class:'h-32 max-w-xl mr-4' %>
+              <%= image_tag song.image_url, class:'h-32 max-w-xs mr-4' %>
                 <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
               
                 <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
@@ -33,6 +33,7 @@
     </div>
 
     <%#=左邊區域-橫的%>
+    <%#=  
     <div class="border-b border-gray-200 m-4">
       <div class="text-2xl">Charts: Top 50</div>
       <div class="text-xs text-gray-500 my-2">The most played tracks on SoundCloud this week</div>
@@ -82,6 +83,7 @@
 
       </div>
     </div>
+    %>
 
     <%#=左邊區域-直的%>
     <div class="border-b border-gray-200 m-4">
