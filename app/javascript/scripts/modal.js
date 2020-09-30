@@ -12,9 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const btnTemplate = getBtnTemplate(modalTarget, 1) //固定寫在class list裡面第二個
       modalTarget.setAttribute('disabled', 'true')
 
-      let scroll = window.scrollY //存下現在的scrollbar Y值
-      document.body.style.position = 'fixed'
-      document.body.style.top = `-${scroll}px`
+      document.body.style.overflow = 'hidden'
 
       const modalDiv = document.createElement('div')
       modalDiv.innerHTML = document.querySelector(`.${btnTemplate}`).innerHTML
@@ -46,9 +44,8 @@ document.addEventListener("DOMContentLoaded", function() {
             body.removeChild(modalDiv)
             modalClosing = false 
           },1000)
-          document.body.style.position = ''
+          document.body.style.overflow = 'auto'
           document.body.style.top = ''
-          window.scrollTo(0, scroll || 0)
           btn.removeAttribute('disabled')
         } else {
           return
