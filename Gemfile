@@ -49,7 +49,7 @@ group :development, :test do
   # 加上下面這些，請鎖定版本
   gem 'capistrano', '3.14.1'
   gem 'capistrano-bundler', '2.0'
-  gem 'capistrano-rails', '1.6'
+  gem 'capistrano-rails', '1.6.1'
   gem 'capistrano-passenger', '0.2.0'
   gem 'capistrano-upload-config'
   gem 'capistrano-rvm'
