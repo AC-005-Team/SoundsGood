@@ -12,7 +12,9 @@ import playlistItem from './playlistItem'
 export default {
   name: 'playlist',
   data(){
-  return{ playlists:[]};
+  return{
+    playlists:[]
+  };
   },
   mounted () {
     const axios = require('axios').create({

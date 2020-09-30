@@ -18,20 +18,22 @@ import playlistitems from './components/playlistItem';
 import playlist from './components/playlist';
 import router from './router'
 import Player from './components/shared/player';
+// import dicover from './components/page/discover';
+// import library from './components/page/library';
+// import stream from './components/page/stream';
+// import upload from './components/page/upload';
+
 
 
 export default {
   data() {
     return {
-      songs: [],
-      play: false
     }
   },
   router,
   store,
   components: {
     HeaderComponent,
-    playlist,
     Player
 
   },

@@ -4,6 +4,7 @@ import axios from 'axios'
 import Api from '../api/api'
 import playlists from './modules/playlists'
 import songs from './modules/songs'
+import song from './modules/song'
 import playlistsSongs from './modules/playlistsSongs'
 
 
@@ -14,6 +15,7 @@ export const store = new Vuex.Store({
   modules:{
     playlists,
     songs,
-    playlistsSongs
+    playlistsSongs,
+    song
   }
 })
