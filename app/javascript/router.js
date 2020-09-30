@@ -2,20 +2,52 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import playlist from './components/playlist';
 import playlist_page from './components/playlist_page';
+import discover from './components/page/discover';
+import library from './components/page/library';
+import stream from './components/page/stream';
+import upload from './components/page/upload';
 
 Vue.use(VueRouter)
 
 export default new VueRouter({
-  routes: [{
+  routes: [
+    {
       path: '/playlists',
+      name: 'playlist',
       component: playlist
     },
+    {
+      path: '/discover',
+      name: 'discover',
+      component: () => import(/* webpackChunkName: "Discover" */ './components/page/discover'),
+    },
+    {
+      path: '/playlists',
+      name: 'stream',
+      component: playlist
+
+      // component: () => import(/* webpackChunkName: "Stream" */ './components/page/stream'),
+
+    },
+    {
+      path: '/library',
+      name: 'library',
+      component: () => import(/* webpackChunkName: "Library" */ './components/page/library'),
+
+
+    },
+    {
+      path: 'upload/users/:id',
+      component: upload,
+      name: 'upload',
+      props: true,
+    },
+
     {
       path: '/playlist/:id',
       component: playlist_page,
       props: true,
 
     }
-
 ]
 })

@@ -1,7 +1,7 @@
 <% unless params[:controller]=="home" && params[:action]=="index"%>
 
 <div class="bg-gray-800 text-gray-400 w-full flex justify-between text-center items-center text-sm sticky top-0 z-10 mx-auto">
-<%#=Logo區域%>  
+<%#=Logo區域%>
   <button class="hover:text-white ml-6">
     <%= link_to discover_path do %>
     <%= image_pack_tag('logo_14.png', class:'w-48 hidden sm:block') %>
@@ -81,8 +81,7 @@
     <div class="hover:text-white"><%= link_to "Sign in",new_user_session_path%></div>
     <div class="hover:text-white"><%= link_to "Create",new_user_registration_path%></div>
   <% end %>
-<%#=後面三點點區域%>  
+<%#=後面三點點區域%>
 </div>
 
 <% end %>
-
