@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded',function() {
 function initializeSessionP() {
   const hostPath = window.location.origin
   const room_number = window.location.pathname.split('/')[2]
-  fetch(`${hostPath}/${room_number}/play.json`)
+  fetch(`${hostPath}/rooms/${room_number}/play.json`)
   .then(response => response.json())
   .then(result => {
     const token = result[0]
@@ -42,7 +42,7 @@ function initializeSessionP() {
 function initializeSessionS() {
   const hostPath = window.location.origin
   const room_number = window.location.pathname.split('/')[2]
-  fetch(`${hostPath}/${room_number}/play.json`)
+  fetch(`${hostPath}/rooms/${room_number}/play.json`)
   .then(response => response.json())
   .then(result => {
     const token = result[0]
