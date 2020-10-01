@@ -3,7 +3,9 @@ class HomeController < ApplicationController
   
   def index;end
   
-  def discover;end
+  def discover
+    @user = current_user
+  end
   
   def stream;end
   
@@ -12,4 +14,5 @@ class HomeController < ApplicationController
   def find_song
     @songs = Song.all.includes(:tags)
   end
+
 end

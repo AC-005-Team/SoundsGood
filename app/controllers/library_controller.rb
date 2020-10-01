@@ -11,7 +11,7 @@ class LibraryController < ApplicationController
   end
 
   def sets
-    @songs = Song.all.includes(:tags)
+    @playlists = current_user.playlists
   end
 
   def albums
