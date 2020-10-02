@@ -42,6 +42,9 @@ gem 'pg'
 gem 'http', '~> 4.4', '>= 4.4.1'
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 
+# Meta-tag helper
+gem 'meta-tags', '~> 2.13'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

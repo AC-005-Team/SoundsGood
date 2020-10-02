@@ -21,6 +21,7 @@ class LibraryController < ApplicationController
   end
 
   def following
+    @followees = current_user.followees
   end
 
   def history
