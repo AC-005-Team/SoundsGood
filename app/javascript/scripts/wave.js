@@ -2,7 +2,7 @@ import WaveSurfer from 'wavesurfer.js'
 import CursorPlugin from 'wavesurfer.js/src/plugin/cursor.js'
 document.addEventListener('DOMContentLoaded', () => {
   const wavePlace = document.querySelector(".waveform-wrap") // see if at least a waveform div is present
-  const peakStorageRoot = 'http://34.67.190.190/api/v1/getjson/song_peaks/'
+  const peakStorageRoot = 'https://peaks.soundsgood.world/api/v1/getjson/song_peaks/'
 
   if(wavePlace){
     const proxyurl = "https://cors-anywhere.herokuapp.com/" // for accessing s3
