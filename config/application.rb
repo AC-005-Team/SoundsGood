@@ -10,7 +10,7 @@ module SoundClown
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
-    config.hosts << "45b2a389e122.ngrok.io"
+    config.hosts << "c7284401c0b3.ngrok.io"
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
