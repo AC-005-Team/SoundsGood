@@ -44,7 +44,7 @@
   <%#=左邊專區：最上面的Comment區域%>
     <div class="border-b border-gray-400">
       <div class="flex ">
-        <img class="w-auto h-10 current_user-avatar" src="https://i1.sndcdn.com/artworks-48wHUXnYlyIAyhPm-kAqlLQ-t500x500.jpg" alt="">
+        <%= image_tag @current_user.avatar_url, class: 'w-auto h-10 current_user-avatar' %>
         <%= form_with(model:@comment, url:song_comments_path(song_id: @song, timepoint: 0), class: "song-comment-form w-11/12 mx-4 border border-gray-400 rounded") do |f|%>
           <%= f.text_field :content, placeholder: "Write a comment", class: "song-main-comment w-10/12 py-2 px-4 border border-gray-400 rounded", data: {id: @song.id} %>
           <%= f.submit class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"%>
@@ -84,18 +84,19 @@
           <i class="fas fa-bolt"></i>
           Add to playlist
         </button>
-        <button class="border border-gray-400 p-1 rounded">
-          <i class="fas fa-bolt"></i>
-          <%=link_to "Create Playlist", new_user_playlist_path(current_user)%>
-        </button>
+        <%=link_to new_user_playlist_path(current_user), class:'border border-gray-400 p-1 rounded' do %>
+          <i class="fas fa-bolt"></i>Create Playlist
+        <% end %>
         <button class="p-1 text-gray-600">
           <i class="fas fa-chevron-circle-right"></i>
           10.2K
         </button>
-        <button class="p-1 text-gray-600">
+        <div class="p-1 text-gray-600">
           <i class="fas fa-heart"></i>
-          <%=@song.liked_users.count %> 
-        </button>
+          <span class='liked-count'>
+            <%=@song.liked_users.count %> 
+          </span>
+        </div>
         <button class="p-1 text-gray-600">
           <i class="fas fa-retweet"></i>
           <%=@song.reposted_users.count %> 
@@ -106,7 +107,11 @@
     <div class="flex text-sm">
   <%#=左邊專區大頭照那%>
       <div class="w-1/5 mr-4" data-controller="follow" data-follow-user="<%= @song.user.id %>">
-        <img class="rounded-full mt-6 mr-6 w-3/4" src="https://i1.sndcdn.com/avatars-000607373832-b25xhj-t200x200.jpg" alt="">
+        <% if @song.user.avatar_url %>
+          <%= image_tag @song.user.avatar_url, class: 'rounded-full mt-6 mr-6 w-3/4' %>
+        <% else %>
+          <%#= if user no avatar%>
+        <% end %>
         <div class="flex justify-start p-1">
           <div><%=@song.user.display_name%></div>
           <i class="far fa-star"></i>
@@ -164,8 +169,8 @@
             <div id= <%=comment.id%>>
               <% comment.replies.each do |reply| %>
               <div class="flex mt-4 ml-6">
-                <% if reply.user.image_url %>
-                  <%= image_tag reply.user.image_url, class: 'w-1/12 rounded-full' %>
+                <% if reply.user.avatar_url %>
+                  <%= image_tag reply.user.avatar_url, class: 'w-1/12 rounded-full' %>
                 <% end %>
                 <div class="w-9/12 mx-2">
                   <div class="flex">

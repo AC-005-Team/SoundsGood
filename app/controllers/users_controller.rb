@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:follow]
   before_action :find_user, only: [:show, :follow]
+  before_action :find_current_user, only: [:show, :edit]
 
   def show;end
 
@@ -13,9 +14,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-    @user = current_user
-  end
+  def edit;end
 
   def update
     if current_user.update(user_params)
@@ -33,6 +32,10 @@ class UsersController < ApplicationController
 
   def find_user
     @user = User.find(params[:id])
+  end
+
+  def find_current_user
+    @current_user = current_user
   end
   
 end
