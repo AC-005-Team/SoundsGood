@@ -1,3 +1,63 @@
+https://soundcloud.com/cy4eroa8bbxx/sets
+<div class="flex mx-6 bg-gradient-to-r from-gray-600 via-gray-400 to-gray-300">
+  <img class="w-1/6 m-6 rounded-full" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
+  <div class="flex justify-between w-5/6 items-start">
+    <div class="m-4">
+      <div class="bg-black rounded p-1 text-xl text-white m-1">
+        user_name
+      </div>
+      <div class="flex bg-gray-900 rounded justify-start">
+        <div class="text-white m-2">first name</div>
+        <div class="text-xl text-orange-700 m-auto mr-2">last name</div>
+      </div>
+    </div>
+    <button class="text-white bg-orange-600 p-2 rounded">
+      <i class="fas fa-camera"></i>
+      Upload header image
+    </button>
+  </div>
+</div>
+<%#= ALL, Popular Tracks, .. Your Insights區域 %>
+<div class="flex justify-between m-4 border-b border-gray-300 p-2">
+  <div class="flex justify-between ml-4 text-xl">
+    <button class="mx-2">All</button>
+    <button class="mx-2">Popular tracks</button>
+    <button class="mx-2">Tracks</button>
+    <button class="mx-2">Albums</button>
+    <button class="mx-2 text-orange-600">Playlist</button>
+    <button class="mx-2">Reposts</button>
+  </div>
+  <div class="flex justify-between items-center mr-4 text-sm">
+    <button class="flex-col items-center mx-2 px-2 rounded bg-orange-600 text-white">
+      <i class="fas fa-chart-bar"></i>
+      Your Insights
+    </button>
+    <button class="flex-col items-center mx-2 px-2 rounded border border-gray-300">
+      <i class="fas fa-share-square"></i>
+      Share
+    </button>
+    <button class="flex-col items-center mx-2 px-2 rounded border border-gray-300">
+      <i class="fas fa-pencil-alt"></i>
+      Edit
+    </button>
+  </div>
+</div>
+
+<%#= 音樂區域 %>
+<div class="grid grid-cols-12 m-4 p-2">
+  <%#= 音樂左邊區域 %>
+  <div class="col-span-12 md:col-span-9">
+    <div class=""></div>
+    <div class=""></div>
+  </div>
+
+  <%#= 音樂右邊區域 %>
+  <div class="hidden md:block col-span-3">
+
+  </div>
+</div>
+
+
 <h1>Playlist</h1>
 <%= link_to 'new play list', new_user_playlist_path(current_user.id) %>
 <%= link_to 'go back', root_path %>

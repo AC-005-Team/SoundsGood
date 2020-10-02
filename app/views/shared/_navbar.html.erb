@@ -2,7 +2,7 @@
 
 <div class="bg-gray-800 text-gray-400 w-full flex justify-between text-center items-center text-sm sticky top-0 z-10 mx-auto">
 <%#=Logo區域%>  
-  <button class="hover:text-white ml-8">
+  <button class="hover:text-white ml-6">
     <%= link_to discover_path do %>
     <%= image_pack_tag('logo_14.png', class:'w-48 hidden sm:block') %>
     <%= image_pack_tag('logo_10.png', class:'w-12 block sm:hidden') %>
@@ -51,7 +51,7 @@
 <%#=使用者大頭貼、名稱區域%>
   <% if user_signed_in? %>
 
-    <div class="dropdown inline-block relative  mr-8">
+    <div class="dropdown inline-block relative ml-4 mr-6">
       <% if current_user.avatar_url %>
         <%= image_tag current_user.avatar_url, class:''%>
       <% else %>
@@ -60,7 +60,7 @@
       <button class="text-gray-300 bg-gray-800 py-2 px-4 rounded inline-flex items-center">
         <span class="mr-1"><%= link_to current_user.display_name, user_path(current_user)%></span>
       </button>
-      <ul class="dropdown-menu absolute hidden text-gray-700">
+      <ul class="dropdown-menu absolute hidden text-gray-700 text-left">
         <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-t"><%= link_to current_user.display_name, user_path(current_user)%></li>
         <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap"><%= link_to "Likes", likes_library_index_path%></li>
         <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap"><%= link_to "Playlists", sets_library_index_path%></li>

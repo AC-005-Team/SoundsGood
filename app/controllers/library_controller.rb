@@ -21,10 +21,11 @@ class LibraryController < ApplicationController
   end
 
   def following
+    @songs = Song.all.includes(:tags)
   end
 
   def history
+    @songs = Song.all.includes(:tags)
   end
-  
   
 end

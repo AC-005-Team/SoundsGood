@@ -18,7 +18,7 @@
           <% if song.image_url %>
             <div class="my-2 mr-2 flex flex-col justify-between">
                 <%#= 歌曲圖片 %>
-                <div class="align-top w-32">
+                <div class="align-top w-32 h-32 bg-black overflow-hidden">
                   <%= link_to image_tag(song.image_url), song_path(song.id) %>
                 </div>
                 <%#= 歌曲名稱、介紹、TAG標籤 %>

@@ -13,7 +13,6 @@
           <% if song.image_url %>
 
     <div class="flex xl:max-h-full">
-
       <%#= 歌曲封面 %>
       <div class="w-1/6 mr-4 mb-4">
         <%= link_to image_tag(song.image_url), song_path(song.id), class:'' %>      
@@ -168,6 +167,7 @@
 <% @songs.each do |song|%>
   <% if song.image_url %>
       <%= image_tag song.image_url, class:'h-32 max-w-xl mr-4' %>
+        
         <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
       
       
