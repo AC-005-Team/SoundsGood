@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   } 
   
   resources :rooms do
+    collection do
+      post :vonage, to: 'rooms#index'
+    end
     member do
       get :play
     end

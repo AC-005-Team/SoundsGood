@@ -1,5 +1,7 @@
 <div class="flex mt-4 ml-6">
-  <img class="w-1/12 rounded-full" src="https://i1.sndcdn.com/avatars-Y57TiYzkrpCtP0pD-w8fdEA-t120x120.jpg" alt="">
+  <% if reply.user.avatar_url %>
+    <%= image_tag reply.user.avatar_url, class: 'w-1/12 rounded-full' %>
+  <% end %>
   <div class="w-9/12 mx-2">
     <div class="flex">
       <button> <%=reply.user.display_name%></button>
