@@ -4,8 +4,10 @@
     <%= display_meta_tags site: 'SoundsGood' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    
     <%= javascript_pack_tag 'hello_vue' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'false' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
    <body>
     <%= render "shared/navbar" %>

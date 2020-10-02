@@ -1,6 +1,6 @@
 <div class="flex">
   <%#左邊區域%>
-  <div class="m-4 w-3/4">
+  <div class="col-span-12 md:col-span-9 mx-4">
     <div class="text-lg text-gray-600 mb-4">Hear the latest posts from the people you’re following:</div>
     
     <div class="flex flex-start items-center">
@@ -12,11 +12,13 @@
         <% @songs.each do |song|%>
           <% if song.image_url %>
 
-    <div class="flex">
+    <div class="flex xl:max-h-full">
 
       <%#= 歌曲封面 %>
-      <%= link_to image_tag(song.image_url), song_path(song.id), class:'h-48 w-1/5 mr-4 mb-4' %>
-      <div class="w-4/5 flex flex-col justify-around mx-2">
+      <div class="w-1/6 mr-4 mb-4">
+        <%= link_to image_tag(song.image_url), song_path(song.id), class:'' %>      
+      </div>
+      <div class="w-5/6 flex flex-col justify-around mx-2">
         <div class="flex justify-between">
           <div class="text-sm flex">
             <%#= 小型播放鍵 %>
@@ -32,47 +34,51 @@
           </div>
 
           <%#= 歌曲Tag標籤區 %>
-          <div class="bg-gray-400 rounded text-xs text-white h-4">
+          <div class="flex">
             <% if song.tags.length > 0 %>
               <% song.tags.each do |tag| %>
-                <%= tag.name %>
+                <div class="bg-gray-400 rounded text-xs text-white text-center p-1">
+                  <%= tag.name %>
+                </div>
               <% end %>
             <% end %> 
           </div>         
         </div>
         <div class="">萱大の音波專區</div>
+
         <div class="flex">
           <img class="w-8" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
           <input class="w-full bg-gray-200 p-2" type="text" placeholder="Write a comment">
         </div>
+        
         <%#= 歌曲功能區 %>
         <div class="flex justify-between">
           <div class="flex">
-            <button class="border border-gray-300 px-3 rounded">
+            <button class="flex border border-gray-300 px-3 rounded">
               <i class="fas fa-heart"></i>
-              like
+              <p class="hidden md:block">like</p> 
             </button>
-            <button class="border border-gray-300 px-3 rounded">
+            <button class="flex border border-gray-300 px-3 rounded">
               <i class="fas fa-share-square"></i>
-              share
+              <p class="hidden md:block">share</p>
             </button>
-            <button class="border border-gray-300 px-3 rounded">
+            <button class="flex border border-gray-300 px-3 rounded">
               <i class="fas fa-balance-scale-left"></i>
-              Add to Next Up
+              <p class="hidden md:block">Add to Next Up</p> 
             </button>
-            <button class="border border-gray-300 px-3 rounded">
+            <button class="flex border border-gray-300 px-3 rounded">
               <i class="fas fa-bolt"></i>
-              More
+              <p class="hidden md:block">More</p>
             </button>
           </div>
           <div class="flex">
-            <button class="">
+            <button class="mr-4 flex">
               <i class="fas fa-play"></i>
-              12.5M
+              <p class="hidden md:block">12.5M</p>
             </button>
-            <button class="">
+            <button class="flex">
               <i class="fas fa-comments"></i>
-              2325
+              <p class="hidden md:block">233</p>
             </button>
           </div>
         </div>
@@ -82,7 +88,7 @@
         <% end %>
   </div>
   <%#右邊邊區域%>
-  <div class="w-1/4 text-gray-600 text-sm m-4">
+  <div class="col-span-3 text-gray-600 text-sm m-4 hidden sm:block">
     <div class="flex justify-between border-b border-gray-400 mb-4">
       <div class="">
         <i class="fas fa-user-friends"></i>
