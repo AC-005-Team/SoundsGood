@@ -10,52 +10,43 @@
   <button class="mr-4 hover:text-orange-500"><%= link_to "Following", following_library_index_path%></button>
   <button class="mr-4 hover:text-orange-500"><%= link_to "History", history_library_index_path%></button>
 </div>
-
 <div class="col-span-9 bg-white">
-    <div class="mx-4 p-5">
-
-      <%#= 版面控制區域 %>
-      <div class="flex justify-between text-lg text-gray-500">
-        <div class="">Hear the tracks you’ve liked:</div>
-        <div class="flex w-1/3">
-          <span class="mx-2">View</span>
-          <button class="mx-2"><i class="fas fa-th-large"></i></button> 
-          <button class="mx-2"><i class="fas fa-th-list"></i></button> 
-          <input class="mx-2 border rounded w-full" type="text" placeholder="Fillter">
-        </div>
-      </div>
-      
-      
-      <div class="grid grid-cols-12 gap-4">
-
-        <% @songs.each do |song|%>
-          <% if song.image_url %>
-
-            <div class="col-span-2 my-2 mr-2 flex flex-col justify-between">
-              <%#= 歌曲圖片 %>
-                <div class="align-top w-full">
-                  <%= link_to image_tag(song.image_url), song_path(song.id), class:'block' %>
-                </div>
-              <%#= 歌曲名稱、介紹、TAG標籤 %>
-                <div class="">
-                  <%#= 歌曲名稱 %>
-                  <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
-                  <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
-                  <%#= 歌曲TAG區 %>                           
-                  <% if song.tags.length > 0 %>
-                    <% song.tags.each do |tag| %>
-                      <%= tag.name %>
-                    <% end %>
-                  <% end %>
-                </div>
-              
-            </div>
-
-          <% end %>
-        <% end %>  
-
+  <div class="mx-4 p-5">
+    <%#= 版面控制區域 %>
+    <div class="flex justify-between text-lg text-gray-500">
+      <div class="">Hear the tracks you’ve liked:</div>
+      <div class="flex w-1/3">
+        <span class="mx-2">View</span>
+        <button class="mx-2"><i class="fas fa-th-large"></i></button> 
+        <button class="mx-2"><i class="fas fa-th-list"></i></button> 
+        <input class="mx-2 border rounded w-full" type="text" placeholder="Fillter">
       </div>
     </div>
+    <div class="grid grid-cols-12 gap-4">
+      <% @like_songs.each do |song|%>
+        <% if song.image_url %>
+          <div class="col-span-2 my-2 mr-2 flex flex-col justify-between">
+            <%#= 歌曲圖片 %>
+            <div class="align-top w-32">
+              <%= link_to image_tag(song.image_url), song_path(song.id), class:'block' %>
+            </div>
+            <%#= 歌曲名稱、介紹、TAG標籤 %>
+            <div class="">
+              <%#= 歌曲名稱 %>
+              <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
+              <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
+              <%#= 歌曲TAG區 %>                           
+              <% if song.tags.length > 0 %>
+                <% song.tags.each do |tag| %>
+                  <%= tag.name %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>  
+    </div>
+  </div>
 <%#=左邊區域結束%>
   <div class="flex border-t border-gray-500 mx-4">
     <div class="my-3 text-xs table-row-group">

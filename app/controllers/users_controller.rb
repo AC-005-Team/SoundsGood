@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:follow]
-  before_action :find_user, only: [:show, :follow]
+  before_action :find_user, only: [:show, :follow, :followers, :following, :likes, :comments]
 
   def show;end
 
@@ -25,6 +25,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def following
+    @followees = @user.followees
+  end
+
+  def followers
+    @followers = @user.followers
+  end
+
+  def likes
+    @like_songs = @user.like_songs.includes(:tags)
+  end
+
+  def comments
+    @comments = @user.comments.includes(:songs)
+  end
   private
 
   def user_params
