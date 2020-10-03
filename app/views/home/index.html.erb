@@ -2,31 +2,48 @@
 <div class="mx-6 bg-white">
 
 <%#這是首頁最上的大圖%>
-  <div class="soundcloud w-full h-full bg-cover" style="background-image: url(https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_b@2x-7e5ff471.jpg)">
+  <div class="soundcloud w-full h-full bg-cover text-white" style="background-image: url(https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_b@2x-7e5ff471.jpg)">
     <div class="">
-      <nav class="container mx-auto py-3 flex items-center justify-between">
+      <nav class="container mx-auto py-3 flex items-center justify-between ">
 
         <button class="hover:text-white w-48">
           <%= link_to discover_path do %>
-          <%= image_pack_tag('logo_14.png') %>
+          <%= image_pack_tag('logo_14.png', class:'w-48 hidden sm:block') %>
+          <%= image_pack_tag('logo_10.png', class:'w-12 block sm:hidden') %>
           <% end %>
         </button>
 
         <div>
-          <button class="px-2 py-2 bg-sladock text-white rounded"><%= link_to "Sign in",new_user_session_path%></button>
-          <button class="px-4 py-2 bg-orange-600 text-white rounded"><%= link_to "Create account",new_user_registration_path%></button>
-          <button class="px-2 py-2 bg-sladock text-white rounded"><a href="#">for Creator</a></button>
+          <button class="px-2 py-2 bg-sladock rounded">
+            <%= link_to "Sign in",new_user_session_path, class:'hidden sm:block'%>
+            <%= link_to new_user_session_path, class:'block sm:hidden' do %>
+              <i class="fas fa-sign-in-alt"></i>              
+            <% end %>
+          </button>
+
+          <button class="bg-orange-600 rounded">
+            <%= link_to "Create account",new_user_registration_path, class:'hidden sm:block px-4 py-2'%>
+            <%= link_to new_user_registration_path, class:'block sm:hidden px-4 py-1' do%>
+              <i class="fas fa-user-plus"></i>
+            <% end %>
+          </button>
+
+          <button class="px-2 py-2 bg-sladock rounded">
+            <a href="#">for Creator</a>
+          </button>
         </div>
       </nav>
     </div>
-    <div class="text-white text-4xl text-center m-10">Connect to SoundsGood</div>
-    <div class="text-white text-2xl text-center mx-auto max-w-xl">Discover, stream, and share a constantly expanding mix of music from emerging and major artists around the world.</div>
+    <div class="text-4xl text-center m-10">Connect to SoundsGood</div>
+    <div class="text-2xl text-center mx-auto max-w-xl">Discover, stream, and share a constantly expanding mix of music from emerging and major artists around the world.</div>
     <div class="text-center content-center my-5 pb-5">
-      <button class="px-4 py-2 bg-orange-600 text-white rounded mb-12"><%= link_to "Sign up for Free",new_user_registration_path%></button>
+      <button class="px-4 py-2 bg-orange-600 rounded mb-12">
+        <%= link_to "Sign up for Free",new_user_registration_path%>
+      </button>
     </div>
   </div>
 
-<%#這是搜尋or上傳自己的那邊%>
+  <%#這是搜尋or上傳自己的那邊%>
   <div class="container mx-auto flex max-w-3xl items-center my-10">
     <form action="" class="relative justify-center flex-grow">
       <input type="search" class="w-full px-2 py-2 focus:outline-none bg-gray-200 rounded" placeholder="Search for artists, bands, tracks, podcasts">
@@ -39,92 +56,50 @@
     Hear what’s trending for free in the SoundsGood community
   </div>
 
-<%#音樂區塊%>
+  <%#音樂區塊%>
   <div class="grid grid-cols-12 gap-4 text-xs">
-
     <% @songs.each do |song|%>
       <% if song.image_url %>
-
         <div class="col-span-2 my-2 mr-2 flex flex-col justify-between">
           <%#= 歌曲圖片 %>
-            <div class="align-top w-full">
-              <%= link_to image_tag(song.image_url), song_path(song.id), class:'block' %>
-            </div>
+          <div class="align-top w-full">
+            <%= link_to image_tag(song.image_url), song_path(song.id), class:'block' %>
+          </div>
           <%#= 歌曲名稱、介紹、TAG標籤 %>
-            <div class="">
-              <%#= 歌曲名稱 %>
-              <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
-              <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
-              <%#= 歌曲TAG區 %>                           
-              <% if song.tags.length > 0 %>
-                <% song.tags.each do |tag| %>
-                  <%= tag.name %>
-                <% end %>
+          <div class="">
+            <%#= 歌曲名稱 %>
+            <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
+            <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
+            <%#= 歌曲TAG區 %>                           
+            <% if song.tags.length > 0 %>
+              <% song.tags.each do |tag| %>
+                <%= tag.name %>
               <% end %>
-            </div>
-          
+            <% end %>
+          </div>
         </div>
-
       <% end %>
     <% end %>  
-
   </div>
 
-
-<%#音樂區塊%>
-  <div class="grid gap-4 grid-cols-6">
-    <div class="">
-      <div class="songcover"></div>
-      <p class="text-sm">Lorem, ipsum dolor.</p>
-      <p class="text-xs text-gray-500">lorem</p>
-    </div>
-
-    <div class="">
-      <div class="songcover"></div>
-      <p class="text-sm">Lorem, ipsum dolor.</p>
-      <p class="text-xs text-gray-500">lorem</p>
-    </div>
-
-    <div class="">
-      <div class="songcover"></div>
-      <p class="text-sm">Lorem, ipsum dolor.</p>
-      <p class="text-xs text-gray-500">lorem</p>
-    </div>
-
-    <div class="">
-      <div class="songcover"></div>
-      <p class="text-sm">Lorem, ipsum dolor.</p>
-      <p class="text-xs text-gray-500">lorem</p>
-    </div>
-
-    <div class="">
-      <div class="songcover"></div>
-      <p class="text-sm">Lorem, ipsum dolor.</p>
-      <p class="text-xs text-gray-500">lorem</p>
-    </div>
-
-    <div class="">
-      <div class="songcover"></div>
-      <p class="text-sm">Lorem, ipsum dolor.</p>
-      <p class="text-xs text-gray-500">lorem</p>
-    </div>
-
-  </div>
-
-<%#橘色按鈕%>
+  <%#橘色按鈕%>
   <div class="flex justify-center">
-    <button class="px-4 py-2 bg-orange-600 text-white rounded"><a href="#">explore trending playlists</a></button>
+    <button class="px-4 py-2 bg-orange-600 text-white rounded">
+      <a href="#">explore trending playlists</a>
+    </button>
   </div>
 
-<%#尋找創作者%>
+  <%#尋找創作者%>
   <div class="songcover1">
-    <div class="w-1/2 m-10 p-10">
-      <div class="text-white text-4xl">Calling all creators</div>
-      <div class="text-white text-2xl">Get on SoundCloud to connect with fans, share your sounds, and grow your audience. What are you waiting for?</div>
-      <button class="px-6 py-2 my-6 bg-sladock text-white rounded border border-gray-200"><a href="#">Find out more</a></button>
+    <div class="m-10 p-10 text-white ">
+      <div class="text-4xl">Calling all creators</div>
+      <div class="text-2xl w-full lg:w-1/2">Get on SoundsGood to connect with fans, share your sounds, and grow your audience. What are you waiting for?</div>
+      <button class="px-6 py-2 my-6 bg-sladock rounded border border-gray-200">
+        <a href="#">Find out more</a>
+      </button>
     </div>
   </div>
-<%#再次逼你登入%>
+  <%#再次逼你登入%>
   <div class="flex flex-col items-center">
     <div class="text-4xl text-center">Thanks for listening. Now join in.</div>
     <div class="text-2xl text-center max-w-xl">Save tracks, follow artists and build playlists. All for free.</div>
@@ -132,13 +107,18 @@
     
     <div class="">
       Already have an account?
-      <button class="px-6 py-2 my-6 bg-sladock rounded border border-gray-200"><%= link_to "Sign in",new_user_session_path%></button>
+      <button class="px-6 py-2 my-6 bg-sladock rounded border border-gray-200">
+        <%= link_to "Sign in",new_user_session_path, class:'hidden sm:block'%>
+        <%= link_to new_user_session_path, class:'block sm:hidden' do %>
+          <i class="fas fa-sign-in-alt"></i>
+        <% end %>
+      </button>
     </div>
   </div>
 
   <div class="my-2 w-full h-1 bg-gray-500">
   </div>
-<%#底部更多選單%>
+  <%#底部更多選單%>
   <div class="flex text-gray-500 text-sm">
     <span class="hover:text-black mx-1"><a href="#">Popular searches</a></span>
       -
