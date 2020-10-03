@@ -7,6 +7,7 @@ const songs = {
 
   state: {
     isPlay: false,
+    continuePlay: false,
     playerTracks: {},
     playerCurrentTrack: null
   },
@@ -23,6 +24,12 @@ const songs = {
     },
     SET_CURRENT_TRACK(state,track){
       state.playerCurrentTrack = track;
+    },
+    KEEP_PLAYING(state){
+      state.continuePlay = true;
+    },
+    PAUSE_PLAYING(state){
+      state.continuePlay = false;
     }
   },
 
@@ -35,6 +42,12 @@ const songs = {
     },
     pause(context){
       context.commit('PAUSE')
+    },
+    continuePlay(context){
+      context.commit('KEEP_PLAYING')
+    },
+    continuePause(context){
+      context.commit('PAUSE_PLAYING')
     },
     setCurrentTrack(context, track) {
     context.commit('SET_CURRENT_TRACK', track);
@@ -52,6 +65,10 @@ const songs = {
 
     playerTracks(state){
       return state.playerTracks
+    },
+
+    continue(state){
+      return state.continuePlay
     },
 
   }

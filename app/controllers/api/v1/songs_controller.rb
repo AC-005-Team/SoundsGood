@@ -1,6 +1,6 @@
 class Api::V1::SongsController < ApplicationController
   def index
-    @songs = current_user.songs.includes(:tags)
+    @songs = Song.all
     @playlists = current_user.playlists
   end
 

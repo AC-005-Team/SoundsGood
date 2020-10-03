@@ -8,7 +8,11 @@
 <script>
 import 'aplayer/dist/APlayer.min.css';
 import APlayer from 'aplayer';
-import { mapGetters } from 'vuex'
+import {
+  mapState,
+  mapGetters,
+  mapActions
+} from 'vuex'
 
 
 export default {
@@ -34,6 +38,7 @@ export default {
   computed: {
     ...mapGetters({
       isPLAY: 'songs/isPLAY',
+      continue: 'songs/continue',
       playerTracks:'songs/playerTracks'
     })
   // getSong() {
@@ -41,8 +46,9 @@ export default {
   // },
 },
 methods:{
+  ...mapActions('songs', [ 'play','pause']),
   handlePlayPause(){
-    if(this.isPLAY){
+    if(this.isPLAY && !this.continue ){
       this.ap.pause();
       this.ap.list.clear();
       this.ap.list.add(this.playerTracks.audio);
@@ -50,14 +56,31 @@ methods:{
     }else{
       this.ap.pause();
     }
+  },
+  handleContinue(){
+    if(this.continue){
+      this.ap.play();
+      // this.$store.dispatch('songs/pause');
+    }else{
+      this.ap.pause();
+    }
   }
+
 },
 watch:{
     isPLAY(newValue, oldValue) {
       if(newValue !== oldValue){
         this.handlePlayPause();
       }
+    },
+
+    continue(newValue,oldValue){
+      if(newValue !== oldValue){
+        this.handleContinue();
       }
+
+    }
+
     }
 }
 

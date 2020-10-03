@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import playlist from './components/playlist';
 import playlist_page from './components/playlist_page';
 import discover from './components/page/discover';
-import library from './components/page/library';
+import you from './components/page/you/you';
 import stream from './components/page/stream';
 import upload from './components/page/upload';
 
@@ -30,9 +30,32 @@ export default new VueRouter({
 
     },
     {
-      path: '/library',
-      name: 'library',
-      component: () => import(/* webpackChunkName: "Library" */ './components/page/library'),
+      path: '/you',
+      name: 'you',
+      component: () => import(/* webpackChunkName: "You" */ './components/page/you/you'),
+      children:[
+        {
+          path:'library',
+          name:'library',
+          component: () => import(/* webpackChunkName: "Library" */ './components/page/you/library'),
+        },
+        {
+          path:'likes',
+          name:'likes',
+          component: () => import(/* webpackChunkName: "Likes" */ './components/page/you/likes'),
+        },
+        {
+          path:'set',
+          name:'playlists',
+          component: () => import(/* webpackChunkName: "Library" */ './components/page/you/playlists'),
+        },
+        {
+          path:'following',
+          name:'following',
+          component: () => import(/* webpackChunkName: "Library" */ './components/page/you/following'),
+        },
+
+      ]
 
 
     },
