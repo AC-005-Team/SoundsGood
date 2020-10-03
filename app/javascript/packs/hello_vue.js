@@ -19,13 +19,20 @@ import Vue from 'vue'
 import App from '../app.vue'
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
+
+
 // import router from './routes.js';
 // import store from '../store';
+// import "./js/jquery.js";
+// import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap'
+import "select2/dist/css/select2.css"
+import "select2/dist/js/select2.js"
+import jQuery from 'jquery'
+window.$ = window.jQuery = jQuery
 
 Vue.use(Vuex);
 Vue.use(VueRouter);
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({

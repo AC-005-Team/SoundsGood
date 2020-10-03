@@ -6,3 +6,4 @@ json.cover @song.image_url
 json.theme '#ebd0c2'
 json.url @song.track_url
 json.duration @song.track.metadata['duration']
+end

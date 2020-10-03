@@ -14,8 +14,9 @@ slide-multiple
 
 <div class="flex overflow-scroll text-gray-500 text-xs">
   <div class="my-2 mr-2"  @click="playPause" @mouseover="mouseOver" @mouseleave="mouseLeave">
-
+<!-- :class="[playing? 'fa-pause-circle': '' ]"  -->
     <div class="cover">
+      <i class="far z-10 fa-pause-circle"  style="font-size: 60px" v-show="playing"  />
       <transition name="fade">
         <div  class="flex-col justify-between">
           <div class="buttons flex flex-reversed rigt-0 items-center z-10">
@@ -24,7 +25,6 @@ slide-multiple
           </div>
 
 
-          <i class="far fa-pause-circle"  v-show="playing" style="font-size: 60px"  />
         </div>
       </transition>
 
@@ -113,8 +113,12 @@ export default {
             playerTracks: 'songs/playerTracks',
             isPLAY: 'songs/isPLAY',
          }),
+
          playing(){
-           if ( this.playerTracks.song_id == this.chart.song_id){
+           if ( this.playerTracks.song_id === this.chart.song_id  ){
+             if(this.isPLAY === false){
+              return false;
+             };
              return true;
            }else{
              return false;
@@ -182,9 +186,7 @@ export default {
   color: rgba(110, 105, 105, 0.88);
 }
 
-.fa-play-circle{
-
-  text-shadow: 20px 3px 16px #272634;
+.fa-pause-circle, .fa-play-circle{
   font-size: 65px;
   color: rgba(247,66,2,0.6);
   position: absolute;
