@@ -5,6 +5,7 @@ class SongsController < ApplicationController
   def index
     @songs = current_user.songs.includes(:tags)
     @playlists = current_user.playlists
+    render json: @songs.to_json(include: [:playlists]), status: 200
   end
 
   def new
@@ -15,9 +16,11 @@ class SongsController < ApplicationController
   def create
     @song =  current_user.songs.new(song_params)
     if @song.save
-      redirect_to user_songs_path
+      # redirect_to user_songs_path
+      render json: @song, status: 200
     else
-      render :new
+      # render :new
+      render json: @song, status: 400
     end
   end
 
