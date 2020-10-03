@@ -20,15 +20,25 @@ slide-multiple
       <transition name="fade">
         <div  class="flex-col justify-between">
           <div class="buttons flex flex-reversed rigt-0 items-center z-10">
-            <i class="fa fa-ellipsis-h mr-2"></i>
-            <i class="fa fa-heart mr-2"></i>
+            <i class="fa fa-ellipsis-h mr-2" @click.stop="toggle"  ></i>
+            <i class="fa fa-heart mr-2" @click.stop="like" :class="[changeColor? 'like':'']"></i>
           </div>
+
 
 
         </div>
       </transition>
 
       <img class="h-32 max-w-xl mr-4"  :src="chart.audio.cover">
+    </div>
+
+
+
+    <div class="dropdown">
+      <div id="myDropdown" class='dropdown-content ' :class=" [isActive? 'show' : '']" >
+        <a>add to play next</a>
+        <a>add to playlist</a>
+      </div>
     </div>
 
     <li> {{ chart.audio.name }} </li>
@@ -40,6 +50,7 @@ slide-multiple
 
 
   </div>
+
 
 </div>
 
@@ -66,6 +77,8 @@ export default {
     return {
       playBtn: false,
       is: false,
+      changeColor:false,
+      isActive: false
     }
   },
   props: ['chart'],
@@ -76,15 +89,18 @@ export default {
   },
 
   methods: {
-    ...mapActions('songs', [ 'play','pause']),
+    ...mapActions('songs', [ 'play','pause','continuePlay','continuePause']),
     ...mapActions('playlists', ['loadSongs']),
 
     playPause(){
       if(this.playerTracks.song_id === this.chart.song_id){
         if(this.isPLAY === true){
           this.$store.dispatch('songs/pause')
+          this.$store.dispatch('songs/continuePause')
         }else{
+          this.$store.dispatch('songs/continuePlay')
           this.$store.dispatch('songs/play')
+          // this.$store.dispatch('songs/play')
         }
       }else{
         this.$store.dispatch('songs/pause')
@@ -98,10 +114,13 @@ export default {
     mouseLeave: function() {
       this.playBtn = false
     },
+    toggle(){
+      return this.isActive = !this.isActive
+    },
 
-    // www() {
-    //   return this.is = !this.is
-    // },
+    like() {
+      return this.changeColor = !this.changeColor
+    },
   },
 
   computed: {
@@ -111,6 +130,7 @@ export default {
         }),
         ...mapGetters({
             playerTracks: 'songs/playerTracks',
+            continue: 'songs/continue',
             isPLAY: 'songs/isPLAY',
          }),
 
@@ -171,7 +191,6 @@ export default {
 .cover:hover img {
   transform: scale(1.2);
   /* box-shadow: inset 0px -10px 10px 3px rgba(0,0,0,.2); */
-
 }
 
 .cover:hover{
@@ -202,6 +221,10 @@ export default {
   font-size: 18px;
 }
 
+.like{
+  color:rgb(255, 93, 33);
+}
+
 .fade-enter-active {
   transition: opacity .01s;
 }
@@ -209,4 +232,31 @@ export default {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  /* position: absolute; */
+  /* left: 20px;
+  top:0; */
+  min-width: 150px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  color: black;
+  padding: 5px;
+  font-size: 12px;
+  text-align: center;
+  display: block;
+
+
+}
+.dropdown a:hover {background-color: #f0c543;}
+.show {display: block;}
 </style>

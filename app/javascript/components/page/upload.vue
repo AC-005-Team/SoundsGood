@@ -285,10 +285,13 @@ export default {
         withCredentials: true,
         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
       };
-      axios.post('http://127.0.0.1:3000/users/2/songs', formData, {
+      const config = {
+        onUploadProgress: progressEvent => console.log(progressEvent.loaded)
+      }
+      axios.post('http://127.0.0.1:3000/users/2/songs', formData,config, {
         withCredentials: true
       }).then(response => {
-        console.log("QWEQWEQW",response)
+        console.log("QWEQWEQW", response)
       }).catch(error => {
         console.log(error.response)
       })
