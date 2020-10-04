@@ -46,3 +46,4 @@ yarn-debug.log*
 /config/credentials/staging.key  
 .env
 *.dev
+.env.staging
