@@ -71,8 +71,11 @@ Rails.application.routes.draw do
         resources :songs, only: [:index, :show] do
           resources :comments, only: [:index]
         end
-        resources :playlists, only: [:show]
-        
+        resources :playlists, only: [:show] do
+          collection do
+            get :library
+          end
+        end
       end
     end
   end

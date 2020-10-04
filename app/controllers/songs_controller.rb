@@ -25,7 +25,11 @@ class SongsController < ApplicationController
   def show 
     @comment = @song.comments.new
     @comments = @song.comments.includes(:user, replies:[:user]).where(reply_id: nil).order(id: :desc)
-    @playlists = current_user.playlists
+    begin
+      @playlists = current_user.playlists
+    rescue
+      p 'not logged in'
+    end
   end
 
   def destroy
