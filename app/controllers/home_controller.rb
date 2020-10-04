@@ -3,9 +3,7 @@ class HomeController < ApplicationController
   
   def index;end
   
-  def discover
-    @user = current_user
-  end
+  def discover;end
   
   def stream;end
   

@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:follow]
-before_action :find_user, only: [:show, :follow, :followers, :following, :likes, :comments]
-  before_action :find_current_user, only: [:show, :edit]
+  before_action :find_user, only: [:show, :follow, :followers, :following, :likes, :comments]
 
   def show;end
 
@@ -49,8 +48,4 @@ before_action :find_user, only: [:show, :follow, :followers, :following, :likes,
     @user = User.find(params[:id])
   end
 
-  def find_current_user
-    @current_user = current_user
-  end
-  
 end

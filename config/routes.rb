@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   
   resources :rooms do
     collection do
-      post :vonage, to: 'rooms#index'
+      post :vonage, to: 'rooms#signal'
     end
     member do
       get :play

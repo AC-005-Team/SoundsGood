@@ -25,7 +25,7 @@
 <%#=左邊使用者專區%>
 <div class="flex m-4 justify-between border-b border-gray-400">
   <div class="mx-4 text-xl m-2">
-    <button class="hover:text-orange-600 mr-4">All</button>
+    <%= link_to "All", user_songs_path(@user.id), class: 'hover:text-orange-600 mr-4' %>
     <button class="hover:text-orange-600 mr-4">Popular Tracks</button>
     <button class="hover:text-orange-600 mr-4">Tracks</button>
     <button class="hover:text-orange-600 mr-4">Albums</button>
@@ -35,7 +35,7 @@
   <div class="flex m-2">
     <button class="mr-4 text-white bg-orange-600 px-2 rounded"><i class="fas fa-balance-scale"></i>Your Insights</button >
     <button class="mr-4"><i class="fas fa-share-square"></i>Share</button >
-    <% if @current_user == @user %>
+    <% if current_user == @user %>
       <%= link_to edit_user_path(current_user.id), class: 'mr-4' do %>
         <i class="fas fa-pencil-alt"></i>Edit
       <% end %>
@@ -121,7 +121,7 @@
         </div>
 
         <%#=右邊 user-like area %>
-        <%= render './shared/like_area.html.erb', element: @current_user %>
+        <%= render './shared/like_area.html.erb', element: current_user %>
 
       </div>
 
