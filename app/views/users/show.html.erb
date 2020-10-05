@@ -13,10 +13,10 @@
         <div class="text-xl text-orange-700 m-auto mr-2"><%= @user.last_name %></div>
       </div>
     </div>
-    <button class="text-white bg-orange-600 p-2 rounded">
+    <button class="flex items-center text-white bg-orange-600 p-2 rounded">
       <i class="fas fa-camera"></i>
-      Upload header image
-    </button>
+      <p class="hidden md:block">Upload header image</p> 
+    </button> 
   </div>
 </div>
 
@@ -98,19 +98,19 @@
         <%#=歌曲功能專區%>
         <div class="">
           <div class="flex w-2/3 my-4 p-2 justify-around">
-            <button class="flex border border-gray-300 px-3 rounded">
+            <button class="flex items-center border border-gray-300 px-3 rounded">
               <i class="fas fa-heart"></i>
               <p class="hidden md:block">like</p> 
             </button>
-            <button class="flex border border-gray-300 px-3 rounded">
+            <button class="flex items-center border border-gray-300 px-3 rounded">
               <i class="fas fa-share-square"></i>
               <p class="hidden md:block">share</p> 
             </button>
-            <button class="flex border border-gray-300 px-3 rounded">
+            <button class="flex items-center border border-gray-300 px-3 rounded">
               <i class="fas fa-balance-scale-left"></i>
               <p class="hidden md:block">Add to Next up</p> 
             </button>
-            <button class="flex border border-gray-300 px-3 rounded">
+            <button class="flex items-center border border-gray-300 px-3 rounded">
               <i class="fas fa-bolt"></i>
               <p class="hidden md:block">More</p> 
             </button>

@@ -1,16 +1,15 @@
 https://soundcloud.com/cy4eroa8bbxx/sets/top-50-all-music-genres
-
+http://127.0.0.1:3000/playlists/1
 <div class="grid grid-cols-12 bg-gradient-to-r from-red-500 via-white to-orange-700 mx-6">
   <div class="col-span-8 m-4 flex flex-col justify-between">
     <div class="flex justify-between">
-      <div class="flex">
+      <div class="flex items-center">
         <div class="">
           <i class="fas fa-play fa-2x"></i>
         </div>
-        
         <div class="">
           <p class="">user_name</p>
-          <p class="">playlists_name</p>
+          <p class=""><%= @playlist.name%></p>
         </div>
       </div>
       <div class="">5 days ago</div>
@@ -131,8 +130,6 @@ https://soundcloud.com/cy4eroa8bbxx/sets/top-50-all-music-genres
 
   </div>
 </div>
-
-
 
 <h1><%= @playlist.name%></h1>
 <div>
