@@ -25,9 +25,9 @@
 
         <div> <%#=萱大大專區%>
           <%= content_tag(:div, '', class:['waveform-wrap waveform-light'], data:{ path: @song.track_url, filename: @song.get_filename, id: @song.id }) do %> 
-          <div class="waveform-dummy-trigger"></div>
-          <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
-        <% end %>
+            <div class="waveform-dummy-trigger"></div>
+            <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
+          <% end %>
         </div>
       </div>
 

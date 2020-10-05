@@ -3,9 +3,9 @@ $(document).on('turbolinks:load', function() {
   const player = document.querySelector('#player1')
   const commentShowOnWave = $('.waveform-comment-space')
   const commentForms = document.querySelectorAll('.song-comment-form')
-  const userAvatarUrl = document.querySelector('.current_user-avatar').getAttribute('src')
-
+  
   if(commentShowOnWave){ //@todo: 決定是否做成SSR
+    const userAvatarUrl = document.querySelector('.current_user-avatar').getAttribute('src')
     const songs = document.querySelectorAll('.waveform-comment-space')
     songs.forEach( song => {
       const songId = song.dataset.id
@@ -57,7 +57,7 @@ $(document).on('turbolinks:load', function() {
       })
     })
     commentShowOnWave.on('click', () => {
-      // @todo: record time, append avatar, cursor to comment text field, other comment avatar opacity .3
+      // @todo: record time, append avatar, cursor to comment text field, other comment avatar
     })
     // @todo: hover avatar and show comment
   }
