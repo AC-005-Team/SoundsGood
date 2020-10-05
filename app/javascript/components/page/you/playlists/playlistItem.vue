@@ -2,7 +2,7 @@
 <div @click='yourClickHandler'>
   <li>playlist: {{ playlist.name }} </li>
   <button @click="playThelist" :id="playlist.id" :class="">play ▶</button>
-  <router-link :to="`playlist/${playlist.id}`">show playlist</router-link>
+  <router-link :to="`/playlist/${playlist.id}`">show playlist</router-link>
   <div class="dropdown">
     <button class="dropbtn" @click="toggle">+</button>
     <div id="myDropdown" class='dropdown-content ' :class=" [isActive? 'show' : '']" >
@@ -15,7 +15,7 @@
 
 <script type="text/javascript">
 import axios from 'axios';
-import Api from '../api/api'
+import Api from '../../../../api/api'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default{
@@ -26,7 +26,7 @@ export default{
 },
   name: 'playlistItem',
   props: ['playlist'],
-  
+
   computed: {
     ...mapGetters({
         playerTracks: 'songs/playerTracks'

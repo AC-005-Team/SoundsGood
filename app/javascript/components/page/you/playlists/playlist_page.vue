@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import Api from '../api/api'
+import Api from '../../../../api/api'
 
 import {
   mapState,

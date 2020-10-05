@@ -1,8 +1,8 @@
 <template>
-
-  <div>
+<div>
   <playlistItem v-for="playlist in playlists" :playlist="playlist"></playlistItem>
-  </div>
+</div>
+
 
 </template>
 
@@ -11,24 +11,24 @@ import axios from 'axios';
 import playlistItem from './playlistItem'
 export default {
   name: 'playlist',
-  data(){
-  return{
-    playlists:[]
-  };
+  data() {
+    return {
+      playlists: []
+    };
   },
-  mounted () {
+  mounted() {
     const axios = require('axios').create({
-    baseURL: 'http://127.0.0.1:3000'
-  });
-  axios
-    .get('/api/v1/playlists')
-    .then(response => (this.playlists = response.data))
-    .catch(function (error) {
-      console.log(error);
+      baseURL: 'http://127.0.0.1:3000'
     });
+    axios
+      .get('/api/v1/playlists')
+      .then(response => (this.playlists = response.data))
+      .catch(function(error) {
+        console.log(error);
+      });
 
-},
-  components:{
+  },
+  components: {
     playlistItem
   }
 

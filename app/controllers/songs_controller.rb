@@ -16,6 +16,7 @@ class SongsController < ApplicationController
 
   def create
     @song =  current_user.songs.new(song_params)
+
     if @song.save
       # redirect_to user_songs_path
       render json: @song, status: 200
