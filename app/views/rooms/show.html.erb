@@ -1,0 +1,13 @@
+<h1>subscriber</h1>
+<p>
+  <strong>Name:</strong>
+  <%= @room.name %>
+</p>
+<p>
+  <strong>Session:</strong>
+  <%= @room.session_id %>
+</p>
+<div id="subscriber"></div>
+<%= link_to 'channel', play_room_path(@room) %>
+
+<%= link_to 'Back', rooms_path %>

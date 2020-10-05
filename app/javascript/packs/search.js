@@ -1,19 +1,20 @@
-const hostPath = "http://" + window.location.host;
-document.addEventListener("turbolinks:load", function() {
-  document.querySelector("#search").addEventListener("keyup", function(e) {
-    if (e.key === "Enter") {
-      result();
-    } else {
-      document.querySelector(".search-result").innerHTML = "";
-      search();
-    }
-  });
+document.addEventListener("DOMContentLoaded", function() {
+  if (document.querySelector("#search")) {
+    document.querySelector("#search").addEventListener("keyup", function(e) {
+      if (e.key === "Enter") {
+        result();
+      } else {
+        document.querySelector(".search-result").innerHTML = "";
+        search();
+      }
+    });
+  }
 });
 
 function search() {
+  const hostPath = window.location.origin;
   const search = document.querySelector("#search");
   const search_value = search.value;
-  console.log(search_value);
   if (search_value === "") {
     return;
   }
@@ -33,13 +34,12 @@ function search() {
         a_tag.classList.add(...class_list);
         a_tag.href = `${hostPath}/search/result?search=${element}`;
         a_tag.textContent = `${element}`;
-        console.log(element);
         search_recommend.appendChild(a_tag);
       })
     );
 }
 
 function result() {
-  const search_result = document.querySelector("#search_bar");
-  search_result.submit();
+  const search_bar = document.querySelector("#search_bar");
+  search_bar.submit();
 }
