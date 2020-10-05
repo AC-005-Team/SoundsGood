@@ -61,7 +61,7 @@
       <%#= 上傳『音樂』神秘小按鈕 %>
       <div class="text-white bg-orange-600 rounded py-2 px-10 relative w-2/5 m-auto">
         Choose Music to Upload
-        <%= f.file_field :track, class: 'song_value bg-black opacity-50 absolute top-0 left-0 h-10'%>
+        <%= f.file_field :track, class: 'song_value bg-black opacity-0 absolute top-0 left-0 h-10'%>
       </div><br>
       <div class="text-2xl" id="music"></div>
       
@@ -126,7 +126,7 @@
 
           <%#= 上傳『圖片』神秘小按鈕 %>
           <div class="w-full max-h-full rounded p-2 bg-gray-200 relative">
-            <input class="bg-black opacity-50 absolute top-0 left-0 h-10" type="file" name=song[image] onchange="showMyImage(this)" >
+            <input class="bg-black opacity-0 absolute top-0 left-0 h-10" type="file" name=song[image] onchange="showMyImage(this)" >
             <i class="fas fa-camera-retro"></i>
             Upload Image
             <img class="" id="thumbnil" src="" >
