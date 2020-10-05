@@ -1,6 +1,7 @@
+import { renderComments } from './comment'
 import WaveSurfer from 'wavesurfer.js'
 import CursorPlugin from 'wavesurfer.js/src/plugin/cursor.js'
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('DOMContentLoaded', () => {
   const wavePlace = document.querySelector(".waveform-wrap") // see if at least a waveform div is present
   const peakStorageRoot = 'https://peaks.soundsgood.world/api/v1/getjson/song_peaks/'
 
@@ -12,12 +13,14 @@ document.addEventListener('turbolinks:load', () => {
       playingNowPath.forEach(songEl => {
         renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb')
         renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#ffffff')
+        renderComments()
       });
     } else {
       // dark
       playingNowPath.forEach(songEl => {
         renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb')
         renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#555555')
+        renderComments()
       });
   }
 
@@ -36,7 +39,7 @@ document.addEventListener('turbolinks:load', () => {
           return
         }
         console.log('------------------------------')
-        console.log('loaded peaks! sample_rate: ' + peaks.sample_rate)
+        console.log('peaks loaded! sample_rate: ' + peaks.sample_rate)
         console.log('------------------------------')
         // load peaks into wavesurfer.js
         // wavesurferDummy.load(proxyurl+url, peaks.data)
@@ -58,7 +61,7 @@ document.addEventListener('turbolinks:load', () => {
       })
       .then(peaks => {
         console.log('------------------------------')
-        console.log('loaded default! sample_rate: ' + peaks.sample_rate)
+        console.log('default loaded! sample_rate: ' + peaks.sample_rate)
         console.log('------------------------------')
         // load peaks into wavesurfer.js
         // wavesurferDummy.load(proxyurl+url, peaks.data)
