@@ -82,7 +82,19 @@ https://soundcloud.com/cy4eroa8bbxx/sets
           </div>
         </div>
         <div class="">音波區</div>
-        <div class="">專輯內歌曲區</div>
+        <div class="">
+          <%#= 專輯內前五首歌曲 %>
+          <div class="flex justify-between">
+            <div class="">
+              <img src="" alt="">
+              <p>song_name</p>
+            </div>
+            <div>
+              播放次數
+            </div>
+          </div>
+        </div>
+        <%#= 功能區域like, share, edit, more %>
         <div class="flex justify-start my-2">
           <button class="flex items-center border border-gray-300 px-3 rounded">
             <svg class="heart" width="15px" viewBox="0 0 500 500" >
@@ -112,7 +124,7 @@ https://soundcloud.com/cy4eroa8bbxx/sets
   </div>
 
   <%#= 音樂右邊區域 %>
-  <div class="hidden md:block col-span-3">
+  <div class="col-span-12 md:col-span-3">
     <div class="flex text-gray-500 mx-4">
       <button class="mx-2">Follower</button>
       <button class="mx-2">Following</button>

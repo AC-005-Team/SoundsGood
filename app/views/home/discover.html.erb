@@ -15,7 +15,6 @@
               <%#= 歌曲圖片 %>
               <%= image_tag song.image_url, class:'h-32 w-32 overflow-hidden bg-black mr-4' %>
                 <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
-              
                 <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
               <%#= 歌曲TAG區 %>                           
                 <% if song.tags.length > 0 %>
@@ -133,7 +132,7 @@
   </div>
 
 <%#=右邊區域右邊區域右邊區域右邊區域右邊區域右邊區域右邊區域右邊區域右邊區域%>
-  <div class="hidden md:block col-span-3 bg-white p-5 right-0 border-l boder-gray-200">
+  <div class="col-span-12 md:col-span-3 bg-white p-5 right-0 border-l boder-gray-200">
     <%#=分隔線區域%>
     <div class="flex justify-between text-gray-500 border-b border-gray-200 text-sm p-2">
       
