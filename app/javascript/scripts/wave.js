@@ -1,6 +1,6 @@
 import WaveSurfer from 'wavesurfer.js'
 import CursorPlugin from 'wavesurfer.js/src/plugin/cursor.js'
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('turbolinks:load', () => {
   const wavePlace = document.querySelector(".waveform-wrap") // see if at least a waveform div is present
   const peakStorageRoot = 'https://peaks.soundsgood.world/api/v1/getjson/song_peaks/'
 
@@ -48,25 +48,27 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     }
     
-    const loadDefaultPeak = (url,wavesurfer) => fetch(peakStorageRoot+'default')
-    .then(response => {
-      if(!response.ok) {
-        throw new Error("HTTP error " + response.status)
-      }
-      return response.json()
-    })
-    .then(peaks => {
-      console.log('------------------------------')
-      console.log('loaded default! sample_rate: ' + peaks.sample_rate)
-      console.log('------------------------------')
-      // load peaks into wavesurfer.js
-      // wavesurferDummy.load(proxyurl+url, peaks.data)
-      wavesurfer.load(proxyurl+url, peaks.data)
-    })
-    .catch((e) => {
-      console.error('error', e)
-      wavesurfer.load(proxyurl+url)
-    })
+    function loadDefaultPeak(url,wavesurfer){
+      fetch(peakStorageRoot+'default')
+      .then(response => {
+        if(!response.ok) {
+          throw new Error("HTTP error " + response.status)
+        }
+        return response.json()
+      })
+      .then(peaks => {
+        console.log('------------------------------')
+        console.log('loaded default! sample_rate: ' + peaks.sample_rate)
+        console.log('------------------------------')
+        // load peaks into wavesurfer.js
+        // wavesurferDummy.load(proxyurl+url, peaks.data)
+        wavesurfer.load(proxyurl+url, peaks.data)
+      })
+      .catch((e) => {
+        console.error('error', e)
+        wavesurfer.load(proxyurl+url)
+      })
+    }
 
     function renderWaveForm(url, songDataName, parentSelector, waveColor) {
       var domEl = document.createElement('div')
@@ -98,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
       });
       getPeak(url, songDataName, wavesurfer);
-      console.log('ok');
       return wavesurfer;
     }
 
@@ -132,11 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
       });
       getPeak(url, songDataName, wavesurfer);
-      console.log('ok');
-      
       return wavesurfer;
     }
-    
-
   }
 })
