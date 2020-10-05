@@ -1,21 +1,29 @@
 <template lang="html">
   <div class="">
-    <li>{{ playlist.name }}</li>
-    <button class="modal-btn addplaylist-btn border border-gray-400 p-1 rounded">
-      <i class="fas fa-bolt"></i>
-      Add to playlist
-    </button>
-</button>
-
+    <li>
+      {{ playlist.name }}
+      <button
+        v-if="addToPlaylist"
+        class="border border-orange-500 text-red-600 p-1 rounded"
+      >
+        <span>Added</span>
+      </button>
+      <button v-else class="border border-gray-400 p-1 rounded">
+        <span>Add to playlist</span>
+      </button>
+    </li>
   </div>
-
 </template>
 
 <script>
 export default {
-  props: ['playlist'],
-}
+  props: ["playlist"],
+  computed: {
+    addToPlaylist: function() {
+      return this.playlist.add_to_playlist;
+    },
+  },
+};
 </script>
 
-<style lang="css" scoped>
-</style>
+<style lang="css" scoped></style>
