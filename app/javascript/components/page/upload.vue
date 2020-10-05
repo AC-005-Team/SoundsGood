@@ -277,9 +277,9 @@ export default {
       formData.append("song[track]", this.track)
       formData.append("song[image]", this.image)
       formData.append("song[tag_items]", this.getTag)
-      // for(var pair of formData.entries()){
-      //   console.log(pair[0]+','+pair[1])
-      // }
+      for(var pair of formData.entries()){
+        console.log(pair[0]+','+pair[1])
+      }
       axios.defaults.headers.common = {
         'X-Requested-With': 'XMLHttpRequest',
         withCredentials: true,
@@ -295,25 +295,6 @@ export default {
       }).catch(error => {
         console.log(error.response)
       })
-      // axios({
-      //     method: 'post',
-      //     url: 'http://127.0.0.1:3000/users/2/songs',
-      //     data: formData,
-      //     withCredentials: true,
-      //     headers: {
-      //       'Content-Type': 'multipart/form-data'
-      //     }
-      //   })
-      //   .then(
-      //     (response) => {
-      //       console.log(response)
-      //     },
-      //     (error) => {
-      //       console.log(error)
-      //     }
-      //   );
-
-
 
     }
 

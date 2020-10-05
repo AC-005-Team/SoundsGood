@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import playlist from './components/playlist';
-import playlist_page from './components/playlist_page';
+import playlist_page from './components/page/you/playlists/playlist_page';
 import discover from './components/page/discover';
 import you from './components/page/you/you';
 import stream from './components/page/stream';
@@ -11,20 +10,20 @@ Vue.use(VueRouter)
 
 export default new VueRouter({
   routes: [
-    {
-      path: '/playlists',
-      name: 'playlist',
-      component: playlist
-    },
+    // {
+    //   path: '/playlists',
+    //   name: 'playlist',
+    //   component: playlist
+    // },
     {
       path: '/discover',
       name: 'discover',
       component: () => import(/* webpackChunkName: "Discover" */ './components/page/discover'),
     },
     {
-      path: '/playlists',
+      path: '/stream',
       name: 'stream',
-      component: playlist
+      component: stream
 
       // component: () => import(/* webpackChunkName: "Stream" */ './components/page/stream'),
 
@@ -47,7 +46,13 @@ export default new VueRouter({
         {
           path:'set',
           name:'playlists',
-          component: () => import(/* webpackChunkName: "Library" */ './components/page/you/playlists'),
+          component: () => import(/* webpackChunkName: "Playlists" */ './components/page/you/playlists/playlists'),
+        },
+        {
+          path: '/playlist/:id',
+          component: 'playlist_page',
+          props: true,
+          component: () => import(/* webpackChunkName: "Playlist_page" */ './components/page/you/playlists/playlist_page'),
         },
         {
           path:'following',
@@ -66,11 +71,6 @@ export default new VueRouter({
       props: true,
     },
 
-    {
-      path: '/playlist/:id',
-      component: playlist_page,
-      props: true,
 
-    }
 ]
 })

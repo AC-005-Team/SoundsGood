@@ -12,52 +12,65 @@ slide-multiple
 <vueper-slide />
 </vueper-slides> -->
 
-<div class="flex overflow-scroll text-gray-500 text-xs">
-  <div class="my-2 mr-2"  @click="playPause" @mouseover="mouseOver" @mouseleave="mouseLeave">
-<!-- :class="[playing? 'fa-pause-circle': '' ]"  -->
-    <div class="cover">
-      <i class="far z-10 fa-pause-circle"  style="font-size: 60px" v-show="playing"  />
-      <transition name="fade">
-        <div  class="flex-col justify-between">
-          <div class="buttons flex flex-reversed rigt-0 items-center z-10">
-            <i class="fa fa-ellipsis-h mr-2" @click.stop="toggle"  ></i>
-            <i class="fa fa-heart mr-2" @click.stop="like" :class="[changeColor? 'like':'']"></i>
+  <div class="flex overflow-scroll text-gray-500 text-xs">
+    <div class="my-2 mr-2" @click="playPause" @mouseover="mouseOver" @mouseleave="mouseLeave">
+      <!-- :class="[playing? 'fa-pause-circle': '' ]"  -->
+      <div class="cover">
+        <i class="far z-10 fa-pause-circle" style="font-size: 60px" v-show="playing" />
+        <transition name="fade">
+          <div class="flex-col justify-between">
+            <div class="buttons flex flex-reversed rigt-0 items-center z-10">
+              <i class="fa fa-ellipsis-h mr-2" @click.stop="toggle"></i>
+              <i class="fa fa-heart mr-2" @click.stop="like" :class="[changeColor? 'like':'']"></i>
+            </div>
+
+
+
           </div>
+        </transition>
 
-
-
-        </div>
-      </transition>
-
-      <img class="h-32 max-w-xl mr-4"  :src="chart.audio.cover">
-    </div>
-
-
-
-    <div class="dropdown">
-      <div id="myDropdown" class='dropdown-content ' :class=" [isActive? 'show' : '']" >
-        <a>add to play next</a>
-        <a>add to playlist</a>
+        <img class="h-32 max-w-xl mr-4" :src="chart.audio.cover">
       </div>
+
+
+
+      <div class="dropdown">
+        <div id="myDropdown" class='dropdown-content ' :class=" [isActive? 'show' : '']">
+          <a><i class="fas fa-headphones-alt addto"></i>add to play next</a>
+          <a @click.stop="aaa"><i class="fas fa-plus-circle addto"></i> add to playlist</a>
+        </div>
+      </div>
+
+      <li> {{ chart.audio.name }} </li>
+      <li>{{ chart.audio.artist }} </li>
+
+
+      <!-- <i class="far fa-pause-circle" style="font-size: 60px" ></i> -->
+      <!-- <i class="far" :class="[is? 'fa-pause-circle' : 'fa-play-circle']"  style="font-size: 60px"  /> -->
+
+
     </div>
 
-    <li> {{ chart.audio.name }} </li>
-    <li>{{ chart.audio.artist }} </li>
+    <sweet-modal ref="modal">
+      <sweet-modal-tab title="Add To Playlist" id="tab1">
+
+        <myPlaylist v-for="playlist in playlists" :playlist="playlist"></myPlaylist >
 
 
-    <!-- <i class="far fa-pause-circle" style="font-size: 60px" ></i> -->
-    <!-- <i class="far" :class="[is? 'fa-pause-circle' : 'fa-play-circle']"  style="font-size: 60px"  /> -->
 
+      </sweet-modal-tab>
+      <sweet-modal-tab title="Create Playlist" id="tab2">
+        <addPlaylist/>
+      </sweet-modal-tab>
+    </sweet-modal>
 
   </div>
 
 
 </div>
-
-
-</div>
 </template>
 <script>
+
 import {
   mapState,
   mapGetters,
@@ -68,8 +81,13 @@ import {
   VueperSlide
 } from 'vueperslides'
 import 'vueperslides/dist/vueperslides.css'
+import {
+  SweetModal,
+  SweetModalTab
+} from 'sweet-modal-vue'
 
-
+import myPlaylist from '../../shared/myPlaylist'
+import addPlaylist from '../../shared/addPlaylist'
 
 export default {
   name: "chart",
@@ -77,8 +95,9 @@ export default {
     return {
       playBtn: false,
       is: false,
-      changeColor:false,
-      isActive: false
+      changeColor: false,
+      isActive: false,
+      playlists:[]
     }
   },
   props: ['chart'],
@@ -86,26 +105,48 @@ export default {
   components: {
     VueperSlides,
     VueperSlide,
+    SweetModal,
+    SweetModalTab,
+    myPlaylist,
+    addPlaylist
+
   },
+  beforeCreate () {
+    const axios = require('axios').create({
+    baseURL: 'http://127.0.0.1:3000'
+  });
+  axios
+    .get('/api/v1/playlists')
+    .then(response => (this.playlists = response.data))
+    .catch(function (error) {
+      console.log(error);
+    });
+
+},
+
 
   methods: {
-    ...mapActions('songs', [ 'play','pause','continuePlay','continuePause']),
+    ...mapActions('songs', ['play', 'pause', 'continuePlay', 'continuePause']),
     ...mapActions('playlists', ['loadSongs']),
 
-    playPause(){
-      if(this.playerTracks.song_id === this.chart.song_id){
-        if(this.isPLAY === true){
+    playPause() {
+      if (this.playerTracks.song_id === this.chart.song_id) {
+        if (this.isPLAY === true) {
           this.$store.dispatch('songs/pause')
           this.$store.dispatch('songs/continuePause')
-        }else{
+        } else {
           this.$store.dispatch('songs/continuePlay')
           this.$store.dispatch('songs/play')
           // this.$store.dispatch('songs/play')
         }
-      }else{
+      } else {
         this.$store.dispatch('songs/pause')
         this.$store.dispatch('playlistsSongs/loadSong', this.chart.song_id)
       }
+    },
+
+    aaa() {
+      this.$refs.modal.open('tab1')
     },
 
     mouseOver: function() {
@@ -114,7 +155,7 @@ export default {
     mouseLeave: function() {
       this.playBtn = false
     },
-    toggle(){
+    toggle() {
       return this.isActive = !this.isActive
     },
 
@@ -125,25 +166,25 @@ export default {
 
   computed: {
 
-        ...mapGetters({
-          listsongs: 'playlistsSongs/listsongs'
-        }),
-        ...mapGetters({
-            playerTracks: 'songs/playerTracks',
-            continue: 'songs/continue',
-            isPLAY: 'songs/isPLAY',
-         }),
+    ...mapGetters({
+      listsongs: 'playlistsSongs/listsongs'
+    }),
+    ...mapGetters({
+      playerTracks: 'songs/playerTracks',
+      continue: 'songs/continue',
+      isPLAY: 'songs/isPLAY',
+    }),
 
-         playing(){
-           if ( this.playerTracks.song_id === this.chart.song_id  ){
-             if(this.isPLAY === false){
-              return false;
-             };
-             return true;
-           }else{
-             return false;
-           }
-         }
+    playing() {
+      if (this.playerTracks.song_id === this.chart.song_id) {
+        if (this.isPLAY === false) {
+          return false;
+        };
+        return true;
+      } else {
+        return false;
+      }
+    }
 
 
 
@@ -235,28 +276,51 @@ export default {
 
 
 .dropdown {
-  position: relative;
+
   display: inline-block;
+  box-shadow: 0 2px 10px rgba(0,0,0,.1);
+  border-radius: 10px;
+
 }
+
+.addto{
+  margin: 4px;
+}
+
+
+
 .dropdown-content {
   display: none;
-  /* position: absolute; */
-  /* left: 20px;
-  top:0; */
-  min-width: 150px;
+  border-radius: 10px;
+  margin: 1px;
+  width: 100%;
   overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  background-color: rgba(#eeeeee, 1);
   z-index: 1;
 }
+
+
 .dropdown-content a {
   color: black;
   padding: 5px;
   font-size: 12px;
   text-align: center;
   display: block;
+  border-bottom: 1px solid blackrgb(120, 119, 117);
 
 
 }
-.dropdown a:hover {background-color: #f0c543;}
-.show {display: block;}
+.dropdown a:hover {
+  transition: 0.2s;
+  background-color: #f98060;
+}
+.show {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 1s, opacity 1s linear;
+
+
+
+}
 </style>
