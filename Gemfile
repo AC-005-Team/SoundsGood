@@ -41,6 +41,7 @@ gem 'pg'
 # Send request
 gem 'http', '~> 4.4', '>= 4.4.1'
 
+gem 'opentok', '~> 4.1', '>= 4.1.2'
 # Meta-tag helper
 gem 'meta-tags', '~> 2.13'
 

@@ -37,6 +37,11 @@
   <div class="hover:text-white hidden sm:block">
     <%= link_to "Upload", new_user_song_path(current_user) if current_user %>
   </div>
+    <div class='text-gray-400'>
+      <%= link_to rooms_path do %>
+        <i class="fa fa-podcast "></i>
+      <% end %>
+    </div>
   <%= link_to new_user_song_path(current_user), class:'block sm:hidden' do %>
     <i class="fas fa-cloud-upload-alt"></i>
   <% end %>

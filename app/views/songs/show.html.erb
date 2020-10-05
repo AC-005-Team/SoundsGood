@@ -121,12 +121,12 @@
         <% if @song.user.followed_by?(current_user) %>
           <button class="flex bg-orange-500 text-white border-orange-500 border p-1 rounded" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
             <i class="fas fa-user-check"></i>
-            <p class="mx-2">Following</p>
+            <p class="mx-2 follow">Following</p>
           </button>
         <% else %>
           <button class="flex bg-white text-orange-500 border-orange-500 border p-1 rounded" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
             <i class="fas fa-user-check"></i>
-            <p class="mx-2">Follow</p>
+            <p class="mx-2 follow">Follow</p>
           </button>
         <% end%> 
       </div>

@@ -9,6 +9,12 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   } 
   
+  resources :rooms do
+    member do
+      get :play
+    end
+  end
+
   resource :search, only: [:show] do
     collection do
       get :result

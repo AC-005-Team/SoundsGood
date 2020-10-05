@@ -6,6 +6,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
+  
+  has_one :room
   # 自己追蹤的人
   has_many :followed_users, foreign_key: :follower_id, class_name: "Follow"
   has_many :followees, through: :followed_users, source: :followee
