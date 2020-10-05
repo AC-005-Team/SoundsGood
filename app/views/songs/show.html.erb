@@ -33,7 +33,9 @@
     </div>
       <%#=右邊大圖區%>
     <div class="w-1/3 p-4">
-      <%= image_tag @song.image_url%> 
+      <% if @song.image_url %>
+        <%= image_tag @song.image_url%> 
+      <% end %>
     </div>
   </div>
 </div>
@@ -309,7 +311,7 @@
       <h2>Add to playlist</h2>
     </div>
     <div class="modal-item" data-controller="playlist" data-playlist-song="<%= @song.id %>">
-    <% if @playlist %>
+    <% if @playlists %>
       <% @playlists.each do |playlist| %>
         <li>Playlist：<%= link_to playlist.name, playlist_path(playlist) %>
         <% if @song.added_by?(playlist) %>
