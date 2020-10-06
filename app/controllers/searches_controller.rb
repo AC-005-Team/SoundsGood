@@ -1,4 +1,5 @@
 class SearchesController < ApplicationController
+  before_action :find_song, only: [:like]
 
   def show
     return if params[:search].blank?
@@ -19,6 +20,20 @@ class SearchesController < ApplicationController
     @users = User.name_search("display_name", params[:search])
     @songs = Song.name_search("name", params[:search]).includes(:tags)
     @Playlists = Playlist.name_search("name", params[:search])
+  end
+
+  def like
+    current_user.toggle_like_song(@song)
+  end
+  
+private
+
+  def favorited_by?(user)
+    liked_users.include?(user)
+  end
+
+  def find_song
+    @song = Song.find(params[:search_id])
   end
 
 end

@@ -1,10 +1,31 @@
 document.addEventListener('DOMContentLoaded', ()=>{
-  let result_like = document.querySelectorAll('.result-toggle-like')
-  result_like.forEach(function(btn){
+  let like_btn = document.querySelectorAll('.like_btn')
+  console.log(like_btn)
+  like_btn.forEach(function(btn){
+    console.log(btn)
     btn.addEventListener('click', ()=>{
-      let song_id = document.querySelector('.result-toggle-song').getAttribute('data-toggle-song')
-      console.log(song_id)
-      fetch('')
+      let host = window.location.origin
+      let song_id = btn.getAttribute('result-like-id')
+      fetch(`${host}/searches/${song_id}/like`)
+      .then(response => {
+        if(response.ok){
+          let icon = btn.children[0]
+          let count = btn.children[1]
+          console.log(icon.getAttribute('data-prefix'))
+          if(icon.getAttribute('data-prefix') == 'far'){
+            let num = Number(count.textContent)
+            icon.style.color = "orange"
+            icon.setAttribute('data-prefix', 'fas')
+            count.innerHTML = num + 1
+          }else{
+            let num = Number(count.textContent)
+            icon.style.color = "black"
+            icon.setAttribute('data-prefix', 'far')
+            count.innerHTML = num - 1
+          }
+        }
+      })
+
     })    
   })
 })

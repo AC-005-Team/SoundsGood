@@ -44,8 +44,8 @@
   <%#=左邊專區：最上面的Comment區域%>
     <div class="border-b border-gray-400">
       <div class="flex ">
-        <% if @current_user %>
-          <%= image_tag @current_user.avatar_url, class: 'w-auto h-10 current_user-avatar' %>
+        <% if current_user.avatar_url %>
+          <%= image_tag current_user.avatar_url, class: 'w-auto h-10 current_user-avatar' %>
         <% end %>
         <%= form_with(model:@comment, url:song_comments_path(song_id: @song, timepoint: 0), class: "song-comment-form w-11/12 mx-4 border border-gray-400 rounded") do |f|%>
           <%= f.text_field :content, placeholder: "Write a comment", class: "song-main-comment w-10/12 py-2 px-4 border border-gray-400 rounded", data: {id: @song.id} %>
