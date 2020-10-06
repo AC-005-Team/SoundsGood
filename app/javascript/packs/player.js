@@ -1,6 +1,6 @@
 import "aplayer/dist/APlayer.min.css";
 import APlayer from "aplayer";
-const hostPath = "http://" + window.location.host;
+const hostPath = window.location.origin;
 //畫面一開始的播放器
 const ap = new APlayer({
   container: document.getElementById("player1"),
