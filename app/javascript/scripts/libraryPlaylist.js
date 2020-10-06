@@ -1,4 +1,4 @@
-document.addEventListener("turbolinks:load", () => {
+document.addEventListener("DOMContentLoaded", () => {
   const parentDom = document.querySelector(".library-playlist-place");
   const hostPath = window.location.origin;
   const template = document.querySelector("template");

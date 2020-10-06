@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function() {
+$(document).on("DOMContentLoaded", function() {
   const hostPath = window.location.origin;
   const player = document.querySelector("#player1");
   const commentShowOnWave = $(".waveform-comment-space");
