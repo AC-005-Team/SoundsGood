@@ -33,7 +33,9 @@
     </div>
       <%#=右邊大圖區%>
     <div class="w-1/3 p-4">
+    <%if @song.image_url %>
       <%= image_tag @song.image_url%> 
+    <% end %>
     </div>
   </div>
 </div>

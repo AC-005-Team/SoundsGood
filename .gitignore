@@ -49,4 +49,3 @@ yarn-debug.log*
 *.dev
 .env.staging
 
-*.key
