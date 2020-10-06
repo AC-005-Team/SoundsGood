@@ -21,7 +21,7 @@ class LibraryController < ApplicationController
   end
 
   def following
-    @songs = Song.all.includes(:tags)
+    @followees = current_user.followees
   end
 
   def history
