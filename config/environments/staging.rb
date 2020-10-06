@@ -1,7 +1,8 @@
 Rails.application.configure do
   # Whitelist one hostname
   config.hosts << "soundsgood.world"
-
+  config.hosts << "www.soundsgood.world"
+  
   config.cache_classes = true
   config.eager_load = true
   config.consider_all_requests_local       = false
