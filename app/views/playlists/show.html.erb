@@ -1,5 +1,3 @@
-https://soundcloud.com/cy4eroa8bbxx/sets/top-50-all-music-genres
-http://127.0.0.1:3000/playlists/1
 <div class="grid grid-cols-12 bg-gradient-to-r from-red-500 via-white to-orange-700 mx-6">
   <div class="col-span-8 m-4 flex flex-col justify-between">
     <div class="flex justify-between">
@@ -63,15 +61,28 @@ http://127.0.0.1:3000/playlists/1
         <p class="">user_name</p>
         <p class="">follower</p>
       </div>
+
       <div class="col-span-12 md:col-span-10">
+        <% @playlist.songs.each do |song| %>
+
         <div class="flex justify-between">
           <div class="flex">
-            <div class="">img</div>
-            <div class="">song_name</div>
-            <div class="">song_intro</div>
+            <div class=""><%= image_tag song.image_url, width: '200px' %></div>
+            
+            <div class=""><%= content_tag(:li,song.name, data: {value: song.name} ) %></div>
+            <div class=""><%= content_tag(:li,song.intro, data: {value: song.intro} ) %></div>
           </div>
-          <div class="">play次數</div>
+          <div class=""><%= content_tag(:li, 'play ▶', class:'getURL', data: {id: song.id} ) %></div>
+          <div class="dropdown">
+            <button class="dropbtn">+</button>
+            <div id="myDropdown" class="dropdown-content">
+            <%= link_to "add to play next", '###' , id: 'addtoplay', data: {id: song.id}  %>
+            <%#= link_to "add to playlist", list_add_path(song.id), data: {}  %>
+           </div>
+          </div>
+          
         </div>
+        <% end %>
       </div>
 
     </div>
@@ -130,6 +141,9 @@ http://127.0.0.1:3000/playlists/1
 
   </div>
 </div>
+
+https://soundcloud.com/cy4eroa8bbxx/sets/top-50-all-music-genres
+http://127.0.0.1:3000/playlists/1
 
 <h1><%= @playlist.name%></h1>
 <div>
