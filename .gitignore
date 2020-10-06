@@ -50,4 +50,3 @@ yarn-debug.log*
 .env.staging
 
 *.key
-/config/credentials/development.key
