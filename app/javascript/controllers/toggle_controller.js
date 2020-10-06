@@ -10,6 +10,8 @@ export default class extends Controller {
       type: "post",
       success: (result) => {
         let btnContent = this.likeBtnTarget.lastElementChild;
+        let liked_count = document.querySelector('.liked-count')
+        let liked_count_number = Number(liked_count.innerText)
         if (result["status"] == true) {
           //愛心變實心
           this.heartTarget.classList.remove("far");
@@ -17,6 +19,8 @@ export default class extends Controller {
           this.likeBtnTarget.classList.remove("border-grey-400");
           this.likeBtnTarget.classList.add("text-red-600", "border-orange-500");
           btnContent.textContent = "Liked";
+          liked_count.textContent = liked_count_number + 1
+
         } else {
           //變空心
           this.heartTarget.classList.remove("fas");
@@ -27,6 +31,7 @@ export default class extends Controller {
           );
           this.likeBtnTarget.classList.add("border-grey-400");
           btnContent.textContent = "Like";
+          liked_count.textContent = liked_count_number - 1
         }
       },
       error: (err) => {

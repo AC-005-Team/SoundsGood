@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function() {
-  const hostPath = 'http://'+window.location.host
+  const hostPath = window.location.origin
   const player = document.querySelector('#player1')
   const commentShowOnWave = $('.waveform-comment-space')
   const commentForms = document.querySelectorAll('.song-comment-form')

@@ -33,7 +33,7 @@
     <div class="search-result flex flex-col absolute mx-auto"></div>
   </div>
   <% end %>
-<%#=上傳按鈕%>    
+<%#=上傳按鈕%>
   <div class="hover:text-white hidden sm:block">
     <%= link_to "Upload", new_user_song_path(current_user) if current_user %>
   </div>
@@ -42,7 +42,7 @@
         <i class="fa fa-podcast "></i>
       <% end %>
     </div>
-  <% if current_user %>
+  <% if user_signed_in? %>
     <%= link_to new_user_song_path(current_user), class:'block sm:hidden' do %>
       <i class="fas fa-cloud-upload-alt"></i>
     <% end %>
@@ -67,7 +67,9 @@
     <div class="hover:text-white"><%= link_to "Create",new_user_registration_path%></div>
   <% end %>
 <%#=後面三點點區域%>  
-  <button class="hover:text-white px-1 hidden sm:block"><i class="fas fa-bell"></i></button>
+  <div class="hover:text-white px-1 hidden sm:block relative">
+    <i class="fas fa-bell"></i>
+  </div>
   <button class="hover:text-white px-1 hidden sm:block"><i class="fas fa-envelope-open"></i></button>
   <button class="hover:text-white px-1 mr-8 hidden sm:block"><i class="fas fa-ellipsis-h"></i></i></button>
 </div>

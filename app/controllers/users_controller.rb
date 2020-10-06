@@ -13,9 +13,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-    @user = current_user
-  end
+  def edit;end
 
   def update
     if current_user.update(user_params)
@@ -49,5 +47,5 @@ class UsersController < ApplicationController
   def find_user
     @user = User.find(params[:id])
   end
-  
+
 end
