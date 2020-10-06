@@ -1,4 +1,4 @@
-<div class="flex">
+<div class="grid grid-cols-12">
   <%#左邊區域%>
   <div class="col-span-12 md:col-span-9 mx-4">
     <div class="text-lg text-gray-600 mb-4">Hear the latest posts from the people you’re following:</div>
@@ -13,9 +13,8 @@
           <% if song.image_url %>
 
     <div class="flex xl:max-h-full">
-
       <%#= 歌曲封面 %>
-      <div class="w-1/6 mr-4 mb-4">
+      <div class="w-32 h-32 overflow-hidden bg-black mr-4 mb-4">
         <%= link_to image_tag(song.image_url), song_path(song.id), class:'' %>      
       </div>
       <div class="w-5/6 flex flex-col justify-around mx-2">
@@ -168,6 +167,7 @@
 <% @songs.each do |song|%>
   <% if song.image_url %>
       <%= image_tag song.image_url, class:'h-32 max-w-xl mr-4' %>
+        
         <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
       
       

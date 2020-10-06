@@ -1,3 +1,175 @@
+https://soundcloud.com/cy4eroa8bbxx/sets
+<div class="flex mx-6 bg-gradient-to-r from-gray-600 via-gray-400 to-gray-300">
+  <img class="w-1/6 m-6 rounded-full" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
+  <div class="flex justify-between w-5/6 items-start">
+    <div class="m-4">
+      <div class="bg-black rounded p-1 text-xl text-white m-1">
+        user_name
+      </div>
+      <div class="flex bg-gray-900 rounded justify-start">
+        <div class="text-white m-2">first name</div>
+        <div class="text-xl text-orange-700 m-auto mr-2">last name</div>
+      </div>
+    </div>
+    <button class="text-white bg-orange-600 p-2 rounded flex items-center">
+      <i class="fas fa-camera"></i>
+      <p class="hidden md:block"> Upload header image</p>
+    </button>
+  </div>
+</div>
+<%#= ALL, Popular Tracks, .. Your Insights區域 %>
+<div class="flex justify-between m-4 border-b border-gray-300 p-2 ">
+
+  <div class="ml-4 text-xl hidden md:flex justify-between">
+    <button class="mx-2">All</button>
+    <button class="mx-2">Popular tracks</button>
+    <button class="mx-2">Tracks</button>
+    <button class="mx-2">Albums</button>
+    <button class="mx-2 text-orange-600">Playlist</button>
+    <button class="mx-2">Reposts</button>
+  </div>
+
+  <div class="dropdown inline-block relative ml-4 mr-6">
+    <button class="text-gray-500 md:text-white bg-gray-00 py-2 px-4 rounded inline-flex items-center">
+      <i class="fas fa-bars"></i>
+      <p class="mx-2"> All</p>
+    </button>
+    <ul class="dropdown-menu absolute hidden text-gray-700 text-left">
+      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-t">Popular tracks</button>
+      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Tracks</button>
+      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Albums</button>
+      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Playlist</button>
+      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-b">Reposts</button>
+    </ul>
+  </div>
+
+
+  <div class="flex justify-between items-center mr-4 text-sm">
+    <button class="flex items-center mx-2 p-1 rounded bg-orange-600 text-white">
+      <i class="fas fa-chart-bar"></i>
+      <p class="hidden md:block">Your Insights</p> 
+    </button>
+    <button class="flex items-center mx-2 p-1 rounded border border-gray-300">
+      <i class="fas fa-share-square"></i>
+      <p class="hidden md:block">Share</p> 
+    </button>
+    <button class="flex items-center mx-2 p-1 rounded border border-gray-300">
+      <i class="fas fa-pencil-alt"></i>
+      <p class="hidden md:block"> Edit</p> 
+    </button>
+  </div>
+</div>
+
+<%#= 音樂區域 %>
+<div class="grid grid-cols-12 mx-4">
+  <%#= 音樂左邊區域 %>
+  <div class="col-span-12 md:col-span-9 mx-4">
+    <div class="grid grid-cols-12 mx-2 text-sm">
+      <%#= 音樂圖片區域 %>
+      <img class="col-span-12 md:col-span-2 h-32 w-32 overflow-hidden" src="https://i1.sndcdn.com/artworks-vgspc96HKh3s-0-t500x500.jpg" alt="">
+      <div class="col-span-10 mx-4 w-full">
+        <div class="grid grid-cols-12 items-center">
+          <div class="col-span-1">
+            <i class="fas fa-play fa-2x"></i>
+          </div>
+          <div class="col-span-9">
+            <p class="text-gray-500">user_name</p>
+            <p class="">user_name</p>
+          </div>
+          <div class="col-span-2">
+            <p class="hidden md:block text-gray-400">2 days ago</p>
+            <p class="hidden md:block text-white bg-gray-600 rounded-full px-2">#tag</p>
+          </div>
+        </div>
+        <div class="">音波區</div>
+        <div class="">專輯內歌曲區</div>
+        <div class="flex justify-start my-2">
+          <button class="flex items-center border border-gray-300 px-3 rounded">
+            <svg class="heart" width="15px" viewBox="0 0 500 500" >
+              <path d="M295.706,35.522C295.706,35.522,295.706,35.522,295.706,35.522c-34.43-0.184-67.161,14.937-89.339,41.273
+              c-22.039-26.516-54.861-41.68-89.339-41.273C52.395,35.522,0,87.917,0,152.55C0,263.31,193.306,371.456,201.143,375.636
+              c3.162,2.113,7.286,2.113,10.449,0c7.837-4.18,201.143-110.759,201.143-223.086C412.735,87.917,360.339,35.522,295.706,35.522z"/>
+            </svg>
+            <p class="hidden md:block">Like</p> 
+          </button>
+          <button class="flex items-center border border-gray-300 px-3 rounded">
+            <i class="fas fa-share-square"></i>
+            <p class="hidden md:block">Share</p> 
+          </button>
+          <button class="flex items-center border border-gray-300 px-3 rounded">
+            <i class="fas fa-pencil-alt"></i> 
+            <p class="hidden md:block">Edit</p> 
+          </button>
+          <button class="flex items-center border border-gray-300 px-3 rounded">
+            <i class="fas fa-ellipsis-h"></i>
+            <p class="hidden md:block">More</p> 
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class=""></div>
+  </div>
+
+  <%#= 音樂右邊區域 %>
+  <div class="hidden md:block col-span-3">
+    <div class="flex text-gray-500 mx-4">
+      <button class="mx-2">Follower</button>
+      <button class="mx-2">Following</button>
+      <button class="mx-2">Tracks</button>
+    </div>
+
+    <div class="p-2">
+      <div class="flex justify-between text-gray-500 border-b border-gray-300 text-sm p-2">
+        <div class="">❤️2 likes</div>
+        <div class="">view all</div>
+      </div>
+
+      <div class="my-4 flex">
+        <img class="w-1/5" src="https://i1.sndcdn.com/artworks-tzoA3a4voEv4g77c-Z5qUqQ-t120x120.jpg" alt="">
+        <div class="w-4/5 mx-2 text-xs">
+            <div class="text-gray-500">Cherokee Recordings</div>
+            <div class="">Dean Robert - Morning</div>
+            <div class="flex justify-around">
+              <a href="">➡️261K</a>
+              <a href="">❤️3315</a>
+              <a href="">⭕️60</a>
+              <a href="">☁️101</a>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex border-t border-gray-400 m-4">
+      <div class="my-3 text-xs table-row-group">
+        <div class="">
+          <span class="text-gray-500  hover:text-black"><a href="#">Legal</a></span>
+            
+          <span class="text-gray-500  hover:text-black"><a href="#">Privacy</a></span>
+            
+          <span class="text-gray-500  hover:text-black"><a href="#">Cookies</a></span>
+            
+          <span class="text-gray-500  hover:text-black"><a href="#">Imprint</a></span>
+
+          <span class="text-gray-500  hover:text-black"><a href="#">Creator Resources</a></span>
+            
+          <span class="text-gray-500  hover:text-black"><a href="#">Blog</a></span>
+            
+          <span class="text-gray-500  hover:text-black"><a href="#">Charts</a></span>
+            
+          <span class="text-gray-500  hover:text-black"><a href="#">Popular Search</a></span>
+        </div>
+        
+          <div class="mt-2 mb-20">
+            Language: English (US)
+          </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <h1>Playlist</h1>
 <%= link_to 'new play list', new_user_playlist_path(current_user.id) %>
 <%= link_to 'go back', root_path %>

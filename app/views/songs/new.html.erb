@@ -1,6 +1,6 @@
 
 <%#=UpLoad、Mastering、Your Tracks區域%>
-<div class="flex justify-between text-sm m-4 border-b border-gray-400">
+<!-- <div class="flex justify-between text-sm m-4 border-b border-gray-400">
   <div class="m-2 hidden sm:block">
     <button class="m-2 hover:text-orange-500">UpLoad</button>
     <button class="m-2 hover:text-orange-500">Mastering</button>
@@ -28,40 +28,34 @@
     <i class="fas fa-share-square"></i>
     <button class="m-2">Creators on SoundsGood</button>
   </div>
-</div>
+</div> -->
 
 <div class="m-4">
   <%#=UpLoad進度條、TryPro區域%>
   <%= form_with model: @song, url: user_songs_path(current_user.id), local: true do |f| %>
 
-  <div class="m-auto w-2/3 border border-gray-400 p-4">
-    <div class="flex justify-between items-center">    
-      <div class="">
-        <div class="flex justify-between items-center">
-          <div class="pr-2">0% of free Uploads used</div> 
-          
-          <button><i class="fas fa-arrow-down"></i></button> 
-        </div>
-        <div>進度條</div>
-        <div class="flex">
-          <button class="text-blue-500 hover:text-black">Try Pro Unlimited</button>
-          <p class="px-2">for unlimited uploads.</p>
-        </div>
-      </div>
-
-      <button class="text-orange-500 border border-orange-600 rounded p-2 hover:bg-orange-600 hover:text-white">Try Pro Unlimited</button>
-      
+<%#=  
+  <div class="m-auto w-2/3 border border-gray-400 p-4 flex justify-around items-center">
+    <div class="flex justify-around items-center">
+      <div class="pr-2">0% of free Uploads used</div> 
+      <button><i class="fas fa-arrow-down"></i></button> 
+    </div>
+    <div>進度條</div>
+    <div class="flex">
+      <button class="text-blue-500 hover:text-black">Try Pro Unlimited</button>
+      <p class="px-2">for unlimited uploads.</p>
     </div>
   </div>
+%>
   <%#=Drag and drop your tracks區域%>
   <div class="mt-2 m-auto w-2/3 border border-gray-400 p-4">
     <div class="text-center">
       <p class="py-2 text-2xl">Drag and drop your tracks & albums here</p>
 
       <%#= 上傳『音樂』神秘小按鈕 %>
-      <div class="text-white bg-orange-600 rounded py-2 px-10 relative w-2/5 m-auto">
+      <div class="text-white bg-orange-600 rounded py-2 relative sm:w-2/5 w-full m-auto">
         Choose Music to Upload
-        <%= f.file_field :track, class: 'song_value bg-black opacity-50 absolute top-0 left-0 h-10'%>
+        <%= f.file_field :track, class: 'song_value bg-black opacity-0 absolute top-0 left-0 h-10'%>
       </div><br>
       <div class="text-2xl" id="music"></div>
       
@@ -117,16 +111,13 @@
     <div class="px-6 py-2 border border-gray-200">
       <div class="flex text-2xl border-b border-gray-400 mb-6">
         <button class="mx-2 text-orange-600">Basic Info</button>
-        <button class="mx-2">Meta Data</button>
-        <button class="mx-2">Permissions</button>
       </div>
 
-      <div class="flex my-2">
-        <div class="w-1/3 max-h-full bg-gradient-to-b from-gray-500 via-white to-orange-300">
-
+      <div class="flex flex-col sm:flex-row my-2 w-full">
+        <div class="w-full sm:w-1/3 max-h-full bg-gradient-to-b from-gray-500 via-white to-orange-300">
           <%#= 上傳『圖片』神秘小按鈕 %>
           <div class="w-full max-h-full rounded p-2 bg-gray-200 relative">
-            <input class="bg-black opacity-50 absolute top-0 left-0 h-10" type="file" name=song[image] onchange="showMyImage(this)" >
+            <input class="bg-black opacity-0 absolute top-0 left-0 h-10" type="file" name=song[image] onchange="showMyImage(this)" >
             <i class="fas fa-camera-retro"></i>
             Upload Image
             <img class="" id="thumbnil" src="" >
@@ -147,11 +138,12 @@
           <%# <p class="mb-4">Genre</p> %>
           <%# <p class="mb-4">Additional Tags</p> %>
           <%# <input class="mb-4 border border-gray-400 rounded w-full p-1" type="text" placeholder="Add tags to describe the genre and mood of your track"> %>
-          
-          <%= f.label :tag_list %>
-          <select name="song[tag_items][]" multiple= "multiple" class= "tag_list mb-4 border border-gray-400 rounded w-full p-1">
-            <%= options_for_select(@tags) %>
-          </select><br>
+          <div class="">
+            <%= f.label :tag_list %>
+            <select name="song[tag_items][]" multiple= "multiple" class= "tag_list mb-4 border border-gray-400 rounded w-full p-1">
+              <%= options_for_select(@tags) %>
+            </select>
+          </div>
           <%# <p class="mb-4">Description</p> %>
           <%# <input class="mb-4 border border-gray-400 rounded w-full p-1" type="text" placeholder="Describe your tracks"> %>
           <%= f.label :intro %>

@@ -2,9 +2,9 @@
 <%#=第一背景色區%>
 <div class="mx-4">
   <div class="flex bg-gradient-to-r from-red-500 via-white to-orange-700">
-    <div class="w-2/3 flex-col-reverse space-y-64 m-5">
+    <div class="w-2/3 flex-col-reverse space-y-32 justify-between m-5">
       <div class="flex">
-        <%= content_tag(:li, '▶', class:'getURL fa-4x', data: {id: @song.id} ) %>
+        <%= content_tag(:li, '▶', class:'getURL fa-3x rounded-full', data: {id: @song.id} ) %>
         <div class="">
           <div class="bg-black rounded p-1 text-white m-1">
             <%=@song.user.display_name%>
@@ -13,7 +13,7 @@
             <div class="text-2xl text-white m-2"><%= title @song.name %></div>
           </div>
         </div>
-        <div class="m-4 text-xl text-white">
+        <div class="m-4 text-xl text-black">
           <div class="">
             1 month ago
           </div>
@@ -29,19 +29,20 @@
           <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
         <% end %>
         </div>
+      </div>
 
     </div>
       <%#=右邊大圖區%>
-    <div class="w-1/3 p-4">
-      <%= image_tag @song.image_url%> 
+    <div class="w-1/4 p-4">
+      <%= image_tag @song.image_url, class:''%> 
     </div>
   </div>
 </div>
 
 <%#=左邊專區起始%>
-<div class="flex m-4">
-  <div class="w-3/4 m-4">
-  <%#=左邊專區：最上面的Comment區域%>
+<div class="grid grid-cols-12 m-4">
+  <div class="col-span-12 md:col-span-9 m-4">
+    <%#=左邊專區：最上面的Comment區域%>
     <div class="border-b border-gray-400">
       <div class="flex ">
         <% if @current_user %>
@@ -54,37 +55,40 @@
       </div>
       <div class="flex my-2 p-2 justify-around text-sm" data-controller="toggle" data-toggle-song="<%= @song.id %>">
         <% if @song.favorited_by?(current_user) %>
-          <button class="border border-orange-500 text-red-600 p-1 rounded" data-target="toggle.likeBtn" data-action="click->toggle#like">
-            <i class="fas fa-heart" data-target="toggle.heart"></i> <span>Liked</span>
+          <button class="flex border border-orange-500 text-red-600 p-1 rounded" data-target="toggle.likeBtn" data-action="click->toggle#like">
+            <i class="fas fa-heart" data-target="toggle.heart"></i> 
+            <span class="hidden md:block">Liked</span>
           </button>
         <% else %>
-          <button class="border border-gray-400 p-1 rounded" data-target="toggle.likeBtn" data-action="click->toggle#like">
-            <i class="far fa-heart" data-target="toggle.heart"></i> <span>Like</span>
+          <button class="flex border border-gray-400 p-1 rounded" data-target="toggle.likeBtn" data-action="click->toggle#like">
+            <i class="far fa-heart" data-target="toggle.heart"></i>
+            <span class="hidden md:block">Like</span>
           </button>
         <% end%>
 
         <% if @song.reposted_by?(current_user) %>
-          <button class="border border-orange-500 text-red-600 p-1 rounded" data-target="toggle.repostBtn" data-action="click->toggle#repost">
+          <button class="flex border border-orange-500 text-red-600 p-1 rounded" data-target="toggle.repostBtn" data-action="click->toggle#repost">
             <i class="fas fa-retweet"></i>
-            <span>Reposted</span>
+            <span class="hidden md:block">Reposted</span>
           </button>
         <% else %>
-          <button class="border border-gray-400 p-1 rounded" data-target="toggle.repostBtn" data-action="click->toggle#repost">
+          <button class="flex border border-gray-400 p-1 rounded" data-target="toggle.repostBtn" data-action="click->toggle#repost">
             <i class="fas fa-retweet"></i>
-            <span>Repost</span>
+            <span class="hidden md:block">Repost</span>
           </button>
         <% end%> 
-        <button class="modal-btn share-btn border border-gray-400 p-1 rounded">
+        <button class="flex modal-btn share-btn border border-gray-400 p-1 rounded">
           <i class="fas fa-share-square"></i>
-          Share
+          <p class="hidden md:block">Share</p> 
         </button>
-        <button class="border border-gray-400 p-1 rounded">
-          <i class="fas fa-balance-scale-left"></i>
-          Add to Next Up
+        <button class="flex border border-gray-400 p-1 rounded">
+          <i class="fas fa-stream"></i>
+          <p class="hidden md:block">Add to Next Up</p> 
+          
         </button>
-        <button class="modal-btn addplaylist-btn border border-gray-400 p-1 rounded">
-          <i class="fas fa-bolt"></i>
-          Add to playlist
+        <button class="flex modal-btn addplaylist-btn border border-gray-400 p-1 rounded">
+          <i class="fas fa-plus"></i>
+          <p class="hidden md:block">Add to Playlist</p> 
         </button>
         <% if current_user%>
           <%=link_to new_user_playlist_path(current_user), class:'border border-gray-400 p-1 rounded' do %>
@@ -120,7 +124,8 @@
           <div><%=@song.user.display_name%></div>
           <i class="far fa-star"></i>
         </div>
-        <div class="flex justify-start p-1">
+
+        <div class="flex justify-start items-center p-1 m-2">
           <i class="fas fa-user-friends"></i>
           <p class="text-gray-400 mx-2 followers-count"><%=@song.user.followers.count%></p>
           <i class="fab fa-soundcloud"></i>
@@ -133,21 +138,22 @@
             <p class="mx-2 follow">Following</p>
           </button>
         <% else %>
-          <button class="flex bg-white text-orange-500 border-orange-500 border p-1 rounded" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
+          <button class="flex items-center bg-white text-orange-500 border-orange-500 border rounded m-4" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
             <i class="fas fa-user-check"></i>
             <p class="mx-2 follow">Follow</p>
           </button>
         <% end%> 
       </div>
-  <%#=正中間留言總數%>
-      <div class="w-4/5 ">
+      <%#=正中間留言區%>
+      <div class="w-full sm:w-4/5">
+        <%#=正中間留言總數%>
         <div class="flex text-gray-400 m-4 p-2 border-b border-gray-400">
           <i class="fas fa-comments"></i>
           <p class="mx-1"><%=@comments.count%></p> 
           <p class="mx-1">comments</p>
         </div>
-  <%#=顯示正中間留言區那%>
-        <div class="" id="comments">
+        <%#=顯示正中間留言區那%>
+        <div class="text-xs" id="comments">
           <% @comments.each do |comment| %>
             <div class="flex main-comment">
               <% if comment.user.avatar_url %>
@@ -161,7 +167,7 @@
                 </div>
                 <p><%=comment.content%></p>
               </div>
-              <div class="w-2/12 text-gray-400">
+              <div class="col-span-2 text-gray-400">
                 <p><%= time_diff(DateTime.now, comment.created_at) %>
                 <%if is_current_user?(comment.user)%>
                   <button class="border border-gray-400 p-1 rounded"><%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"}%></button> 
@@ -208,9 +214,9 @@
 
 
 <%#=右邊專區%>
-  <div class="w-1/4 m-4">
+  <div class="col-span-3 m-4 hidden md:block">
     <div class="flex justify-between text-gray-500 border-b border-gray-300 text-sm p-2">
-      <div class=""><i class="fas fa-heart"></i> Related Tracks</div>
+      <div class=""><i class="fas fa-heart"></i>Related Tracks</div>
       <button class="">view all</button>
     </div>
     <%= render './shared/related_area.html.erb', element: @related_song %>
@@ -218,22 +224,22 @@
     <div class="flex border-t border-gray-400">
       <div class="my-3 text-xs table-row-group">
 
-        <div class="">
-          <span class="text-gray-500  hover:text-black"><a href="#">Legal</a></span>
+        <div class="text-gray-500">
+          <span class="hover:text-black"><a href="#">Legal</a></span>
             
-          <span class="text-gray-500  hover:text-black"><a href="#">Privacy</a></span>
+          <span class="hover:text-black"><a href="#">Privacy</a></span>
             
-          <span class="text-gray-500  hover:text-black"><a href="#">Cookies</a></span>
+          <span class="hover:text-black"><a href="#">Cookies</a></span>
             
-          <span class="text-gray-500  hover:text-black"><a href="#">Imprint</a></span>
+          <span class="hover:text-black"><a href="#">Imprint</a></span>
 
-          <span class="text-gray-500  hover:text-black"><a href="#">Creator Resources</a></span>
+          <span class="hover:text-black"><a href="#">Creator Resources</a></span>
             
-          <span class="text-gray-500  hover:text-black"><a href="#">Blog</a></span>
+          <span class="hover:text-black"><a href="#">Blog</a></span>
             
-          <span class="text-gray-500  hover:text-black"><a href="#">Charts</a></span>
+          <span class="hover:text-black"><a href="#">Charts</a></span>
             
-          <span class="text-gray-500  hover:text-black"><a href="#">Popular Search</a></span>
+          <span class="hover:text-black"><a href="#">Popular Search</a></span>
         </div>
         
           <div class="mt-2 mb-20">
