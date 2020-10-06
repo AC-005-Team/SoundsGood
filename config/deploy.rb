@@ -21,7 +21,7 @@ set :repo_url, "git@github.com:AC-005-Team/SoundClown.git"
 # set :pty, true
 
 # Default value for :linked_files is []
- append :linked_files, ".env" ,"config/secrets.yml", "/config/credentials/development.key"
+ append :linked_files, ".env" ,"config/secrets.yml"
 
 # Default value for linked_dirs is []
  append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
