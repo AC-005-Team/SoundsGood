@@ -46,7 +46,7 @@ class Song < ApplicationRecord
   private
   def create_peak_data #上傳歌曲時，打api到GCP node.js server
     p '------calling node.js------'
-    HTTP.post("http://34.67.190.190/api/v1/soundwavify", :json => { :filetype => "song_peaks", :filepath => self.track_url })
+    HTTP.post("https://peaks.soundsgood.world/api/v1/soundwavify", :json => { :filetype => "song_peaks", :filepath => self.track_url })
     p '------------end------------'
   end
 end
