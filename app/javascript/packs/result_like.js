@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
         if(response.ok){
           let icon = btn.children[0]
           let count = btn.children[1]
-          console.log(icon.getAttribute('data-prefix'))
           if(icon.getAttribute('data-prefix') == 'far'){
             let num = Number(count.textContent)
             icon.style.color = "orange"
@@ -25,7 +24,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
           }
         }
       })
-
     })    
   })
 })

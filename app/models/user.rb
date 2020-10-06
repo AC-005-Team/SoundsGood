@@ -30,6 +30,10 @@ class User < ApplicationRecord
   has_many :repost_playlists, through: :reposts, source: :repostable, source_type: "Playlist"
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
+    "-"*20
+    puts request.env["omniauth.auth"]
+    "-"*20
+
     data = access_token.info
     user = User.find_by(google_token: access_token.credentials.token, google_uid: access_token.uid )
     return user if user.present?
@@ -107,7 +111,7 @@ class User < ApplicationRecord
     data = access_token.info
   
     User.create(
-      first_name: data["first_name"],
+      display_name: data["name"],
       last_name: data["last_name"],
       email: data["email"],
       password: Devise.friendly_token[0,20],
