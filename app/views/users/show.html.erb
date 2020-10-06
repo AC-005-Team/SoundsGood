@@ -2,7 +2,7 @@
 
 <%#=圖區一%>
 <div class="flex mx-4 bg-gradient-to-r from-red-500 via-white to-orange-700">
-  <img class="w-1/6 m-4 rounded-full" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
+  <%= image_tag @user.avatar_url, class:'w-1/6 m-4 rounded-full' %>
   <div class="flex justify-between w-5/6 items-start">
     <div class="m-4">
       <div class="bg-black rounded p-1 text-xl text-white m-1">
@@ -14,10 +14,11 @@
       </div>
         <div><%= link_to 'create podcast channel', rooms_path %></div>
     </div>
-    <button class="text-white bg-orange-600 p-2 rounded">
-      <i class="fas fa-camera"></i>
-      Upload header image
-    </button>
+    <% if @current_user == @user %>
+      <%= link_to edit_user_path(@user), class: 'text-white bg-orange-600 p-2 rounded' do %>
+        <i class="fas fa-camera"></i>Upload header image
+      <% end %>
+    <% end %>
   </div>
 </div>
 
@@ -138,46 +139,9 @@
         <div class="">view all</div>
       </div>
 
-      <div class="my-4 flex">
-        <img class="w-1/5" src="https://i1.sndcdn.com/artworks-tzoA3a4voEv4g77c-Z5qUqQ-t120x120.jpg" alt="">
-        <div class="w-4/5 mx-2 text-xs">
-            <div class="text-gray-500">Cherokee Recordings</div>
-            <div class="">Dean Robert - Morning</div>
-            <div class="flex justify-around">
-              <a href="">➡️261K</a>
-              <a href="">❤️3315</a>
-              <a href="">⭕️60</a>
-              <a href="">☁️101</a>
-            </div>
-        </div>
-      </div>
+        <%#=右邊 user-like area %>
+        <%= render './shared/like_area.html.erb', element: current_user %>
 
-      <div class="my-4 flex">
-        <img class="w-1/5" src="https://i1.sndcdn.com/artworks-tzoA3a4voEv4g77c-Z5qUqQ-t120x120.jpg" alt="">
-        <div class="w-4/5 mx-2 text-xs">
-            <div class="text-gray-500">Cherokee Recordings</div>
-            <div class="">Dean Robert - Morning</div>
-            <div class="flex justify-around">
-              <a href="">➡️261K</a>
-              <a href="">❤️3315</a>
-              <a href="">⭕️60</a>
-              <a href="">☁️101</a>
-            </div>
-        </div>
-      </div>
-
-      <div class="my-4 flex">
-        <img class="w-1/5" src="https://i1.sndcdn.com/artworks-tzoA3a4voEv4g77c-Z5qUqQ-t120x120.jpg" alt="">
-        <div class="w-4/5 mx-2 text-xs">
-            <div class="text-gray-500">Cherokee Recordings</div>
-            <div class="">Dean Robert - Morning</div>
-            <div class="flex justify-around">
-              <a href="">➡️261K</a>
-              <a href="">❤️3315</a>
-              <a href="">⭕️60</a>
-              <a href="">☁️101</a>
-            </div>
-        </div>
       </div>
     </div>
 
@@ -209,27 +173,3 @@
     </div>
   </div>  
 </div>
-
-
-
-<h1>這是<%= @user.email %>的頁面</h1>
-<%= link_to follow_user_path, method: 'post' do %>
-  <button>Follow</button>
-<% end %>
-<h1>profile</h1>
-<%= link_to 'edit', edit_user_path(current_user) if current_user%>
-<%= link_to 'go back', root_path %>
-<ul>
-  <% if @user.header_url && @user.avatar_url %>
-    <li>header:<%= image_tag @user.header_url, width: '100px' %></li>
-    <li>avatar:<%= image_tag @user.avatar_url, width: '100px' %></li>
-  <% end%>
-  <li>email:<%= @user.email %></li>
-  <li>nick_name:<%= @user.display_name %></li>
-  <li>gender:<%= @user.gender %></li>
-  <li>age:<%= @user.age %></li>
-  <li>first_name:<%= @user.first_name %></li>
-  <li>last_name:<%= @user.last_name %></li>
-  <li>city:<%= @user.city %></li>
-  <li>country:<%= @user.country %></li>
-</ul>

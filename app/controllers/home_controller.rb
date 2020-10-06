@@ -12,4 +12,5 @@ class HomeController < ApplicationController
   def find_song
     @songs = Song.all.includes(:tags)
   end
+
 end

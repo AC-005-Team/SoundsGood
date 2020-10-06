@@ -45,7 +45,9 @@
     <%#=左邊專區：最上面的Comment區域%>
     <div class="border-b border-gray-400">
       <div class="flex ">
-        <img class="w-auto h-10 current_user-avatar" src="https://i1.sndcdn.com/artworks-48wHUXnYlyIAyhPm-kAqlLQ-t500x500.jpg" alt="">
+        <% if @current_user %>
+          <%= image_tag @current_user.avatar_url, class: 'w-auto h-10 current_user-avatar' %>
+        <% end %>
         <%= form_with(model:@comment, url:song_comments_path(song_id: @song, timepoint: 0), class: "song-comment-form w-11/12 mx-4 border border-gray-400 rounded") do |f|%>
           <%= f.text_field :content, placeholder: "Write a comment", class: "song-main-comment w-10/12 py-2 px-4 border border-gray-400 rounded", data: {id: @song.id} %>
           <%= f.submit class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"%>
@@ -88,18 +90,21 @@
           <i class="fas fa-plus"></i>
           <p class="hidden md:block">Add to Playlist</p> 
         </button>
-        <button class="border border-gray-400 p-1 rounded">
-          <i class="fas fa-bolt"></i>
-          <%=link_to "Create Playlist", new_user_playlist_path(current_user) if current_user %>
-        </button>
+        <% if current_user%>
+          <%=link_to new_user_playlist_path(current_user), class:'border border-gray-400 p-1 rounded' do %>
+            <i class="fas fa-bolt"></i>Create Playlist
+          <% end %>
+        <% end %>
         <button class="p-1 text-gray-600">
           <i class="fas fa-chevron-circle-right"></i>
           10.2K
         </button>
-        <button class="p-1 text-gray-600">
+        <div class="p-1 text-gray-600">
           <i class="fas fa-heart"></i>
-          <%=@song.liked_users.count %> 
-        </button>
+          <span class='liked-count'>
+            <%=@song.liked_users.count %> 
+          </span>
+        </div>
         <button class="p-1 text-gray-600">
           <i class="fas fa-retweet"></i>
           <%=@song.reposted_users.count %> 
@@ -107,19 +112,22 @@
 
       </div>
     </div>
-    <div class="flex flex-col sm:flex-row text-sm">
-      <%#=左邊專區大頭照那%>
-      <div class="flex justify-between w-1/5 sm:w-1/6 sm:block mr-4 h-16 text-lg" data-controller="follow" data-follow-user="<%= @song.user.id %>">
-        <img class="rounded-full mt-2 mr-4 w-3/4" src="https://i1.sndcdn.com/avatars-000607373832-b25xhj-t200x200.jpg" alt="">
-        
-        <div class="flex items-center p-1 m-2">
-          <i class="far fa-star"></i>        
-          <p class="w-16"><%=@song.user.display_name%></p>
+    <div class="flex text-sm">
+  <%#=左邊專區大頭照那%>
+      <div class="w-1/5 mr-4" data-controller="follow" data-follow-user="<%= @song.user.id %>">
+        <% if @song.user.avatar_url %>
+          <%= image_tag @song.user.avatar_url, class: 'rounded-full mt-6 mr-6 w-3/4' %>
+        <% else %>
+          <%#= if user no avatar%>
+        <% end %>
+        <div class="flex justify-start p-1">
+          <div><%=@song.user.display_name%></div>
+          <i class="far fa-star"></i>
         </div>
 
         <div class="flex justify-start items-center p-1 m-2">
           <i class="fas fa-user-friends"></i>
-          <p class="text-gray-400 mx-2"><%=@song.user.followers.count%></p>
+          <p class="text-gray-400 mx-2 followers-count"><%=@song.user.followers.count%></p>
           <i class="fab fa-soundcloud"></i>
           <p class="text-gray-400 mx-2"><%=@song.user.songs.count%></p>
         </div>
@@ -147,41 +155,42 @@
         <%#=顯示正中間留言區那%>
         <div class="text-xs" id="comments">
           <% @comments.each do |comment| %>
-            <div class="grid grid-cols-12 h-12 main-comment">
-              <img class="col-span-1 h-12 rounded-full" src="https://i1.sndcdn.com/avatars-Y57TiYzkrpCtP0pD-w8fdEA-t120x120.jpg" alt="">
-              
-              <div class="col-span-9 mx-2">
+            <div class="flex main-comment">
+              <% if comment.user.avatar_url %>
+                <%= image_tag comment.user.avatar_url, class: 'w-1/12 rounded-full' %>
+              <% end %>
+              <div class="w-9/12 mx-2">
                 <div class="flex">
-                  <button> <%=comment.user.display_name%></button>  
-                  <p class="mx-2">at:</p>               
-                  <p> <%=comment.created_at%> </p>
-
+                  <button> <%=comment.user.display_name%></button>
+                  <p class ="mx-1"> at</p>
+                  <p><%= comment.created_at.strftime("%H:%M") %></p> 
                 </div>
-                <p class=""> <%=comment.content%> </p>
+                <p><%=comment.content%></p>
               </div>
-
               <div class="col-span-2 text-gray-400">
-                <button class="border border-gray-400 p-1 rounded"> <i class="fas fa-reply"></i> Reply </button>
+                <p><%= time_diff(DateTime.now, comment.created_at) %>
                 <%if is_current_user?(comment.user)%>
-                  <button class="border border-gray-400 p-1 rounded"> <%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"}%> </button> 
+                  <button class="border border-gray-400 p-1 rounded"><%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"}%></button> 
                 <%end%>
               </div>
             </div>
             <%#=顯示正中間針對留言的留言那%>
             <div id= <%=comment.id%>>
               <% comment.replies.each do |reply| %>
-              <div class="grid grid-cols-12 mt-4 ml-6">
-                <img class="col-span-1 h-10 rounded-full" src="https://i1.sndcdn.com/avatars-Y57TiYzkrpCtP0pD-w8fdEA-t120x120.jpg" alt="">
-                <div class="col-span-9 mx-2">
+              <div class="flex mt-4 ml-6">
+                <% if reply.user.avatar_url %>
+                  <%= image_tag reply.user.avatar_url, class: 'w-1/12 rounded-full' %>
+                <% end %>
+                <div class="w-9/12 mx-2">
                   <div class="flex">
                     <button> <%=reply.user.display_name%></button>
-                    <p class="mx-2">at:</p>               
-                    <p> <%=reply.created_at%> </p>
-
+                    <p class ="mx-1"> at</p>
+                    <p><%= reply.created_at.strftime("%H:%M") %></p>
                   </div>
                   <p class=""> <%=reply.content%> </p>
                 </div>
-                <div class="col-span-2 text-gray-400">
+                <div class="w-2/12 text-gray-400">
+                  <p><%= time_diff(DateTime.now, reply.created_at) %>
                   <%if is_current_user?(comment.user)%>
                   <button class="border border-gray-400 p-1 rounded"> <%= link_to "Delete", comment_path(song_id: @song.id, id: reply.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%> </button>
                   <%end%>
@@ -210,21 +219,8 @@
       <div class=""><i class="fas fa-heart"></i>Related Tracks</div>
       <button class="">view all</button>
     </div>
-
-    <div class="my-4 flex">
-      <img class="w-1/5" src="https://i1.sndcdn.com/artworks-tzoA3a4voEv4g77c-Z5qUqQ-t120x120.jpg" alt="">
-      <div class="w-4/5 mx-2 text-xs">
-        <div class="text-gray-500">Cherokee Recordings</div>
-        <div class="">Dean Robert - Morning</div>
-        <div class="flex justify-around">
-          <a href="">➡️261K</a>
-          <a href="">❤️3315</a>
-          <a href="">⭕️60</a>
-          <a href="">☁️101</a>
-        </div>
-      </div>
-    </div>
-
+    <%= render './shared/related_area.html.erb', element: @related_song %>
+  
     <div class="flex border-t border-gray-400">
       <div class="my-3 text-xs table-row-group">
 

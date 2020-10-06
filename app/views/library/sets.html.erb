@@ -23,7 +23,27 @@
           </button>
         </div>
       </div>
-      <div class="library-playlist-place grid grid-cols-12 gap-4">
+      
+      
+      <div class="grid grid-cols-12 gap-4">
+        <% @playlists.each do |playlist|%>
+          <div class="col-span-2 my-2 mr-2 flex flex-col justify-between">
+            <%#= 歌曲圖片 %>
+            <div class="align-top w-full">
+              <% if playlist.songs[0] %>
+                <%= link_to image_tag(playlist.songs[0].image_url), playlist_path(playlist.id), class:'block' %>
+              <% else %>
+                <%#= 放假圖 %>
+              <% end %>
+            </div>
+              <%#= 歌曲名稱、介紹、TAG標籤 %>
+              <div class="">
+                <%#= 歌曲名稱 %>
+                <%= content_tag(:li,content_tag(:a, playlist.name, href: playlist_path(playlist)), data: {value: playlist.name} ) %>
+                <%= content_tag(:li,playlist.intro, data: {value: playlist.intro} ) %>
+              </div>
+            </div>
+        <% end %>
       </div>
     </div>
 <%#=左邊區域結束%>

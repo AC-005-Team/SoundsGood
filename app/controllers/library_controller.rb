@@ -7,11 +7,10 @@ class LibraryController < ApplicationController
 
   def likes
     @like_songs = current_user.like_songs
-    @songs = Song.all.includes(:tags)
   end
 
   def sets
-    @songs = Song.all.includes(:tags)
+    @playlists = current_user.playlists
   end
 
   def albums

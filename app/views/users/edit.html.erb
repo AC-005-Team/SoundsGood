@@ -3,17 +3,14 @@
     <%= form_with model: @user, url: user_path(current_user.id), method: 'put', local: true  do |f| %>
       <div>
         <%= f.label :header %>
-        <input type="file" name=user[header] onchange="showMyImage(this)" class= 'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3'>
-        <img id="thumbnil" src="" >
+        <%= f.file_field :file, name: "user[header]", onchange: "showMyImage(this)", class: 'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3' %>
+        <%= image_tag '', id:'thumbnil' %>
       </div>
       
       <div>
         <%= f.label :avatar %>
-        <%= f.input :file, as: :hidden, input_html: { name: "user[avatar]", onchange: "showMyAvatar(this)", class: 'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3' } %>
-        <!-----
-        <input type="file" name=user[avatar] onchange="showMyAvatar(this)" class= 'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3'>
-        ----->
-        <img id="avatar" src="" >
+        <%= f.file_field :file, name: "user[avatar]", onchange: "showMyAvatar(this)", class: 'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3' %>
+        <%= image_tag '', id:'avatar' %>
       </div>
 
       <div>
