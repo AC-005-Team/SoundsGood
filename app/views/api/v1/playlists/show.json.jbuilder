@@ -10,5 +10,4 @@ json.audio do
 end
 end
 
-
-\
+json.first_cover @songs.first.image_url

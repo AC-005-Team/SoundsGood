@@ -11,6 +11,14 @@ class Api::V1::PlaylistsController < ApplicationController
   end
   def index
     @playlists = current_user.playlists
+    @playlist = @playlists.each { |element| element }
+
+
+
+
+
+
+
   end
 
 end

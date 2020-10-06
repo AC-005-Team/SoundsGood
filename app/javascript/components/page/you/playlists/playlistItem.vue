@@ -1,6 +1,17 @@
 <template>
 <div @click='yourClickHandler'>
-  <li>playlist: {{ playlist.name }} </li>
+<div class="my-2 mr-2 flex sm:flex-col justify-between flex-row">
+<div class="align-top w-32 h-32  overflow-hidden rounded"  :style="{ 'background-image': 'url('+  url + ')' }">
+<img class="h-32 max-w-xl mr-4" :src="url">
+</div>
+<div class="text-2xl sm:text-sm hover:bg-gray-200 rounded" >
+<li>{{playlist.name}}</li>
+<li>{{playlist.intro}}</li>
+</div>
+</div>
+
+
+
   <button @click="playThelist" :id="playlist.id" :class="">play ▶</button>
   <router-link :to="`/playlist/${playlist.id}`">show playlist</router-link>
   <div class="dropdown">
@@ -11,6 +22,9 @@
     </div>
   </div>
 </div>
+
+
+
 </template>
 
 <script type="text/javascript">
@@ -21,7 +35,10 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 export default{
   data(){
   return {
-    isActive: false
+    isActive: false,
+    track_id: this.playlist.id,
+    url: ''
+
   }
 },
   name: 'playlistItem',
@@ -29,13 +46,30 @@ export default{
 
   computed: {
     ...mapGetters({
-        playerTracks: 'songs/playerTracks'
-     })
+        playerTracks: 'songs/playerTracks',
+        playlistTracks:'playlistsSongs/listsongs'
+     }),
+
+  },
+  ...mapActions('playlistsSongs', ['loadList']),
+  created(){
+    const axios = require('axios').create({
+      baseURL: 'http://127.0.0.1:3000'
+    });
+    axios
+      .get(`/api/v1/playlists/${this.track_id}`)
+      .then(response => (this.url = response.data.first_cover))
+      .catch(function(error) {
+        console.log( 'playlist has no image'  );
+      });
+
+
   },
 
   methods: {
        ...mapActions('songs', [ 'play','pause']),
        ...mapActions('playlists', ['loadSongs']),
+       ...mapActions('playlistsSogns', ['loadList']),
     playThelist(){
       if(this.playerTracks.id !== this.playlist.id || !this.playerTracks ){
         this.$store.dispatch('songs/pause')

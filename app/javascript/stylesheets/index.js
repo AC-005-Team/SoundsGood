@@ -9,3 +9,4 @@ require("./index.css");
 require("./wave.css")
 
 require("./loader.scss");
+require("./wave.css")

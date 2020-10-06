@@ -15,8 +15,8 @@
       <!-- </div> -->
     <!-- </div> -->
     <div class="m-4">
-          <form enctype="multipart/form-data" action="/users/2/songs" accept-charset="UTF-8" method="post" @submit.prevent="uploadForm">
-            <input type="hidden" name="authenticity_token" value="oXk6f8bIOHgjfx2DX3jsKnC0+mDlh5v4kCq/6TWs+i7fZ4ui+JK8LxMc/PKlFYLWeHmjg4x/xAdnt7hbxS1qvw==">
+          <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" @submit.prevent="uploadForm">
+            <!-- <input type="hidden" name="authenticity_token" value="oXk6f8bIOHgjfx2DX3jsKnC0+mDlh5v4kCq/6TWs+i7fZ4ui+JK8LxMc/PKlFYLWeHmjg4x/xAdnt7hbxS1qvw=="> -->
 <!--
           <div class="m-auto w-2/3 border border-gray-400 p-4">
             <div class="flex justify-between items-center">
@@ -291,13 +291,13 @@ export default {
       axios.post('http://127.0.0.1:3000/users/2/songs', formData,config, {
         withCredentials: true
       }).then(response => {
+        // 去除動畫
         console.log("QWEQWEQW", response)
       }).catch(error => {
         console.log(error.response)
       })
-
+      // 執行動畫
     }
-
 
 
   }

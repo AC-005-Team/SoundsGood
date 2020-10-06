@@ -37,7 +37,7 @@ slide-multiple
       <div class="dropdown">
         <div id="myDropdown" class='dropdown-content ' :class=" [isActive? 'show' : '']">
           <a><i class="fas fa-headphones-alt addto"></i>add to play next</a>
-          <a @click.stop="aaa"><i class="fas fa-plus-circle addto"></i> add to playlist</a>
+          <a @click.stop="aaa"><i class="fas fa-plus-circle addto" ></i> add to playlist</a>
         </div>
       </div>
 
@@ -51,18 +51,15 @@ slide-multiple
 
     </div>
 
-    <sweet-modal ref="modal">
-      <sweet-modal-tab title="Add To Playlist" id="tab1">
-
-        <myPlaylist v-for="playlist in playlists" :playlist="playlist"></myPlaylist >
-
-
-
+  <sweet-modal ref="modal">
+    <sweet-modal-tab title="Add To Playlist" id="tab1" class="overscroll-auto">
+      <myPlaylist v-for="playlist in playlists" :playlist="playlist" ></myPlaylist >
       </sweet-modal-tab>
       <sweet-modal-tab title="Create Playlist" id="tab2">
-        <addPlaylist/>
+        <addPlaylist @after_add="addPlaylist"/>
       </sweet-modal-tab>
     </sweet-modal>
+
 
   </div>
 
@@ -70,7 +67,6 @@ slide-multiple
 </div>
 </template>
 <script>
-
 import {
   mapState,
   mapGetters,
@@ -162,6 +158,9 @@ export default {
     like() {
       return this.changeColor = !this.changeColor
     },
+    addPlaylist(obj) {
+      this.playlists.push(obj)
+    }
   },
 
   computed: {
@@ -256,6 +255,7 @@ export default {
 }
 .fa-ellipsis-h:hover,.fa-heart:hover{
   transform: scale(1.2);
+  color:rgb(251, 171, 171);
   transition:.3s;
 }
 .fa-ellipsis-h,.fa-heart{

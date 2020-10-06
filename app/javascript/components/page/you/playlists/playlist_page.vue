@@ -1,6 +1,6 @@
 <template>
 <div @click="yourClickHandler">
-  <router-link to="/playlists">back to playlists</router-link>
+  <!-- <router-link to="/playlists">back to playlists</router-link> -->
   <h1>{{listsongs.name}}</h1>
   <div v-for="(song, index) in listsongs.audio" :key="index">
     <img :src="song.cover">
