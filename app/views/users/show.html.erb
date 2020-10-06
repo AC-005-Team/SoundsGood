@@ -2,7 +2,9 @@
 
 <%#=圖區一%>
 <div class="flex mx-4 bg-gradient-to-r from-red-500 via-white to-orange-700">
-  <%= image_tag @user.avatar_url, class:'w-1/6 m-4 rounded-full' %>
+  <% if @user.avatar_url %>
+    <%= image_tag @user.avatar_url, class:'w-1/6 m-4 rounded-full' %>
+  <% end %>
   <div class="flex justify-between w-5/6 items-start">
     <div class="m-4">
       <div class="bg-black rounded p-1 text-xl text-white m-1">

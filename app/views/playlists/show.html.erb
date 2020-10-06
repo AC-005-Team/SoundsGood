@@ -24,7 +24,7 @@
 
 <% @playlist.songs.each do |song| %>
   <ul>
-    <li> <%= image_tag song.image_url, width: '200px' %> </li>
+     <li> <%= image_tag song.image_url, width: '200px' %> </li>
     <%= content_tag(:li,song.name, data: {value: song.name} ) %>
     <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
     <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: song.id} ) %>
