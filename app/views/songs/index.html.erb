@@ -34,15 +34,14 @@
             <%#= link_to "add to playlist",list_add_path(song.id), data: {}  %>
           </div>
         </div>
-
         <div>
           <h3>Add to playlist</h3>
             <% @playlists.each do |playlist| %>
               <li>Playlist：<%= playlist.name %>
-              <% if @song.added_by?(playlist) %>
-                <%= link_to "Added", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
+              <% if song.added_by?(playlist) %>
+                <%= link_to "Added", add_to_playlist_song_path(id: song, playlist_id: playlist), method: "post" %> </li>
               <% else %>
-                <%= link_to "Add to playlist", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
+                <%= link_to "Add to playlist", add_to_playlist_song_path(id: song, playlist_id: playlist), method: "post" %> </li>
               <% end %>
             <% end %> 
         </div>
@@ -164,10 +163,10 @@
                 <%# <h3>Add to playlist</h3> %>
                   <% @playlists.each do |playlist| %>
                     <li>Playlist：<%= playlist.name %>
-                    <% if @song.added_by?(playlist) %>
-                      <%= link_to "Added", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
+                    <% if song.added_by?(playlist) %>
+                      <%= link_to "Added", add_to_playlist_song_path(id: song, playlist_id: playlist), method: "post" %> </li>
                     <% else %>
-                      <%= link_to "Add to playlist", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
+                      <%= link_to "Add to playlist", add_to_playlist_song_path(id: song, playlist_id: playlist), method: "post" %> </li>
                     <% end %>
                   <% end %> 
               </div>

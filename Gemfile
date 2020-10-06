@@ -42,6 +42,7 @@ gem 'pg'
 gem 'http', '~> 4.4', '>= 4.4.1'
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 
+gem 'opentok', '~> 4.1', '>= 4.1.2'
 # Meta-tag helper
 gem 'meta-tags', '~> 2.13'
 

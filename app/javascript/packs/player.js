@@ -1,34 +1,37 @@
-import 'aplayer/dist/APlayer.min.css';
-import APlayer from 'aplayer';
-const hostPath = 'http://'+window.location.host
+import "aplayer/dist/APlayer.min.css";
+import APlayer from "aplayer";
+const hostPath = window.location.origin;
 //畫面一開始的播放器
 const ap = new APlayer({
-  container: document.getElementById('player1'),
+  container: document.getElementById("player1"),
   listFolded: true,
-  audio: [{
-    autoplay: true,
-    theme: '#f18b00',
-    cover: '', //required,
-    title: '', // Required, music title
-    author: '', // Required, music author
-    url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/Music_for_Video/Blue_Dot_Sessions/Fjell/Blue_Dot_Sessions_-_Kvelden_Trapp.mp3"
-  }]
+  audio: [
+    {
+      autoplay: true,
+      theme: "#f18b00",
+      cover: "", //required,
+      title: "", // Required, music title
+      author: "", // Required, music author
+      url:
+        "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/Music_for_Video/Blue_Dot_Sessions/Fjell/Blue_Dot_Sessions_-_Kvelden_Trapp.mp3",
+    },
+  ],
 });
 //立即點播放單首歌
-const songs = document.querySelectorAll('.getURL');
-if(songs){
+const songs = document.querySelectorAll(".getURL");
+if (songs) {
   songs.forEach((song) => {
-    song.addEventListener('click', function(e) {
+    song.addEventListener("click", function(e) {
       e.preventDefault();
       let id = e.currentTarget.dataset.id;
       ap.pause();
       ap.list.clear();
-      getPlay(id).then(val => {
+      getPlay(id).then((val) => {
         ap.list.add(val);
       });
       ap.play();
-      console.log(ap)
-      ap.container.setAttribute('data-playing', id)
+      console.log(ap);
+      ap.container.setAttribute("data-playing", id);
     });
   });
 }
@@ -38,99 +41,78 @@ async function getPlay(id) {
   let response = await fetch(`${hostPath}/api/v1/songs/${id}`);
   let playlistTrack = await response.json();
   return playlistTrack;
-};
-
-
-
-
+}
 
 //ADD TO PLAY NEXT by json
-const addbutton = document.querySelectorAll('#addtoplay');
-if (addbutton){
+const addbutton = document.querySelectorAll("#addtoplay");
+if (addbutton) {
   addbutton.forEach((song) => {
-    song.addEventListener('click', function(e) {
+    song.addEventListener("click", function(e) {
       e.preventDefault();
       let id = e.currentTarget.dataset.id;
-      getPlay(id).then(val => {
+      getPlay(id).then((val) => {
         ap.list.add(val);
       });
     });
   });
-
 }
-
-
 
 // read playlists JSON
 async function getPlayList(id) {
   let response = await fetch(`${hostPath}/api/v1/playlists/${id}`);
   let playlistTrack = await response.json();
   return playlistTrack;
-};
+}
 
 //play playlist by json
-const playlistBtn = document.querySelector('#play_playlist');
-if(playlistBtn){
-  playlistBtn.addEventListener('click', function(e){
+const playlistBtn = document.querySelector("#play_playlist");
+if (playlistBtn) {
+  playlistBtn.addEventListener("click", function(e) {
     let id = e.currentTarget.dataset.id;
     ap.pause();
     ap.list.clear();
-    getPlayList(id).then(val => {
+    getPlayList(id).then((val) => {
       ap.list.add(val);
     });
     ap.play();
   });
-
 }
 
+const dropbtn = document.querySelectorAll(".dropbtn");
+const dropDownbtn = document.querySelectorAll("#myDropdown");
 
-
-
-
-const dropbtn = document.querySelectorAll('.dropbtn');
-const dropDownbtn = document.querySelectorAll('#myDropdown');
-
-if (dropbtn){
-  for(let i = 0;  i < dropbtn.length; i++) {
-    dropbtn[i].addEventListener('click', function(e){
-      console.log("hihihihii")
-      const $dropDown = e.currentTarget.parentNode
-      $dropDown.querySelector('#myDropdown').classList.toggle('show')
+if (dropbtn) {
+  for (let i = 0; i < dropbtn.length; i++) {
+    dropbtn[i].addEventListener("click", function(e) {
+      console.log("hihihihii");
+      const $dropDown = e.currentTarget.parentNode;
+      $dropDown.querySelector("#myDropdown").classList.toggle("show");
     });
   }
 }
 
-
-
-
 window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
+  if (!event.target.matches(".dropbtn")) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
     var i;
     for (i = 0; i < dropdowns.length; i++) {
       var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
+      if (openDropdown.classList.contains("show")) {
+        openDropdown.classList.remove("show");
       }
     }
   }
-}
-
+};
 
 const heart = document.querySelectorAll(".heart");
-for(var i =0, len = heart.length; i<len; i++)
-{
-  heart[i].onclick = function(){
-  if(this.classList.contains('like_btn')){
-    this.classList.remove('like_btn');
-    this.classList.add('like_btn_reverse');
-  } else {
-
-    this.classList.remove('like_btn_reverse');
-    this.classList.add('like_btn');
-  }
-}
-
-
-
+for (var i = 0, len = heart.length; i < len; i++) {
+  heart[i].onclick = function() {
+    if (this.classList.contains("like_btn")) {
+      this.classList.remove("like_btn");
+      this.classList.add("like_btn_reverse");
+    } else {
+      this.classList.remove("like_btn_reverse");
+      this.classList.add("like_btn");
+    }
+  };
 }
