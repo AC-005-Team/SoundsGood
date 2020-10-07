@@ -23,7 +23,7 @@ import "tailwindcss/base";
 import "tailwindcss/components";
 import "tailwindcss/utilities";
 // import "@fortawesome/fontawesome-free/js/all";
-import '@fortawesome/fontawesome-svg-core';
+// import '@fortawesome/fontawesome-svg-core';
 // config.autoReplaceSvg = false
 import WaveSurfer from "wavesurfer.js";
 // require('./style.css')

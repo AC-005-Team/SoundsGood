@@ -40,6 +40,8 @@ Rails.application.routes.draw do
     resources :songs, shallow: true do
       member do
         post :like
+        get :like
+        get :add_to_playlist
         post :add_to_playlist
         post :repost
       end
@@ -76,7 +78,7 @@ Rails.application.routes.draw do
         resources :songs, only: [:index, :show] do
           resources :comments, only: [:index]
         end
-        resources :playlists, only: [:show] do
+        resources :playlists, only: [:index,:show] do
           collection do
             get :library
           end

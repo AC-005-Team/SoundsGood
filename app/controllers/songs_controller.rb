@@ -53,6 +53,7 @@ class SongsController < ApplicationController
 
   def like
     current_user.toggle_like_song(@song)
+    
     respond_to do |format|
       format.html {redirect_to @song}
       format.json {render json: {status: @song.favorited_by?(current_user)}}

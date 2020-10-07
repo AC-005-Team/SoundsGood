@@ -4,32 +4,32 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import Rails from "@rails/ujs"
 
 
-const playlistsSongs = {
+const favorite = {
   namespaced: true,
 
   state: {
-     ListSongs: [],
-     Added: false,
+     LikeSongs: [],
+     Like: false,
 
   },
 
   mutations: {
     SAVE_LIST(state, data) {
-      state.ListSongs = data;
+      state.LikeSongs = data;
     },
     TOGGLE(state,data){
-      state.Added = data
+      state.Like = data
     },
     LOAD_STATUS(state,data){
-      state.Added = data
+      state.Like = data
     },
   },
 
   getters:{
-    listsongs(state){
-      return state.ListSongs;
+    likesongs(state){
+      return state.LikeSongs;
     },
-    added(state){
+    like(state){
       return state.Added;
     },
   },
@@ -43,14 +43,14 @@ const playlistsSongs = {
     //   let response = await Api().get(`/api/v1/songs/${id}`);
     //   commit('LOAD_STATUS', response.data)
     // },
-    async toggleList({commit}, payload) {
+    async toggleLike({commit}, payload ) {
       // let response = await Api().post(`/songs/${id}/like.json`);
       // commit('TOGGLE', response.data)
-
       Rails.ajax({
-        url: `/songs/${payload.id}/add_to_playlist?playlist_id=${payload.playlist_id}.json`,
+        url: `/songs/${id}/like.json`,
         type: 'post',
-        success: (result) => {commit('TOGGLE',result.status)}
+        success: (result) => {commit('TOGGLE',result.status)
+      }
 
         // error: (err) => {
         //   console.log(err);
@@ -58,16 +58,16 @@ const playlistsSongs = {
       })
     },
 
-    ...mapActions('songs', ['setPlayerTracks','play']),
-    async loadSong({dispatch}, id){
-      let response = await Api().get(`/api/v1/songs/${id}`);
-      dispatch('songs/setPlayerTracks', response.data, {root:true}); //塞到module tracks方法
-      dispatch('songs/play',response.data,  {root:true});
+    // ...mapActions('songs', ['setPlayerTracks','play']),
+    // async loadSong({dispatch}, id){
+    //   let response = await Api().get(`/api/v1/songs/${id}`);
+    //   dispatch('songs/setPlayerTracks', response.data, {root:true}); //塞到module tracks方法
+    //   dispatch('songs/play',response.data,  {root:true});
 
       // commit('SAVE_LIST', response.data)
 
     }
- }
+
 }
 
-export default playlistsSongs
+export default favorite

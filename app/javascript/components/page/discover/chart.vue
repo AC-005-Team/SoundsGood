@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click='yourClickHandler'>
     <!-- <vueper-slides class="no-shadow"
 :visible-slides="3"
 slide-multiple
@@ -48,9 +48,11 @@ slide-multiple
             class="dropdown-content "
             :class="[isActive ? 'show' : '']"
           >
-            <a><i class="fas fa-headphones-alt addto"></i>add to play next</a>
-            <a @click.stop="aaa" :song_id="this.chart.song_id"
-              ><i class="fas fa-plus-circle addto"></i> add to playlist</a
+            <a><i class="fas fa-headphones-alt addto">
+
+            </i>add to play next</a>
+            <a @click.stop="aaa" :song_id="this.chart.song_id">
+              <i class="fas fa-plus-circle addto"></i> add to playlist</a
             >
           </div>
         </div>
@@ -62,28 +64,16 @@ slide-multiple
         <!-- <i class="far" :class="[is? 'fa-pause-circle' : 'fa-play-circle']"  style="font-size: 60px"  /> -->
       </div>
 
-      <sweet-modal ref="modal">
-        <sweet-modal-tab title="Add To Playlist" id="tab1">
-          <myPlaylist
-            v-for="playlist in playlists"
-            :playlist="playlist"
-          ></myPlaylist>
-        </sweet-modal-tab>
-        <sweet-modal-tab title="Create Playlist" id="tab2">
-          <addPlaylist />
-        </sweet-modal-tab>
-      </sweet-modal>
-    </div>
 
   <sweet-modal ref="modal">
     <sweet-modal-tab title="Add To Playlist" id="tab1" class="overscroll-auto">
-      <myPlaylist v-for="playlist in playlists" :playlist="playlist" ></myPlaylist >
+      <myPlaylist v-for="playlist in playlists" :playlist="playlist" :track_id="track_id"></myPlaylist >
       </sweet-modal-tab>
       <sweet-modal-tab title="Create Playlist" id="tab2">
         <addPlaylist @after_add="addPlaylist"/>
       </sweet-modal-tab>
     </sweet-modal>
-
+  </div>
 
   </div>
 </template>
@@ -115,6 +105,7 @@ export default {
       changeColor: false,
       isActive: false,
       playlists: [],
+      track_id: null,
     };
   },
   props: ["chart"],
@@ -127,11 +118,13 @@ export default {
     myPlaylist,
     addPlaylist,
   },
-  beforeCreate() {},
+
 
   methods: {
     ...mapActions("songs", ["play", "pause", "continuePlay", "continuePause"]),
     ...mapActions("playlists", ["loadSongs"]),
+    ...mapActions("like", ["toggleLike"]),
+
 
     playPause() {
       if (this.playerTracks.song_id === this.chart.song_id) {
@@ -151,17 +144,26 @@ export default {
 
     aaa() {
       var song_id = event.target.getAttribute("song_id");
+      console.log(song_id);
+
       this.$refs.modal.open("tab1");
       const axios = require("axios").create({
         baseURL: "http://127.0.0.1:3000",
       });
       axios
-        // .get("/api/v1/playlists")
         .get(`/api/v1/songs/${song_id}`)
-        .then((response) => (this.playlists = response.data.playlists))
+        // .then((abc) => (this.playlists = abc.data.playlists))
+        .then((response) => (this.track_id = response.data.song_id))
         .catch(function(error) {
           console.log(error);
         });
+        axios
+          .get(`/api/v1/songs/${song_id}`)
+          .then((abc) => (this.playlists = abc.data.playlists))
+          // .then((response) => (this.track_id = response.data.song_id))
+          .catch(function(error) {
+            console.log(error);
+          });
     },
 
     mouseOver: function() {
@@ -170,16 +172,23 @@ export default {
     mouseLeave: function() {
       this.playBtn = false;
     },
+    yourClickHandler(){
+      if (!event.target.matches('.fa-ellipsis-h')) {
+        this.isActive = false
+      }
+
+    },
     toggle() {
       return (this.isActive = !this.isActive);
     },
 
     like() {
-      return (this.changeColor = !this.changeColor);
+      this.changeColor = !this.changeColor
     },
     addPlaylist(obj) {
       this.playlists.push(obj)
-    }
+    },
+
   },
 
   computed: {

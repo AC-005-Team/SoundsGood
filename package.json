@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
-    "@fortawesome/fontawesome-svg-core": "^1.2.31",
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@johmun/vue-tags-input": "^2.1.0",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
@@ -28,14 +28,8 @@
     "vue-loader": "^15.9.3",
     "vue-router": "^3.4.3",
     "vue-template-compiler": "^2.6.12",
-<<<<<<< HEAD
-
-    "tailwindcss": "^1.7.6",
-    "select2": "^4.0.13",
-=======
     "vueperslides": "^2.10.8",
     "vuex": "^3.5.1",
->>>>>>> 6c955e8...  play and pause button
     "wavesurfer-peakbuilder": "^1.0.3",
     "wavesurfer.js": "^4.0.1"
   },

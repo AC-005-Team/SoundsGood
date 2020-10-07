@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import 'aplayer/dist/APlayer.min.css';
 import APlayer from 'aplayer';
 
@@ -84,7 +84,6 @@ if(playlistBtn){
 
 }
 
-=======
 // import 'aplayer/dist/APlayer.min.css';
 // import APlayer from 'aplayer';
 //
@@ -168,7 +167,6 @@ if(playlistBtn){
 //
 // }
 //
->>>>>>> 36404cf...  vuex api
 
 
 

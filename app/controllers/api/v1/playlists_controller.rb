@@ -9,15 +9,10 @@ class Api::V1::PlaylistsController < ApplicationController
   def library
     @playlists = current_user.playlists.concat(current_user.like_playlists)
   end
+
   def index
     @playlists = current_user.playlists
-    @playlist = @playlists.each { |element| element }
-
-
-
-
-
-
+    # @playlist = @playlists.each { |element| element }
 
   end
 
