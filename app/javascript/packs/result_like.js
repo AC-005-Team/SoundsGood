@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', ()=>{
   let like_btn = document.querySelectorAll('.like_btn')
-  console.log(like_btn)
   like_btn.forEach(function(btn){
-    console.log(btn)
     btn.addEventListener('click', ()=>{
       let host = window.location.origin
       let song_id = btn.getAttribute('result-like-id')

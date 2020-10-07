@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   resources :searches, only:[] do
     get :like
+    get :follow
   end
 
   resources :users, only: [:edit, :update, :show] do
