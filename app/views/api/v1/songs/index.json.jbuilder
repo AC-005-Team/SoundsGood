@@ -1,5 +1,8 @@
 json.(@songs) do |song|
   json.song_id song.id
+  json.likes song.favorited_by?(current_user)
+
+
 json.audio do
 
     json.name song.name

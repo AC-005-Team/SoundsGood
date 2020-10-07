@@ -27,6 +27,7 @@ slide-multiple
             v-show="playing"
           />
           <transition name="fade">
+
             <div class="flex-col justify-between">
               <div class="buttons flex flex-reversed rigt-0 items-center z-10">
                 <i class="fa fa-ellipsis-h mr-2" @click.stop="toggle"></i>
@@ -41,6 +42,7 @@ slide-multiple
 
           <img class="h-32 max-w-xl mr-4" :src="chart.audio.cover" />
         </div>
+
 
         <div class="dropdown">
           <div
@@ -102,10 +104,12 @@ export default {
     return {
       playBtn: false,
       is: false,
-      changeColor: false,
+      // changeColor: false,
       isActive: false,
       playlists: [],
       track_id: null,
+      like_status: null
+
     };
   },
   props: ["chart"],
@@ -123,7 +127,8 @@ export default {
   methods: {
     ...mapActions("songs", ["play", "pause", "continuePlay", "continuePause"]),
     ...mapActions("playlists", ["loadSongs"]),
-    ...mapActions("like", ["toggleLike"]),
+    ...mapActions("favorite", ["toggleLike"]),
+
 
 
     playPause() {
@@ -183,7 +188,13 @@ export default {
     },
 
     like() {
-      this.changeColor = !this.changeColor
+      // this.changeColor = !this.changeColor
+
+      let payload = {
+        id: this.chart.song_id,
+      }
+      this.$store.dispatch('favorite/toggleLike', payload)
+
     },
     addPlaylist(obj) {
       this.playlists.push(obj)
@@ -191,15 +202,20 @@ export default {
 
   },
 
+
   computed: {
     ...mapGetters({
       listsongs: "playlistsSongs/listsongs",
     }),
+
+
     ...mapGetters({
       playerTracks: "songs/playerTracks",
       continue: "songs/continue",
       isPLAY: "songs/isPLAY",
     }),
+
+
 
     playing() {
       if (this.playerTracks.song_id === this.chart.song_id) {
@@ -212,28 +228,19 @@ export default {
       }
     },
 
-    // ...mapGetters({
-    //   index: 'song/index'
-    // }),
-    //
-    // index_song: function render() {
-    //   var array1 = this.index
-    //   var songs = {};
-    //   var song_name = [];
-    //   var song_artist = [];
-    //   array1.forEach(a => song_name.push(a.audio.name))
-    //   array1.forEach(a => song_artist.push(a.audio.artist))
-    //   songs.name = song_name
-    //   songs.artist = song_artist
-    //   console.log(songs)
-    //   return songs
-    // },
-  },
 
-  ...mapActions("song", ["song/loadIndex"]),
-  created() {
-    this.$store.dispatch("song/loadIndex");
+    changeColor() {
+      return !!this.chart.likes
+    }
   },
+  created(){
+    // this.changeColor= this.chart.likes
+
+
+  }
+
+
+
 };
 </script>
 

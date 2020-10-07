@@ -10,6 +10,7 @@ const songs = {
     continuePlay: false,
     playerTracks: {},
     playerCurrentTrack: null
+    
   },
 
   mutations: {

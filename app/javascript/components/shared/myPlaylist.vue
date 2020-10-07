@@ -56,8 +56,6 @@ export default {
       console.log(this.playlist.add_to_playlist);
       this.add = this.playlist.add_to_playlist;
       this.button.text = this.add ? 'Added' : 'Add To Playlist';
-
-
   },
   ...mapActions('playlistsSongs', ['toggleList']),
 

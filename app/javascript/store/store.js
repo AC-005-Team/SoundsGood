@@ -6,7 +6,7 @@ import playlists from './modules/playlists'
 import songs from './modules/songs'
 import song from './modules/song'
 import playlistsSongs from './modules/playlistsSongs'
-import like from './modules/like'
+import favorite from './modules/favorite'
 
 
 Vue.use(Vuex)
@@ -18,6 +18,6 @@ export const store = new Vuex.Store({
     songs,
     playlistsSongs,
     song,
-    like
+    favorite
   }
 })

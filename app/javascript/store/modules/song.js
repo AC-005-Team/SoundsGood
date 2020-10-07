@@ -7,7 +7,7 @@ const song = {
 
   state: {
     Song: {},
-    Index: {}
+    Index: {},
   },
 
   mutations: {
@@ -16,7 +16,16 @@ const song = {
     },
     LOAD_INDEX(state, data){
       state.Index = data;
+    },
+    FIND_INDEX(state, data){
+      //只更新找到位置陣列的部分
+      let y = data.id
+      var foundValue = state.Index.find(obj => obj.song_id === y);
+      let a = state.Index.indexOf(foundValue)
+      state.Index[a].likes = !state.Index[a].likes
+      // state.Index[id].likes = !state.Index[id].likes
     }
+
   },
 
   getters: {
@@ -25,18 +34,27 @@ const song = {
     },
     index(state){
       return state.Index;
-    }
+    },
+
   },
 
   actions: {
 
     ...mapActions("songs", ["setPlayerTracks", "play"]),
-    async loadIndex({ commit }, id) {
+    async loadIndex({ commit }) {
       let response = await Api().get(`/api/v1/songs`);
       // dispatch("songs/setPlayerTracks", response.data, { root: true }); //塞到module tracks方法
       // dispatch("songs/play", response.data, { root: true });
       commit("LOAD_INDEX", response.data);
     },
+
+
+    updateStates({ commit }, payload){
+      commit('FIND_INDEX', payload)
+
+    },
+
+
 
     async loadSong({ commit }, id) {
       let response = await Api().get(`/api/v1/songs/${id}`);
