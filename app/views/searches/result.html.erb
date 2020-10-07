@@ -104,7 +104,7 @@
       <div class="flex mb-6">
         <div class="sm:w-1/6 w-1/4">
           <%#= 搜尋結果的Song圖片 %>
-          <%= link_to image_tag(song.image_url), song_path(song.id) %>
+          <%= link_to image_tag(song.image_url), song_path(song.id) if song.image_url %>
         </div>
 
         <div class="sm:w-5/6 w-3/4 mx-4">
@@ -132,7 +132,7 @@
 
           <%#=超難的音波專區%>
           <div class="">
-            <%= content_tag(:div, '', class:['w-100 waveform-wrap'], data:{ path: song.track_url, filename: song.get_filename, id: song.id}) do %> 
+            <%= content_tag(:div, '', class:['waveform-wrap waveform-small'], data:{ path: song.track_url, filename: song.get_filename, id: song.id}) do %> 
               <div class="waveform-dummy-trigger"></div>
               <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
             <% end %>

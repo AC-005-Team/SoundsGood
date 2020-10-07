@@ -1,5 +1,10 @@
 class Api::V1::CommentsController < ApplicationController
   def index
-    @comments = Song.find(params[:song_id]).comments
+    @song = Song.find(params[:song_id])
+    @comments = @song.comments
+    @song_and_comments = {
+      song: @song,
+      comments: @comments
+    }
   end
 end
