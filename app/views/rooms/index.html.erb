@@ -5,8 +5,8 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Session</th>
+      <th>Host</th>
+      <th>All Channels</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,15 +16,19 @@
       <tr>
         <td><%= room.user.display_name%></td>
         <td><%= room.name %></td>
-        <td><%= room.session_id %></td>
-        <td><%= link_to 'Show', room %></td>
-        <td><%= link_to 'Edit', edit_room_path(room) %></td>
-        <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if room.user == current_user %>
+          <td><%= link_to 'channel', play_room_path(room) %></td>
+          <td><%= link_to 'Edit', edit_room_path(room) %></td>
+          <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+          <td><%= link_to 'Show', room %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Room', new_room_path, params: current_user %>
+<% if !current_user.room %>
+  <%= link_to 'New Room', new_room_path, params: current_user %>
+<% end %>
