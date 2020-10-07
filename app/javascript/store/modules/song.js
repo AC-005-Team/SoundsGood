@@ -8,6 +8,7 @@ const song = {
   state: {
     Song: {},
     Index: {},
+    LikesTracks :{}
   },
 
   mutations: {
@@ -24,6 +25,9 @@ const song = {
       let a = state.Index.indexOf(foundValue)
       state.Index[a].likes = !state.Index[a].likes
       // state.Index[id].likes = !state.Index[id].likes
+    },
+    LOAD_LIKES(state, data){
+      state.LikesTracks = data
     }
 
   },
@@ -35,6 +39,9 @@ const song = {
     index(state){
       return state.Index;
     },
+    like_songs(state){
+      return state.LikesTracks
+    }
 
   },
 
@@ -51,7 +58,11 @@ const song = {
 
     updateStates({ commit }, payload){
       commit('FIND_INDEX', payload)
+    },
 
+    async loadlikeSongs({ commit }) {
+      let response = await Api().get('/api/v1/library/likes.json');
+      commit("LOAD_LIKES", response.data);
     },
 
 

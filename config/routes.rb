@@ -83,6 +83,12 @@ Rails.application.routes.draw do
             get :library
           end
         end
+        resources :library, only:[] do
+          collection do
+            get :likes
+            get :following
+          end
+        end
       end
     end
   end

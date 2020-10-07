@@ -1,7 +1,7 @@
 <template>
 <div @click='yourClickHandler'>
 <div class="my-2 mr-2 flex sm:flex-col justify-between flex-row">
-<div class="align-top w-32 h-32  overflow-hidden rounded"  :style="{ 'background-image': 'url('+  url + ')' }">
+<div class="align-top w-32 h-32  overflow-hidden rounded "  :style="{ 'background-image': 'url('+  url + ')' }">
 <img class="h-32 max-w-xl mr-4" :src="url">
 </div>
 <div class="text-2xl sm:text-sm hover:bg-gray-200 rounded" >
@@ -53,11 +53,7 @@ export default{
   },
   ...mapActions('playlistsSongs', ['loadList']),
   created(){
-    const axios = require('axios').create({
-      baseURL: 'http://127.0.0.1:3000'
-    });
-    axios
-      .get(`/api/v1/playlists/${this.track_id}`)
+  Api().get(`/api/v1/playlists/${this.track_id}`)
       .then(response => (this.url = response.data.first_cover))
       .catch(function(error) {
         console.log( 'playlist has no image'  );

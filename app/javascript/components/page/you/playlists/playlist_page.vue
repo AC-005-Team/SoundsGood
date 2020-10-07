@@ -1,7 +1,7 @@
 <template>
-<div @click="yourClickHandler">
+<!-- <div @click="yourClickHandler"> -->
   <!-- <router-link to="/playlists">back to playlists</router-link> -->
-  <h1>{{listsongs.name}}</h1>
+  <!-- <h1>{{listsongs.name}}</h1>
   <div v-for="(song, index) in listsongs.audio" :key="index">
     <img :src="song.cover">
     <li>name: {{ song.name }} artist: {{ song.artist }}  </li>
@@ -15,9 +15,23 @@
       </div>
       </div>
     </div>
-  </div>
+  </div> -->
+
+<!-- </div> -->
+
+
+
+<div >
+
+
+
+
 
 </div>
+
+
+
+
 </template>
 
 <script>

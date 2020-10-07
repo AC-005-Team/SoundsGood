@@ -1,4 +1,4 @@
-https://soundcloud.com/cy4eroa8bbxx/sets/top-50-all-music-genres
+
 
 <h1><%= @playlist.name%></h1>
 <div>
@@ -8,13 +8,13 @@ https://soundcloud.com/cy4eroa8bbxx/sets/top-50-all-music-genres
   <% else %>
     <i class="far fa-heart"></i>
     <%= link_to "Like", like_playlist_path(@playlist), method: "post" %>
-  <% end%>  
+  <% end%>
 
   <% if @playlist.reposted_by?(current_user) %>
     <i class="fas fa-retweet"> <%= link_to "Reposted", repost_playlist_path(@playlist), method: "post" %>  </i>
   <% else %>
     <i class="fas fa-retweet"> <%= link_to "Repost", repost_playlist_path(@playlist), method: "post" %> </i>
-  <% end%>  
+  <% end%>
 </div>
 
 <div>
@@ -48,4 +48,3 @@ https://soundcloud.com/cy4eroa8bbxx/sets/top-50-all-music-genres
   </div>
 <% end %>
 <%= content_tag(:button, "播放整個清單 ▶", id: 'play_playlist',data: {id: @playlist.id}  ) %>
-
