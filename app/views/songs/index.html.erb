@@ -83,8 +83,8 @@
   </div>
 </div>
 
-<div class="flex  mx-4 text-sm">
-  <div class="w-3/4">
+<div class="flex mx-4 text-sm">
+  <div class="w-full">
     <%#=左邊分享、使用者功能專區%>
     <div class="flex border-b border-gray-400">
       <div class="flex w-1/2 my-2 justify-around ">
@@ -94,25 +94,25 @@
             c-22.039-26.516-54.861-41.68-89.339-41.273C52.395,35.522,0,87.917,0,152.55C0,263.31,193.306,371.456,201.143,375.636
             c3.162,2.113,7.286,2.113,10.449,0c7.837-4.18,201.143-110.759,201.143-223.086C412.735,87.917,360.339,35.522,295.706,35.522z"/>
           </svg>
-          like
+          <p class="hidden md:block">Like</p> 
         </button>
-        <button class="border border-gray-300 px-3 rounded">
+        <button class="flex border border-gray-300 px-3 rounded">
           <i class="fas fa-share-square"></i>
-          share
+          <p class="hidden md:block">Share</p> 
         </button>
-        <button class="border border-gray-300 px-3 rounded">
+        <button class="flex border border-gray-300 px-3 rounded">
           <i class="fas fa-balance-scale-left"></i>
-          Add to Next Up
+          <p class="hidden md:block">Add to Next up</p> 
         </button>
-        <button class="border border-gray-300 px-3 rounded">
+        <button class="flex border border-gray-300 px-3 rounded">
           <i class="fas fa-bolt"></i>
-          More
+          <p class="hidden md:block">More</p> 
         </button>
       </div>
 
       <div class="flex w-1/2 justify-end">
         <div class="my-2 mx-4">
-          Last Uploaded 2 day ago
+          <p class="hidden md:block">Last Uploaded 2 day ago</p> 
         </div>
       </div>
     </div>
@@ -125,14 +125,20 @@
           <div class="flex py-1 items-center hover:bg-gray-100">
             <% if song.image_url %>
             <div class="rounded-full w-10 mx-2">
-              <%= image_tag song.image_url %>
+              <%= image_tag song.image_url %>             
             </div>
             <% end %>
+            
             <button class="text-gray-500 hover:text-black mx-2">
               <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
             </button>
 
             <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
+
+            <%= content_tag(:div, '', class:['w-3/6 waveform-wrap'], data:{ path: song.track_url, filename: song.get_filename }) do %> 
+              <div class="waveform-dummy-trigger"></div>
+              <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
+            <% end %>         
 
             <div class="flex justify-end ml-auto">
 
@@ -180,7 +186,7 @@
   
   </div>
     <%#=右邊使用者專區%>
-  <div class="w-1/4 1111111">
+  <div class="w-1/4 hidden md:block">
     <div class="p-2">
       <div class="">
         Based on Tipsy Records - Toniia & Geena Fontanella - Psychic
@@ -241,3 +247,57 @@
     </div>
   </div>
 </div>
+
+<%= link_to 'new song', new_user_song_path(current_user.id) %>
+<%= link_to 'go back', root_path %>
+<% @songs.each do |song|%>
+  <% if song.image_url %>
+      <ul>
+        <li class="flex">
+          <%= image_tag song.image_url, width: '200px' %>
+            <%= content_tag(:div, '', class:['w-3/6 waveform-wrap'], data:{ path: song.track_url, filename: song.get_filename }) do %> 
+              <div class="waveform-dummy-trigger"></div>
+              <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
+            <% end %>
+        </li>
+        <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song), data: { turbolinks: false }), data: {value: song.name} ) %>
+        <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
+        <% if song.tags.length > 0 %>
+          <% song.tags.each do |tag| %>
+            <li><%= tag.name %></li>
+          <% end %>
+        <% end %>
+        <%= content_tag(:li, 'play ▶', class:'getURL', data: {id: song.id} ) %>
+        <li><%= link_to 'Delete', song_path(song.id), method: 'delete' %></li>
+        
+        <!-- 愛心 -->
+        <svg class="heart" width="25px" viewBox="0 0 500 500" >
+          <path d="M295.706,35.522C295.706,35.522,295.706,35.522,295.706,35.522c-34.43-0.184-67.161,14.937-89.339,41.273
+          c-22.039-26.516-54.861-41.68-89.339-41.273C52.395,35.522,0,87.917,0,152.55C0,263.31,193.306,371.456,201.143,375.636
+          c3.162,2.113,7.286,2.113,10.449,0c7.837-4.18,201.143-110.759,201.143-223.086C412.735,87.917,360.339,35.522,295.706,35.522z"/>
+        </svg>
+        
+        <div class="dropdown">
+          <button class="dropbtn">+</button>
+          <div id="myDropdown" class="dropdown-content">
+            <%= link_to "add to play next", '###' , id: 'addtoplay', data: {id: song.id}  %>
+            <%#= link_to "add to playlist",list_add_path(song.id), data: {}  %>
+          </div>
+        </div>
+
+        <div>
+          <h3>Add to playlist</h3>
+            <% @playlists.each do |playlist| %>
+              <li>Playlist：<%= playlist.name %>
+              <% if @song.added_by?(playlist) %>
+                <%= link_to "Added", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
+              <% else %>
+                <%= link_to "Add to playlist", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
+              <% end %>
+            <% end %> 
+        </div>
+      </ul>
+  <% end %>
+<% end %>
+
+<div id="player1" class="aplayer"></div>

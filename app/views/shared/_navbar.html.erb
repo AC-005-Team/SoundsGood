@@ -2,7 +2,7 @@
 
 <div class="bg-gray-800 text-gray-400 w-full flex justify-between text-center items-center text-sm sticky top-0 z-10 mx-auto">
 <%#=Logo區域%>  
-  <button class="hover:text-white ml-8">
+  <button class="hover:text-white ml-6">
     <%= link_to discover_path do %>
     <%= image_pack_tag('logo_14.png', class:'w-48 hidden sm:block') %>
     <%= image_pack_tag('logo_10.png', class:'w-12 block sm:hidden') %>
@@ -16,12 +16,16 @@
   <button class="hover:text-white mx-2">
     <%= link_to "Stream", stream_path, class:'hidden sm:block'%>
     <%= link_to stream_path, class:'block sm:hidden' do %>
-      <i class="fas fa-bolt fa-2x"></i>
+      <i class="fas fa-bolt"></i>
     <% end %>
   </button>
 
-  <button class="hover:text-white mx-2 hidden sm:block">
-    <%= link_to "Library", library_library_index_path%>
+  <button class="hover:text-white mx-2">
+    <%= link_to "Library", library_library_index_path, class:'hidden sm:block'%>
+    <%= link_to library_library_index_path, class:'block sm:hidden' do %>
+      <i class="fas fa-music"></i>
+    <% end %>
+
   </button>
 
   <%#=搜尋區域%>
@@ -47,15 +51,26 @@
       <i class="fas fa-cloud-upload-alt"></i>
     <% end %>
   <% end %>
+
+  <button class="hover:text-white px-1 hidden sm:block"><i class="fas fa-podcast"></i></button>
+  <button class="hover:text-white px-1 hidden sm:block"><i class="fas fa-envelope-open"></i></button>
+
 <%#=使用者大頭貼、名稱區域%>
   <% if user_signed_in? %>
 
-    <div class="dropdown inline-block relative">
+    <div class="dropdown inline-block relative ml-4 mr-6">
+      <% if current_user.avatar_url %>
+        <%= image_tag current_user.avatar_url, class:''%>
+      <% else %>
+        <i class="fas fa-user-secret"></i>
+      <% end %>
       <button class="text-gray-300 bg-gray-800 py-2 px-4 rounded inline-flex items-center">
         <span class="mr-1"><%= link_to current_user.display_name, user_path(current_user)%></span>
       </button>
-      <ul class="dropdown-menu absolute hidden text-gray-700">
+      <ul class="dropdown-menu absolute hidden text-gray-700 text-left">
         <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-t"><%= link_to current_user.display_name, user_path(current_user)%></li>
+        <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap"><%= link_to "Likes", likes_library_index_path%></li>
+        <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap"><%= link_to "Playlists", sets_library_index_path%></li>
         <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap"><%= link_to "User Upload", user_songs_path(current_user) %></li>
         <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap"><%= link_to 'Edit', edit_user_path(current_user.id) %></li>
         <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-b"><%= link_to "Sign out", destroy_user_session_path, method: "delete"%></li>
@@ -67,11 +82,6 @@
     <div class="hover:text-white"><%= link_to "Create",new_user_registration_path%></div>
   <% end %>
 <%#=後面三點點區域%>  
-  <div class="hover:text-white px-1 hidden sm:block relative">
-    <i class="fas fa-bell"></i>
-  </div>
-  <button class="hover:text-white px-1 hidden sm:block"><i class="fas fa-envelope-open"></i></button>
-  <button class="hover:text-white px-1 mr-8 hidden sm:block"><i class="fas fa-ellipsis-h"></i></i></button>
 </div>
 
 <% end %>

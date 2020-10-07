@@ -25,35 +25,57 @@
 </div>
 
 <%#=左邊使用者專區%>
-<div class="flex m-4 justify-between border-b border-gray-400">
-  <div class="mx-4 text-xl m-2">
-    <%= link_to "All", user_songs_path(@user.id), class: 'hover:text-orange-600 mr-4' %>
-    <button class="hover:text-orange-600 mr-4">Popular Tracks</button>
-    <button class="hover:text-orange-600 mr-4">Tracks</button>
-    <button class="hover:text-orange-600 mr-4">Albums</button>
-    <button class="hover:text-orange-600 mr-4">Playlists</button>
-    <button class="hover:text-orange-600 mr-4">Reposts</button>
+<div class="flex justify-between m-4 border-b border-gray-300 p-2 ">
+
+  <div class="ml-4 text-xl hidden md:flex justify-between">
+    <button class="mx-2 text-orange-600">All</button>
+    <button class="mx-2">Popular tracks</button>
+    <button class="mx-2">Tracks</button>
+    <button class="mx-2">Albums</button>
+    <button class="mx-2">Playlist</button>
+    <button class="mx-2">Reposts</button>
   </div>
-  <div class="flex m-2">
-    <button class="mr-4 text-white bg-orange-600 px-2 rounded"><i class="fas fa-balance-scale"></i>Your Insights</button >
-    <button class="mr-4"><i class="fas fa-share-square"></i>Share</button >
-    <% if current_user == @user %>
-      <%= link_to edit_user_path(current_user.id), class: 'mr-4' do %>
-        <i class="fas fa-pencil-alt"></i>Edit
-      <% end %>
-    <% end %>
+
+  <div class="dropdown inline-block relative ml-4 mr-6">
+    <button class="text-gray-500 md:text-white bg-gray-00 py-2 px-4 rounded inline-flex items-center">
+      <i class="fas fa-bars"></i>
+      <p class="mx-2"> All</p>
+    </button>
+    <ul class="dropdown-menu absolute hidden text-gray-700 text-left">
+      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-t">Popular tracks</button>
+      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Tracks</button>
+      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Albums</button>
+      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Playlist</button>
+      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-b">Reposts</button>
+    </ul>
+  </div>
+
+
+  <div class="flex justify-between items-center mr-4 text-sm">
+    <button class="flex items-center mx-2 p-1 rounded bg-orange-600 text-white">
+      <i class="fas fa-chart-bar"></i>
+      <p class="hidden md:block">Your Insights</p> 
+    </button>
+    <button class="flex items-center mx-2 p-1 rounded border border-gray-300">
+      <i class="fas fa-share-square"></i>
+      <p class="hidden md:block">Share</p> 
+    </button>
+    <button class="flex items-center mx-2 p-1 rounded border border-gray-300">
+      <i class="fas fa-pencil-alt"></i>
+      <p class="hidden md:block"> Edit</p> 
+    </button>
   </div>
 </div>
 
 
 
-<div class="flex mx-4 ">
-  <div class="w-3/4 mx-4">
+<div class="grid grid-cols-12 mx-4 ">
+  <div class="col-span-12 md:col-span-9 mx-4">
     <div class="text-2xl">Recent</div>
-<%#=左邊專輯專區%>
-    <div class="flex my-4">
-      <img class="w-1/5 rounded-full" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">    
-      <div class="my-auto w-4/5">
+    <%#=左邊專輯專區%>
+    <div class="grid grid-cols-12 my-4">
+      <img class="col-span-12 md:col-span-2 h-32 w-32 overflow-hidden rounded-full" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">    
+      <div class="col-span-10 w-full">
         <div class="flex justify-between">
           <div class="w-1/12">
             <i class="fas fa-arrow-circle-right fa-3x"></i>
@@ -68,64 +90,62 @@
           </div>
         </div>
 
-<%#=超難的音波專區%>
+        <%#=超難的音波專區%>
         <div class="">萱大の音波專區</div>
-<%#=留言專區%>
+        <%#=留言專區%>
         <div class="flex m-4">
           <img class="w-8" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
           <input class="w-full mx-2" type="text" placeholder="Write a comment">
         </div>
 
 
-<%#=歌曲功能專區%>
+        <%#=歌曲功能專區%>
         <div class="">
           <div class="flex w-2/3 my-4 p-2 justify-around">
-            <button class="border border-gray-300 px-3 rounded">
+            <button class="flex border border-gray-300 px-3 rounded">
               <i class="fas fa-heart"></i>
-              like
+              <p class="hidden md:block">like</p> 
             </button>
-            <button class="border border-gray-300 px-3 rounded">
+            <button class="flex border border-gray-300 px-3 rounded">
               <i class="fas fa-share-square"></i>
-              share
+              <p class="hidden md:block">share</p> 
             </button>
-            <button class="border border-gray-300 px-3 rounded">
+            <button class="flex border border-gray-300 px-3 rounded">
               <i class="fas fa-balance-scale-left"></i>
-              Add to Next Up
+              <p class="hidden md:block">Add to Next up</p> 
             </button>
-            <button class="border border-gray-300 px-3 rounded">
+            <button class="flex border border-gray-300 px-3 rounded">
               <i class="fas fa-bolt"></i>
-              More
+              <p class="hidden md:block">More</p> 
             </button>
           </div>
         </div>
       </div>
     </div>
-
-
-
   </div> 
 
 
 
-  <%#=右邊使用者專區%>
-  <div class="w-1/4 border-l border-gray-400 px-2">
+      <%#=右邊使用者專區%>
+  <div class="hidden md:block col-span-3 border-l border-gray-400 px-2">
 
-      <div class="flex text-gray-500 mx-4">
-        <button class="mx-2">Follower</button>
-        <button class="mx-2">Following</button>
-        <button class="mx-2">Tracks</button>
+    <div class="flex text-gray-500 mx-4">
+      <button class="mx-2">Follower</button>
+      <button class="mx-2">Following</button>
+      <button class="mx-2">Tracks</button>
+    </div>
+
+    <div class="p-2">
+      <div class="flex justify-between text-gray-500 border-b border-gray-300 text-sm p-2">
+        <div class="">❤️2 likes</div>
+        <div class="">view all</div>
       </div>
-
-      <div class="p-2">
-        <div class="flex justify-between text-gray-500 border-b border-gray-300 text-sm p-2">
-          <div class="">❤️2 likes</div>
-          <div class="">view all</div>
-        </div>
 
         <%#=右邊 user-like area %>
         <%= render './shared/like_area.html.erb', element: current_user %>
 
       </div>
+    </div>
 
     <div class="flex border-t border-gray-400 m-4">
       <div class="my-3 text-xs table-row-group">
