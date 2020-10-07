@@ -8,21 +8,45 @@ document.addEventListener('DOMContentLoaded', () => {
   if(wavePlace){
     const proxyurl = "https://cors-anywhere.herokuapp.com/" // for accessing s3
     const playingNowPath = document.querySelectorAll(".waveform-wrap")
-    if(wavePlace.classList.contains('waveform-light')){
-      // light
-      playingNowPath.forEach(songEl => {
-        renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb')
-        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#ffffff')
-        renderComments()
-      });
-    } else {
-      // dark
-      playingNowPath.forEach(songEl => {
-        renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb')
-        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#555555')
-        renderComments()
-      });
-  }
+    const isLight = el => { return el.classList.contains('waveform-light') }
+    const isSmall = el => { return el.classList.contains('waveform-small') }
+    playingNowPath.forEach(songEl=>{
+      if(isLight(songEl) && isSmall(songEl)){
+        console.log('light and small')
+        renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb', 0.2)
+        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#ffffff', 0.5)
+      } else if(isLight(songEl) && !isSmall(songEl)) {
+        console.log('light and not small')
+        renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb', 0.32)
+        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#ffffff', 0.8)
+      } else if(!isLight(songEl) && isSmall(songEl)) {
+        console.log('not light and small')
+        renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb', 0.2)
+        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#555555', 0.5)
+      } else {
+        console.log('not light and not small')
+        renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb', 0.32)
+        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#555555', 0.8)
+      }
+      renderComments(songEl)
+    })
+
+  //   if(wavePlace.classList.contains('waveform-light')){
+  //     // light
+  //     console.log('light')
+  //     playingNowPath.forEach(songEl => {
+  //       renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb')
+  //       renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#ffffff')
+  //       renderComments(songEl)
+  //     });
+  //     // dark
+  //     console.log('dark')
+  //     playingNowPath.forEach(songEl => {
+  //       renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb', 0.32)
+  //       renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#555555', 0.8)
+  //       renderComments(songEl)
+  //     });
+  // }
 
     function getPeak(url, songDataName, wavesurfer) {
       fetch(peakStorageRoot+songDataName)
@@ -73,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     }
 
-    function renderWaveForm(url, songDataName, parentSelector, waveColor) {
+    function renderWaveForm(url, songDataName, parentSelector, waveColor, size) {
       var domEl = document.createElement('div')
       domEl.classList.add('waveform')
       parentSelector.appendChild(domEl)
@@ -84,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         progressColor: '#ff7626',
         cursorColor: '',
         barWidth: 3,
-        barHeight: 0.8,
+        barHeight: size,
         height: 150,
         barRadius: 2,
         cursorWidth: 1,
@@ -106,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return wavesurfer;
     }
 
-    function renderCommentSpace(url, songDataName, parentSelector, waveColor) {
+    function renderCommentSpace(url, songDataName, parentSelector, waveColor, size) {
       var domEl = document.createElement('div')
       domEl.classList.add('waveform-comment-space')
       domEl.setAttribute('data-id', parentSelector.dataset.id)
@@ -117,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         waveColor: waveColor, //@todo: change color
         progressColor: '#ffcfb5',
         barWidth: 3,
-        barHeight: 0.32,
+        barHeight: size,
         height: 150,
         barRadius: 2,
         cursorWidth: 0,
