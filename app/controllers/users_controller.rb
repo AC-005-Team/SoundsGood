@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:follow]
-  before_action :find_user, only: [:show, :follow, :followers, :following, :likes, :comments]
+  before_action :find_user, only: [:edit, :update, :show, :follow, :followers, :following, :likes, :comments]
 
   def show;end
 

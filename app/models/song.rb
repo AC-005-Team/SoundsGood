@@ -15,6 +15,9 @@ class Song < ApplicationRecord
   
   has_many :songs_tags, dependent: :destroy
   has_many :tags, through: :songs_tags
+
+ 
+
   def added_by?(playlist)
     playlists.include?(playlist)
   end
@@ -49,4 +52,5 @@ class Song < ApplicationRecord
     HTTP.post("https://peaks.soundsgood.world/api/v1/soundwavify", :json => { :filetype => "song_peaks", :filepath => self.track_url })
     p '------------end------------'
   end
+
 end
