@@ -1,10 +1,16 @@
 <%#=這是User資訊頁面%>
 
 <%#=圖區一%>
-<div class="flex mx-4 bg-gradient-to-r from-red-500 via-white to-orange-700">
-  <% if @user.avatar_url %>
-    <%= image_tag @user.avatar_url, class:'w-1/6 m-4 rounded-full' %>
-  <% end %>
+<div class="flex mx-6 bg-gradient-to-b from-gray-700 via-white to-gray-500">
+  
+  <div class="w-32 h-32 overflow-hidden m-4">
+    <% if @user.avatar_url %>
+      <%= image_tag @user.avatar_url, class:'rounded-full' %>
+      <% else %>
+      <div class="h-32 w-32 bg-cover" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
+    <% end %>
+  </div>
+
   <div class="flex justify-between w-5/6 items-start">
     <div class="m-4">
       <div class="bg-black rounded p-1 text-xl text-white m-1">
@@ -25,8 +31,8 @@
 </div>
 
 <%#=左邊使用者專區%>
-<div class="flex m-4 justify-between border-b border-gray-400">
-  <div class="mx-4 text-xl m-2">
+<div class="flex items-center m-4 justify-between border-b border-gray-400">
+  <div class="ml-4 text-xl hidden md:flex justify-between">
     <%= link_to "All", user_songs_path(@user.id), class: 'hover:text-orange-600 mr-4' %>
     <button class="hover:text-orange-600 mr-4">Popular Tracks</button>
     <button class="hover:text-orange-600 mr-4">Tracks</button>
@@ -34,12 +40,33 @@
     <button class="hover:text-orange-600 mr-4">Playlists</button>
     <button class="hover:text-orange-600 mr-4">Reposts</button>
   </div>
+
+  <div class="dropdown inline-block relative ml-4 mr-6">
+    <button class="text-gray-500 md:text-white bg-gray-00 py-2 px-4 rounded inline-flex items-center">
+      <i class="fas fa-bars"></i>
+      <p class="mx-2"> All</p>
+    </button>
+    <ul class="dropdown-menu absolute hidden text-gray-700 text-left">
+      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-t">Popular tracks</button>
+      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Tracks</button>
+      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Albums</button>
+      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Playlist</button>
+      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-b">Reposts</button>
+    </ul>
+  </div>
+
   <div class="flex m-2">
-    <button class="mr-4 text-white bg-orange-600 px-2 rounded"><i class="fas fa-balance-scale"></i>Your Insights</button >
-    <button class="mr-4"><i class="fas fa-share-square"></i>Share</button >
+    <button class="flex items-center mr-4 text-white bg-orange-600 px-2 rounded">
+      <i class="fas fa-chart-bar"></i>
+      <p class="hidden md:block">Your Insights</p> 
+    </button >
+    <button class="flex items-center mr-4"><i class="fas fa-share-square"></i>
+      <p class="hidden md:block">Share</p> 
+    </button >
     <% if current_user == @user %>
-      <%= link_to edit_user_path(current_user.id), class: 'mr-4' do %>
-        <i class="fas fa-pencil-alt"></i>Edit
+      <%= link_to edit_user_path(current_user.id), class: 'mr-4 flex items-center' do %>
+        <i class="fas fa-pencil-alt"></i>
+        <p class="hidden md:block">Edit</p> 
       <% end %>
     <% end %>
   </div>
@@ -52,7 +79,7 @@
     <div class="text-2xl">Recent</div>
     <%#=左邊專輯專區%>
     <div class="grid grid-cols-12 my-4">
-      <img class="col-span-12 md:col-span-2 h-32 w-32 overflow-hidden rounded-full" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">    
+      <img class="col-span-12 md:col-span-2 h-32 w-32 bg-cover" style="background-image: url(<% root_path %>/img/user_image_1.png)" alt="">    
       <div class="col-span-12 md:col-span-10 w-full">
         <div class="grid grid-cols-12">
           <div class="col-span-2 md:col-span-1">
@@ -72,7 +99,7 @@
         <div class="">萱大の音波專區</div>
         <%#=留言專區%>
         <div class="flex m-4">
-          <img class="w-8" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
+          <img class="bg-cover w-8 h-8" style="background-image: url(<% root_path %>/img/user_image_1.png)" alt="">
           <input class="w-full mx-2" type="text" placeholder="Write a comment">
         </div>
 
@@ -89,11 +116,11 @@
               <p class="hidden md:block">share</p> 
             </button>
             <button class="flex items-center border border-gray-300 px-3 rounded">
-              <i class="fas fa-balance-scale-left"></i>
+              <i class="fas fa-plus"></i>
               <p class="hidden md:block">Add to Next up</p> 
             </button>
             <button class="flex items-center border border-gray-300 px-3 rounded">
-              <i class="fas fa-bolt"></i>
+              <i class="fas fa-ellipsis-h"></i>
               <p class="hidden md:block">More</p> 
             </button>
           </div>
@@ -123,33 +150,31 @@
         <%= render './shared/like_area.html.erb', element: current_user %>
 
       </div>
-    </div>
-
-    <div class="flex border-t border-gray-400 m-4">
+          <div class="flex border-t border-gray-400 m-4">
       <div class="my-3 text-xs table-row-group">
-        <div class="">
-          <span class="text-gray-500  hover:text-black"><a href="#">Legal</a></span>
+        <div class="text-gray-500">
+          <span class="hover:text-black"><a href="#">Legal</a></span>
             
-          <span class="text-gray-500  hover:text-black"><a href="#">Privacy</a></span>
+          <span class="hover:text-black"><a href="#">Privacy</a></span>
             
-          <span class="text-gray-500  hover:text-black"><a href="#">Cookies</a></span>
+          <span class="hover:text-black"><a href="#">Cookies</a></span>
             
-          <span class="text-gray-500  hover:text-black"><a href="#">Imprint</a></span>
+          <span class="hover:text-black"><a href="#">Imprint</a></span>
 
-          <span class="text-gray-500  hover:text-black"><a href="#">Creator Resources</a></span>
+          <span class="hover:text-black"><a href="#">Creator Resources</a></span>
             
-          <span class="text-gray-500  hover:text-black"><a href="#">Blog</a></span>
+          <span class="hover:text-black"><a href="#">Blog</a></span>
             
-          <span class="text-gray-500  hover:text-black"><a href="#">Charts</a></span>
+          <span class="hover:text-black"><a href="#">Charts</a></span>
             
-          <span class="text-gray-500  hover:text-black"><a href="#">Popular Search</a></span>
+          <span class="hover:text-black"><a href="#">Popular Search</a></span>
         </div>
-        
           <div class="mt-2 mb-20">
             Language: English (US)
           </div>
-
       </div>
     </div>
+    </div>
+
   </div>  
 </div>
