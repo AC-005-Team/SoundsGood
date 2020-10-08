@@ -73,6 +73,7 @@ class SongsController < ApplicationController
   private
 
   def song_params
+    # byebug
     params.require(:song).permit(:name, :intro, :track, :image, tag_items: [])
   end
 

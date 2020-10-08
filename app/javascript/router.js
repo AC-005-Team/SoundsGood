@@ -49,12 +49,6 @@ export default new VueRouter({
           component: () => import(/* webpackChunkName: "Playlists" */ './components/page/you/playlists/playlists'),
         },
         {
-          path: '/playlist/:id',
-          component: 'playlist_page',
-          props: true,
-          component: () => import(/* webpackChunkName: "Playlist_page" */ './components/page/you/playlists/playlist_page'),
-        },
-        {
           path:'following',
           name:'following',
           component: () => import(/* webpackChunkName: "Library" */ './components/page/you/following'),
@@ -69,6 +63,12 @@ export default new VueRouter({
       component: upload,
       name: 'upload',
       props: true,
+    },
+    {
+      path: '/playlist/:id',
+      component: 'playlist_page',
+      props: true,
+      component: () => import(/* webpackChunkName: "Playlist_page" */ './components/page/you/playlists/playlist_page'),
     },
 
 

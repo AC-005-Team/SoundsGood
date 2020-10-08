@@ -239,6 +239,7 @@ export default {
       intro: this.intro,
       tag: '',
       tags: [],
+      aaa:[],
 
     }
   },
@@ -255,6 +256,7 @@ export default {
   computed: {
     getTag() {
       var views = this.tags.map(item => item.text);
+      console.log(views);
       return views;
     }
   },
@@ -276,7 +278,10 @@ export default {
       formData.append("song[intro]", this.intro)
       formData.append("song[track]", this.track)
       formData.append("song[image]", this.image)
-      formData.append("song[tag_items]", this.getTag)
+      this.getTag.forEach((tag) => {
+        formData.append("song[tag_items][]", tag)
+      })
+      console.log(this.getTag)
       for(var pair of formData.entries()){
         console.log(pair[0]+','+pair[1])
       }
@@ -296,7 +301,7 @@ export default {
       }).catch(error => {
         console.log(error.response)
       })
-      // 執行動畫
+
     }
 
 

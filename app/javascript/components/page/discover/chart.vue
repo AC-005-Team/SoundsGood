@@ -20,7 +20,7 @@ slide-multiple
         @mouseleave="mouseLeave"
       >
         <!-- :class="[playing? 'fa-pause-circle': '' ]"  -->
-        <div class="cover">
+        <div class="cover overflow-hidden w-32 h-32 bg-white">
           <i
             class="far z-10 fa-pause-circle"
             style="font-size: 60px"
@@ -40,7 +40,7 @@ slide-multiple
             </div>
           </transition>
 
-          <img class="h-32 max-w-xl mr-4" :src="chart.audio.cover" />
+          <img class="h-32 max-w-xl mr-4 object-cover" :src="chart.audio.cover" />
         </div>
 
 
@@ -264,6 +264,7 @@ export default {
   transition: 0.3s;
   box-shadow: inset 0px -10px 10px 3px rgba(0, 0, 0, 0.2);
 }
+
 .buttons {
   position: absolute;
   bottom: 1rem;
