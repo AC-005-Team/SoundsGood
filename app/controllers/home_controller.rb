@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  before_action :authenticate_user!, except: [:discover]
   before_action :find_song
   
   def index;end

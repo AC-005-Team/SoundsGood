@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy, :play]
   before_action :find_token_key, only: [:show, :play]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /rooms
   # GET /rooms.json
@@ -80,7 +81,7 @@ class RoomsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def room_params
-      params.require(:room).permit(:name, :session_id).merge(user_id: current_user.id)
+      params.require(:room).permit(:name).merge(user_id: current_user.id)
     end
 
     def find_token_key

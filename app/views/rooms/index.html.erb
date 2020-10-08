@@ -29,6 +29,6 @@
 </table>
 
 <br>
-<% if !current_user.room %>
+<% if current_user && !current_user.room.present? %>
   <%= link_to 'New Room', new_room_path, params: current_user %>
 <% end %>

@@ -1,5 +1,5 @@
 class LibraryController < ApplicationController
-  before_action :authenticate_user!, only: [:likes]
+  before_action :authenticate_user!
 
   def library
     @songs = Song.all.includes(:tags)
@@ -24,7 +24,7 @@ class LibraryController < ApplicationController
   end
 
   def history
-    @songs = Song.all.includes(:tags)
+    @followees = current_user.followees
   end
-  
+
 end
