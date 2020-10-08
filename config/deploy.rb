@@ -21,10 +21,10 @@ set :repo_url, "git@github.com:AC-005-Team/SoundClown.git"
 # set :pty, true
 
 # Default value for :linked_files is []
- append :linked_files, ".env" ,"config/secrets.yml" 
+ append :linked_files, ".env" ,"config/secrets.yml" ,"config/credentials/development.key"
 
 # Default value for linked_dirs is []
- append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "config/credentials", "tmp/sockets", "public/system"
 
 # Default value for default_env is {}
  set :default_env, { path: "/usr/local/rvm/rubies/ruby-2.6.5/bin:$PATH" }
