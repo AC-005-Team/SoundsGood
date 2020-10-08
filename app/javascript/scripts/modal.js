@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
   if(modalBtn){
     modalBtn.forEach( btn => {
     btn.addEventListener('click', (e) => {
-      const modalTarget = e.target
+      const modalTarget = e.currentTarget
       const btnTemplate = getBtnTemplate(modalTarget, 1) //固定寫在class list裡面第二個
       modalTarget.setAttribute('disabled', 'true')
 
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
           return
         }
       })
-    })
+    }, true)
   })
   }
   function getBtnTemplate(node, n) {
