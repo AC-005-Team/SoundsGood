@@ -129,7 +129,7 @@
                     <i class="fas fa-redo-alt"></i>
                     <p class="hidden md:block">3,300</p>
                   </button>
-                  <button class="flex border border-gray-300 px-3 mx-1 rounded">
+                  <button class="modal-btn share-btn flex border border-gray-300 px-3 mx-1 rounded">
                     <i class="fas fa-share"></i>
                     <p class="hidden md:block">Share</p> 
                   </button>
@@ -151,6 +151,19 @@
               </div>
             </div>
           </div>
+          <template class="share-template">
+            <div class="modal-container share-container">
+            </div>
+            <div class="modal-content">
+              <div class="modal-item">
+                <h1>Share</h1>
+              </div>
+              <div class="modal-item">
+                <%= content_tag(:button, 'Twitter', class:'share-twitter', data:{name: song.name, artist: song.user.display_name, link: song_path(song.id)}) %>
+                <%= content_tag(:button, 'Facebook', class:'share-facebook', data:{name: song.name, artist: song.user.display_name, link: song_path(song.id)}) %>
+              </div>
+            </div>
+          </template>
         <% end %>
       <% end %>
 
@@ -183,5 +196,3 @@
 <%# template for song%>
 
 
-<template>
-</template>
