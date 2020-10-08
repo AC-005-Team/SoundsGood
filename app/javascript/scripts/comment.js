@@ -119,4 +119,5 @@ export function renderComments(song){
   function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max))
   }
+  return
 }

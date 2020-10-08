@@ -1,6 +1,5 @@
 import 'aplayer/dist/APlayer.min.css';
 import APlayer from 'aplayer';
-
 //畫面一開始的播放器
 const ap = new APlayer({
   container: document.getElementById('player1'),
@@ -32,14 +31,56 @@ if(songs){
     });
   });
 }
+const clickOnWave = () => {
+  
+}
+
+
+const waves = document.querySelectorAll('.waveform-wrap')
+if(waves){
+  waves.forEach( wave => {
+    wave.addEventListener('click', function(e) {
+      console.log(e)
+      e.preventDefault();
+      let playing = ap.container.dataset.playing
+      let id = e.currentTarget.dataset.id;
+      let node = e.currentTarget
+      getPlay(id).then(val => {
+        if(playing!==id){
+          // ap.pause();
+          ap.list.clear();
+          ap.list.add(val);
+          ap.play();
+          ap.on('playing', ()=>{
+            ap.seek(getSec(val, e, node))
+            ap.play()
+          })
+          ap.container.setAttribute('data-playing', id)
+          playing = ap.container.dataset.playing
+          console.log(playing)
+        } else {
+          // ap.pause();
+          // ap.list.add(val);
+          ap.seek(getSec(val, e, node))
+          ap.play();
+        }
+      });
+    });
+  })
+}
+function getSec(val, e, node){
+  let duration = val.duration
+  let timepoint = e.offsetX
+  let totalWidth = node.parentNode.offsetWidth
+  return Math.round(timepoint/totalWidth*duration)
+}
 
 //拿到本首歌的json
 async function getPlay(id) {
-  let response = await fetch(`http://127.0.0.1:3000/api/v1/songs/${id}`);
+  let response = await fetch(`${window.location.origin}/api/v1/songs/${id}`);
   let playlistTrack = await response.json();
   return playlistTrack;
 };
-
 
 
 

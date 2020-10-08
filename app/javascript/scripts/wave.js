@@ -1,4 +1,5 @@
 import { renderComments } from './comment'
+import { playAlong } from "./playAlong";
 import WaveSurfer from 'wavesurfer.js'
 import CursorPlugin from 'wavesurfer.js/src/plugin/cursor.js'
 document.addEventListener('DOMContentLoaded', () => {
@@ -31,35 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
       renderComments(songEl)
     })
 
-  //   if(wavePlace.classList.contains('waveform-light')){
-  //     // light
-  //     console.log('light')
-  //     playingNowPath.forEach(songEl => {
-  //       renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb')
-  //       renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#ffffff')
-  //       renderComments(songEl)
-  //     });
-  //     // dark
-  //     console.log('dark')
-  //     playingNowPath.forEach(songEl => {
-  //       renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb', 0.32)
-  //       renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#555555', 0.8)
-  //       renderComments(songEl)
-  //     });
-  // }
-
     function getPeak(url, songDataName, wavesurfer) {
       fetch(peakStorageRoot+songDataName)
       .then(response => {
         if (!response.ok) {
-          loadDefaultPeak(url, wavesurfer)
+          loadDefaultPeak(url, wavesurfer) // if no peak data, load default
           return
         }
         return response.json()
       })
       .then(peaks => {
         if(peaks.length == 0){
-          loadDefaultPeak(url, wavesurfer)
+          loadDefaultPeak(url, wavesurfer) // if peak data contains error, load default
           return
         }
         console.log('------------------------------')
