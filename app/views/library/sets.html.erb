@@ -7,7 +7,6 @@ leego專用
   <button class="mr-4 text-orange-600 hover:text-orange-500"><%= link_to "Playlists", sets_library_index_path%></button>
   <button class="mr-4 hover:text-orange-500"><%= link_to "Following", following_library_index_path%></button>
   <button class="mr-4 hover:text-orange-500"><%= link_to "History", history_library_index_path%></button>
-
 </div>
 
 <div class="col-span-9 bg-white">
@@ -15,7 +14,7 @@ leego專用
 
       <%#= 版面控制區域 %>
       <div class="flex justify-between text-lg text-gray-500">
-        <div class="">Hear the tracks you’ve liked:</div>
+        <div class="">Hear your own playlists and the playlists you’ve liked:</div>
         <div class="flex w-1/3">
           <input class="mx-2 border border-gray-200 rounded w-3/4" type="text" placeholder="Fillter">
           <button class="border border-orange-600 text-orange-600 w-1/4 flex justify-between items-center px-2">
@@ -26,28 +25,25 @@ leego專用
       </div>
       
       
-      <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-
-        <% @songs.each do |song|%>
-          <% if song.image_url %>
-
-            <div class="my-2 mr-2 flex sm:flex-col justify-between flex-row">
-              <%#= 歌曲圖片 %>
-                <div class="align-top w-32 h-32 bg-black overflow-hidden rounded">
-                  <%= link_to image_tag(song.image_url), song_path(song.id), class:'block' %>
-                </div>
-              <%#= 歌曲名稱、介紹、TAG標籤 %>
-                <div class="text-2xl sm:text-sm hover:bg-gray-200 rounded">
-                  <%#= 歌曲名稱 %>
-                  <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
-                  <%= content_tag(:li,song.intro, data: {value: song.intro}, class:'text-xs text-gray-400' ) %>
-                </div>
-              
+      <div class="grid grid-cols-12 gap-4">
+        <% @playlists.each do |playlist|%>
+          <div class="col-span-2 my-2 mr-2 flex flex-col justify-between">
+            <%#= 歌曲圖片 %>
+            <div class="align-top w-full">
+              <% if playlist.songs[0] %>
+                <%= link_to image_tag(playlist.songs[0].image_url), playlist_path(playlist.id), class:'block' %>
+              <% else %>
+                <%#= 放假圖 %>
+              <% end %>
             </div>
-
-          <% end %>
-        <% end %>  
-
+              <%#= 歌曲名稱、介紹、TAG標籤 %>
+              <div class="">
+                <%#= 歌曲名稱 %>
+                <%= content_tag(:li,content_tag(:a, playlist.name, href: playlist_path(playlist)), data: {value: playlist.name} ) %>
+                <%= content_tag(:li,playlist.intro, data: {value: playlist.intro} ) %>
+              </div>
+            </div>
+        <% end %>
       </div>
     </div>
 <%#=左邊區域結束%>
@@ -79,3 +75,11 @@ leego專用
     </div>
   </div>
 </div>
+<template>
+  <div class="col-span-2 my-2 mr-2 flex flex-col justify-between">
+    <div class="align-top w-full set-img-place">
+    </div>
+    <div class="set-info-place">               
+    </div>   
+  </div>
+</template>

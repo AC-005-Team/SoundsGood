@@ -1,8 +1,8 @@
 <%#=這是User資訊頁面%>
 
 <%#=圖區一%>
-<div class="flex mx-6 bg-gradient-to-b from-gray-700 via-white to-gray-500">
-  <img class="w-1/6 m-4 rounded-full" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
+<div class="flex mx-4 bg-gradient-to-r from-red-500 via-white to-orange-700">
+  <%= image_tag @user.avatar_url, class:'w-1/6 m-4 rounded-full' %>
   <div class="flex justify-between w-5/6 items-start">
     <div class="m-4">
       <div class="bg-black rounded p-1 text-xl text-white m-1">
@@ -12,54 +12,34 @@
         <div class="text-white m-2"><%= @user.first_name %></div>
         <div class="text-xl text-orange-700 m-auto mr-2"><%= @user.last_name %></div>
       </div>
+        <div><%= link_to 'create podcast channel', rooms_path %></div>
     </div>
-    <button class="flex items-center text-white bg-orange-600 p-2 rounded">
-      <i class="fas fa-camera"></i>
-      <p class="hidden md:block">Upload header image</p> 
-    </button> 
+    <% if @current_user == @user %>
+      <%= link_to edit_user_path(@user), class: 'text-white bg-orange-600 p-2 rounded' do %>
+        <i class="fas fa-camera"></i>Upload header image
+      <% end %>
+    <% end %>
   </div>
 </div>
 
 <%#=左邊使用者專區%>
-<div class="flex justify-between m-4 border-b border-gray-300 p-2 ">
-
-  <div class="ml-4 text-xl hidden md:flex justify-between">
-    <button class="mx-2 text-orange-600">All</button>
-    <button class="mx-2">Popular tracks</button>
-    <button class="mx-2">Tracks</button>
-    <button class="mx-2">Albums</button>
-    <button class="mx-2">Playlist</button>
-    <button class="mx-2">Reposts</button>
+<div class="flex m-4 justify-between border-b border-gray-400">
+  <div class="mx-4 text-xl m-2">
+    <%= link_to "All", user_songs_path(@user.id), class: 'hover:text-orange-600 mr-4' %>
+    <button class="hover:text-orange-600 mr-4">Popular Tracks</button>
+    <button class="hover:text-orange-600 mr-4">Tracks</button>
+    <button class="hover:text-orange-600 mr-4">Albums</button>
+    <button class="hover:text-orange-600 mr-4">Playlists</button>
+    <button class="hover:text-orange-600 mr-4">Reposts</button>
   </div>
-
-  <div class="dropdown inline-block relative ml-4 mr-6">
-    <button class="text-gray-500 md:text-white bg-gray-00 py-2 px-4 rounded inline-flex items-center">
-      <i class="fas fa-bars"></i>
-      <p class="mx-2"> All</p>
-    </button>
-    <ul class="dropdown-menu absolute hidden text-gray-700 text-left">
-      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-t">Popular tracks</button>
-      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Tracks</button>
-      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Albums</button>
-      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Playlist</button>
-      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-b">Reposts</button>
-    </ul>
-  </div>
-
-
-  <div class="flex justify-between items-center mr-4 text-sm">
-    <button class="flex items-center mx-2 p-1 rounded bg-orange-600 text-white">
-      <i class="fas fa-chart-bar"></i>
-      <p class="hidden md:block">Your Insights</p> 
-    </button>
-    <button class="flex items-center mx-2 p-1 rounded border border-gray-300">
-      <i class="fas fa-share-square"></i>
-      <p class="hidden md:block">Share</p> 
-    </button>
-    <button class="flex items-center mx-2 p-1 rounded border border-gray-300">
-      <i class="fas fa-pencil-alt"></i>
-      <p class="hidden md:block"> Edit</p> 
-    </button>
+  <div class="flex m-2">
+    <button class="mr-4 text-white bg-orange-600 px-2 rounded"><i class="fas fa-balance-scale"></i>Your Insights</button >
+    <button class="mr-4"><i class="fas fa-share-square"></i>Share</button >
+    <% if current_user == @user %>
+      <%= link_to edit_user_path(current_user.id), class: 'mr-4' do %>
+        <i class="fas fa-pencil-alt"></i>Edit
+      <% end %>
+    <% end %>
   </div>
 </div>
 
@@ -137,46 +117,9 @@
         <div class="">view all</div>
       </div>
 
-      <div class="my-4 flex">
-        <img class="w-1/5" src="https://i1.sndcdn.com/artworks-tzoA3a4voEv4g77c-Z5qUqQ-t120x120.jpg" alt="">
-        <div class="w-4/5 mx-2 text-xs">
-            <div class="text-gray-500">Cherokee Recordings</div>
-            <div class="">Dean Robert - Morning</div>
-            <div class="flex justify-around">
-              <a href="">➡️261K</a>
-              <a href="">❤️3315</a>
-              <a href="">⭕️60</a>
-              <a href="">☁️101</a>
-            </div>
-        </div>
-      </div>
+        <%#=右邊 user-like area %>
+        <%= render './shared/like_area.html.erb', element: current_user %>
 
-      <div class="my-4 flex">
-        <img class="w-1/5" src="https://i1.sndcdn.com/artworks-tzoA3a4voEv4g77c-Z5qUqQ-t120x120.jpg" alt="">
-        <div class="w-4/5 mx-2 text-xs">
-            <div class="text-gray-500">Cherokee Recordings</div>
-            <div class="">Dean Robert - Morning</div>
-            <div class="flex justify-around">
-              <a href="">➡️261K</a>
-              <a href="">❤️3315</a>
-              <a href="">⭕️60</a>
-              <a href="">☁️101</a>
-            </div>
-        </div>
-      </div>
-
-      <div class="my-4 flex">
-        <img class="w-1/5" src="https://i1.sndcdn.com/artworks-tzoA3a4voEv4g77c-Z5qUqQ-t120x120.jpg" alt="">
-        <div class="w-4/5 mx-2 text-xs">
-            <div class="text-gray-500">Cherokee Recordings</div>
-            <div class="">Dean Robert - Morning</div>
-            <div class="flex justify-around">
-              <a href="">➡️261K</a>
-              <a href="">❤️3315</a>
-              <a href="">⭕️60</a>
-              <a href="">☁️101</a>
-            </div>
-        </div>
       </div>
     </div>
 
@@ -208,27 +151,3 @@
     </div>
   </div>  
 </div>
-
-
-
-<h1>這是<%= @user.email %>的頁面</h1>
-<%= link_to follow_user_path, method: 'post' do %>
-  <button>Follow</button>
-<% end %>
-<h1>profile</h1>
-<%= link_to 'edit', edit_user_path(current_user) if current_user%>
-<%= link_to 'go back', root_path %>
-<ul>
-  <% if @user.header_url && @user.avatar_url %>
-    <li>header:<%= image_tag @user.header_url, width: '100px' %></li>
-    <li>avatar:<%= image_tag @user.avatar_url, width: '100px' %></li>
-  <% end%>
-  <li>email:<%= @user.email %></li>
-  <li>nick_name:<%= @user.display_name %></li>
-  <li>gender:<%= @user.gender %></li>
-  <li>age:<%= @user.age %></li>
-  <li>first_name:<%= @user.first_name %></li>
-  <li>last_name:<%= @user.last_name %></li>
-  <li>city:<%= @user.city %></li>
-  <li>country:<%= @user.country %></li>
-</ul>

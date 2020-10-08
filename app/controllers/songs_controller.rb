@@ -1,6 +1,5 @@
 class SongsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-
   before_action :find_song, only: [:show, :destroy, :like, :repost, :add_to_playlist, :share]
 
   def index
@@ -25,7 +24,12 @@ class SongsController < ApplicationController
   def show 
     @comment = @song.comments.new
     @comments = @song.comments.includes(:user, replies:[:user]).where(reply_id: nil).order(id: :desc)
-    @playlists = current_user.playlists
+    @related_song = Song.all.limit(3)
+    begin
+      @playlists = current_user.playlists
+    rescue
+      p 'not logged in'
+    end
   end
 
   def destroy
@@ -70,5 +74,5 @@ class SongsController < ApplicationController
   def find_song
     @song = Song.find(params[:id])
   end
-  
+    
 end

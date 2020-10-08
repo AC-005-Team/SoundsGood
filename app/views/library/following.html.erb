@@ -5,33 +5,65 @@
   <button class="mr-4 text-orange-600 hover:text-orange-500"><%= link_to "Following", following_library_index_path%></button>
   <button class="mr-4 hover:text-orange-500"><%= link_to "History", history_library_index_path%></button>
 </div>
-
-<div class="m-4 p-2">
-  <div class="flex justify-between text-gray-400">
-    <span class="">Hear what the people you follow have posted:</span>
-    <input class="px-1" type="text" placeholder="Filter">
-  </div>
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-
-      <% @songs.each do |song|%>
-        <% if song.image_url %>
-
-          <div class="my-2 mr-2 flex sm:flex-col justify-between flex-row">
-            <%#= 歌曲圖片 %>
-              <div class="align-top w-32 h-32 bg-black overflow-hidden rounded-full">
-                <%= link_to image_tag(song.image_url), song_path(song.id), class:'block' %>
-              </div>
-            <%#= 歌曲名稱、介紹、TAG標籤 %>
-              <div class="text-2xl sm:text-sm hover:bg-gray-200 rounded">
-                <%#= 歌曲名稱 %>
-                <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
-                <%= content_tag(:li,song.intro, data: {value: song.intro}, class:'text-xs text-gray-400' ) %>
-              </div>
-            
-          </div>
-
+<div class="col-span-9 bg-white">
+  <div class="mx-4 p-5">
+    <%#= 版面控制區域 %>
+    <div class="flex justify-between text-lg text-gray-500">
+      <div class="">Hear what the people you follow have posted:</div>
+      <div class="flex w-1/3">
+        <span class="mx-2">View</span>
+        <button class="mx-2"><i class="fas fa-th-large"></i></button> 
+        <button class="mx-2"><i class="fas fa-th-list"></i></button> 
+        <input class="mx-2 border rounded w-full" type="text" placeholder="Fillter">
+      </div>
+    </div>
+    
+    <div class="grid grid-cols-12 gap-4">
+      <% @followees.each do |followee| %>
+        <%#= 歌曲圖片 %>
+          <div class="col-span-2 my-2 mr-2 flex flex-col justify-between">
+            <div class="align-top w-full">
+        <% if followee.avatar_url %>
+              <%= link_to image_tag(followee.image_url), user_path(followee.id), class:'block' %>
+          <% else %>
+              <%= link_to image_tag('https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg'), user_path(followee.id), class:'block' %>
         <% end %>
+            </div>
+            <%#= followee名稱 %>
+            <div class="">
+            <%#= followee名稱 %>
+              <%= content_tag(:li,content_tag(:a, followee.display_name, href: user_path(followee))) %>
+            </div>
+          </div>
       <% end %>  
+    </div>
+  </div>
+<%#=左邊區域結束%>
+  <div class="flex border-t border-gray-500 mx-4">
+    <div class="my-3 text-xs table-row-group">
+
+      <div class="text-gray-500">
+        <span class="hover:text-black"><a href="#">Legal</a></span>
+          -
+        <span class="hover:text-black"><a href="#">Privacy</a></span>
+          -
+        <span class="hover:text-black"><a href="#">Cookies</a></span>
+          -
+        <span class="hover:text-black"><a href="#">Imprint</a></span>
+          -
+        <span class="hover:text-black"><a href="#">Creator Resources</a></span>
+          -
+        <span class="hover:text-black"><a href="#">Blog</a></span>
+          -
+        <span class="hover:text-black"><a href="#">Charts</a></span>
+          -
+        <span class="hover:text-black"><a href="#">Popular Search</a></span>
+      </div>
+      
+        <div class="mt-2 mb-20">
+          Language: English (US)
+        </div>
 
     </div>
+  </div>
 </div>

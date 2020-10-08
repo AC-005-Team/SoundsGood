@@ -143,50 +143,9 @@
       <button class="hover:text-black">view all</button>
     </div>
 
-    <div class="my-4 flex">
-      <img class="w-1/5" src="https://i1.sndcdn.com/artworks-tzoA3a4voEv4g77c-Z5qUqQ-t120x120.jpg" alt="">
-      <div class="w-4/5 mx-2 text-xs">
-        <div class="text-gray-500">Cherokee Recordings</div>
-        <div class="">Dean Robert - Morning</div>
-        <div class="flex justify-around text-gray-500">
-          <a href=""><i class="fas fa-arrow-right"></i>261K</a>
-          <a href=""><i class="fas fa-heart"></i>3315</a>
-          <a href=""><i class="fas fa-history"></i>60</a>
-          <a href=""><i class="fas fa-comment-dots"></i>101</a>
-        </div>
-        
-      </div>
-    </div>
-
-    <div class="my-4 flex">
-      <img class="w-1/5" src="https://i1.sndcdn.com/artworks-tzoA3a4voEv4g77c-Z5qUqQ-t120x120.jpg" alt="">
-      <div class="w-4/5 mx-2 text-xs">
-        <div class="text-gray-500">Cherokee Recordings</div>
-        <div class="">Dean Robert - Morning</div>
-        <div class="flex justify-around">
-          <a href="">➡️261K</a>
-          <a href="">❤️3315</a>
-          <a href="">⭕️60</a>
-          <a href="">☁️101</a>
-        </div>
-        
-      </div>
-    </div>
-
-    <div class="my-4 flex">
-      <img class="w-1/5" src="https://i1.sndcdn.com/artworks-tzoA3a4voEv4g77c-Z5qUqQ-t120x120.jpg" alt="">
-      <div class="w-4/5 mx-2 text-xs">
-        <div class="text-gray-500">Cherokee Recordings</div>
-        <div class="">Dean Robert - Morning</div>
-        <div class="flex justify-around">
-          <a href="">➡️261K</a>
-          <a href="">❤️3315</a>
-          <a href="">⭕️60</a>
-          <a href="">☁️101</a>
-        </div>
-        
-      </div>
-    </div>
+    <%#=右邊 user-like area %>
+    <%= render './shared/like_area.html.erb', element: current_user %>
+    
 
     <%#=分隔線區域%>
     <div class="flex justify-between text-gray-500 border-b border-gray-300 text-sm p-2">
@@ -196,7 +155,7 @@
       </button>
       <button class="hover:text-black">view all</button>
     </div>
-
+    
     <div class="my-4 flex">
       <img class="w-1/5" src="https://i1.sndcdn.com/artworks-tzoA3a4voEv4g77c-Z5qUqQ-t120x120.jpg" alt="">
       <div class="w-4/5 mx-2 text-xs">
