@@ -21,4 +21,32 @@ class SearchesController < ApplicationController
     @Playlists = Playlist.name_search("name", params[:search])
   end
 
+  def like
+    @song = Song.find(params[:search_id])
+    current_user.toggle_like_song(@song)
+  end
+
+  def follow
+    @user = User.find(params[:search_id])
+    current_user.toggle_follow(@user)
+  end
+  
+private
+
+  def toggle_follow(followee)
+    if follows?(followee)
+      followees.destroy(followee)
+    else
+      followees << followee
+    end
+  end
+
+  def follows?(followee)
+    followees.include?(followee)
+  end
+
+  def favorited_by?(user)
+    liked_users.include?(user)
+  end
+
 end
