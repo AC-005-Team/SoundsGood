@@ -24,6 +24,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :searches, only:[] do
+    get :like
+    get :follow
+  end
+
   resources :users, only: [:edit, :update, :show] do
     member do
       post :follow

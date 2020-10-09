@@ -68,17 +68,43 @@
 
       <%#=音樂資料部分%>
         <% if @users  %>
-          <% @users.each do|f|%>
-            <%= f.display_name %>
+          <% @users.each do|user|%>
+            <div class="flex">
+              <% if user.avatar_url %>
+                <%= image_tag user.avatar_url, class: 'w-1/5 rounded-full' %>
+              <% end %>
+              <div class="w-4/5 flex-col items-end">
+                <p class="text-black"><%= user.display_name%></p> 
+                <div class="flex justify-between text-xs">
+                  <div>
+                    <i class="fas fa-user-friends"></i>
+                      <span class=>
+                        <%= user.followers.count %>
+                      </span>
+                    <i class="fab fa-soundcloud"></i>
+                    <%= user.songs.count %>
+                  </div>
+                  <button class="flex items-center border border-gray-400 rounded px-2 text-black follow_btn" result-follow-id='<%= user.id %>'>
+                    <% if current_user.follows?(user)%>
+                      <i class="fas fa-user-check" style="color: orange"></i>
+                      <p class>Following</p> 
+                    <% else %>
+                      <i class="fas fa-user-check" style="color: black"></i>
+                      <p class>Follow+</p> 
+                    <% end %>
+                  </button>
+                </div>
+              </div>
+            </div>
           <% end %>
         <% end %>
         
         <% if @songs %>
-        <% @songs.each do|f|%>
+        <% @songs.each do|song|%>
       <div class="flex mb-6">
         <div class="sm:w-1/6 w-1/4">
           <%#= 搜尋結果的Song圖片 %>
-          <%= link_to image_tag(f.image_url), song_path(f.id) %>
+          <%= link_to image_tag(song.image_url), song_path(song.id) if song.image_url %>
         </div>
 
         <div class="sm:w-5/6 w-3/4 mx-4">
@@ -90,13 +116,13 @@
   
             <div class="flex-col w-9/12">
             <%#= 歌曲名稱 %>
-              <p><%= f.name %></p>
-              <p class=""><%= link_to f.name, song_path(f.id) %></p>
+              <p><%= song.name %></p>
+              <p class=""><%= link_to song.name, song_path(song.id) %></p>
             </div>
 
             <div class="w-2/12 flex justify-end">
             <%#= 歌曲TAG名稱 %>              
-              <% f.tags.each do |tag|%>
+              <% song.tags.each do |tag|%>
 
               <div class="text-white bg-gray-400 rounded text-center">
                 <%= tag.name %>
@@ -107,7 +133,12 @@
           </div>
 
           <%#=超難的音波專區%>
-          <div class="">萱大の音波專區</div>
+          <div class="">
+            <%= content_tag(:div, '', class:['waveform-wrap waveform-small'], data:{ path: song.track_url, filename: song.get_filename, id: song.id}) do %> 
+              <div class="waveform-dummy-trigger"></div>
+              <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
+            <% end %>
+          </div>
           <%#=留言專區%>
           <%# <div class="flex my-2">
             <img class="w-8" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
@@ -118,11 +149,17 @@
           <%#=歌曲功能專區、按讚、重播%>
           <div class="flex text-sm">
             <div class="flex w-2/3 my-2 justify-start">
-              <button class="flex items-center border border-gray-300 px-3 mx-1 rounded">
-                <i class="fas fa-heart"></i>
-                <p class="hidden md:block">30K</p> 
+
+              <button class="flex border border-gray-300 px-3 mx-1 rounded like_btn" result-like-id='<%= song.id %>' >
+                <% if song.favorited_by?(current_user) %>
+                  <i class="fas fa-heart" style="color: orange"></i>
+                <% else %>
+                  <i class="far fa-heart"></i>
+                <% end %>
+                <p class="hidden md:block like_count"><%= song.liked_users.count %></p> 
               </button>
-              <button class="flex items-center border border-gray-300 px-3 mx-1 rounded">
+
+              <button class="flex border border-gray-300 px-3 mx-1 rounded">
                 <i class="fas fa-redo-alt"></i>
                 <p class="hidden md:block">3,300</p>
               </button>
@@ -141,13 +178,12 @@
               <button class="flex items-center mx-2">
                 <i class="fas fa-play"></i>
                 <p class="hidden md:block">31.5M</p>
-          
-                
               </button>
-              <button class="flex items-center mx-2">
+              
+              <%= link_to song_path(song.id), class:'flex mx-2' do %>
                 <i class="fas fa-comments"></i>
-                <p class="hidden md:block">3074</p>
-              </button>
+                <p class="hidden md:block"><%= song.comments.count%></p>
+              <% end %>
 
             </div>
           </div>
