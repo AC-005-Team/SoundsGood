@@ -60,7 +60,7 @@
                     </span>
                   <i class="fab fa-soundcloud"></i>
                     <span>
-                      <%= user.songs.count %>
+                      <%= user.songs.size %>
                     </span>
                 </div>
                 <button class="flex items-center border border-gray-400 rounded px-2 text-black follow_btn" result-follow-id='<%= user.id %>'>
@@ -87,9 +87,9 @@
             </div>
             <div class="sm:w-5/6 w-3/4 mx-4">
               <div class="flex items-center text-sm text-gray-500">
-                <button class="text-orange-500 mr-2">
-                  <i class="fas fa-play fa-2x"></i>
-                </button>
+
+              <%= content_tag(:li, '▶', class:'getURL text-orange-500 mr-2', data: {id: song.id} ) %>
+
                 <div class="flex-col w-9/12">
                 <%#= 歌曲名稱 %>
                   <p><%= song.name %></p>
@@ -131,7 +131,7 @@
                     <% else %>
                       <i class="fas fa-redo-alt"></i>
                     <% end %>
-                    <p class="hidden md:block"><%= song.reposts.count %></p>
+                    <p class="hidden md:block"><%= song.reposts.size %></p>
                   </button>
                   <button class="modal-btn share-btn flex border border-gray-300 px-3 mx-1 rounded">
                     <i class="fas fa-share"></i>
@@ -149,7 +149,7 @@
                   </button>
                   <%= link_to song_path(song.id), class:'flex mx-2' do %>
                     <i class="fas fa-comments"></i>
-                    <p class="hidden md:block song_comments"><%= song.comments.count%></p>
+                    <p class="hidden md:block song_comments"><%= song.comments.size%></p>
                   <% end %>
                 </div>
               </div>
