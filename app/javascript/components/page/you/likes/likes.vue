@@ -13,9 +13,14 @@
       </div>
     </div>
 
-    <div class="flex overflow-scroll">
+    <!-- <div class="flex overflow-scroll">
       <likeSongs v-for="song in songs" :song="song"/>
+    </div> -->
 
+    <div class="flex justify-between">
+      <div class="grid sm:grid-cols-2 md:col-span-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 ">
+        <likeSongs v-for="song in songs" :song="song"/>
+      </div>
     </div>
 
 
