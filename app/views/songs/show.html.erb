@@ -25,16 +25,18 @@
 
         <div> <%#=萱大大專區%>
           <%= content_tag(:div, '', class:['waveform-wrap waveform-light'], data:{ path: @song.track_url, filename: @song.get_filename, id: @song.id }) do %> 
-          <div class="waveform-dummy-trigger"></div>
-          <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
-        <% end %>
+            <div class="waveform-dummy-trigger"></div>
+            <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
+          <% end %>
         </div>
       </div>
 
     </div>
       <%#=右邊大圖區%>
-    <div class="w-1/4 p-4">
-      <%= image_tag @song.image_url, class:''%> 
+    <div class="w-1/3 p-4">
+      <% if @song.image_url %>
+        <%= image_tag @song.image_url%> 
+      <% end %>
     </div>
   </div>
 </div>
@@ -48,9 +50,9 @@
         <% if current_user && current_user.avatar_url %>
           <%= image_tag current_user.avatar_url, class: 'w-auto h-10 current_user-avatar' %>
         <% end %>
-        <%= form_with(model:@comment, url:song_comments_path(song_id: @song, timepoint: 0), class: "song-comment-form w-11/12 mx-4 border border-gray-400 rounded") do |f|%>
-          <%= f.text_field :content, placeholder: "Write a comment", class: "song-main-comment w-10/12 py-2 px-4 border border-gray-400 rounded", data: {id: @song.id} %>
-          <%= f.submit class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"%>
+        <%= form_with(model:@comment, url:song_comments_path(song_id: @song, timepoint: 0), class: "song-comment-form w-11/12 mx-4") do |f|%>
+          <%= f.text_field :content, placeholder: "Write a comment", class: "song-main-comment w-full h-full pl-1 border border-gray-400 rounded", data: {id: @song.id} %>
+          <%= f.submit type: "hidden", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold rounded"%>
         <% end %>
       </div>
       <div class="flex my-2 p-2 justify-around text-sm" data-controller="toggle" data-toggle-song="<%= @song.id %>">
@@ -287,7 +289,7 @@
       <h2>Add to playlist</h2>
     </div>
     <div class="modal-item" data-controller="playlist" data-playlist-song="<%= @song.id %>">
-    <% if @playlist %>
+    <% if @playlists %>
       <% @playlists.each do |playlist| %>
         <li>Playlist：<%= link_to playlist.name, playlist_path(playlist) %>
         <% if @song.added_by?(playlist) %>

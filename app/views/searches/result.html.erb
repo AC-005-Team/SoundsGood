@@ -80,10 +80,23 @@
         
       <% if @songs %>
         <% @songs.each do|song|%>
-          <div class="flex mb-6 track_template">
-            <div class="sm:w-1/6 w-1/4">
-              <%#= 搜尋結果的Song圖片 %>
-              <%= link_to image_tag(song.image_url), song_path(song.id) %>
+      <div class="flex mb-6">
+        <div class="sm:w-1/6 w-1/4">
+          <%#= 搜尋結果的Song圖片 %>
+          <%= link_to image_tag(song.image_url), song_path(song.id) if song.image_url %>
+        </div>
+
+        <div class="sm:w-5/6 w-3/4 mx-4">
+          <div class="flex items-center text-sm text-gray-500">
+
+            <button class="text-orange-500 mr-2">
+              <i class="fas fa-play fa-2x"></i>
+            </button>
+  
+            <div class="flex-col w-9/12">
+            <%#= 歌曲名稱 %>
+              <p><%= song.name %></p>
+              <p class=""><%= link_to song.name, song_path(song.id) %></p>
             </div>
             <div class="sm:w-5/6 w-3/4 mx-4">
               <div class="flex items-center text-sm text-gray-500">

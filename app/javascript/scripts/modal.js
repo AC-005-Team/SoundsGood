@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
           return
         }
       })
-    })
+    }, true)
   })
   }
   function getBtnTemplate(node, n) {
