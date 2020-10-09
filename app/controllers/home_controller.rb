@@ -14,6 +14,7 @@ class HomeController < ApplicationController
     end
     @items.sort_by!{|item| item.created_at}.reverse!
     respond_to do |format|
+      format.html
       format.json
     end
   end

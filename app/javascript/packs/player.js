@@ -1,5 +1,6 @@
 import 'aplayer/dist/APlayer.min.css';
 import APlayer from 'aplayer';
+let waveProgress, playingDuration, waveformWidth, secOfFourth
 //畫面一開始的播放器
 const ap = new APlayer({
   container: document.getElementById('player1'),
@@ -19,23 +20,22 @@ if(songs){
   songs.forEach((song) => {
     song.addEventListener('click', function(e) {
       e.preventDefault();
+      let playing = ap.container.dataset.playing
       let id = e.currentTarget.dataset.id;
-      ap.pause();
-      ap.list.clear();
-      getPlay(id).then(val => {
-        ap.list.add(val);
-      });
-      ap.play();
-      console.log(ap)
-      ap.container.setAttribute('data-playing', id)
+      if(playing!==id){
+        ap.pause();
+        ap.list.clear();
+        getPlay(id).then(val => {
+          ap.list.add(val);
+        });
+        ap.play();
+        console.log(ap)
+        ap.container.setAttribute('data-playing', id)
+      }
+      ap.toggle()
     });
   });
 }
-const clickOnWave = () => {
-  
-}
-
-
 const waves = document.querySelectorAll('.waveform-wrap')
 if(waves){
   waves.forEach( wave => {
@@ -45,29 +45,45 @@ if(waves){
       let playing = ap.container.dataset.playing
       let id = e.currentTarget.dataset.id;
       let node = e.currentTarget
-      getPlay(id).then(val => {
+      waveformWidth = node.parentNode.offsetWidth
+      console.log(waveformWidth)
+      getPlay(id).then(val=>{
+        playingDuration = val.duration
         if(playing!==id){
-          // ap.pause();
-          ap.list.clear();
-          ap.list.add(val);
+          if(waveProgress){
+            waveProgress.style.width = ''
+          }
+          secOfFourth = 0
+          waveProgress = wave.querySelector('.waveform>wave>wave')
+          ap.pause();
+          ap.list.clear()
+          ap.list.add(val)
           ap.play();
-          ap.on('playing', ()=>{
-            ap.seek(getSec(val, e, node))
-            ap.play()
-          })
           ap.container.setAttribute('data-playing', id)
-          playing = ap.container.dataset.playing
-          console.log(playing)
+          console.log(waveProgress)
         } else {
-          // ap.pause();
-          // ap.list.add(val);
+          ap.play()
+          secOfFourth = getSec(val, e, node)
           ap.seek(getSec(val, e, node))
-          ap.play();
         }
-      });
+      })
     });
   })
+  ap.on('timeupdate', () => {
+    secOfFourth += 0.25
+    console.log(secOfFourth)
+    console.log(widthCalc(secOfFourth))
+    waveProgress.style.width = widthCalc(secOfFourth)
+  })
+  ap.on('ended', () => {
+    secOfFourth = 0
+  })
 }
+
+function widthCalc(secOfFourth){
+  return `${waveformWidth/playingDuration*secOfFourth}px`
+}
+
 function getSec(val, e, node){
   let duration = val.duration
   let timepoint = e.offsetX
@@ -81,9 +97,6 @@ async function getPlay(id) {
   let playlistTrack = await response.json();
   return playlistTrack;
 };
-
-
-
 
 //ADD TO PLAY NEXT by json
 const addbutton = document.querySelectorAll('#addtoplay');
@@ -99,8 +112,6 @@ if (addbutton){
   });
 
 }
-
-
 
 // read playlists JSON
 async function getPlayList(id) {
@@ -124,10 +135,6 @@ if(playlistBtn){
 
 }
 
-
-
-
-
 const dropbtn = document.querySelectorAll('.dropbtn');
 const dropDownbtn = document.querySelectorAll('#myDropdown');
 
@@ -140,9 +147,6 @@ if (dropbtn){
     });
   }
 }
-
-
-
 
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {
@@ -157,7 +161,6 @@ window.onclick = function(event) {
   }
 }
 
-
 const heart = document.querySelectorAll(".heart");
 for(var i =0, len = heart.length; i<len; i++)
 {
@@ -171,7 +174,4 @@ for(var i =0, len = heart.length; i<len; i++)
     this.classList.add('like_btn');
   }
 }
-
-
-
-}
+} 
