@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function(){
   const user_btn = document.querySelector('.user_btn')
   const playlist_btn = document.querySelector('.playlist_btn')
   const all_btn = document.querySelector('.all_btn')
-  if( track_btn && user_btn && playlist_btn && all_btn ){
+  if( user_btn ){
     const user_temp = document.querySelectorAll('.user_template')
     const track_temp = document.querySelectorAll('.track_template')
     const playlist_temp = document.querySelectorAll('.playlist_template')
