@@ -52,7 +52,7 @@
 
 <script>
 import likeSongs from './like_songs'
-import Api from "../../../api/api";
+import Api from "../../../../api/api";
 
 import {
   mapState,

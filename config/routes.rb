@@ -89,6 +89,15 @@ Rails.application.routes.draw do
             get :following
           end
         end
+        # resources :users, only: [:show] do
+        #   member do
+        #     get :reposts
+        #     get :followers
+        #     get :following
+        #     get :comments
+        #     get :likes
+        #   end
+        # end
       end
     end
   end

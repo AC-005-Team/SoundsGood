@@ -41,7 +41,7 @@ export default new VueRouter({
         {
           path:'likes',
           name:'likes',
-          component: () => import(/* webpackChunkName: "Likes" */ './components/page/you/likes'),
+          component: () => import(/* webpackChunkName: "Likes" */ './components/page/you/likes/likes'),
         },
         {
           path:'set',

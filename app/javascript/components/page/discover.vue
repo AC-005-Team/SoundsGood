@@ -513,18 +513,8 @@ export default {
     VueperSlide,
   },
 
-  //   data(){
-  //   // return {
-  //   // playBtn: false
-  //   // }
-  // },
   methods: {
-    // mouseOver: function() {
-    //   this.playBtn = true
-    // },
-    // mouseLeave: function() {
-    //   this.playBtn = false
-    // }
+
   },
 
   computed: {
@@ -532,18 +522,6 @@ export default {
       index: 'song/index'
     }),
 
-    // index_song: function render() {
-    //   var array1 = this.index
-    //   var songs = {};
-    //   var song_name = [];
-    //   var song_artist = [];
-    //   array1.forEach(a => song_name.push(a.audio.name))
-    //   array1.forEach(a => song_artist.push(a.audio.artist))
-    //   songs.name = song_name
-    //   songs.artist = song_artist
-    //   console.log(songs)
-    //   return songs
-    // },
 
 
   },

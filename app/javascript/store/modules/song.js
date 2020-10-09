@@ -67,10 +67,10 @@ const song = {
 
 
 
-    async loadSong({ commit }, id) {
+    async loadSong({commit,dispatch}, id) {
       let response = await Api().get(`/api/v1/songs/${id}`);
-      // dispatch("songs/setPlayerTracks", response.data, { root: true }); //塞到module tracks方法
-      // dispatch("songs/play", response.data, { root: true });
+      dispatch("songs/setPlayerTracks", response.data, { root: true }); //塞到module tracks方法
+      dispatch("songs/play", response.data, { root: true });
 
       commit("SAVE_SONG", response.data);
 
