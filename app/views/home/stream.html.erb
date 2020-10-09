@@ -3,14 +3,16 @@
   <div class="col-span-12 md:col-span-9 mx-4">
     <div class="text-lg text-gray-600 mb-4">Hear the latest posts from the people you’re following:</div>
     
+
+
+        <% @songs.each do |song|%>
+          <% if song.image_url %>
+          
     <div class="flex flex-start items-center">
       <img class="w-8 rounded-full mr-4" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
       <button class="mr-4">user_name</button>
       <span class="text-gray-500">posted 1 month ago</span>
     </div>
-
-        <% @songs.each do |song|%>
-          <% if song.image_url %>
 
     <div class="flex xl:max-h-full">
       <%#= 歌曲封面 %>

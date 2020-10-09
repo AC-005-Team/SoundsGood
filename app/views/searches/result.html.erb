@@ -1,8 +1,8 @@
 <div class="m-4">
 
   <div class="flex text-2xl border-b border-gray-200 m-4">
-    <p class="mx-2">Search result for</p>
-    <p class=""><%= @params_search %></p>
+    <p class="mx-2">Search result for: </p>
+    <p class="">"<%= @params_search %>"</p>
   </div>
 
   <div class="grid grid-cols-12 m-4">
@@ -150,7 +150,7 @@
           <div class="flex text-sm">
             <div class="flex w-2/3 my-2 justify-start">
 
-              <button class="flex border border-gray-300 px-3 mx-1 rounded like_btn" result-like-id='<%= song.id %>' >
+              <button class="flex items-center border border-gray-300 px-3 mx-1 rounded like_btn" result-like-id='<%= song.id %>' >
                 <% if song.favorited_by?(current_user) %>
                   <i class="fas fa-heart" style="color: orange"></i>
                 <% else %>
@@ -159,13 +159,13 @@
                 <p class="hidden md:block like_count"><%= song.liked_users.count %></p> 
               </button>
 
-              <button class="flex border border-gray-300 px-3 mx-1 rounded">
+              <button class="flex items-center border border-gray-300 px-3 mx-1 rounded">
                 <i class="fas fa-redo-alt"></i>
                 <p class="hidden md:block">3,300</p>
               </button>
               <button class="flex items-center border border-gray-300 px-3 mx-1 rounded">
                 <i class="fas fa-share"></i>
-                <p class="hidden md:block">Share</p> 
+                <p class="hidden md:block">Share</p>
                 
               </button>
               <button class="flex items-center border border-gray-300 px-3 mx-1 rounded">
