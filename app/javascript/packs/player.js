@@ -40,13 +40,11 @@ const waves = document.querySelectorAll('.waveform-wrap')
 if(waves){
   waves.forEach( wave => {
     wave.addEventListener('click', function(e) {
-      console.log(e)
       e.preventDefault();
       let playing = ap.container.dataset.playing
       let id = e.currentTarget.dataset.id;
       let node = e.currentTarget
       waveformWidth = node.parentNode.offsetWidth
-      console.log(waveformWidth)
       getPlay(id).then(val=>{
         playingDuration = val.duration
         if(playing!==id){
@@ -60,7 +58,6 @@ if(waves){
           ap.list.add(val)
           ap.play();
           ap.container.setAttribute('data-playing', id)
-          console.log(waveProgress)
         } else {
           ap.play()
           secOfFourth = getSec(val, e, node)
@@ -71,8 +68,6 @@ if(waves){
   })
   ap.on('timeupdate', () => {
     secOfFourth += 0.25
-    console.log(secOfFourth)
-    console.log(widthCalc(secOfFourth))
     waveProgress.style.width = widthCalc(secOfFourth)
   })
   ap.on('ended', () => {
@@ -110,7 +105,6 @@ if (addbutton){
       });
     });
   });
-
 }
 
 // read playlists JSON

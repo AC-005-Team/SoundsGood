@@ -1,5 +1,4 @@
 import { renderComments } from './comment'
-import { playAlong } from "./playAlong";
 import WaveSurfer from 'wavesurfer.js'
 import CursorPlugin from 'wavesurfer.js/src/plugin/cursor.js'
 document.addEventListener('DOMContentLoaded', () => {
