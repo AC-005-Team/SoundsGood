@@ -5,9 +5,9 @@ class PlaylistsController < ApplicationController
     @playlists = current_user.playlists
   end
 
-  def new
-    @playlist = current_user.playlists.new
-  end
+  # def new
+  #   @playlist = current_user.playlists.new
+  # end
 
   def show
     @playlist = Playlist.find(params[:id])
@@ -17,9 +17,11 @@ class PlaylistsController < ApplicationController
   def create
     @playlist = current_user.playlists.new(playlist_params)
     if @playlist.save
-      redirect_to user_playlists_path
+      @song = Song.find(params[:song_id])
+      @playlist.songs << @song
+      # redirect_to user_playlists_path
     else
-      render :new
+      # render :new
     end
   end
 

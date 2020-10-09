@@ -33,7 +33,7 @@
 
     </div>
       <%#=右邊大圖區%>
-    <div class="w-1/4 p-4">
+    <div class="w-1/3 p-4">
       <%= image_tag @song.image_url, class:''%> 
     </div>
   </div>
@@ -90,11 +90,9 @@
           <i class="fas fa-plus"></i>
           <p class="hidden md:block">Add to Playlist</p> 
         </button>
-        <% if current_user%>
-          <%=link_to new_user_playlist_path(current_user), class:'border border-gray-400 p-1 rounded' do %>
+          <%=link_to playlists_path, class:'border border-gray-400 p-1 rounded' do %>
             <i class="fas fa-bolt"></i>Create Playlist
           <% end %>
-        <% end %>
         <button class="p-1 text-gray-600">
           <i class="fas fa-chevron-circle-right"></i>
           10.2K
@@ -253,18 +251,9 @@
   
 </div>
 
-<!-- @todo-dropdownlist
-<div class="dropdown">
-  <button class="dropbtn">+</button>
-  <div id="myDropdown" class="dropdown-content">
-    <%= link_to "add to play next", '###' , id: 'addtoplay', data: {id: @song.id}  %>
-    <%#= link_to "add to playlist",add_to_playlist_song_path(@song), data: {}  %>
-  </div>
-</div> -->
-
-  <div id="player1" class="aplayer"></div>
 
 <% #以下之後用Vue藏內容應該可以 %>
+
 <template class="share-template">
   <div class="modal-container share-container">
   </div>
@@ -284,27 +273,48 @@
   </div>
   <div class="modal-content">
     <div class="modal-item flex" id="addplaylist-modal">
-      <h2 class="mr-4">Add to playlist</h2>
+      <h2 class="mr-4 text-red-600">Add to playlist</h2>
       <h2>Create a playlist</h2>
     </div>
-    <div class="modal-item" data-controller="playlist" data-playlist-song="<%= @song.id %>">
-    <% if @playlists %>
-      <% @playlists.each do |playlist| %>
-        <li>Playlist：<%= link_to playlist.name, playlist_path(playlist) %>
-        <% if @song.added_by?(playlist) %>
-          <button class="border border-orange-500 text-red-600 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
-            <span>Added</span>
-          </button>
-        </li>
-        <% else %>
-          <button class="border border-gray-400 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
-            <span>Add to playlist</span>
-          </button>
-        </li>
-        <% end %>
-      <% end %> 
-    <% end %>
-   </div>
+    <div class="modal-item" id="addplaylist-content" data-controller="playlist" data-playlist-song="<%= @song.id %>">
+      <% if @playlists %>
+        <% @playlists.each do |playlist| %>
+          <li>Playlist：<%= link_to playlist.name, playlist_path(playlist) %>
+          <% if @song.added_by?(playlist) %>
+            <button class="border border-orange-500 text-red-600 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
+              <span>Added</span>
+            </button>
+          </li>
+          <% else %>
+            <button class="border border-gray-400 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
+              <span>Add to playlist</span>
+            </button>
+          </li>
+          <% end %>
+        <% end %> 
+      <% end %>
+    </div>
+    <div class="modal-item hidden" id="createplaylist-content">
+      
+      <div class="bg-white w-full bg-opacity-75">
+        <div class="container m-auto bg-white max-w-lg flex flex-col justify-center mt-12 rounded">
+    
+      <%= form_for(@playlist, url: playlists_path(song_id: @song.id))  do |f| %>
+        <div>
+          <%= f.label :name %>
+          <%= f.text_field :name, class:'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3'%>
+        </div>
+        <div>
+          <%= f.label :intro %>
+          <%= f.text_field :intro, class:'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3' %>
+        </div>
+        <%= f.submit '創造新歌單囉', class: "w-full px-2 py-2 text-white rounded bg-orange-700" %>
+      <% end %>
+    
+        </div>
+      </div>
+
+    </div>
   </div>
 </template>
 <% set_meta_tags og: {

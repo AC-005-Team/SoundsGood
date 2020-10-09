@@ -30,6 +30,7 @@ class SongsController < ApplicationController
     rescue
       p 'not logged in'
     end
+    @playlist = Playlist.new
   end
 
   def destroy
