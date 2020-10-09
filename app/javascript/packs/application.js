@@ -32,8 +32,7 @@ import "./tag"
 import "./play"
 import "./upload_button"
 import "./navbar_button"
-import "./result_like"
-import "./result_follow"
+
 
 
 
