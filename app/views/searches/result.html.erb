@@ -125,9 +125,13 @@
                     <% end %>
                     <p class="hidden md:block like_count"><%= song.liked_users.count %></p> 
                   </button>
-                  <button class="flex border border-gray-300 px-3 mx-1 rounded">
-                    <i class="fas fa-redo-alt"></i>
-                    <p class="hidden md:block">3,300</p>
+                  <button class="flex border border-gray-300 px-3 mx-1 rounded repost_btn" result-repost-id='<%= song.id %>'>
+                    <% if song.reposted_by?(current_user)%>
+                      <i class="fas fa-redo-alt" style="color: orange"></i>
+                    <% else %>
+                      <i class="fas fa-redo-alt"></i>
+                    <% end %>
+                    <p class="hidden md:block"><%= song.reposts.count %></p>
                   </button>
                   <button class="modal-btn share-btn flex border border-gray-300 px-3 mx-1 rounded">
                     <i class="fas fa-share"></i>
