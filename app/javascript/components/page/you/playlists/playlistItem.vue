@@ -89,7 +89,6 @@ export default {
   methods: {
     ...mapActions("songs", ["play", "pause", "continuePlay", "continuePause"]),
     ...mapActions('playlists', ['loadSongs']),
-    ...mapActions('playlistsSogns', ['loadList']),
     ...mapActions("favorite", ["toggleLike"]),
 
 

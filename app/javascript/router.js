@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 import playlist_page from './components/page/you/playlists/playlist_page';
 import discover from './components/page/discover';
 import you from './components/page/you/you';
-import stream from './components/page/stream';
 import upload from './components/page/upload';
+import stream from './components/page/you/stream/stream';
 
 Vue.use(VueRouter)
 
@@ -25,7 +25,7 @@ export default new VueRouter({
       name: 'stream',
       component: stream
 
-      // component: () => import(/* webpackChunkName: "Stream" */ './components/page/stream'),
+      // component: () => import(/* webpackChunkName: "Stream" */ './components/page/you/stream/stream'),
 
     },
     {

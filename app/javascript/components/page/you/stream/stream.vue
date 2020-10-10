@@ -4,7 +4,7 @@
   <div class="col-span-12 md:col-span-9 mx-4">
     <div class="text-lg text-gray-600 mb-4">Hear the latest posts from the people youâ€™re following:</div>
 
-          <streamItem/>
+          <streamItem v-for="stream in streamData" :stream="stream"/>
         </div>
 
 
@@ -95,13 +95,31 @@
 </template>
 
 <script>
+import {
+  mapState,
+  mapGetters,
+  mapActions
+} from 'vuex'
+
 import streamItem from './streamItem'
 
 export default {
   components:{
     streamItem
+  },
+
+    computed: {
+      ...mapGetters({
+        streamData: 'stream/stream'
+      })
+    },
+
+    ...mapActions('stream',['loadStream']),
+    created() {
+      this.$store.dispatch('stream/loadStream')
+    }
   }
-}
+
 </script>
 
 <style lang="css" scoped>

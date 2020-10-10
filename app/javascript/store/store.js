@@ -8,6 +8,7 @@ import song from './modules/song'
 import playlistsSongs from './modules/playlistsSongs'
 import favorite from './modules/favorite'
 import follow from './modules/follow'
+import stream from './modules/stream'
 
 
 Vue.use(Vuex)
@@ -20,6 +21,7 @@ export const store = new Vuex.Store({
     playlistsSongs,
     song,
     favorite,
-    follow
+    follow,
+    stream
   }
 })
