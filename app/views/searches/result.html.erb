@@ -44,9 +44,10 @@
 
     <%#= 右邊的搜尋結果 %>
     <div>
+    <span class="template">
       <% if @users  %>
         <% @users.each do|user|%>
-          <div class="flex user_template">
+          <div class="flex">
             <% if user.avatar_url %>
               <%= image_tag user.avatar_url, class: 'w-1/5 rounded-full' %>
             <% end %>
@@ -77,9 +78,14 @@
           </div>
         <% end %>
       <% end %>
+    </span>
       
-      <%= render './shared/song_module', songs: @songs %>
-      <%= render './shared/playlist_module', playlists: @playlists %>
+      <span class="track_template">
+        <%= render './shared/song_module', songs: @songs %>
+      </span>
+      <span class="playlist_template">
+        <%= render './shared/playlist_module', playlists: @playlists %>
+      </span>
     </div>
   </div>
 </div>

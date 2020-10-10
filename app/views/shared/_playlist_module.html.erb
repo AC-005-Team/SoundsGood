@@ -1,21 +1,19 @@
 <% if playlists %>
   <% playlists.each do |playlist|%>
     <% if playlist.songs.any? %>
-      <span class="playlist_template">
-        <div class="flex justify-aroundp-3 p-5 bg-gradient-to-r from-gray-500 via-white to-pink-300"> <%#=專輯內圖、取名、hover愛心、播放%>
-          <% if playlist.songs.first %>
-            <%= image_tag playlist.songs.first.image_url, class: 'w-1/4 bg-cover' %>
-          <% end %>
-          <% playlist.songs.each do |song| %>
-            <div class="w-3/4 overflow-auto h-48"> <%#=曲名區域%>
-              <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-                <div class="w-9/12 m-2 text-base text-gray-500"><%= song.name %>></div>
-                <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-              </div>
+      <div class="flex justify-aroundp-3 p-5 bg-gradient-to-r from-gray-500 via-white to-pink-300"> <%#=專輯內圖、取名、hover愛心、播放%>
+        <% if playlist.songs.first %>
+          <%= image_tag playlist.songs.first.image_url, class: 'w-1/4 bg-cover' %>
+        <% end %>
+        <% playlist.songs.each do |song| %>
+          <div class="w-3/4 overflow-auto h-48"> <%#=曲名區域%>
+            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
+              <div class="w-9/12 m-2 text-base text-gray-500"><%= song.name %>></div>
+              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
             </div>
-          <% end %>
-        </div>
-      </span>
+          </div>
+        <% end %>
+      </div>
     <% end %>
   <% end %>
 <% end %>
