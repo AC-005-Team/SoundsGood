@@ -16,13 +16,15 @@ class PlaylistsController < ApplicationController
 
   def create
     @playlist = current_user.playlists.new(playlist_params)
-    if @playlist.save
-      @song = Song.find(params[:song_id])
-      @playlist.songs << @song
-      # redirect_to user_playlists_path
-    else
-      # render :new
-    end
+    @playlists = current_user.playlists
+      respond_to do |format|
+        if @playlist.save
+          format.js { @song = Song.find(params[:song_id]) 
+          @playlist.songs << @song }
+        else
+          # render :new
+        end
+      end
   end
 
   def show;end

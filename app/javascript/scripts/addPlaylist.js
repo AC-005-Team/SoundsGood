@@ -7,11 +7,17 @@ document.addEventListener("DOMContentLoaded", () => {
     createBtn.addEventListener("click", () => {
       addBtn.classList.remove("text-red-600");
       createBtn.classList.add("text-red-600");
-      // const song_id = document.querySelector("#addplaylist-content").dataset.playlistSong;
       document.querySelector("#addplaylist-content").classList.add("hidden");
       document
         .querySelector("#createplaylist-content")
         .classList.remove("hidden");
+    });
+
+    addBtn.addEventListener("click", () => {
+      addBtn.classList.add("text-red-600");
+      createBtn.classList.remove("text-red-600");
+      document.querySelector("#addplaylist-content").classList.remove("hidden");
+      document.querySelector("#createplaylist-content").classList.add("hidden");
     });
   });
 });
