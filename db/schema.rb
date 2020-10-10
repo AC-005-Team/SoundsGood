@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_09_032647) do
+ActiveRecord::Schema.define(version: 2020_10_10_064404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(version: 2020_10_09_032647) do
     t.text "image_data"
     t.integer "reposts_count", default: 0
     t.integer "comments_count", default: 0
+    t.integer "played_times", default: 0
     t.index ["user_id"], name: "index_songs_on_user_id"
   end
 

@@ -8,7 +8,7 @@
         <div class="text-gray-500"><%= song.name %></div>
         <div class=""><%= song.intro %></div>
         <div class="flex justify-around text-gray-500">
-          <a href=""><i class="fas fa-arrow-right"></i>261K</a>
+          <a href=""><i class="fas fa-arrow-right"></i><%= song.played_times %></a>
           <a href=""><i class="fas fa-heart"></i><%= song.liked_users.count%></a>
           <a href=""><i class="fas fa-history"></i><%= song.reposts.size%></a>
           <%= link_to song_path(song) do %>

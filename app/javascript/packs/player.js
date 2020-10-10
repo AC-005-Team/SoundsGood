@@ -27,8 +27,21 @@ if(songs){
         ap.list.add(val);
       });
       ap.play();
-      console.log(ap)
       ap.container.setAttribute('data-playing', id)
+      const hosts = window.location.origin
+      const csrfToken = document.querySelector('meta[name="csrf-token"]').content
+      fetch(`${hosts}/songs/${id}/add_played_times`, {
+        method: 'PATCH',
+        headers: {
+          'x-csrf-token': csrfToken
+        }
+      })
+      .then(response => {
+        if(response.ok){
+        }else{
+          console('error')
+        }
+      })
     });
   });
 }
