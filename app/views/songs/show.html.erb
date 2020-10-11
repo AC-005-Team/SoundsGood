@@ -7,7 +7,7 @@
         <%= content_tag(:li, '▶', class:'getURL fa-3x rounded-full', data: {id: @song.id} ) %>
         <div class="">
           <div class="bg-black rounded p-1 text-white m-1">
-            <%=@song.user.display_name%>
+            <%= @song.user.display_name %>
           </div>
           <div class="flex bg-gray-900 rounded">
             <div class="text-2xl text-white m-2"><%= title @song.name %></div>
@@ -92,24 +92,24 @@
           <i class="fas fa-plus"></i>
           <p class="hidden md:block">Add to Playlist</p> 
         </button>
-        <% if current_user%>
-          <%=link_to new_user_playlist_path(current_user), class:'border border-gray-400 p-1 rounded' do %>
+        <% if current_user %>
+          <%= link_to new_user_playlist_path(current_user), class:'border border-gray-400 p-1 rounded' do %>
             <i class="fas fa-bolt"></i>Create Playlist
           <% end %>
         <% end %>
-        <button class="p-1 text-gray-600">
+        <div class="p-1 text-gray-600">
           <i class="fas fa-chevron-circle-right"></i>
-          10.2K
-        </button>
+          <%= @song.played_times %> 
+        </div>
         <div class="p-1 text-gray-600">
           <i class="fas fa-heart"></i>
           <span class='liked-count'>
-            <%=@song.liked_users.count %> 
+            <%= @song.liked_users.count %> 
           </span>
         </div>
         <button class="p-1 text-gray-600">
           <i class="fas fa-retweet"></i>
-          <%=@song.reposted_users.count %> 
+          <%= @song.reposted_users.count %> 
         </button>
 
       </div>

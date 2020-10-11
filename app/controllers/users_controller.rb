@@ -2,7 +2,10 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:follow]
   before_action :find_user, only: [:edit, :update, :show, :follow, :followers, :following, :likes, :comments]
 
-  def show;end
+  def show
+    @all_songs = @user.songs | @user.repost_songs
+    @all_playlists = @user.playlists | @user.repost_playlists
+  end
 
   def follow
     current_user.toggle_follow(@user)
