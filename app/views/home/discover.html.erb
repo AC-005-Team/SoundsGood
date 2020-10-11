@@ -13,9 +13,8 @@
 
             <div class="my-2 mr-2">
               <%#= 歌曲圖片 %>
-              <%= image_tag song.image_url, class:'h-32 max-w-xl mr-4' %>
+              <%= image_tag song.image_url, class:'h-32 w-32 overflow-hidden bg-black mr-4' %>
                 <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
-              
                 <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
               <%#= 歌曲TAG區 %>                           
                 <% if song.tags.length > 0 %>
@@ -33,6 +32,7 @@
     </div>
 
     <%#=左邊區域-橫的%>
+    <%#=  
     <div class="border-b border-gray-200 m-4">
       <div class="text-2xl">Charts: Top 50</div>
       <div class="text-xs text-gray-500 my-2">The most played tracks on SoundCloud this week</div>
@@ -82,6 +82,7 @@
 
       </div>
     </div>
+    %>
 
     <%#=左邊區域-直的%>
     <div class="border-b border-gray-200 m-4">
@@ -94,36 +95,6 @@
             <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia & Geena Fontanella - Psychic</div>
             <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
           </div>
-          
-          <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-            <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia & Geena Fontanella - Psychic</div>
-            <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-          </div>
-
-          <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-            <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia & Geena Fontanella - Psychic</div>
-            <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-          </div>
-
-          <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-            <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia & Geena Fontanella - Psychic</div>
-            <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-          </div>
-
-          <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-            <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia & Geena Fontanella - Psychic</div>
-            <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-          </div>
-
-          <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-            <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia & Geena Fontanella - Psychic</div>
-            <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-          </div>
-
-          <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-            <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia & Geena Fontanella - Psychic</div>
-            <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-          </div>
         </div>
       </div>
       <button class="text-center p-1 border border-gray-400 ml-auto my-3 block rounded text-xs">Go to Playlist</button>
@@ -131,7 +102,7 @@
   </div>
 
 <%#=右邊區域右邊區域右邊區域右邊區域右邊區域右邊區域右邊區域右邊區域右邊區域%>
-  <div class="hidden md:block col-span-3 bg-white p-5 right-0 border-l boder-gray-200">
+  <div class="col-span-12 md:col-span-3 bg-white p-5 right-0 border-l boder-gray-200">
     <%#=分隔線區域%>
     <div class="flex justify-between text-gray-500 border-b border-gray-200 text-sm p-2">
       

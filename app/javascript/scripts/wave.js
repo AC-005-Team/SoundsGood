@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       renderComments(songEl)
     })
-
     function getPeak(url, songDataName, wavesurfer) {
       fetch(peakStorageRoot+songDataName)
       .then(response => {

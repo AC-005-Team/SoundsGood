@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   def comments
     @comments = @user.comments.includes(:songs)
   end
-  private
+private
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :display_name, :avatar, :email, :header)

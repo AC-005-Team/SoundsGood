@@ -5,8 +5,6 @@
   <button class="mr-4 hover:text-orange-500"><%= link_to "Overview", library_library_index_path%></button>
   <button class="mr-4 text-orange-600 hover:text-orange-500"><%= link_to "Likes", likes_library_index_path%></button>
   <button class="mr-4 hover:text-orange-500"><%= link_to "Playlists", sets_library_index_path%></button>
-  <button class="mr-4 hover:text-orange-500"><%= link_to "Albums", albums_library_index_path%></button>
-  <button class="mr-4 hover:text-orange-500"><%= link_to "Stations", stations_library_index_path%></button>
   <button class="mr-4 hover:text-orange-500"><%= link_to "Following", following_library_index_path%></button>
   <button class="mr-4 hover:text-orange-500"><%= link_to "History", history_library_index_path%></button>
 </div>
@@ -22,16 +20,16 @@
         <input class="mx-2 border rounded w-full" type="text" placeholder="Fillter">
       </div>
     </div>
-    <div class="grid grid-cols-12 gap-4">
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
       <% @like_songs.each do |song|%>
         <% if song.image_url %>
-          <div class="col-span-2 my-2 mr-2 flex flex-col justify-between">
+          <div class="my-2 mr-2 flex sm:flex-col justify-between flex-row">
             <%#= 歌曲圖片 %>
-            <div class="align-top w-32">
+            <div class="align-top w-32 h-32 bg-black overflow-hidden rounded">
               <%= link_to image_tag(song.image_url), song_path(song.id), class:'block' %>
             </div>
             <%#= 歌曲名稱、介紹、TAG標籤 %>
-            <div class="">
+            <div class="text-2xl sm:text-sm hover:bg-gray-200 rounded">
               <%#= 歌曲名稱 %>
               <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
               <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>

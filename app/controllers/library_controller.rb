@@ -24,7 +24,7 @@ class LibraryController < ApplicationController
   end
 
   def history
+    @songs = Song.all.includes(:tags)
   end
-  
   
 end
