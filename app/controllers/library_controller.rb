@@ -1,4 +1,5 @@
 class LibraryController < ApplicationController
+  layout: "spa"
   before_action :authenticate_user!, only: [:likes]
 
   def library
@@ -26,5 +27,5 @@ class LibraryController < ApplicationController
   def history
     @songs = Song.all.includes(:tags)
   end
-  
+
 end

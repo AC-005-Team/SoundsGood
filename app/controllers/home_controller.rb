@@ -3,9 +3,12 @@ class HomeController < ApplicationController
 
   def index;end
 
-  def discover;end
+  def discover
+    render layout: "spa"
+  end
 
   def stream
+
     @users = [current_user]+current_user.followees.includes(:songs, :playlists, :reposts).order(created_at: :desc)
     @items = []
     @users.each do |user|
@@ -16,6 +19,7 @@ class HomeController < ApplicationController
       format.json
       format.html
     end
+    render layout: "spa"
   end
 
   private

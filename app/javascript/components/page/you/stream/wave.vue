@@ -88,7 +88,7 @@ export default {
     var ctx = document.createElement('canvas').getContext('2d');
     var linGrad = ctx.createLinearGradient(0, 64, 0, 200);
     linGrad.addColorStop(0.6, 'rgba(96, 96, 96, 1)');
-    linGrad.addColorStop(0.8, 'rgba(214, 214, 214, 0.83)');
+    linGrad.addColorStop(0.8, 'rgb(215, 215, 215)');
     var linGrad2 = ctx.createLinearGradient(0, 64, 0, 200);
     linGrad2.addColorStop(0.4, 'rgba(251, 128, 49, 0.77)');
     linGrad2.addColorStop(1, 'rgba(253, 218, 218,0.4)');

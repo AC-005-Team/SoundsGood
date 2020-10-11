@@ -9,6 +9,7 @@ import stream from './components/page/you/stream/stream';
 Vue.use(VueRouter)
 
 export default new VueRouter({
+  mode:'history',
   routes: [
     // {
     //   path: '/playlists',
@@ -23,9 +24,9 @@ export default new VueRouter({
     {
       path: '/stream',
       name: 'stream',
-      component: stream
+      // component: stream
 
-      // component: () => import(/* webpackChunkName: "Stream" */ './components/page/you/stream/stream'),
+      component: () => import(/* webpackChunkName: "Stream" */ './components/page/you/stream/stream'),
 
     },
     {
