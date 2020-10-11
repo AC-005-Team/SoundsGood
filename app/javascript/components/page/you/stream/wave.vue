@@ -31,7 +31,8 @@ export default {
       f: this.filename,
       i: this.id,
       peakStorageRoot: 'https://peaks.soundsgood.world/api/v1/getjson/song_peaks/',
-      proxyurl: "https://cors-anywhere.herokuapp.com/"
+      proxyurl: "https://cors-anywhere.herokuapp.com/",
+      wafesurfer_comment: null
     };
   },
   props:['path','filename','id'],
@@ -84,15 +85,25 @@ export default {
 
   },
   mounted(){
+    var ctx = document.createElement('canvas').getContext('2d');
+    var linGrad = ctx.createLinearGradient(0, 64, 0, 200);
+    linGrad.addColorStop(0.6, 'rgba(96, 96, 96, 1)');
+    linGrad.addColorStop(0.8, 'rgba(214, 214, 214, 0.83)');
+    var linGrad2 = ctx.createLinearGradient(0, 64, 0, 200);
+    linGrad2.addColorStop(0.4, 'rgba(251, 128, 49, 0.77)');
+    linGrad2.addColorStop(1, 'rgba(253, 218, 218,0.4)');
+
      // const playingNowPath = document.querySelector(".waveform-wrap")
      // const isSmall = document.querySelector('waveform-small');
      this.wavesurfer = WaveSurfer.create({
         container: this.$refs.waveform,
-        waveColor: '#555555', //@todo: change color
-        progressColor: '#ff7626',
+        // waveColor: '#555555', //@todo: change color
+        // progressColor: '#ff7626',
         cursorColor: '',
         barWidth: 3,
-        barHeight: 0.8,
+        waveColor: linGrad,
+        progressColor: linGrad2,
+        barHeight: 0.5,
         height: 150,
         barRadius: 2,
         cursorWidth: 1,
@@ -111,11 +122,59 @@ export default {
         ]
       });
       this.getPeak(this.p, this.f, this.wavesurfer);
-
   }
 
 }
 </script>
 
 <style lang="css" scoped>
+.waveform-wrap {
+  position: relative;
+  height: 150px;
+  opacity: .75;
+  transition: .25s;
+  cursor: pointer;
+}
+.waveform-wrap:hover {
+  opacity: 1;
+}
+.waveform {
+  position: absolute;
+  width: 100%;
+  height: 75px;
+  overflow: hidden;
+}
+.waveform-comment-space {
+  position: absolute;
+  width: 100%;
+  height: 75px;
+}
+.waveform-dummy-trigger {
+  position: absolute;
+  opacity: 0;
+  height: 75px;
+  width: 100%;
+  /* z-index: 100; */
+
+}
+.waveform-dummy {
+  position: absolute;
+  /* z-index: 1; */
+  opacity: 0;
+  width: 100%;
+  height: 75px;
+  background-color: #555;
+  overflow: hidden;
+}
+
+.waveform-dummy.wave-effect-show {
+  opacity: 1;
+}
+
+.comment-avatar {
+  position: absolute;
+  top: 75px;
+  z-index: 99;
+}
+
 </style>
