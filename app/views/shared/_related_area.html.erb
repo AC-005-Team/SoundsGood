@@ -2,7 +2,7 @@
   <% element.each do |song| %>
     <div class="my-4 flex">
     <%= link_to song_path(song), class:'flex w-1/5 items-center' do %>
-        <%#= image_tag song.image_url %>
+      <%= image_tag song.image_url if song.image_url %>
     <% end %>
       <div class="w-4/5 mx-2 text-xs">
         <div class="text-gray-500"><%= song.name %></div>

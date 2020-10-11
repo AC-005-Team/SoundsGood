@@ -43,8 +43,12 @@
             <% end %> 
           </div>         
         </div>
-        <div class="">萱大の音波專區</div>
-
+        <div class="">
+          <%= content_tag(:div, '', class:['waveform-wrap'], data:{ path: song.track_url, filename: song.get_filename, id: song.id }) do %> 
+            <div class="waveform-dummy-trigger"></div>
+            <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
+          <% end %>
+        </div>
         <div class="flex">
           <img class="w-8" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
           <input class="w-full bg-gray-200 p-2" type="text" placeholder="Write a comment">
@@ -87,7 +91,7 @@
         <% end %>
   </div>
   <%#右邊邊區域%>
-  <div class="col-span-3 text-gray-600 text-sm m-4 hidden sm:block">
+  <div class="col-span-12 md:col-span-3 text-gray-600 text-sm m-4">
     <div class="flex justify-between border-b border-gray-400 mb-4">
       <div class="">
         <i class="fas fa-user-friends"></i>

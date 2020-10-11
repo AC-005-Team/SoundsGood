@@ -39,10 +39,10 @@
           <h3>Add to playlist</h3>
             <% @playlists.each do |playlist| %>
               <li>Playlist：<%= playlist.name %>
-              <% if @song.added_by?(playlist) %>
-                <%= link_to "Added", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
+              <% if song.added_by?(playlist) %>
+                <%= link_to "Added", add_to_playlist_song_path(id: song, playlist_id: playlist), method: "post" %> </li>
               <% else %>
-                <%= link_to "Add to playlist", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
+                <%= link_to "Add to playlist", add_to_playlist_song_path(id: song, playlist_id: playlist), method: "post" %> </li>
               <% end %>
             <% end %> 
         </div>
@@ -54,7 +54,7 @@
 
 <%#=圖區暫時保留起來%>
 <%#=圖區%>
-<div class="mx-4">
+<div class="mx-6">
   <div class="flex bg-gradient-to-r from-red-500 via-white to-orange-700">
     <div class="w-2/3 flex-col-reverse space-y-64 m-5">
       <div class="flex">
@@ -170,10 +170,10 @@
                 <%# <h3>Add to playlist</h3> %>
                   <% @playlists.each do |playlist| %>
                     <li>Playlist：<%= playlist.name %>
-                    <% if @song.added_by?(playlist) %>
-                      <%= link_to "Added", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
+                    <% if song.added_by?(playlist) %>
+                      <%= link_to "Added", add_to_playlist_song_path(id: song, playlist_id: playlist), method: "post" %> </li>
                     <% else %>
-                      <%= link_to "Add to playlist", add_to_playlist_song_path(id: @song, playlist_id: playlist), method: "post" %> </li>
+                      <%= link_to "Add to playlist", add_to_playlist_song_path(id: song, playlist_id: playlist), method: "post" %> </li>
                     <% end %>
                   <% end %> 
               </div>

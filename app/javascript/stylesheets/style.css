@@ -25,3 +25,6 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
   width: 100%;
   background-size: cover;
 }
+.comment-avatar>img{
+  max-width: initial;
+}
