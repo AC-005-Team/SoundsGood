@@ -8,7 +8,7 @@
       <div class="sm:w-5/6 w-3/4 mx-4">
         <div class="flex items-center text-sm text-gray-500">
 
-        <%= content_tag(:li, '▶', class:'getURL text-orange-500 mr-2', data: {id: song.id} ) %>
+        <%= content_tag(:li, '▶', class:'getURL text-orange-500 mr-2 play-btn', data: {id: song.id} ) %>
 
           <div class="flex-col w-9/12">
           <%#= 歌曲名稱 %>
@@ -24,7 +24,7 @@
         </div>
         <%#=超難的音波專區%>
         <div class="">
-          <%= content_tag(:div, '', class:['w-100 waveform-wrap'], data:{ path: song.track_url, filename: song.get_filename, id: song.id}) do %> 
+          <%= content_tag(:div, '', class:['w-full waveform-wrap waveform-small'], data:{ path: song.track_url, filename: song.get_filename, id: song.id}) do %> 
             <div class="waveform-dummy-trigger"></div>
             <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
           <% end %>
