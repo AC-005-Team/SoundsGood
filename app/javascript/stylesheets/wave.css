@@ -44,5 +44,31 @@
 .comment-avatar {
   position: absolute;
   top: 75px;
-  z-index: 99;
+  z-index: 5;
+}
+.comment-line {
+  background: rgb(255,118,38);
+  background: linear-gradient(180deg, rgba(255,118,38,1) 8%, rgba(255,118,38,0.7441351540616247) 46%, rgba(255,118,38,0.26234243697478987) 77%, rgba(255,118,38,0) 100%);
+  width:1px;
+  z-index: 6;
+}
+.comment-img {
+  object-fit: cover;
+  width:20px;
+  height: 20px;
+  z-index:5;
+}
+.comment-user {
+  font-size: 10px;
+  color: rgb(255,118,38);
+}
+.comment-content {
+  font-size: 10px;
+  color: #ffffff
+}
+.comment-on-wave-wrap {
+  display: none;
+}
+.comment-on-wave-wrap:hover {
+  display: block;
 }

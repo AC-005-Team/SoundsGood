@@ -40,7 +40,7 @@ const waves = document.querySelectorAll('.waveform-wrap')
 if(waves){
   waves.forEach( wave => {
     wave.addEventListener('click', function(e) {
-      e.preventDefault();
+      // e.preventDefault();
       let playing = ap.container.dataset.playing
       let id = e.currentTarget.dataset.id;
       let node = e.currentTarget

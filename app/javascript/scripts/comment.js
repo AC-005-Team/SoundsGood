@@ -87,8 +87,9 @@ export function renderComments(song){
     if (comment.user_img == null){
       domEl.innerHTML = `<img src='https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg' width="20" style="overflow:">`
     }else{
-      domEl.innerHTML = `<img src='${comment.user_img}' width="20">`
+      domEl.innerHTML = `<img class ='comment-img' src='${comment.user_img}' style=''><div class="flex comment-on-wave-wrap"><div class="comment-line"></div><p class="comment-user pl-1 pt-1">${comment.user_name}</p><p class="pl-1 pt-1 comment-content">${comment.content}</p></div>`
     }
+    domEl.querySelector
   }
   function readyForComment(imgUrl, timePercent, songId){
     var domEl = document.createElement('div')
