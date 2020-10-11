@@ -4,7 +4,12 @@ document.addEventListener('DOMContentLoaded', function(){
     btn.addEventListener('click',function(){
       const btn_id = btn.getAttribute('result-follow-id')
       const host = window.location.origin
-      fetch(`${host}/searches/${btn_id}/follow`)
+      const csrfToken = document.querySelector('meta[name="csrf-token"]').content
+      fetch(`${host}/searches/${btn_id}/follow`, {
+        method: 'PATCH',
+        headers: {
+          'x-csrf-token': csrfToken
+        }})
       .then(response => { 
         if (response.ok){
           let icon = btn.children[0]
