@@ -15,24 +15,31 @@ const ap = new APlayer({
   }]
 });
 //立即點播放單首歌
-const songs = document.querySelectorAll('.getURL');
+const songs = document.querySelectorAll('.play-btn');
 if(songs){
   songs.forEach((song) => {
     song.addEventListener('click', function(e) {
-      e.preventDefault();
       let playing = ap.container.dataset.playing
       let id = e.currentTarget.dataset.id;
-      if(playing!==id){
-        ap.pause();
-        ap.list.clear();
-        getPlay(id).then(val => {
+      waveProgress = document.querySelector(`.waveform-wrap[data-id="${id}"]>.waveform>wave>wave`)
+      getPlay(id).then(val=>{
+        if(playing!==id){
+          if(waveProgress){
+            waveProgress.style.width = ''
+            waveformWidth = waveProgress.parentNode.parentNode.parentNode.offsetWidth
+          }
+          playingDuration = val.duration
+          secOfFourth = 0
+          ap.pause();
+          ap.list.clear();
           ap.list.add(val);
-        });
-        ap.play();
-        console.log(ap)
-        ap.container.setAttribute('data-playing', id)
-      }
-      ap.toggle()
+          ap.play();
+          ap.container.setAttribute('data-playing', id)
+        } else {
+          ap.toggle()
+        }
+      })
+      
     });
   });
 }
@@ -67,6 +74,7 @@ if(waves){
     });
   })
   ap.on('timeupdate', () => {
+    console.log('gogo')
     secOfFourth += 0.25
     waveProgress.style.width = widthCalc(secOfFourth)
   })
@@ -74,11 +82,26 @@ if(waves){
     secOfFourth = 0
   })
 }
-
+const aplayerBar = document.querySelector('.aplayer-bar-wrap')
+if (aplayerBar) {
+  aplayerBar.addEventListener('click', (e) => {
+    // ap.pause()
+    let playedSec = document.querySelector('.aplayer-ptime').textContent
+    let playedSecAry = playedSec.split(':')
+    if(playedSecAry.length == 3 ) {
+      secOfFourth = parseInt(playedSecAry[0], 10)*60*60 + parseInt(playedSecAry[1], 10)*60 + parseInt(playedSecAry[2], 10)
+    } else {
+      secOfFourth = parseInt(playedSecAry[0], 10)*60 + parseInt(playedSecAry[1], 10)
+    }
+    waveProgress.style.width = widthCalc(secOfFourth)
+    // ap.play()
+  })
+}
+// calculates progress of .25 second
 function widthCalc(secOfFourth){
   return `${waveformWidth/playingDuration*secOfFourth}px`
 }
-
+// returns certain time of song, where was clicked on wave
 function getSec(val, e, node){
   let duration = val.duration
   let timepoint = e.offsetX

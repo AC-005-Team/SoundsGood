@@ -4,7 +4,7 @@
   <div class="flex bg-gradient-to-b from-gray-800 via-white to-gray-400">
     <div class="w-2/3 flex-col-reverse space-y-32 justify-between m-5">
       <div class="flex">
-        <%= content_tag(:li, '▶', class:'getURL fa-3x rounded-full', data: {id: @song.id} ) %>
+        <%= content_tag(:li, '▶', class:'getURL fa-3x rounded-full play-btn', data: {id: @song.id} ) %>
         <div class="">
           <div class="bg-black rounded p-1 text-white m-1">
             <%=@song.user.display_name%>
