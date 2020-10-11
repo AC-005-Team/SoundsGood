@@ -2,7 +2,7 @@
 <div class="mx-6 bg-white">
 
 <%#這是首頁最上的大圖%>
-  <div class="w-full h-full bg-cover text-white" style="background-image: url(https://scontent.ftpe8-2.fna.fbcdn.net/v/t1.0-9/105357330_10222837299112212_7050122635318528059_o.jpg?_nc_cat=103&_nc_sid=0debeb&_nc_ohc=uVkcwx7ZgBcAX-r5t9l&_nc_ht=scontent.ftpe8-2.fna&oh=2724e83a018d981ca3baa63af1be9a60&oe=5F9CDA64)">
+  <div class="bg-gray-700 text-white w-full bg-cover bg-center bg-no-repeat" style="background-image: url(<% root_path %>/img/back_1.jpg)">
     <div class="">
       <nav class="container mx-auto py-3 flex items-center justify-between ">
 
@@ -49,7 +49,10 @@
       <input type="search" class="w-full px-2 py-2 focus:outline-none bg-gray-200 rounded" placeholder="Search for artists, bands, tracks, podcasts">
     </form>
     <span class="px-4">or</span>
-    <button class="px-4 py-2 bg-orange-600 text-white rounded"><a href="#">Upload your own</a></button>
+    <button class="flex items-center px-4 py-2 bg-orange-600 text-white rounded">
+      <i class="fas fa-cloud-upload-alt"></i>
+      <a class="hidden sm:block" href="#">Upload your own</a>
+    </button>
   </div>
 
   <div class="text-black text-center text-2xl m-10">
@@ -57,30 +60,18 @@
   </div>
 
   <%#音樂區塊%>
-  <div class="grid grid-cols-12 gap-4 text-xs">
-    <% @songs.each do |song|%>
-      <% if song.image_url %>
-        <div class="col-span-2 my-2 mr-2 flex flex-col justify-between">
-          <%#= 歌曲圖片 %>
-          <div class="align-top w-full">
-            <%= link_to image_tag(song.image_url), song_path(song.id), class:'block' %>
-          </div>
-          <%#= 歌曲名稱、介紹、TAG標籤 %>
-          <div class="">
-            <%#= 歌曲名稱 %>
-            <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
-            <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
-            <%#= 歌曲TAG區 %>                           
-            <% if song.tags.length > 0 %>
-              <% song.tags.each do |tag| %>
-                <%= tag.name %>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-    <% end %>  
-  </div>
+      <div class="flex overflow-scroll text-gray-500 text-xs">
+        <% @songs.each do |song|%>
+          <% if song.image_url %>
+            <div class="my-2 mr-2">
+              <%#= 歌曲圖片 %>
+              <%= image_tag song.image_url, class:'h-32 w-32 overflow-hidden bg-black mr-4' %>
+                <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
+                <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
+            </div>
+          <% end %>
+        <% end %>          
+      </div>
 
   <%#橘色按鈕%>
   <div class="flex justify-center">
@@ -90,7 +81,7 @@
   </div>
 
   <%#尋找創作者%>
-  <div class="songcover1" style="background-image: url(https://www.facebook.com/photo?fbid=10222837300912257&set=pcb.10222837421915282)">
+  <div class="bg-gray-700 text-white w-full bg-cover bg-center bg-no-repeat" style="background-image: url(<% root_path %>/img/back_2.jpg)">
     <div class="m-10 p-10 text-white">
       <div class="text-4xl">Calling all creators</div>
       <div class="text-2xl w-full lg:w-1/2">Get on SoundsGood to connect with fans, share your sounds, and grow your audience. What are you waiting for?</div>
@@ -119,7 +110,7 @@
   <div class="my-2 w-full h-1 bg-gray-500">
   </div>
   <%#底部更多選單%>
-  <div class="flex text-gray-500 text-sm">
+  <div class="text-gray-500 text-sm">
     <span class="hover:text-black mx-1"><a href="#">Popular searches</a></span>
       -
     <span class="hover:text-black mx-1"><a href="#">Directory</a></span>
