@@ -1,11 +1,13 @@
-https://soundcloud.com/cy4eroa8bbxx/sets
 <div class="flex mx-6 bg-gradient-to-r from-gray-600 via-gray-400 to-gray-300">
+<% if user_signed_in? %>
   <img class="w-1/6 m-6 rounded-full" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
   <div class="flex justify-between w-5/6 items-start">
     <div class="m-4">
+      
       <div class="bg-black rounded p-1 text-xl text-white m-1">
-        user_name
+        <%= link_to current_user.display_name, user_path(current_user)%>
       </div>
+      
       <div class="flex bg-gray-900 rounded justify-start">
         <div class="text-white m-2">first name</div>
         <div class="text-xl text-orange-700 m-auto mr-2">last name</div>
@@ -16,6 +18,7 @@ https://soundcloud.com/cy4eroa8bbxx/sets
       <p class="hidden md:block"> Upload header image</p>
     </button>
   </div>
+<% end %>
 </div>
 <%#= ALL, Popular Tracks, .. Your Insights區域 %>
 <div class="flex justify-between m-4 border-b border-gray-300 p-2 ">
@@ -63,8 +66,13 @@ https://soundcloud.com/cy4eroa8bbxx/sets
 <%#= 音樂區域 %>
 <div class="grid grid-cols-12 mx-4">
   <%#= 音樂左邊區域 %>
-  <div class="col-span-12 md:col-span-9 mx-4">
-    <div class="grid grid-cols-12 mx-2 text-sm">
+  <div class="col-span-12 md:col-span-9 m-4">
+    
+    <% if @playlists %>
+    <% @playlists.each do |playlist| %>
+
+    <div class="grid grid-cols-12 mx-2 text-sm my-6">
+
       <%#= 音樂圖片區域 %>
       <img class="col-span-12 md:col-span-2 h-32 w-32 overflow-hidden" src="https://i1.sndcdn.com/artworks-vgspc96HKh3s-0-t500x500.jpg" alt="">
       <div class="col-span-10 mx-4 w-full">
@@ -73,8 +81,8 @@ https://soundcloud.com/cy4eroa8bbxx/sets
             <i class="fas fa-play fa-2x"></i>
           </div>
           <div class="col-span-9">
-            <p class="text-gray-500">user_name</p>
-            <p class="">user_name</p>
+            <p class="text-gray-500"><%= link_to current_user.display_name, user_path(current_user)%></p>
+            <p class=""><%= link_to playlist.name, playlist_path(playlist) %></p>
           </div>
           <div class="col-span-2">
             <p class="hidden md:block text-gray-400">2 days ago</p>
@@ -82,7 +90,19 @@ https://soundcloud.com/cy4eroa8bbxx/sets
           </div>
         </div>
         <div class="">音波區</div>
-        <div class="">專輯內歌曲區</div>
+        <div class="">
+          <%#= 專輯內前五首歌曲 %>
+          <div class="flex justify-between">
+            <div class="">
+              <img src="" alt="">
+              <p>song_name</p>
+            </div>
+            <div>
+              播放次數
+            </div>
+          </div>
+        </div>
+        <%#= 功能區域like, share, edit, more %>
         <div class="flex justify-start my-2">
           <button class="flex items-center border border-gray-300 px-3 rounded">
             <svg class="heart" width="15px" viewBox="0 0 500 500" >
@@ -107,12 +127,17 @@ https://soundcloud.com/cy4eroa8bbxx/sets
         </div>
       </div>
     </div>
-    
+            <% end %>
+
+    <% else %>
+      <li>you have no playlist</li>
+    <% end %>
+
     <div class=""></div>
   </div>
 
   <%#= 音樂右邊區域 %>
-  <div class="hidden md:block col-span-3">
+  <div class="col-span-12 md:col-span-3">
     <div class="flex text-gray-500 mx-4">
       <button class="mx-2">Follower</button>
       <button class="mx-2">Following</button>
@@ -169,6 +194,8 @@ https://soundcloud.com/cy4eroa8bbxx/sets
   </div>
 </div>
 
+https://soundcloud.com/cy4eroa8bbxx/sets 
+http://127.0.0.1:3000/users/1/playlists
 
 <h1>Playlist</h1>
 <%= link_to 'new play list', new_user_playlist_path(current_user.id) %>
