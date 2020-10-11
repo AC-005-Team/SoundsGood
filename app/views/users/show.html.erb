@@ -1,10 +1,16 @@
 <%#=這是User資訊頁面%>
 
 <%#=圖區一%>
-<div class="flex mx-4 bg-gradient-to-r from-red-500 via-white to-orange-700">
-  <% if @user.avatar_url %>
-    <%= image_tag @user.avatar_url, class:'w-1/6 m-4 rounded-full' %>
-  <% end %>
+<div class="flex mx-6 bg-gradient-to-b from-gray-700 via-white to-gray-500">
+  
+  <div class="w-32 h-32 overflow-hidden m-4">
+    <% if @user.avatar_url %>
+      <%= image_tag @user.avatar_url, class:'rounded-full' %>
+      <% else %>
+      <div class="h-32 w-32 bg-cover" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
+    <% end %>
+  </div>
+
   <div class="flex justify-between w-5/6 items-start">
     <div class="m-4">
       <div class="bg-black rounded p-1 text-xl text-white m-1">
@@ -39,8 +45,7 @@
 </div>
 
 <%#=左邊使用者專區%>
-<div class="flex justify-between m-4 border-b border-gray-300 p-2 ">
-
+<div class="flex items-center m-4 justify-between border-b border-gray-400">
   <div class="ml-4 text-xl hidden md:flex justify-between">
     <button class="mx-2 text-orange-600 all_btn">All</button>
     <button class="mx-2 track_btn">Tracks</button>
@@ -69,23 +74,22 @@
 
 
 <div class="grid grid-cols-12 mx-4 ">
-
-<div class="col-span-12 md:col-span-9 mx-4">
-  <span class="all_template">
-    <%= render './shared/song_module', songs: @all_songs %>
-    <%= render './shared/playlist_module', playlists: @all_playlists %>
-  </span>
-  <span class="track_template hidden">
-    <%= render './shared/song_module', songs: @user.songs %>
-  </span>
-  <span class="playlist_template hidden">
-    <%= render './shared/playlist_module', playlists: @user.playlists %>
-  </span>
-  <span class="repost_template hidden">
-    <%= render './shared/song_module', songs: @user.repost_songs %>
-    <%= render './shared/playlist_module', playlists: @user.repost_playlists %>
-  </span>
-</div>
+  <div class="col-span-12 md:col-span-9 mx-4">
+    <span class="all_template">
+      <%= render './shared/song_module', songs: @all_songs %>
+      <%= render './shared/playlist_module', playlists: @all_playlists %>
+    </span>
+    <span class="track_template hidden">
+      <%= render './shared/song_module', songs: @user.songs %>
+    </span>
+    <span class="playlist_template hidden">
+      <%= render './shared/playlist_module', playlists: @user.playlists %>
+    </span>
+    <span class="repost_template hidden">
+      <%= render './shared/song_module', songs: @user.repost_songs %>
+      <%= render './shared/playlist_module', playlists: @user.repost_playlists %>
+    </span>
+  </div>
   <%#=左邊專輯專區%>
   
 
@@ -123,34 +127,32 @@
       <%= render './shared/like_area.html.erb', element: @user %>
 
       </div>
-    </div>
-
-    <div class="flex border-t border-gray-400 m-4">
+          <div class="flex border-t border-gray-400 m-4">
       <div class="my-3 text-xs table-row-group">
-        <div class="">
-          <span class="text-gray-500  hover:text-black"><a href="#">Legal</a></span>
+        <div class="text-gray-500">
+          <span class="hover:text-black"><a href="#">Legal</a></span>
             
-          <span class="text-gray-500  hover:text-black"><a href="#">Privacy</a></span>
+          <span class="hover:text-black"><a href="#">Privacy</a></span>
             
-          <span class="text-gray-500  hover:text-black"><a href="#">Cookies</a></span>
+          <span class="hover:text-black"><a href="#">Cookies</a></span>
             
-          <span class="text-gray-500  hover:text-black"><a href="#">Imprint</a></span>
+          <span class="hover:text-black"><a href="#">Imprint</a></span>
 
-          <span class="text-gray-500  hover:text-black"><a href="#">Creator Resources</a></span>
+          <span class="hover:text-black"><a href="#">Creator Resources</a></span>
             
-          <span class="text-gray-500  hover:text-black"><a href="#">Blog</a></span>
+          <span class="hover:text-black"><a href="#">Blog</a></span>
             
-          <span class="text-gray-500  hover:text-black"><a href="#">Charts</a></span>
+          <span class="hover:text-black"><a href="#">Charts</a></span>
             
-          <span class="text-gray-500  hover:text-black"><a href="#">Popular Search</a></span>
+          <span class="hover:text-black"><a href="#">Popular Search</a></span>
         </div>
-        
           <div class="mt-2 mb-20">
             Language: English (US)
           </div>
-
       </div>
     </div>
+    </div>
+
   </div>  
 </div>
 

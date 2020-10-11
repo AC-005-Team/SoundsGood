@@ -1,7 +1,7 @@
 <%#=專輯播放頁面%>
 <%#=第一背景色區%>
-<div class="mx-4">
-  <div class="flex bg-gradient-to-r from-red-500 via-white to-orange-700">
+<div class="mx-6">
+  <div class="flex bg-gradient-to-b from-gray-800 via-white to-gray-400">
     <div class="w-2/3 flex-col-reverse space-y-32 justify-between m-5">
       <div class="flex">
         <%= content_tag(:li, '▶', class:'getURL fa-3x rounded-full', data: {id: @song.id} ) %>
@@ -57,38 +57,38 @@
       </div>
       <div class="flex my-2 p-2 justify-around text-sm" data-controller="toggle" data-toggle-song="<%= @song.id %>">
         <% if @song.favorited_by?(current_user) %>
-          <button class="flex border border-orange-500 text-red-600 p-1 rounded" data-target="toggle.likeBtn" data-action="click->toggle#like">
+          <button class="flex items-center border border-orange-500 text-red-600 p-1 rounded" data-target="toggle.likeBtn" data-action="click->toggle#like">
             <i class="fas fa-heart" data-target="toggle.heart"></i> 
             <span class="hidden md:block">Liked</span>
           </button>
         <% else %>
-          <button class="flex border border-gray-400 p-1 rounded" data-target="toggle.likeBtn" data-action="click->toggle#like">
+          <button class="flex items-center border border-gray-400 p-1 rounded" data-target="toggle.likeBtn" data-action="click->toggle#like">
             <i class="far fa-heart" data-target="toggle.heart"></i>
             <span class="hidden md:block">Like</span>
           </button>
         <% end%>
 
         <% if @song.reposted_by?(current_user) %>
-          <button class="flex border border-orange-500 text-red-600 p-1 rounded" data-target="toggle.repostBtn" data-action="click->toggle#repost">
+          <button class="flex items-center border border-orange-500 text-red-600 p-1 rounded" data-target="toggle.repostBtn" data-action="click->toggle#repost">
             <i class="fas fa-retweet"></i>
             <span class="hidden md:block">Reposted</span>
           </button>
         <% else %>
-          <button class="flex border border-gray-400 p-1 rounded" data-target="toggle.repostBtn" data-action="click->toggle#repost">
+          <button class="flex items-center border border-gray-400 p-1 rounded" data-target="toggle.repostBtn" data-action="click->toggle#repost">
             <i class="fas fa-retweet"></i>
             <span class="hidden md:block">Repost</span>
           </button>
         <% end%> 
-        <button class="flex modal-btn share-btn border border-gray-400 p-1 rounded">
+        <button class="flex items-center modal-btn share-btn border border-gray-400 p-1 rounded">
           <i class="fas fa-share-square"></i>
           <p class="hidden md:block">Share</p> 
         </button>
-        <button class="flex border border-gray-400 p-1 rounded">
+        <button class="flex items-center border border-gray-400 p-1 rounded">
           <i class="fas fa-stream"></i>
           <p class="hidden md:block">Add to Next Up</p> 
           
         </button>
-        <button class="flex modal-btn addplaylist-btn border border-gray-400 p-1 rounded">
+        <button class="flex items-center modal-btn addplaylist-btn border border-gray-400 p-1 rounded">
           <i class="fas fa-plus"></i>
           <p class="hidden md:block">Add to Playlist</p> 
         </button>
@@ -163,7 +163,7 @@
               <% end %>
               <div class="w-9/12 mx-2">
                 <div class="flex">
-                  <button> <%=comment.user.display_name%></button>
+                  <button><%=comment.user.display_name%></button>
                   <p class ="mx-1"> at</p>
                   <p><%= comment.created_at.strftime("%H:%M") %></p> 
                 </div>
@@ -216,7 +216,7 @@
 
 
 <%#=右邊專區%>
-  <div class="col-span-3 m-4 hidden md:block">
+  <div class="col-span-12 md:col-span-3 m-4">
     <div class="flex justify-between text-gray-500 border-b border-gray-300 text-sm p-2">
       <div class=""><i class="fas fa-heart"></i>Related Tracks</div>
       <button class="">view all</button>
