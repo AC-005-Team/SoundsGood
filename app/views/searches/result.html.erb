@@ -123,7 +123,7 @@
               </div>
               <%#=超難的音波專區%>
               <div class="">
-                <%= content_tag(:div, '', class:['w-100 waveform-wrap'], data:{ path: song.track_url, filename: song.get_filename, id: song.id}) do %> 
+                <%= content_tag(:div, '', class:['w-100 waveform-wrap waveform-small'], data:{ path: song.track_url, filename: song.get_filename, id: song.id}) do %> 
                   <div class="waveform-dummy-trigger"></div>
                   <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
                 <% end %>

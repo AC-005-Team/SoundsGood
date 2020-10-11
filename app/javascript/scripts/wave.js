@@ -4,6 +4,23 @@ import CursorPlugin from 'wavesurfer.js/src/plugin/cursor.js'
 document.addEventListener('DOMContentLoaded', () => {
   const wavePlace = document.querySelector(".waveform-wrap") // see if at least a waveform div is present
   const peakStorageRoot = 'https://peaks.soundsgood.world/api/v1/getjson/song_peaks/'
+  const ctx = document.createElement('canvas').getContext('2d')
+  const waveDarkSmall = ctx.createLinearGradient(900, 0, 900, 100);
+  waveDarkSmall.addColorStop(0.88, 'rgb(96, 96, 96)');
+  waveDarkSmall.addColorStop(0.89, 'rgb(255, 255, 255)');
+  waveDarkSmall.addColorStop(0.90, 'rgb(215, 215, 215)');
+  const waveProgressSmall = ctx.createLinearGradient(900, 0, 900, 100);
+  waveProgressSmall.addColorStop(0.88, 'rgb(255,118,38)');
+  waveProgressSmall.addColorStop(0.89, 'rgb(255, 255, 255)');
+  waveProgressSmall.addColorStop(0.90, '#ffcfb5');
+  const waveLightLarge = ctx.createLinearGradient(900, 0, 900, 120);
+  waveLightLarge.addColorStop(0.88, 'rgba(255, 255, 255, 1)');
+  waveLightLarge.addColorStop(0.89, 'rgba(255, 255, 255, 0)');
+  waveLightLarge.addColorStop(0.90, 'rgba(215, 215, 215, 1)');
+  const waveProgressLarge = ctx.createLinearGradient(900, 0, 900, 120);
+  waveProgressLarge.addColorStop(0.88, 'rgb(255,118,38)');
+  waveProgressLarge.addColorStop(0.89, 'rgba(255, 255, 255, 0)');
+  waveProgressLarge.addColorStop(0.90, '#ffcfb5');
 
   if(wavePlace){
     const proxyurl = "https://cors-anywhere.herokuapp.com/" // for accessing s3
@@ -11,22 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const isLight = el => { return el.classList.contains('waveform-light') }
     const isSmall = el => { return el.classList.contains('waveform-small') }
     playingNowPath.forEach(songEl=>{
-      if(isLight(songEl) && isSmall(songEl)){
-        console.log('light and small')
-        renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb', 0.2)
-        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#ffffff', 0.5)
-      } else if(isLight(songEl) && !isSmall(songEl)) {
-        console.log('light and not small')
-        renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb', 0.32)
-        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#ffffff', 0.8)
-      } else if(!isLight(songEl) && isSmall(songEl)) {
-        console.log('not light and small')
-        renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb', 0.2)
-        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#555555', 0.5)
+      if(isLight(songEl) && !isSmall(songEl)){
+        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, waveLightLarge,waveProgressLarge, 0.8, 120)
+        createCommentSpace(songEl, 'large')
       } else {
-        console.log('not light and not small')
-        renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb', 0.32)
-        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#555555', 0.8)
+        console.log('Dark, small')
+        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, waveDarkSmall,waveProgressSmall, 0.5, 100)
+        createCommentSpace(songEl, 'small')
       }
       renderComments(songEl)
     })
@@ -79,19 +87,19 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     }
 
-    function renderWaveForm(url, songDataName, parentSelector, waveColor, size) {
+    function renderWaveForm(url, songDataName, parentSelector, waveColor, waveProgress, size, height) {
       var domEl = document.createElement('div')
       domEl.classList.add('waveform')
       parentSelector.appendChild(domEl)
       
       var wavesurfer = WaveSurfer.create({
         container: domEl,
-        waveColor: waveColor, //@todo: change color
-        progressColor: '#ff7626',
+        waveColor: waveColor,
+        progressColor: waveProgress,
         cursorColor: '',
         barWidth: 3,
         barHeight: size,
-        height: 150,
+        height: height,
         barRadius: 2,
         cursorWidth: 1,
         barGap: 2,
@@ -112,37 +120,17 @@ document.addEventListener('DOMContentLoaded', () => {
       return wavesurfer;
     }
 
-    function renderCommentSpace(url, songDataName, parentSelector, waveColor, size) {
+    function createCommentSpace(song, size) {
       var domEl = document.createElement('div')
       domEl.classList.add('waveform-comment-space')
-      domEl.setAttribute('data-id', parentSelector.dataset.id)
-      parentSelector.appendChild(domEl)
-      
-      var wavesurfer = WaveSurfer.create({
-        container: domEl,
-        waveColor: waveColor, //@todo: change color
-        progressColor: '#ffcfb5',
-        barWidth: 3,
-        barHeight: size,
-        height: 150,
-        barRadius: 2,
-        cursorWidth: 0,
-        barGap: 2,
-        plugins: [
-          CursorPlugin.create({
-            showTime: true,
-            opacity: 0,
-            customShowTimeStyle: {
-              'background-color': '#000',
-              color: '#fff',
-              padding: '2px',
-              'font-size': '10px'
-            }
-          })
-        ]
-      });
-      getPeak(url, songDataName, wavesurfer);
-      return wavesurfer;
+      domEl.classList.add('w-full')
+      domEl.setAttribute('data-id', song.dataset.id)
+      if (size=='small'){
+        domEl.style.top = '56px'
+      } else {
+        domEl.style.top = '68px'
+      }
+      song.appendChild(domEl)
     }
   }
 })

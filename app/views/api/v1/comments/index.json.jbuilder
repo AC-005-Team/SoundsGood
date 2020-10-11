@@ -1,3 +1,10 @@
+if current_user
+  json.current_user do
+    json.user_name current_user.display_name
+    json.user_url user_path(current_user)
+  end
+end
+
 json.song do
   json.duration @song_and_comments[:song].track.metadata['duration']
 end
