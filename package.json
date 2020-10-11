@@ -23,6 +23,7 @@
     "sweet-modal-vue": "^2.0.0",
     "tailwindcss": "^1.7.6",
     "turbolinks": "^5.2.0",
+    "vee-validate": "^3.4.0",
     "vue": "^2.6.12",
     "vue-aplayer": "^1.6.1",
     "vue-loader": "^15.9.3",

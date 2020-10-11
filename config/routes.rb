@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # get '/playlists/:id', to: 'home#index'
   get '/discover', to: "home#discover"
   get '/stream', to: "home#stream"
+  get '/upload', to: "songs#upload"
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -37,24 +38,29 @@ Rails.application.routes.draw do
       # get :search
       # get :search_result
     end
-    resources :songs, shallow: true do
-      member do
-        post :like
-        get :like
-        get :add_to_playlist
-        post :add_to_playlist
-        post :repost
-      end
-      resources :comments, only: [:create, :destroy]
-      member do
-        get :share
-      end
+    resources :songs, only: [:index]
+    resources :playlists, only: [:index]
+  end
+
+
+  resources :songs, only: [:new ,:create, :show, :edit, :update, :destroy]  do
+    member do
+      post :like
+      get :like
+      get :add_to_playlist
+      post :add_to_playlist
+      post :repost
     end
-    resources :playlists, shallow: true do
-      member do
-        post :like
-        post :repost
-      end
+    resources :comments, only: [:create, :destroy]
+    member do
+      get :share
+    end
+  end
+
+  resources :playlists, only: [:create, :show, :edit, :update, :destroy] do
+    member do
+      post :like
+      post :repost
     end
   end
 

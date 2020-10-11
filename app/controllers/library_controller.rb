@@ -1,5 +1,5 @@
 class LibraryController < ApplicationController
-  layout: "spa"
+  layout "spa"
   before_action :authenticate_user!, only: [:likes]
 
   def library

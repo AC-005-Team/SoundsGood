@@ -60,8 +60,8 @@ export default new VueRouter({
 
     },
     {
-      path: 'upload/users/:id',
-      component: upload,
+      path: '/upload',
+      component: () => import(/* webpackChunkName: "Upload" */ './components/page/upload'),
       name: 'upload',
       props: true,
     },

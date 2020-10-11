@@ -15,7 +15,19 @@
       <!-- </div> -->
     <!-- </div> -->
     <div class="m-4">
-          <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" @submit.prevent="uploadForm">
+          <form @submit.prevent="uploadForm">
+
+
+
+
+
+
+
+
+
+
+
+
             <!-- <input type="hidden" name="authenticity_token" value="oXk6f8bIOHgjfx2DX3jsKnC0+mDlh5v4kCq/6TWs+i7fZ4ui+JK8LxMc/PKlFYLWeHmjg4x/xAdnt7hbxS1qvw=="> -->
 <!--
           <div class="m-auto w-2/3 border border-gray-400 p-4">
@@ -42,27 +54,21 @@
 
             <div class="mt-2 m-auto w-2/3 border border-gray-400 p-4">
               <div class="text-center">
-                <p class="py-2 text-2xl">Drag and drop your tracks &amp; albums here</p>
+                <p class="py-2 text-2xl">Upload Your Music, audio type must be mp3,ogg,mpeg</p>
 
-                  <div class="text-white bg-orange-600 rounded py-2 px-10 relative w-2/5 m-auto">
+
+                  <!-- <button class="text-white bg-orange-600 rounded py-2 px-10 relative w-2/5 m-auto hover:bg-white hover:text-orange-600 border border-orange-600">
                     Choose Music to Upload
-                    <input class="song_value bg-black opacity-0 absolute top-0 left-0 h-10" type="file" name="song[track]" id="song_track" @change="song_value">
-                  </div><br>
+                  </button><br> -->
+                    <ValidationProvider rules="required|ext:mp3,ogg,mpeg"  ref="provider" name="audio"  v-slot="{ errors, validate }">
+
+                    <input class="song_value" type="file" name="song[track]" id="song_track" @change="handleFileChange" >
+                  <!-- <input type="file" @change="validate"> -->
+                     <span class="text-red-600">{{ errors[0] }}</span>
+                     </ValidationProvider>
+
                   <div class="text-2xl" id="music">{{ fileName }}</div>
 
-                  <!-- <input type="checkbox">
-                  <span class="py-2 text-xs">
-                    Make a playlist when multiple files are selected</span> -->
-
-                  <!-- <div class="text-xs">
-                    <span class="py-2 ">Privacy:
-                    </span>
-                    <input type="radio" value="Public" name="Privacy" id="Public">
-                    <label for="Public">Public</label>
-                    <input type="radio" value="Private" name="Privacy" id="Private">
-                    <label for="Private">Private</label>
-                  </div> -->
-                  <!-- <p class="py-2 text-xs">Provide FLAC, WAV, ALAC, or AIFF for highest audio quality.</p> -->
                   </div>
                 </div>
 
@@ -70,16 +76,13 @@
                   <div class="w-2/3 m-auto text-xs">
                     <div class="flex justify-between items-center bg-gray-200 p-2 border border-gray-300 rounded">
                       <div class="flex">
-                        <!-- <p class="">Provide FLAC, WAV, ALAC, or AIFF for highest audio quality.</p> -->
-                        <!-- <button class="text-blue-600 hover:text-black">Learn more about lossless HD.</button> -->
                       </div>
-                      <!-- <button class="bg-white rounded p-1 border border-gray-400">Replace File</button> -->
                     </div>
 
-                    <div class="flex justify-between text-xs text-gray-600 my-2">
+                    <!-- <div class="flex justify-between text-xs text-gray-600 my-2">
                       <p class="">Name of songs</p>
                       <p class="">Ready. Click Save to post this track.</p>
-                    </div>
+                    </div> -->
 
                     <div class="flex justify-between h-2">
                       <div class="w-1/2 bg-blue-600"></div>
@@ -89,68 +92,49 @@
                     <div class="px-6 py-2 border border-gray-200">
                       <div class="flex text-2xl border-b border-gray-400 mb-6">
                         <button class="mx-2 text-orange-600">Basic Info</button>
-                        <button class="mx-2">Meta Data</button>
-                        <button class="mx-2">Permissions</button>
                       </div>
 
                       <div class="flex my-2">
                         <div class="w-1/3 max-h-full bg-cover bg-top bg-gradient-to-b from-gray-500 via-white to-orange-300" :style="{ 'background-image': 'url('+  url + ')' }">
 
                             <div class="w-full max-h-full rounded p-2 bg-gray-200 relative" >
-                              <input class="bg-black opacity-0 absolute top-0 left-0 h-10" type="file" name="song[image]" @change="showMyImage">
                               <i class="fas fa-camera-retro"></i>
                               Upload Image
-                              <!-- <img class="" id="thumbnil" :src="url"> -->
+                              <ValidationProvider rules="required|ext:jpg" ref="image_area" name="image"  v-slot="{ errors, validate }">
+                                <input type="file" class="" name="song[image]" title="" @change="showMyImage">
+                                <span class="text-red-600">{{ errors[0] }}</span>
+                              </ValidationProvider>
                             </div>
                            </div>
-                          <div class="w-2/3 mx-4 text-sm">
-                                <label for="song_name">Name</label>
-                                <input autofocus="autofocus" autocomplete="name" class="mb-4 border border-gray-400 rounded w-full p-1" v-model="name" name="song[name]" id="song_name">
 
-                                <div class="mb-4 flex">
-                                  <p class="text-gray-500">Soundsgood.com/aabbccdd/</p>
-                                  <input class="w-full" type="text" v-model="name"  placeholder="songsname">
-                                  <button class="">
-                                    <svg class="svg-inline--fa fa-pencil-alt fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pencil-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg><!-- <i class="fas fa-pencil-alt"></i> -->
-                                  </button>
-                                </div>
+                          <div class="w-2/3 mx-4 text-sm">
+                            <label for="song_name">Name</label>
+                            <ValidationProvider rules="required" ref="name_area" name="name"  v-slot="{ errors, validate }">
+                                <input class="mb-4 border border-gray-400 rounded w-full p-1" v-model="name" name="song[name]" id="song_name">
+                                <span class="text-red-600">{{ errors[0] }}</span>
+                                </ValidationProvider>
+
 
                                         <label for="song_tag_list">Tag list</label>
-                                        <!-- <select name="song[tag_items][]"  multiple="multiple"  class="tag_list mb-4 border border-gray-400 rounded w-full p-1">
+                                        <vue-tags-input v-model="tag" :tags="tags" @tags-changed="newTags => tags = newTags"/>
 
-                                        </select> -->
-                                        <vue-tags-input
-    v-model="tag"
-    :tags="tags"
-    @tags-changed="newTags => tags = newTags"
-  />
 
                                         <br>
+                                        <ValidationProvider rules="required" ref="intro_area" name="intro"  v-slot="{ errors, validate }">
                                             <label for="song_intro">Intro</label>
                                             <input class="mb-4 border border-gray-400 rounded w-full p-1" v-model="intro" name="song[intro]" id="song_intro">
-
-                                            <!-- <div class="text-xs">
-                                              <span class="py-2 ">Privacy:
-                                              </span>
-                                              <input type="radio" value="Public" name="Privacy" id="Public">
-                                              <label for="Public">Public</label>
-                                              <input type="radio" value="Private" name="Privacy" id="Private">
-                                              <label for="Private">Private</label>
-                                            </div> -->
+                                            <span class="text-red-600">{{ errors[0] }}</span>
+                                          </ValidationProvider>
                                           </div>
                                         </div>
                                       </div>
 
 
-                                      <div class="flex justify-between items-center p-6 border border-gray-200 rounded">
-                                        <div class="flex">
-                                          <p class="text-orange-600">*</p>
-                                          <p class="">Required fields</p>
-                                        </div>
-                                        <div class="text-sm">
-                                          <button class="mr-2">Cancel</button>
-                                          <div class="animation">
+                                      <div class="flex justify-center items-center p-6 border border-gray-200 rounded">
 
+                                        <div class="text-sm">
+
+                                          <div class="animation" v-show="display">
                                             <div class="loader">
                                               <span></span>
                                               <span></span>
@@ -170,49 +154,11 @@
                                             </div>
                                           </div>
 
-                                          <input type="submit" name="commit" value="Create Song" data-disable-with="Create Song">
+
+
 
                                         </div>
                                       </div>
-                                      <div class="flex m-6 border-b border-gray-300 py-2">
-                                        <p class="">By uploading, you confirm that your sounds comply with our</p>
-                                        <button class="text-blue-600 hover:text-black">Terms of Use</button>
-                                        <p class="">and you don't infringe anyone else's rights.</p>
-                                      </div>
-                                        <div class="flex m-6">
-                                          <div class="my-3 text-xs table-row-group">
-                                            <div class="text-gray-500">
-                                              <span class="hover:text-black">
-                                                <a href="#">Legal</a>
-                                              </span>
-                                              <span class="hover:text-black">
-                                                <a href="#">Privacy</a>
-                                              </span>
-                                              <span class="hover:text-black">
-                                                <a href="#">Cookies</a>
-                                              </span>
-                                              <span class="hover:text-black">
-                                                <a href="#">Imprint</a>
-                                              </span>
-                                              <span class="hover:text-black">
-                                                <a href="#">Creator Resources</a>
-                                              </span>
-                                              <span class="hover:text-black">
-                                                <a href="#">Blog</a>
-                                              </span>
-                                              <span class="hover:text-black">
-                                                <a href="#">Charts</a>
-                                              </span>
-                                              <span class="hover:text-black">
-                                                <a href="#">Popular Search</a>
-                                              </span>
-                                            </div>
-                                            <div class="flex mt-2 mb-20">
-                                              <button class="text-blue-500 hover:text-black pr-2">Language:</button>
-                                              English (US)
-                                            </div>
-                                          </div>
-                                        </div>
                                       </div>
                                     </form>
                                   </div>
@@ -228,9 +174,14 @@ import Api from '../../api/api'
 import axios from 'axios';
 
 
+
+
+
+
 export default {
   data() {
     return {
+      value: '',
       fileName: '',
       url: '',
       track: null,
@@ -239,12 +190,14 @@ export default {
       intro: this.intro,
       tag: '',
       tags: [],
-      aaa:[],
-
+      aaa: [],
+      value: '',
+      display: false
     }
   },
   components: {
     VueTagsInput,
+
   },
 
   // mounted() {
@@ -262,15 +215,33 @@ export default {
   },
 
   methods: {
-    song_value() {
-      var fileData = event.target.files[0];
-      this.track = fileData
-      this.fileName = fileData.name
+    async handleFileChange(e) {
+      const {
+        valid
+      } = await this.$refs.provider.validate(e);
+
+      if (valid) {
+        var fileData = event.target.files[0];
+        this.track = fileData
+        this.fileName = fileData.name
+      }
     },
-    showMyImage() {
-      var fileData = event.target.files[0];
-      this.image = fileData
-      this.url = URL.createObjectURL(fileData)
+
+    // song_value() {
+    //   var fileData = event.target.files[0];
+    //   this.track = fileData
+    //   this.fileName = fileData.name
+    // },
+    async showMyImage(e) {
+      const {
+        valid
+      } = await this.$refs.image_area.validate(e);
+
+      if (valid) {
+        var fileData = event.target.files[0];
+        this.image = fileData
+        this.url = URL.createObjectURL(fileData)
+      }
     },
     uploadForm() {
       let formData = new FormData();
@@ -281,26 +252,22 @@ export default {
       this.getTag.forEach((tag) => {
         formData.append("song[tag_items][]", tag)
       })
-      console.log(this.getTag)
-      for(var pair of formData.entries()){
-        console.log(pair[0]+','+pair[1])
-      }
-      axios.defaults.headers.common = {
-        'X-Requested-With': 'XMLHttpRequest',
-        withCredentials: true,
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      };
-      const config = {
-        onUploadProgress: progressEvent => console.log(progressEvent.loaded)
-      }
-      axios.post('http://127.0.0.1:3000/users/2/songs', formData,config, {
-        withCredentials: true
-      }).then(response => {
-        // 去除動畫
+      // console.log(this.getTag)
+      // for (var pair of formData.entries()) {
+      //   console.log(pair[0] + ',' + pair[1])
+      // }
+      // const config = {
+      //   onUploadProgress: progressEvent => console.log(progressEvent.loaded)
+      // }
+      Api().post('/songs', formData).then(response => {
+
         console.log("QWEQWEQW", response)
+        this.display = false;
+        this.$router.push('discover');
       }).catch(error => {
         console.log(error.response)
       })
+      this.display = true;
 
     }
 
@@ -309,5 +276,117 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
+
+$orange: #f4c2a8;
+$dark-orange: #b52600;
+$white: #fff;
+$curve: cubic-bezier(0.850, 0.000, 0.550, 1.300);
+$speed: 1.3s;
+
+
+// Container
+.animation {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: rgba(17, 16, 16, 0.66);
+}
+
+// Soundwave animation
+.loader {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+  width: 500px;
+  height: 200px;
+  span {
+    display: block;
+    background: $orange;
+    width: 8px;
+    height: 10%;
+    border-radius: 14px;
+    margin-right: 20px;
+    float: left;
+    margin-top: 20%;
+    &:last-child {
+      margin-right: 0px;
+    }
+    &:nth-child(1) {
+      animation: load $speed 1.4s infinite linear;
+    }
+    &:nth-child(2) {
+      animation: load $speed 1.2s infinite linear;
+
+    }
+    &:nth-child(3) {
+      animation: load $speed 1s infinite linear;
+    }
+    &:nth-child(4) {
+      animation: load $speed 0.7s infinite linear;
+    }
+    &:nth-child(5) {
+      animation: load $speed 0.6s infinite linear;
+    }
+    &:nth-child(6) {
+      animation: load $speed 0.4s infinite linear;
+    }
+    &:nth-child(7) {
+      animation: load $speed 0.2s infinite linear;
+    }
+    &:nth-child(8) {
+      animation: load $speed 0s infinite linear;
+    }
+    &:nth-child(9) {
+      animation: load $speed 0.3s infinite linear;
+    }
+    &:nth-child(10) {
+      animation: load $speed 0.5s infinite linear;
+    }
+    &:nth-child(11) {
+      animation: load $speed 0.6s infinite linear;
+    }
+    &:nth-child(12) {
+      animation: load $speed 0.8s infinite linear;
+    }
+    &:nth-child(13) {
+      animation: load $speed 1s infinite linear;
+    }
+    &:nth-child(14) {
+      animation: load $speed 1.2s infinite linear;
+    }
+    &:nth-child(15) {
+      animation: load $speed 1.4s infinite linear;
+    }
+  }
+}
+
+@keyframes load {
+  0% {
+    background: $orange;
+    margin-top: 25%;
+    height: 10%;
+  }
+  50% {
+    background: $dark-orange;
+    height: 100%;
+    margin-top: 0%;
+  }
+  100% {
+    background: $orange;
+    height: 20%;
+    margin-top: 25%;
+  }
+}
+
+
+
 </style>
