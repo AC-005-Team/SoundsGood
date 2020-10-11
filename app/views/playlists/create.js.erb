@@ -3,4 +3,5 @@ var addPlaylist = document.querySelector("#addplaylist-content")
 
 createPlaylist.innerHTML = "<%= j render("playlists/create", playlist: @playlist ,song: @song) %>"
 
-addPlaylist.innerHTML = "<%= j render("playlists/add", playlists: @playlists ,song: @song) %>"        
+addPlaylist.innerHTML = "<%= j render("playlists/add", playlists: @playlists ,song: @song) %>"
+        
