@@ -29,8 +29,21 @@ if(songs){
           ap.list.add(val);
         });
         ap.play();
-        console.log(ap)
         ap.container.setAttribute('data-playing', id)
+        const hosts = window.location.origin
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').content
+        fetch(`${hosts}/songs/${id}/add_played_times`, {
+          method: 'PATCH',
+          headers: {
+           'x-csrf-token': csrfToken
+          }
+        })
+        .then(response => {
+          if(response.ok){
+          }else{
+            console('error')
+          }
+        })
       }
       ap.toggle()
     });
@@ -88,7 +101,8 @@ function getSec(val, e, node){
 
 //拿到本首歌的json
 async function getPlay(id) {
-  let response = await fetch(`${window.location.origin}/api/v1/songs/${id}`);
+  let hosts = window.location.origin
+  let response = await fetch(`${hosts}/api/v1/songs/${id}`);
   let playlistTrack = await response.json();
   return playlistTrack;
 };
@@ -109,7 +123,8 @@ if (addbutton){
 
 // read playlists JSON
 async function getPlayList(id) {
-  let response = await fetch(`http://127.0.0.1:3000/api/v1/playlists/${id}`);
+  let hosts = window.location.origin
+  let response = await fetch(`${hosts}/api/v1/playlists/${id}`);
   let playlistTrack = await response.json();
   return playlistTrack;
 };

@@ -18,15 +18,11 @@
         <i class="fas fa-user-friends"></i>
         <p class="mx-4 my-1">People</p>
       </button>
-      <div class="flex items-center">
+      <button class="flex items-center w-full playlist_btn">
         <i class="fas fa-book"></i>
-        <button class="mx-4 my-1">Albums</button>
-      </div>
-      <div class="flex items-center">
-        <i class="fas fa-book"></i>
-        <button class="mx-4 my-1">Playlists</button>
-      </div>
-      <div class="hidden sm:block my-6">
+        <p class="mx-4 my-1">Playlists</p>
+      </button>
+      <div class="flex">
         <div class="my-3 text-xs table-row-group border-t border-gray-300 py-2">
           <div class="text-gray-500">
             <span class="hover:text-black"><a href="#">Legal</a></span>
@@ -46,27 +42,12 @@
       </div>
     </div>
 
-  <%#= 右邊的搜尋結果 %>
-    <div class="col-span-12 md:col-span-10">
-      <div class="flex text-sm text-gray-400 my-4">
-        Found 
-        <button class="">
-          搜尋到的結果數量+ 
-          tracks,
-        </button>
-        <button class="">
-          搜尋到的結果數量+ 
-          playlists,
-        </button>
-        <button class="">
-          搜尋到的結果數量+ 
-          people
-        </button>      
-      </div>
-
+    <%#= 右邊的搜尋結果 %>
+    <div>
+    <span class="template">
       <% if @users  %>
         <% @users.each do|user|%>
-          <div class="flex user_template">
+          <div class="flex">
             <% if user.avatar_url %>
               <%= image_tag user.avatar_url, class: 'w-1/5 rounded-full' %>
             <% end %>
@@ -80,7 +61,7 @@
                   </span>
                   <i class="fab fa-soundcloud"></i>
                     <span>
-                      <%= user.songs.count %>
+                      <%= user.songs.size %>
                     </span>
                 </div>
                 <button class="flex items-center border border-gray-400 rounded px-2 text-black follow_btn" result-follow-id='<%= user.id %>'>
@@ -97,95 +78,13 @@
           </div>
         <% end %>
       <% end %>
-      <% if @songs %>
-        <% @songs.each do|song|%>
-          <div class="flex mb-6 track_template">
-            <div class="sm:w-1/6 w-1/4">
-              <%#= 搜尋結果的Song圖片 %>
-              <%= link_to image_tag(song.image_url), song_path(song.id) if song.image_url %>
-            </div>
-            <div class="sm:w-5/6 w-3/4 mx-4">
-              <div class="flex items-center text-sm text-gray-500">
-                <button class="text-orange-500 mr-2">
-                  <i class="fas fa-play fa-2x"></i>
-                </button>
-                <div class="flex-col w-9/12">
-                  <%#= 歌曲名稱 %>
-                  <p><%= song.name %></p>
-                  <p class=""><%= link_to song.name, song_path(song.id) %></p>
-                </div>
-                <div class="w-2/12 flex">
-                <%#= 歌曲TAG名稱 %>              
-                  <% song.tags.each do |tag|%>
-                    <div class="text-white bg-gray-400 rounded-full text-center"><%= tag.name %></div>
-                  <% end %> 
-                </div>
-              </div>
-              <%#=超難的音波專區%>
-              <div class="">
-                <%= content_tag(:div, '', class:['w-100 waveform-wrap'], data:{ path: song.track_url, filename: song.get_filename, id: song.id}) do %> 
-                  <div class="waveform-dummy-trigger"></div>
-                  <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
-                <% end %>
-              </div>
-              <%#=留言專區%>
-              <%# <div class="flex my-2">
-                <img class="w-8" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
-                <input class="w-full mx-2" type="text" placeholder="Write a comment">
-              </div> %>
-              <%#=歌曲功能專區、按讚、重播%>
-              <div class="flex text-sm">
-                <div class="flex w-2/3 my-2 justify-start">
-                  <button class="flex border border-gray-300 px-3 mx-1 rounded like_btn" result-like-id='<%= song.id %>' >
-                    <% if song.favorited_by?(current_user) %>
-                      <i class="fas fa-heart" style="color: orange"></i>
-                    <% else %>
-                      <i class="far fa-heart"></i>
-                    <% end %>
-                    <p class="hidden md:block like_count"><%= song.liked_users.count %></p> 
-                  </button>
-                  <button class="flex border border-gray-300 px-3 mx-1 rounded">
-                    <i class="fas fa-redo-alt"></i>
-                    <p class="hidden md:block">3,300</p>
-                  </button>
-                  <button class="flex border border-gray-300 px-3 mx-1 rounded">
-                    <i class="fas fa-share"></i>
-                    <p class="hidden md:block">Share</p> 
-                  </button>
-                  <button class="flex border border-gray-300 px-3 mx-1 rounded">
-                    <i class="fas fa-ellipsis-h"></i>
-                    <p class="hidden md:block">More</p>
-                  </button>
-                </div>
-                <div class="flex w-1/3 justify-end">
-                  <button class="flex mx-2">
-                    <i class="fas fa-play"></i>
-                    <p class="hidden md:block">31.5M</p>
-                  </button>
-                  <%= link_to song_path(song.id), class:'flex mx-2' do %>
-                    <i class="fas fa-comments"></i>
-                    <p class="hidden md:block song_comments"><%= song.comments.count%></p>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-      <% if @playlists %>
-        <% @playlists.each do |playlist|%>
-          <div class="flex justify-around p-5 bg-gradient-to-r from-gray-500 via-white to-pink-300"> <%#=專輯內圖、取名、hover愛心、播放%>
-            <%#= image_tag 'filename'%>
-            <div class="w-1/4 bg-cover" style="background-image: url(<% root_path %>/img/back_1.jpg)"></div>
-            <div class="w-3/4 overflow-auto h-48"> <%#=曲名區域%>
-              <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-                <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia & Geena Fontanella - Psychic</div>
-                <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
+    </span>
+      <span class="track_template">
+        <%= render './shared/song_module', songs: @songs %>
+      </span>
+      <span class="playlist_template">
+        <%= render './shared/playlist_module', playlists: @playlists %>
+      </span>
     </div>
   </div>
 </div>
@@ -194,5 +93,3 @@
 <%# template for song%>
 
 
-<template>
-</template>

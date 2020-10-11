@@ -1,4 +1,13 @@
 <div class="bg-white w-full bg-opacity-75">
+  <span>
+    <% if current_user.errors.any? %>
+      <ul>
+        <% current_user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </span>
   <div class="container m-auto bg-white max-w-lg flex flex-col justify-center mt-12 rounded">
     <%= form_with model: @user, url: user_path(current_user.id), method: 'put', local: true  do |f| %>
       <div>
