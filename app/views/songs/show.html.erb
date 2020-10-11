@@ -1,11 +1,11 @@
 <%#=專輯播放頁面%>
 <%#=第一背景色區%>
 <div class="mx-6">
-  <div class="flex bg-gradient-to-b from-gray-800 via-white to-gray-400 bg-cover bg-no-repeat" style="background-image: url(<% root_path %>/img/back_1.jpg)">
-    <div class="w-3/4 flex-col-reverse space-y-32 justify-between m-5">
+  <div class="grid grid-cols-12 bg-gradient-to-b from-gray-800 via-white to-gray-400 bg-cover bg-no-repeat bg-transparent" style="background-image: url(<% root_path %>/img/back_1.jpg)">
+    <div class="col-span-12 md:col-span-9 flex-col-reverse space-y-32 justify-between m-5">
       <div class="flex">
         <%= content_tag(:li, '▶', class:'getURL fa-3x rounded-full', data: {id: @song.id} ) %>
-        <div class="">
+        <div class="mx-2">
           <div class="bg-black rounded p-1 text-white m-1">
             <%=@song.user.display_name%>
           </div>
@@ -13,7 +13,7 @@
             <div class="text-2xl text-white m-2"><%= title @song.name %></div>
           </div>
         </div>
-        <div class="m-4 text-xl text-black">
+        <div class="m-4 text-xl text-white">
           <div class="">
             1 month ago
           </div>
@@ -30,13 +30,12 @@
           <% end %>
         </div>
       </div>
-
-    </div>
       <%#=右邊大圖區%>
-    <div class="w-1/4 p-4">
-      <% if @song.image_url %>
-        <%= image_tag @song.image_url%> 
-      <% end %>
+      <div class="col-span-6 md:col-span-3 p-4">
+        <% if @song.image_url %>
+          <%= image_tag @song.image_url%> 
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
