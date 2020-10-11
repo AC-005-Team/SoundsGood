@@ -94,8 +94,9 @@
           <p class="hidden md:block">Add to Playlist</p> 
         </button>
         <% if current_user%>
-          <%=link_to new_user_playlist_path(current_user), class:'border border-gray-400 p-1 rounded' do %>
-            <i class="fas fa-bolt"></i>Create Playlist
+          <%=link_to new_user_playlist_path(current_user), class:'flex items-center border border-gray-400 p-1 rounded' do %>
+            <i class="fas fa-bolt"></i>
+            <p class="hidden md:block">Create Playlist</p> 
           <% end %>
         <% end %>
         <button class="p-1 text-gray-600">
