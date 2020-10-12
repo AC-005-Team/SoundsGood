@@ -7,6 +7,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
   
+  validates :display_name, presence: true, allow_blank: false
+  
   has_one :room
   # 自己追蹤的人
   has_many :followed_users, foreign_key: :follower_id, class_name: "Follow"
@@ -29,11 +31,9 @@ class User < ApplicationRecord
   has_many :repost_songs, through: :reposts, source: :repostable, source_type: "Song"
   has_many :repost_playlists, through: :reposts, source: :repostable, source_type: "Playlist"
 
-  def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
-    "-"*20
-    puts request.env["omniauth.auth"]
-    "-"*20
+  before_create :add_avatar
 
+  def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
     user = User.find_by(google_token: access_token.credentials.token, google_uid: access_token.uid )
     return user if user.present?
@@ -119,7 +119,10 @@ class User < ApplicationRecord
       google_uid: access_token.uid
     )
   end
-    
+
+  def add_avatar
+    self.avatar_data = '{"id":"user/1/avatar/75b54db160fd8c18982c1924751db1ad.png","storage":"store","metadata":{"filename":"user_image.png","size":27632,"mime_type":"image/png"}}' if self.avatar_data == nil
+  end
 
 end
 

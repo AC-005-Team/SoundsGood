@@ -1,6 +1,6 @@
 class SongsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :find_song, only: [:show, :destroy, :like, :repost, :add_to_playlist, :share]
+  before_action :find_song, only: [:show, :destroy, :like, :repost, :add_to_playlist, :share, :add_played_times]
 
   def index
     @songs = current_user.songs.includes(:tags)
@@ -62,6 +62,10 @@ class SongsController < ApplicationController
       format.html {redirect_to @song}
       format.json {render json: {status: @song.reposted_by?(current_user)}}
     end
+  end
+
+  def add_played_times
+    @song.played_times += 1
   end
   
   def share;end
