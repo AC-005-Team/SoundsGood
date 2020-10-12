@@ -1,33 +1,27 @@
 <div class="m-4">
-
   <div class="flex text-2xl border-b border-gray-200 m-4">
     <p class="mx-2">Search result for</p>
-    <p class=""><%= @params_search %></p>
+    <p class="result_search"><%= @params_search %></p>
   </div>
-
-  <div class="flex m-4">
-  <%#= 左邊的篩選器 %>
-    <div class="hidden sm:block m-6">
-      <div class="flex items-center bg-orange-500 text-white py-1 px-2 rounded">
+    <%#= 左邊的篩選器 %>
+  <div class="grid grid-cols-12 m-4">
+    <div class="col-span-12 md:col-span-2">
+      <button class="flex items-center bg-orange-500 text-white py-1 px-2 w-full rounded all_btn">
         <i class="fas fa-search"></i>
-        <button class="mx-4">Everything</button>
-      </div>
-      <div class="flex items-center">
+        <p class="mx-4">Everything</p>
+      </button>
+      <button class="flex items-center w-full track_btn">
         <i class="fab fa-soundcloud"></i>
-        <button class="mx-4 my-1">Tracks</button>
-      </div>
-      <div class="flex items-center">
+        <p class="mx-4 my-1">Trackd</p>
+      </button>
+      <button class="flex items-center w-full user_btn">
         <i class="fas fa-user-friends"></i>
-        <button class="mx-4 my-1">People</button>
-      </div>
-      <div class="flex items-center">
+        <p class="mx-4 my-1">People</p>
+      </button>
+      <button class="flex items-center w-full playlist_btn">
         <i class="fas fa-book"></i>
-        <button class="mx-4 my-1">Albums</button>
-      </div>
-      <div class="flex items-center">
-        <i class="fas fa-book"></i>
-        <button class="mx-4 my-1">Playlists</button>
-      </div>
+        <p class="mx-4 my-1">Playlists</p>
+      </button>
       <div class="flex">
         <div class="my-3 text-xs table-row-group border-t border-gray-300 py-2">
           <div class="text-gray-500">
@@ -48,114 +42,54 @@
       </div>
     </div>
 
-  <%#= 右邊的搜尋結果 %>
-    <div class="">
-      <div class="flex text-sm text-gray-400 my-4">
-        Found 
-        <button class="">
-          搜尋到的結果數量+ 
-          tracks,
-        </button>
-        <button class="">
-          搜尋到的結果數量+ 
-          playlists,
-        </button>
-        <button class="">
-          搜尋到的結果數量+ 
-          people
-        </button>      
-      </div>
-
-      <%#=音樂資料部分%>
-        <% if @users  %>
-          <% @users.each do|f|%>
-            <%= f.display_name %>
-          <% end %>
+    <%#= 右邊的搜尋結果 %>
+    <div>
+    <span class="template">
+      <% if @users  %>
+        <% @users.each do|user|%>
+          <div class="flex">
+            <% if user.avatar_url %>
+              <%= image_tag user.avatar_url, class: 'w-1/5 rounded-full' %>
+            <% end %>
+            <div class="w-4/5 flex-col items-end">
+              <p class="text-black"><%= user.display_name%></p> 
+              <div class="flex justify-between text-xs">
+                <div>
+                  <i class="fas fa-user-friends"></i>
+                  <span class="user_follower_count">
+                    <%= user.followers.count %>
+                  </span>
+                  <i class="fab fa-soundcloud"></i>
+                    <span>
+                      <%= user.songs.size %>
+                    </span>
+                </div>
+                <button class="flex items-center border border-gray-400 rounded px-2 text-black follow_btn" result-follow-id='<%= user.id %>'>
+                  <% if current_user.follows?(user)%>
+                    <i class="fas fa-user-check" style="color: orange"></i>
+                    <p class>Following</p> 
+                  <% else %>
+                    <i class="fas fa-user-check" ></i>
+                    <p class>Follow+</p> 
+                  <% end %>
+                </button>
+              </div>
+            </div>
+          </div>
         <% end %>
-        
-        <% if @songs %>
-        <% @songs.each do|f|%>
-      <div class="flex mb-6">
-        <div class="sm:w-1/6 w-1/4">
-          <%#= 搜尋結果的Song圖片 %>
-          <%= link_to image_tag(f.image_url), song_path(f.id) %>
-        </div>
-
-        <div class="sm:w-5/6 w-3/4 mx-4">
-          <div class="flex items-center text-sm text-gray-500">
-
-            <button class="text-orange-500 mr-2">
-              <i class="fas fa-play fa-2x"></i>
-            </button>
-  
-            <div class="flex-col w-9/12">
-            <%#= 歌曲名稱 %>
-              <p><%= f.name %></p>
-              <p class=""><%= link_to f.name, song_path(f.id) %></p>
-            </div>
-
-            <div class="w-2/12 flex">
-            <%#= 歌曲TAG名稱 %>              
-              <% f.tags.each do |tag|%>
-
-              <div class="text-white bg-gray-400 rounded-full text-center">  <%= tag.name %></div>
-              <% end %> 
-            </div>
-
-          </div>
-
-          <%#=超難的音波專區%>
-          <div class="">萱大の音波專區</div>
-          <%#=留言專區%>
-          <%# <div class="flex my-2">
-            <img class="w-8" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
-            <input class="w-full mx-2" type="text" placeholder="Write a comment">
-          </div> %>
-
-
-          <%#=歌曲功能專區、按讚、重播%>
-          <div class="flex text-sm">
-            <div class="flex w-2/3 my-2 justify-start">
-              <button class="flex border border-gray-300 px-3 mx-1 rounded">
-                <i class="fas fa-heart"></i>
-                <p class="hidden md:block">30K</p> 
-              </button>
-              <button class="flex border border-gray-300 px-3 mx-1 rounded">
-                <i class="fas fa-redo-alt"></i>
-                <p class="hidden md:block">3,300</p>
-              </button>
-              <button class="flex border border-gray-300 px-3 mx-1 rounded">
-                <i class="fas fa-share"></i>
-                <p class="hidden md:block">Share</p> 
-                
-              </button>
-              <button class="flex border border-gray-300 px-3 mx-1 rounded">
-                <i class="fas fa-ellipsis-h"></i>
-                <p class="hidden md:block">More</p>
-              </button>
-            </div>
-
-            <div class="flex w-1/3 justify-end">
-              <button class="flex mx-2">
-                <i class="fas fa-play"></i>
-                <p class="hidden md:block">31.5M</p>
-          
-                
-              </button>
-              <button class="flex mx-2">
-                <i class="fas fa-comments"></i>
-                <p class="hidden md:block">3074</p>
-              </button>
-
-            </div>
-          </div>
-        </div>
-      </div>
       <% end %>
-<% end %>
-
+    </span>
+      <span class="track_template">
+        <%= render './shared/song_module', songs: @songs %>
+      </span>
+      <span class="playlist_template">
+        <%= render './shared/playlist_module', playlists: @playlists %>
+      </span>
     </div>
-
   </div>
-
 </div>
+
+
+<%# template for song%>
+
+

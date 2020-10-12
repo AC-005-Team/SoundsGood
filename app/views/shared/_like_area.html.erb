@@ -2,17 +2,17 @@
   <% element.like_songs.each do |song| %>
     <div class="my-4 flex">
     <%= link_to song_path(song), class:'flex w-1/5 items-center' do %>
-      <%= image_tag song.image_url %>
+      <%= image_tag song.image_url if song.image_url %>
     <% end %>
       <div class="w-4/5 mx-2 text-xs">
         <div class="text-gray-500"><%= song.name %></div>
         <div class=""><%= song.intro %></div>
         <div class="flex justify-around text-gray-500">
-          <a href=""><i class="fas fa-arrow-right"></i>261K</a>
+          <a href=""><i class="fas fa-arrow-right"></i><%= song.played_times %></a>
           <a href=""><i class="fas fa-heart"></i><%= song.liked_users.count%></a>
-          <a href=""><i class="fas fa-history"></i>60</a>
+          <a href=""><i class="fas fa-history"></i><%= song.reposts.size%></a>
           <%= link_to song_path(song) do %>
-            <i class="fas fa-comment-dots"></i><%= song.comments.count%>
+            <i class="fas fa-comment-dots"></i><%= song.comments.size%>
           <% end %>
         </div>
       </div>

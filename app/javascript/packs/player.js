@@ -1,6 +1,6 @@
 import "aplayer/dist/APlayer.min.css";
 import APlayer from "aplayer";
-const hostPath = window.location.origin;
+let waveProgress, playingDuration, waveformWidth, secOfFourth;
 //畫面一開始的播放器
 const ap = new APlayer({
   container: document.getElementById("player1"),
@@ -23,22 +23,89 @@ if (songs) {
   songs.forEach((song) => {
     song.addEventListener("click", function(e) {
       e.preventDefault();
+      let playing = ap.container.dataset.playing;
       let id = e.currentTarget.dataset.id;
-      ap.pause();
-      ap.list.clear();
-      getPlay(id).then((val) => {
-        ap.list.add(val);
-      });
-      ap.play();
-      console.log(ap);
-      ap.container.setAttribute("data-playing", id);
+      if (playing !== id) {
+        ap.pause();
+        ap.list.clear();
+        getPlay(id).then((val) => {
+          ap.list.add(val);
+        });
+        ap.play();
+        ap.container.setAttribute("data-playing", id);
+        const hosts = window.location.origin;
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')
+          .content;
+        fetch(`${hosts}/songs/${id}/add_played_times`, {
+          method: "PATCH",
+          headers: {
+            "x-csrf-token": csrfToken,
+          },
+        }).then((response) => {
+          if (response.ok) {
+          } else {
+            console("error");
+          }
+        });
+      }
+      ap.toggle();
     });
   });
+}
+const waves = document.querySelectorAll(".waveform-wrap");
+if (waves) {
+  waves.forEach((wave) => {
+    wave.addEventListener("click", function(e) {
+      e.preventDefault();
+      let playing = ap.container.dataset.playing;
+      let id = e.currentTarget.dataset.id;
+      let node = e.currentTarget;
+      waveformWidth = node.parentNode.offsetWidth;
+      getPlay(id).then((val) => {
+        playingDuration = val.duration;
+        if (playing !== id) {
+          if (waveProgress) {
+            waveProgress.style.width = "";
+          }
+          secOfFourth = 0;
+          waveProgress = wave.querySelector(".waveform>wave>wave");
+          ap.pause();
+          ap.list.clear();
+          ap.list.add(val);
+          ap.play();
+          ap.container.setAttribute("data-playing", id);
+        } else {
+          ap.play();
+          secOfFourth = getSec(val, e, node);
+          ap.seek(getSec(val, e, node));
+        }
+      });
+    });
+  });
+  ap.on("timeupdate", () => {
+    secOfFourth += 0.25;
+    waveProgress.style.width = widthCalc(secOfFourth);
+  });
+  ap.on("ended", () => {
+    secOfFourth = 0;
+  });
+}
+
+function widthCalc(secOfFourth) {
+  return `${(waveformWidth / playingDuration) * secOfFourth}px`;
+}
+
+function getSec(val, e, node) {
+  let duration = val.duration;
+  let timepoint = e.offsetX;
+  let totalWidth = node.parentNode.offsetWidth;
+  return Math.round((timepoint / totalWidth) * duration);
 }
 
 //拿到本首歌的json
 async function getPlay(id) {
-  let response = await fetch(`${hostPath}/api/v1/songs/${id}`);
+  let hosts = window.location.origin;
+  let response = await fetch(`${hosts}/api/v1/songs/${id}`);
   let playlistTrack = await response.json();
   return playlistTrack;
 }
@@ -59,7 +126,8 @@ if (addbutton) {
 
 // read playlists JSON
 async function getPlayList(id) {
-  let response = await fetch(`${hostPath}/api/v1/playlists/${id}`);
+  let hosts = window.location.origin;
+  let response = await fetch(`${hosts}/api/v1/playlists/${id}`);
   let playlistTrack = await response.json();
   return playlistTrack;
 }
