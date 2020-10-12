@@ -53,12 +53,14 @@ Rails.application.routes.draw do
         get :share
       end
     end
-    resources :playlists, shallow: true do
-      member do 
-        post :like
-        post :repost
-      end  
-    end
+    resources :playlists, only: [:index] 
+  end
+
+  resources :playlists, only: [:create, :show, :edit, :update, :destroy] do
+    member do 
+      post :like
+      post :repost
+    end  
   end
   
   resources :stream, only: [:index]
