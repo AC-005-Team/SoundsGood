@@ -11,11 +11,11 @@ class HomeController < ApplicationController
   def stream
 
     @users = [current_user]+current_user.followees.includes(:songs, :playlists, :reposts).order(created_at: :desc)
-    @items = []
+    @items_all = []
     @users.each do |user|
-      @items += user.songs+user.playlists+user.reposts.includes(:user, :repostable)
+      @items_all += user.songs+user.playlists+user.reposts.includes(:user, :repostable)
     end
-    @items.sort_by!{|item| item.created_at}.reverse!
+    @items = @items_all.sort_by!{|item| item.created_at}.reverse!.first(10)
     respond_to do |format|
       format.json
       format.html

@@ -94,7 +94,7 @@ import {
   SweetModal,
   SweetModalTab
 } from 'sweet-modal-vue'
-
+import Api from "../../../api/api";
 import myPlaylist from '../../shared/myPlaylist'
 import addPlaylist from '../../shared/addPlaylist'
 
@@ -125,7 +125,8 @@ export default {
 
 
   methods: {
-    ...mapActions("songs", ["play", "pause", "continuePlay", "continuePause"]),
+    ...mapActions('playlistsSongs', ['toggleList']),
+
     ...mapActions("playlists", ["loadSongs"]),
     ...mapActions("favorite", ["toggleLike"]),
 
@@ -152,18 +153,13 @@ export default {
       console.log(song_id);
 
       this.$refs.modal.open("tab1");
-      const axios = require("axios").create({
-        baseURL: "http://127.0.0.1:3000",
-      });
-      axios
-        .get(`/api/v1/songs/${song_id}`)
+      Api().get(`/api/v1/songs/${song_id}`)
         // .then((abc) => (this.playlists = abc.data.playlists))
         .then((response) => (this.track_id = response.data.song_id))
         .catch(function(error) {
           console.log(error);
         });
-        axios
-          .get(`/api/v1/songs/${song_id}`)
+      Api().get(`/api/v1/songs/${song_id}`)
           .then((abc) => (this.playlists = abc.data.playlists))
           // .then((response) => (this.track_id = response.data.song_id))
           .catch(function(error) {

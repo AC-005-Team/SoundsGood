@@ -1,6 +1,6 @@
 class Api::V1::SongsController < ApplicationController
   def index
-    @songs = Song.all
+    @songs = Song.all.last(10)
     @playlists = current_user.playlists
   end
 

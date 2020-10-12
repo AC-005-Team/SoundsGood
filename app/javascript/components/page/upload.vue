@@ -100,7 +100,7 @@
                             <div class="w-full max-h-full rounded p-2 bg-gray-200 relative" >
                               <i class="fas fa-camera-retro"></i>
                               Upload Image
-                              <ValidationProvider rules="required|ext:jpg" ref="image_area" name="image"  v-slot="{ errors, validate }">
+                              <ValidationProvider rules="required|ext:jpg,png,jpeg" ref="image_area" name="image"  v-slot="{ errors, validate }">
                                 <input type="file" class="" name="song[image]" title="" @change="showMyImage">
                                 <span class="text-red-600">{{ errors[0] }}</span>
                               </ValidationProvider>

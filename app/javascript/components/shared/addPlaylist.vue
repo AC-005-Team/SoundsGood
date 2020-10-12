@@ -73,15 +73,15 @@ export default {
       for(var pair of formData.entries()){
         console.log(pair[0]+','+pair[1])
       }
-      axios.defaults.headers.common = {
-        'X-Requested-With': 'XMLHttpRequest',
-        withCredentials: true,
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      };
-      const config = {
-        onUploadProgress: progressEvent => console.log(progressEvent.loaded)
-      }
-      axios.post('http://127.0.0.1:3000/users/2/playlists', formData,config, {
+      // axios.defaults.headers.common = {
+      //   'X-Requested-With': 'XMLHttpRequest',
+      //   withCredentials: true,
+      //   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      // };
+      // const config = {
+      //   onUploadProgress: progressEvent => console.log(progressEvent.loaded)
+      // }
+      Api().post('/playlists', formData,config, {
         withCredentials: true
       }).then(response => {
         this.$emit('after_add', { name: this.name, intro: this.intro} )
