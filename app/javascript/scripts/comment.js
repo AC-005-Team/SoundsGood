@@ -158,16 +158,5 @@ export function renderComments(song){
   function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max))
   }
-  
-  // function hideComment(e){
-  //   e.stopPropagation()
-  //   e.currentTarget.querySelector('.comment-on-wave-wrap').classList.add('invisible')
-
-  // }
-  // function showComment(e){
-  //   e.stopPropagation()
-  //   e.currentTarget.querySelector('.comment-on-wave-wrap').classList.remove('invisible')
-  // }
-
   return
 }

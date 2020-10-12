@@ -39,7 +39,6 @@ if(songs){
           ap.toggle()
         }
       })
-      
     });
   });
 }
@@ -52,7 +51,7 @@ if(waves){
       let id = e.currentTarget.dataset.id;
       let node = e.currentTarget
       waveformWidth = node.parentNode.offsetWidth
-      getPlay(id).then(val=>{
+      getPlay(id).then(val=>{ // @todo: 確認api是否有變動
         playingDuration = val.duration
         if(playing!==id){
           if(waveProgress){
@@ -74,7 +73,6 @@ if(waves){
     });
   })
   ap.on('timeupdate', () => {
-    console.log('gogo')
     secOfFourth += 0.25
     waveProgress.style.width = widthCalc(secOfFourth)
   })
@@ -85,7 +83,6 @@ if(waves){
 const aplayerBar = document.querySelector('.aplayer-bar-wrap')
 if (aplayerBar) {
   aplayerBar.addEventListener('click', (e) => {
-    // ap.pause()
     let playedSec = document.querySelector('.aplayer-ptime').textContent
     let playedSecAry = playedSec.split(':')
     if(playedSecAry.length == 3 ) {
@@ -94,7 +91,6 @@ if (aplayerBar) {
       secOfFourth = parseInt(playedSecAry[0], 10)*60 + parseInt(playedSecAry[1], 10)
     }
     waveProgress.style.width = widthCalc(secOfFourth)
-    // ap.play()
   })
 }
 // calculates progress of .25 second
