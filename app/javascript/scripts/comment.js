@@ -1,10 +1,11 @@
-export function renderComments(song){
+export function renderComments(song, ap){
   console.log('start')
   const songId = song.dataset.id
   const hostPath = window.location.origin
   const player = document.querySelector('#player1')
   const commentArea = document.querySelector(`.song-main-comment[data-id="${songId}"]`)
-  let parentWidth, commentForm, currentUserName, currentUserUrl
+  let parentWidth, commentForm, currentUserName, currentUserUrl, timenow
+  let isCommentShowing = false
   if (commentArea){
   commentForm = document.querySelector(`.song-main-comment[data-id="${songId}"]`).parentNode
   }
@@ -113,7 +114,6 @@ export function renderComments(song){
     domEl.querySelector('.comment-on-wave-wrap').addEventListener('mouseleave', (e)=>{
       e.currentTarget.classList.remove('opacity-100')
       e.currentTarget.classList.toggle('hidden')
-
     })
     // click on user name of comments on wave, redirect to user show
     domEl.querySelector('.comment-user').addEventListener('click', (e) => {
@@ -126,6 +126,22 @@ export function renderComments(song){
       let replyForm = document.querySelector(`input[data-id="${commentId}"]`)
       e.stopPropagation()
       replyForm.focus()
+    })
+    // when second same, let comment appear for 2s
+    ap.on('timeupdate', () => {
+      timenow = document.querySelector('.aplayer-ptime').textContent
+      if (mmssToSecond(timenow)==comment.timepoint && isCommentShowing == false) {
+        domEl.querySelector('.comment-on-wave-wrap').classList.remove('hidden')
+        isCommentShowing = true
+        setTimeout(() => {
+          domEl.querySelector('.comment-on-wave-wrap').classList.add('opacity-100')
+        }, 10);
+        setTimeout(() => {
+          domEl.querySelector('.comment-on-wave-wrap').classList.remove('opacity-100')
+          domEl.querySelector('.comment-on-wave-wrap').classList.toggle('hidden')
+          isCommentShowing = false
+        }, 2000);
+      }
     })
   }
   function readyForComment(imgUrl, timePercent, songId){

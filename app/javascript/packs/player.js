@@ -1,5 +1,6 @@
 import 'aplayer/dist/APlayer.min.css';
 import APlayer from 'aplayer';
+import { waveShow } from "../scripts/wave";
 let waveProgress, playingDuration, waveformWidth, secOfFourth
 //畫面一開始的播放器
 const ap = new APlayer({
@@ -14,6 +15,7 @@ const ap = new APlayer({
     url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/Music_for_Video/Blue_Dot_Sessions/Fjell/Blue_Dot_Sessions_-_Kvelden_Trapp.mp3"
   }]
 });
+waveShow(ap)
 //立即點播放單首歌
 const songs = document.querySelectorAll('.play-btn');
 if(songs){

@@ -1,7 +1,8 @@
 import { renderComments } from './comment'
 import WaveSurfer from 'wavesurfer.js'
 import CursorPlugin from 'wavesurfer.js/src/plugin/cursor.js'
-document.addEventListener('DOMContentLoaded', () => {
+export function waveShow(ap){
+// document.addEventListener('DOMContentLoaded', () => {
   const wavePlace = document.querySelector(".waveform-wrap") // see if at least a waveform div is present
   const peakStorageRoot = 'https://peaks.soundsgood.world/api/v1/getjson/song_peaks/'
   const ctx = document.createElement('canvas').getContext('2d')
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, waveDarkSmall,waveProgressSmall, 0.5, 100)
         createCommentSpace(songEl, 'small')
       }
-      renderComments(songEl)
+      renderComments(songEl, ap)
     })
     function getPeak(url, songDataName, wavesurfer) {
       fetch(peakStorageRoot+songDataName)
@@ -133,4 +134,5 @@ document.addEventListener('DOMContentLoaded', () => {
       song.appendChild(domEl)
     }
   }
-})
+// })
+}
