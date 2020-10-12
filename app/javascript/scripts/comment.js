@@ -1,13 +1,12 @@
 export function renderComments(song, ap){
-  console.log('start')
   const songId = song.dataset.id
   const hostPath = window.location.origin
   const player = document.querySelector('#player1')
   const commentArea = document.querySelector(`.song-main-comment[data-id="${songId}"]`)
-  let parentWidth, commentForm, currentUserName, currentUserUrl, timenow
+  let parentWidth, commentForm, currentUserName, currentUserUrl, playtimeNow
   let isCommentShowing = false
   if (commentArea){
-  commentForm = document.querySelector(`.song-main-comment[data-id="${songId}"]`).parentNode
+    commentForm = commentArea.parentNode
   }
   let userAvatar = document.querySelector('.current_user-avatar')
   let userAvatarUrl
@@ -16,6 +15,7 @@ export function renderComments(song, ap){
   }
   const waveCommentSpace = document.querySelector(`.waveform-comment-space[data-id="${songId}"]`)
   parentWidth = waveCommentSpace.offsetWidth
+  // get the comments of this song
   fetch(`${hostPath}/api/v1/songs/${songId}/comments`)
   .then(res => {
     if(!res.ok){
@@ -36,6 +36,7 @@ export function renderComments(song, ap){
   .catch( err => {
     console.error(err)
   })
+  // add eventListener to comment input field: focus -> append, blur -> remove, submit -> blur and append
   function getReadyForNewComment(song, duration){
     let commentInput = commentForm.querySelector('.song-main-comment')
     commentInput.addEventListener('focus', (event) => {
@@ -74,17 +75,13 @@ export function renderComments(song, ap){
       commentForm.addEventListener('submit', appendWhenSubmit)
       commentInput.addEventListener('blur', removeWhenBlur)
     })
-    // commentShowOnWave.addEventListener('click', () => {
-    //   // @todo: record time, append avatar, cursor to comment text field, other comment avatar
-    // })
   }
-  // @todo: hover avatar and show comment
-  
   function appendCommentsToSong(song, comments, duration){
     comments.forEach(comment => {
       appendCommentToSong(song, comment, duration)
     })
   }
+// append comment to the correct place and add eventListener: pop when the progress is same as timepoint
   function appendCommentToSong(song, comment, duration){
     var domEl = document.createElement('div')
     domEl.classList.add('comment-avatar')
@@ -96,22 +93,24 @@ export function renderComments(song, ap){
     }else{
       domEl.innerHTML = `<img class ='comment-img' src='${comment.user_img}' style=''><div class="flex comment-on-wave-wrap opacity-0 hidden absolute" style="min-width: max-content"><div class="comment-line"></div><p class="comment-user pl-1 pt-1">${comment.user_name}</p><p class="pl-1 pt-1 comment-content">${comment.content}</p></div>`
     }
-    domEl.querySelector('img').addEventListener('mouseenter', (e)=>{
+    let commentAvatar = domEl.querySelector('img')
+    let commentWrap = domEl.querySelector('.comment-on-wave-wrap')
+    commentAvatar.addEventListener('mouseenter', (e)=>{
       let target = e.currentTarget.parentNode.querySelector('.comment-on-wave-wrap')
       target.classList.remove('hidden')
       setTimeout(() => {
         target.classList.add('opacity-100')
       }, 10);
     })
-    domEl.querySelector('.comment-on-wave-wrap').addEventListener('mouseenter', (e)=>{
+    commentWrap.addEventListener('mouseenter', (e)=>{
       e.currentTarget.classList.remove('hidden')
       e.currentTarget.classList.add('opacity-100')
     })
-    domEl.querySelector('img').addEventListener('mouseleave', (e)=>{
+    commentAvatar.addEventListener('mouseleave', (e)=>{
       e.currentTarget.parentNode.querySelector('.comment-on-wave-wrap').classList.remove('opacity-100')
       e.currentTarget.parentNode.querySelector('.comment-on-wave-wrap').classList.add('hidden')
     })
-    domEl.querySelector('.comment-on-wave-wrap').addEventListener('mouseleave', (e)=>{
+    commentWrap.addEventListener('mouseleave', (e)=>{
       e.currentTarget.classList.remove('opacity-100')
       e.currentTarget.classList.toggle('hidden')
     })
@@ -121,7 +120,7 @@ export function renderComments(song, ap){
       window.location.href = `${window.location.origin}${comment.user_url}`
     })
     // click on user img of comments on wave, redirect to user reply
-    domEl.querySelector('.comment-img').addEventListener('click', (e) => {
+    commentAvatar.addEventListener('click', (e) => {
       let commentId = e.currentTarget.parentNode.dataset.id
       let replyForm = document.querySelector(`input[data-id="${commentId}"]`)
       e.stopPropagation()
@@ -129,16 +128,16 @@ export function renderComments(song, ap){
     })
     // when second same, let comment appear for 2s
     ap.on('timeupdate', () => {
-      timenow = document.querySelector('.aplayer-ptime').textContent
-      if (mmssToSecond(timenow)==comment.timepoint && isCommentShowing == false) {
-        domEl.querySelector('.comment-on-wave-wrap').classList.remove('hidden')
+      playtimeNow = document.querySelector('.aplayer-ptime').textContent
+      if (mmssToSecond(playtimeNow)==comment.timepoint && isCommentShowing == false) {
+        commentWrap.classList.remove('hidden')
         isCommentShowing = true
         setTimeout(() => {
-          domEl.querySelector('.comment-on-wave-wrap').classList.add('opacity-100')
+          commentWrap.classList.add('opacity-100')
         }, 10);
         setTimeout(() => {
-          domEl.querySelector('.comment-on-wave-wrap').classList.remove('opacity-100')
-          domEl.querySelector('.comment-on-wave-wrap').classList.toggle('hidden')
+          commentWrap.classList.remove('opacity-100')
+          commentWrap.classList.toggle('hidden')
           isCommentShowing = false
         }, 2000);
       }
@@ -157,12 +156,10 @@ export function renderComments(song, ap){
       domEl.innerHTML = `<img src='${imgUrl}' width="20">`
     }
   }
-
-  
   function isNowPlaying(e){
     return player.dataset.playing ? ( player.dataset.playing == e.target.dataset.id   ) : false
   }
-
+  // convert mmss to second, in order to update db
   function mmssToSecond(mmss) {
     let mmssAry = mmss.split(':')
     if(mmssAry.length == 3 ) {
@@ -171,6 +168,7 @@ export function renderComments(song, ap){
         return parseInt(mmssAry[0], 10)*60 + parseInt(mmssAry[1], 10)
     }
   }
+  // if the song is not playing, return a random timepoint
   function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max))
   }
