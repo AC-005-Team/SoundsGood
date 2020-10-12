@@ -29,8 +29,8 @@
       <router-link :to="{ name: 'upload',params: { id: 123 } }" class="block sm:hidden"><i class="fas fa-arrow-circle-up fa-2x"></i></router-link>
     </div>
     <div class="hover:text-white flex items-center">
-      <router-link :to="{ name: 'upload',params: { id: 123 } }" class="hidden sm:block"><i class="fas fa-microphone-alt fa-2x"></i>On Air</router-link>
-      <router-link :to="{ name: 'upload',params: { id: 123 } }" class="sm:hidden block "><i class="fas fa-microphone-alt fa-2x"></i></router-link>
+      <router-link to="/rooms"><i class="fas fa-microphone-alt fa-2x"></i>On Air</router-link>
+      <router-link to="/rooms"><i class="fas fa-microphone-alt fa-2x"></i></router-link>
     </div>
 
     <div class="dropdown inline-block relative ml-4 mr-6">
