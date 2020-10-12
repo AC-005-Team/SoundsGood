@@ -1,65 +1,16 @@
 <template lang="html">
   <div class="">
-    <!-- <div class="flex justify-between text-sm m-4 border-b border-gray-400"> -->
-      <!-- <div class="flex m-2">
-        <button class="m-2 hover:text-orange-500">UpLoad</button>
-        <button class="m-2 hover:text-orange-500">Mastering</button>
-        <button class="m-2 hover:text-orange-500">Your Tracks</button>
-        <button class="m-2 hover:text-orange-500">Insights</button>
-        <button class="m-2 hover:text-orange-500">Pro Plan</button>
-        <button class="m-2 hover:text-orange-500">Pulse</button>
-      </div> -->
-      <!-- <div class="flex items-center">
-        <svg class="svg-inline--fa fa-share-square fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="share-square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M568.482 177.448L424.479 313.433C409.3 327.768 384 317.14 384 295.985v-71.963c-144.575.97-205.566 35.113-164.775 171.353 4.483 14.973-12.846 26.567-25.006 17.33C155.252 383.105 120 326.488 120 269.339c0-143.937 117.599-172.5 264-173.312V24.012c0-21.174 25.317-31.768 40.479-17.448l144.003 135.988c10.02 9.463 10.028 25.425 0 34.896zM384 379.128V448H64V128h50.916a11.99 11.99 0 0 0 8.648-3.693c14.953-15.568 32.237-27.89 51.014-37.676C185.708 80.83 181.584 64 169.033 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48v-88.806c0-8.288-8.197-14.066-16.011-11.302a71.83 71.83 0 0 1-34.189 3.377c-7.27-1.046-13.8 4.514-13.8 11.859z"></path></svg><!-- <i class="fas fa-share-square"></i> -->
-        <!-- <button class="m-2">Creators on SoundsGood</button> -->
-      <!-- </div> -->
-    <!-- </div> -->
+
     <div class="m-4">
           <form @submit.prevent="uploadForm">
 
-
-
-
-
-
-
-
-
-
-
-
-            <!-- <input type="hidden" name="authenticity_token" value="oXk6f8bIOHgjfx2DX3jsKnC0+mDlh5v4kCq/6TWs+i7fZ4ui+JK8LxMc/PKlFYLWeHmjg4x/xAdnt7hbxS1qvw=="> -->
-<!--
-          <div class="m-auto w-2/3 border border-gray-400 p-4">
-            <div class="flex justify-between items-center">
-              <div class="">
-                <div class="flex justify-between items-center">
-                  <div class="pr-2">0% of free Uploads used</div>
-
-                  <button>
-                    <svg class="svg-inline--fa fa-arrow-down fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z"></path></svg><!-- <i class="fas fa-arrow-down"></i> -->
-                  <!-- </button>
-                </div>
-                <div>進度條</div>
-                <div class="flex">
-                  <button class="text-blue-500 hover:text-black">Try Pro Unlimited</button>
-                  <p class="px-2">for unlimited uploads.</p>
-                </div>
-              </div>
-
-              <button class="text-orange-500 border border-orange-600 rounded p-2 hover:bg-orange-600 hover:text-white">Try Pro Unlimited</button>
-
-            </div>
-          </div> -->
 
             <div class="mt-2 m-auto w-2/3 border border-gray-400 p-4">
               <div class="text-center">
                 <p class="py-2 text-2xl">Upload Your Music, audio type must be mp3,ogg,mpeg</p>
 
 
-                  <!-- <button class="text-white bg-orange-600 rounded py-2 px-10 relative w-2/5 m-auto hover:bg-white hover:text-orange-600 border border-orange-600">
-                    Choose Music to Upload
-                  </button><br> -->
+
                     <ValidationProvider rules="required|ext:mp3,ogg,mpeg"  ref="provider" name="audio"  v-slot="{ errors, validate }">
 
                     <input class="song_value" type="file" name="song[track]" id="song_track" @change="handleFileChange" >
@@ -67,7 +18,7 @@
                      <span class="text-red-600">{{ errors[0] }}</span>
                      </ValidationProvider>
 
-                  <div class="text-2xl" id="music">{{ fileName }}</div>
+                  <div class="text-2xl" id="music"></div>
 
                   </div>
                 </div>
@@ -114,7 +65,8 @@
                                 <span class="text-red-600">{{ errors[0] }}</span>
                                 </ValidationProvider>
 
-
+                                        <label for="song_tag_list">Music Genre</label>
+                                        <v-select multiple v-model="selected" :options="options" :value="selected" />
                                         <label for="song_tag_list">Tag list</label>
                                         <vue-tags-input v-model="tag" :tags="tags" @tags-changed="newTags => tags = newTags"/>
 
@@ -134,7 +86,7 @@
 
                                       <div class="flex justify-center items-center p-6 border border-gray-200 rounded">
 
-                                        <button type="submit" @click.prevent="uploadForm" >Submit</button>
+                                        <button type="submit" class="submit" @click.prevent="uploadForm" >Submit</button>
                                         <div class="text-sm">
 
                                           <div class="animation" v-show="display">
@@ -175,6 +127,11 @@
 import VueTagsInput from '@johmun/vue-tags-input';
 import Api from '../../api/api'
 import axios from 'axios';
+import {
+  mapState,
+  mapGetters,
+  mapActions
+} from 'vuex'
 
 
 
@@ -195,7 +152,11 @@ export default {
       tags: [],
       aaa: [],
       value: '',
-      display: false
+      display: false,
+      options:['Blues','Classical','Country','Electronic','Hip-Hop','Instrumental','Jazz','Pop','Rock'
+               ,'Soul-RnB','Podcast'],
+      selected:''
+
     }
   },
   components: {
@@ -210,11 +171,18 @@ export default {
   //   })
   // },
   computed: {
+    ...mapGetters({
+      user_id: 'user/user_id',
+      user_name: 'user/user_name'
+    }),
     getTag() {
       var views = this.tags.map(item => item.text);
       console.log(views);
       return views;
     }
+  },
+  beforeCreate(){
+    this.$store.dispatch('user/loadUser')
   },
 
   methods: {
@@ -247,6 +215,8 @@ export default {
       }
     },
     uploadForm() {
+
+
       if( this.name && this.intro && this.track && this.image ){
         let formData = new FormData();
         formData.append("song[name]", this.name)
@@ -256,20 +226,30 @@ export default {
         this.getTag.forEach((tag) => {
           formData.append("song[tag_items][]", tag)
         })
+        formData.append("song[tag_items][]", this.selected)
+        // for(var pair of formData.entries()) {
+        //   console.log(pair[0]+ ', '+ pair[1]);
+        // }
+
+
         Api().post('/songs', formData).then(response => {
           console.log("QWEQWEQW", response)
           this.display = false;
-          this.$router.push('discover');
+          var u_id = this.user_id
+          window.location.href = `/users/${u_id}`;
+          // this.$router.push('discover');
         }).catch(error => {
           console.log(error.response)
         })
         this.display = true;
       }else{
-        this.$alert("Please fill the form properly");
+        this.$alert("Please fill the form properly!");
       }
     }
-  }
+   }
 }
+
+
 
 
 </script>
@@ -281,6 +261,7 @@ $dark-orange: #b52600;
 $white: #fff;
 $curve: cubic-bezier(0.850, 0.000, 0.550, 1.300);
 $speed: 1.3s;
+
 
 
 // Container
@@ -309,9 +290,9 @@ $speed: 1.3s;
   span {
     display: block;
     background: $orange;
-    width: 8px;
-    height: 10%;
-    border-radius: 14px;
+    width: 10px;
+    // height: 10%;
+    border-radius: 20px;
     margin-right: 20px;
     float: left;
     margin-top: 20%;

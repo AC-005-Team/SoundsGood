@@ -334,6 +334,8 @@ export default {
   transition: 0.2s;
   background-color: #f98060;
 }
+
+
 .show {
   display: block;
   visibility: visible;

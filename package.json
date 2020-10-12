@@ -28,6 +28,7 @@
     "vue-aplayer": "^1.6.1",
     "vue-loader": "^15.9.3",
     "vue-router": "^3.4.3",
+    "vue-select": "^3.10.8",
     "vue-simple-alert": "^1.1.1",
     "vue-template-compiler": "^2.6.12",
     "vueperslides": "^2.10.8",

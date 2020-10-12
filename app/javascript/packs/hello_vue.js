@@ -34,6 +34,10 @@ localize('en', en);
 Vue.component('ValidationObserver', ValidationObserver);
 Vue.component('ValidationProvider', ValidationProvider);
 
+import vSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
+Vue.component("v-select", vSelect);
+
 Vue.use(VueSimpleAlert);
 Vue.config.productionTip = false;
 
