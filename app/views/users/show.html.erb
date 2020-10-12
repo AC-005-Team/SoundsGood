@@ -20,11 +20,26 @@
         <div class="text-white m-2"><%= @user.first_name %></div>
         <div class="text-xl text-orange-700 m-auto mr-2"><%= @user.last_name %></div>
       </div>
-        <div><%= link_to 'create podcast channel', rooms_path %></div>
+      <% if current_user == @user %>
+        <% if current_user.room %>
+          <div>
+            <%= link_to 'start channel', play_room_path(current_user.room.id) %>
+          </div>
+        <% else %>
+          <div>
+            <%= link_to 'create podcast channel', rooms_path %>
+          </div>
+        <% end %>
+      <% else %>
+        <div>
+          <%= link_to 'podcast channel', room_path(@user.room.id) %>
+        </div>
+      <% end %>
     </div>
-    <% if @current_user == @user %>
-      <%= link_to edit_user_path(@user), class: 'text-white bg-orange-600 p-2 rounded' do %>
-        <i class="fas fa-camera"></i>Upload header image
+    <% if current_user == @user %>
+      <%= link_to edit_user_path(@user), class: 'text-white bg-orange-600 p-2 rounded flex items-center' do %>
+        <i class="fas fa-camera"></i>
+        <p class="hidden sm:block">Upload header image</p> 
       <% end %>
     <% end %>
   </div>
@@ -33,40 +48,25 @@
 <%#=左邊使用者專區%>
 <div class="flex items-center m-4 justify-between border-b border-gray-400">
   <div class="ml-4 text-xl hidden md:flex justify-between">
-    <%= link_to "All", user_songs_path(@user.id), class: 'hover:text-orange-600 mr-4' %>
-    <button class="hover:text-orange-600 mr-4">Popular Tracks</button>
-    <button class="hover:text-orange-600 mr-4">Tracks</button>
-    <button class="hover:text-orange-600 mr-4">Albums</button>
-    <button class="hover:text-orange-600 mr-4">Playlists</button>
-    <button class="hover:text-orange-600 mr-4">Reposts</button>
+    <button class="mx-2 text-orange-600 all_btn">All</button>
+    <button class="mx-2 track_btn">Tracks</button>
+    <button class="mx-2 playlist_btn">Playlist</button>
+    <button class="mx-2 reposts_btn">Reposts</button>
   </div>
 
-  <div class="dropdown inline-block relative ml-4 mr-6">
-    <button class="text-gray-500 md:text-white bg-gray-00 py-2 px-4 rounded inline-flex items-center">
-      <i class="fas fa-bars"></i>
-      <p class="mx-2"> All</p>
-    </button>
-    <ul class="dropdown-menu absolute hidden text-gray-700 text-left">
-      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-t">Popular tracks</button>
-      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Tracks</button>
-      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Albums</button>
-      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Playlist</button>
-      <button class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-b">Reposts</button>
-    </ul>
-  </div>
-
-  <div class="flex m-2">
-    <button class="flex items-center mr-4 text-white bg-orange-600 px-2 rounded">
+  <div class="flex justify-between items-center mr-4 text-sm">
+    <button class="flex items-center mx-2 p-1 rounded bg-orange-600 text-white">
       <i class="fas fa-chart-bar"></i>
       <p class="hidden md:block">Your Insights</p> 
-    </button >
-    <button class="flex items-center mr-4"><i class="fas fa-share-square"></i>
-      <p class="hidden md:block">Share</p> 
-    </button >
+    </button>
+    <button class="flex items-center mx-2 p-1 rounded border border-gray-300">
+      <i class="fas fa-share-square"></i>
+      <p class="modal-btn share-btn hidden md:block">Share</p> 
+    </button>
     <% if current_user == @user %>
-      <%= link_to edit_user_path(current_user.id), class: 'mr-4 flex items-center' do %>
+      <%= link_to edit_user_path(current_user), class:'flex items-center mx-2 p-1 rounded border border-gray-300' do %>
         <i class="fas fa-pencil-alt"></i>
-        <p class="hidden md:block">Edit</p> 
+        <p class="hidden md:block"> Edit</p> 
       <% end %>
     <% end %>
   </div>
@@ -76,78 +76,56 @@
 
 <div class="grid grid-cols-12 mx-4 ">
   <div class="col-span-12 md:col-span-9 mx-4">
-    <div class="text-2xl">Recent</div>
-    <%#=左邊專輯專區%>
-    <div class="grid grid-cols-12 my-4">
-      <img class="col-span-12 md:col-span-2 h-32 w-32 bg-cover" style="background-image: url(<% root_path %>/img/user_image_1.png)" alt="">    
-      <div class="col-span-12 md:col-span-10 w-full">
-        <div class="grid grid-cols-12">
-          <div class="col-span-2 md:col-span-1">
-            <i class="fas fa-arrow-circle-right fa-3x"></i>
-          </div>
-          <div class="col-span-8 md:col-span-9">
-            <p class="text-gray-400 text-xs"><%= @user.display_name %></p>
-            <p>Link_to SongName</p>
-          </div>
-          <div class="col-span-2 md:col-span-2 text-gray-400 text-xs">
-            5 days ago
-            ###Tag###
-          </div>
-        </div>
-
-        <%#=超難的音波專區%>
-        <div class="">萱大の音波專區</div>
-        <%#=留言專區%>
-        <div class="flex m-4">
-          <img class="bg-cover w-8 h-8" style="background-image: url(<% root_path %>/img/user_image_1.png)" alt="">
-          <input class="w-full mx-2" type="text" placeholder="Write a comment">
-        </div>
-
-
-        <%#=歌曲功能專區%>
-        <div class="">
-          <div class="flex w-2/3 my-4 p-2 justify-around">
-            <button class="flex items-center border border-gray-300 px-3 rounded">
-              <i class="fas fa-heart"></i>
-              <p class="hidden md:block">like</p> 
-            </button>
-            <button class="flex items-center border border-gray-300 px-3 rounded">
-              <i class="fas fa-share-square"></i>
-              <p class="hidden md:block">share</p> 
-            </button>
-            <button class="flex items-center border border-gray-300 px-3 rounded">
-              <i class="fas fa-plus"></i>
-              <p class="hidden md:block">Add to Next up</p> 
-            </button>
-            <button class="flex items-center border border-gray-300 px-3 rounded">
-              <i class="fas fa-ellipsis-h"></i>
-              <p class="hidden md:block">More</p> 
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> 
-
+    <span class="all_template">
+      <%= render './shared/song_module', songs: @all_songs %>
+      <%= render './shared/playlist_module', playlists: @all_playlists %>
+    </span>
+    <span class="track_template hidden">
+      <%= render './shared/song_module', songs: @user.songs %>
+    </span>
+    <span class="playlist_template hidden">
+      <%= render './shared/playlist_module', playlists: @user.playlists %>
+    </span>
+    <span class="repost_template hidden">
+      <%= render './shared/song_module', songs: @user.repost_songs %>
+      <%= render './shared/playlist_module', playlists: @user.repost_playlists %>
+    </span>
+  </div>
+  <%#=左邊專輯專區%>
+  
 
 
       <%#=右邊使用者專區%>
-  <div class="col-span-12 md:col-span-3 border-l border-gray-400 px-2">
-
-    <div class="flex text-gray-500 mx-4">
-      <button class="mx-2">Follower</button>
-      <button class="mx-2">Following</button>
-      <button class="mx-2">Tracks</button>
+  <div class="hidden md:block col-span-3 border-l border-gray-400 px-2">
+    <div class="flex text-gray-500 mx-4 ">
+      <div>
+        <div class="mx-2">
+          Follower
+        </div>
+        <p class="text-center"><%= @user.followers.count%></p>
+      </div>
+      <div>
+        <div class="mx-2">
+          Following
+        </div>
+        <p class="text-center"><%= @user.followees.count%></p>
+      </div>
+      <div>
+        <div class="mx-2">
+          Tracks
+        </div>
+        <p class="text-center"><%= @user.songs.size%></p>
+      </div>
     </div>
 
     <div class="p-2">
-      <div class="flex justify-between text-gray-500 border-b border-gray-300 text-sm p-2">
-        <div class="">❤️2 likes</div>
-        <div class="">view all</div>
-      </div>
-
+      <% if current_user == @user %>
+        <div class="flex text-gray-500 border-b border-gray-300 text-sm p-2">
+          <%= link_to 'view all', likes_library_index_path, class:'ml-auto' %>
+        </div>
+      <% end %>
         <%#=右邊 user-like area %>
-        <%= render './shared/like_area.html.erb', element: current_user %>
+      <%= render './shared/like_area.html.erb', element: @user %>
 
       </div>
           <div class="flex border-t border-gray-400 m-4">
@@ -178,3 +156,17 @@
 
   </div>  
 </div>
+
+<template class="share-template">
+  <div class="modal-container share-container">
+  </div>
+  <div class="modal-content">
+    <div class="modal-item">
+      <h1>Share</h1>
+    </div>
+    <div class="modal-item">
+      <%= content_tag(:button, 'Twitter', class:'share-twitter', data:{name: current_user.display_name, link: user_path(current_user.id)}) %>
+      <%= content_tag(:button, 'Facebook', class:'share-facebook', data:{name: current_user.display_name, link: user_path(current_user.id)}) %>
+    </div>
+  </div>
+</template>

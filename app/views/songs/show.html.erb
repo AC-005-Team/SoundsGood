@@ -7,7 +7,7 @@
         <%= content_tag(:li, '▶', class:'getURL fa-3x rounded-full', data: {id: @song.id} ) %>
         <div class="mx-2">
           <div class="bg-black rounded p-1 text-white m-1">
-            <%=@song.user.display_name%>
+            <%= @song.user.display_name %>
           </div>
           <div class="flex bg-gray-900 rounded">
             <div class="text-2xl text-white m-2"><%= title @song.name %></div>
@@ -99,19 +99,19 @@
             <p class="hidden md:block">Create Playlist</p> 
           <% end %>
         <% end %>
-        <button class="p-1 text-gray-600">
+        <div class="p-1 text-gray-600">
           <i class="fas fa-chevron-circle-right"></i>
-          10.2K
-        </button>
+          <%= @song.played_times %> 
+        </div>
         <div class="p-1 text-gray-600">
           <i class="fas fa-heart"></i>
           <span class='liked-count'>
-            <%=@song.liked_users.count %> 
+            <%= @song.liked_users.count %> 
           </span>
         </div>
         <button class="p-1 text-gray-600">
           <i class="fas fa-retweet"></i>
-          <%=@song.reposted_users.count %> 
+          <%= @song.reposted_users.count %> 
         </button>
 
       </div>

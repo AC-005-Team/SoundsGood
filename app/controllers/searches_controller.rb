@@ -1,4 +1,6 @@
 class SearchesController < ApplicationController
+  before_action :authenticate_user!, only: [:show, :result]
+  before_action :find_song, only: [:like, :repost]
 
   def show
     return if params[:search].blank?
@@ -18,17 +20,20 @@ class SearchesController < ApplicationController
     @params_search = params[:search] 
     @users = User.name_search("display_name", params[:search])
     @songs = Song.name_search("name", params[:search]).includes(:tags)
-    @Playlists = Playlist.name_search("name", params[:search])
+    @playlists = Playlist.name_search("name", params[:search])
   end
 
   def like
-    @song = Song.find(params[:search_id])
     current_user.toggle_like_song(@song)
   end
 
   def follow
     @user = User.find(params[:search_id])
     current_user.toggle_follow(@user)
+  end
+
+  def repost
+    current_user.toggle_repost_song(@song)
   end
   
 private
@@ -47,6 +52,14 @@ private
 
   def favorited_by?(user)
     liked_users.include?(user)
+  end
+
+  def reposted_by?(user)
+    reposted_users.include?(user)
+  end
+
+  def find_song
+    @song = Song.find(params[:search_id])
   end
 
 end

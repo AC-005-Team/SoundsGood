@@ -4,7 +4,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
     btn.addEventListener('click', ()=>{
       let host = window.location.origin
       let song_id = btn.getAttribute('result-like-id')
-      fetch(`${host}/searches/${song_id}/like`)
+      const csrfToken = document.querySelector('meta[name="csrf-token"]').content
+      fetch(`${host}/searches/${song_id}/like`, {
+        method: 'PATCH',
+        headers: {
+          'x-csrf-token': csrfToken
+        }})
       .then(response => {
         if(response.ok){
           let icon = btn.children[0]
