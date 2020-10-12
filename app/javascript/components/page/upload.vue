@@ -130,8 +130,11 @@
                                       </div>
 
 
+
+
                                       <div class="flex justify-center items-center p-6 border border-gray-200 rounded">
 
+                                        <button type="submit" @click.prevent="uploadForm" >Submit</button>
                                         <div class="text-sm">
 
                                           <div class="animation" v-show="display">
@@ -161,7 +164,6 @@
                                       </div>
                                       </div>
                                     </form>
-                                    <button type="submit" value="Submit">Submit</button>
                                   </div>
 
   </div>
@@ -245,7 +247,7 @@ export default {
       }
     },
     uploadForm() {
-      if(this.name && this.intro && thi.strack && this.image){
+      if( this.name && this.intro && this.track && this.image ){
         let formData = new FormData();
         formData.append("song[name]", this.name)
         formData.append("song[intro]", this.intro)
@@ -254,31 +256,22 @@ export default {
         this.getTag.forEach((tag) => {
           formData.append("song[tag_items][]", tag)
         })
+        Api().post('/songs', formData).then(response => {
+          console.log("QWEQWEQW", response)
+          this.display = false;
+          this.$router.push('discover');
+        }).catch(error => {
+          console.log(error.response)
+        })
+        this.display = true;
       }else{
-        this.$alert("Hello Vue Simple Alert.");
+        this.$alert("Please fill the form properly");
       }
-      // console.log(this.getTag)
-      // for (var pair of formData.entries()) {
-      //   console.log(pair[0] + ',' + pair[1])
-      // }
-      // const config = {
-      //   onUploadProgress: progressEvent => console.log(progressEvent.loaded)
-      // }
-      Api().post('/songs', formData).then(response => {
-
-        console.log("QWEQWEQW", response)
-        this.display = false;
-        this.$router.push('discover');
-      }).catch(error => {
-        console.log(error.response)
-      })
-      this.display = true;
-
     }
-
-
   }
 }
+
+
 </script>
 
 <style lang="scss" scoped>
