@@ -44,5 +44,6 @@ yarn-debug.log*
 .env
 *.dev
 *.key
-/config/cred entials/development.key
+config/credentials/development.key
+/config/credentials/development.key
 /config/credentials/credentials.key

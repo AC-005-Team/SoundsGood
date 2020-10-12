@@ -56,9 +56,9 @@
               <div class="flex justify-between text-xs">
                 <div>
                   <i class="fas fa-user-friends"></i>
-                    <span class="user_follower_count">
-                      <%= user.followers.count %>
-                    </span>
+                  <span class="user_follower_count">
+                    <%= user.followers.count %>
+                  </span>
                   <i class="fab fa-soundcloud"></i>
                     <span>
                       <%= user.songs.size %>
@@ -79,7 +79,6 @@
         <% end %>
       <% end %>
     </span>
-      
       <span class="track_template">
         <%= render './shared/song_module', songs: @songs %>
       </span>
