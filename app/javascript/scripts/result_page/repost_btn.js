@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', ()=>{
-  let like_btn = document.querySelectorAll('.like_btn')
-  like_btn.forEach(function(btn){
+  let repost_btn = document.querySelectorAll('.repost_btn')
+  repost_btn.forEach(function(btn){
     btn.addEventListener('click', ()=>{
       let host = window.location.origin
-      let song_id = btn.getAttribute('result-like-id')
+      let repost_id = btn.getAttribute('result-repost-id')
       const csrfToken = document.querySelector('meta[name="csrf-token"]').content
-      fetch(`${host}/searches/${song_id}/like`, {
+      fetch(`${host}/searches/${repost_id}/repost`, {
         method: 'PATCH',
         headers: {
           'x-csrf-token': csrfToken
@@ -14,15 +14,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
         if(response.ok){
           let icon = btn.children[0]
           let count = btn.children[1]
-          if(icon.getAttribute('data-prefix') == 'far'){
+          if(icon.style.color == '' || icon.getAttribute('style') == 'color: black;'){
             let num = Number(count.textContent)
             icon.style.color = "orange"
-            icon.setAttribute('data-prefix', 'fas')
             count.innerHTML = num + 1
           }else{
             let num = Number(count.textContent)
             icon.style.color = "black"
-            icon.setAttribute('data-prefix', 'far')
             count.innerHTML = num - 1
           }
         }

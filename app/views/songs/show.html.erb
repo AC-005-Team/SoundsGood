@@ -7,7 +7,7 @@
         <%= content_tag(:li, '▶', class:'getURL fa-3x rounded-full play-btn', data: {id: @song.id} ) %>
         <div class="">
           <div class="bg-black rounded p-1 text-white m-1">
-            <%=@song.user.display_name%>
+            <%= @song.user.display_name %>
           </div>
           <div class="flex bg-gray-900 rounded">
             <div class="text-2xl text-white m-2"><%= title @song.name %></div>
@@ -79,7 +79,7 @@
             <span class="hidden md:block">Repost</span>
           </button>
         <% end%> 
-        <button class="flex items-center modal-btn share-btn border border-gray-400 p-1 rounded">
+        <button class="modal-btn share-btn flex border border-gray-400 p-1 rounded">
           <i class="fas fa-share-square"></i>
           <p class="hidden md:block">Share</p> 
         </button>
@@ -88,28 +88,28 @@
           <p class="hidden md:block">Add to Next Up</p> 
           
         </button>
-        <button class="flex items-center modal-btn addplaylist-btn border border-gray-400 p-1 rounded">
+        <button class="modal-btn addplaylist-btn flex border border-gray-400 p-1 rounded">
           <i class="fas fa-plus"></i>
           <p class="hidden md:block">Add to Playlist</p> 
         </button>
-        <% if current_user%>
-          <%=link_to new_user_playlist_path(current_user), class:'border border-gray-400 p-1 rounded' do %>
-            <i class="fas fa-bolt"></i>Create Playlist
-          <% end %>
-        <% end %>
-        <button class="p-1 text-gray-600">
+        
+        <!-- @todo: 刪掉會跑版，要調整 -->
+        <button class="p-1 text-gray-600 .invisible">
+        </button>    
+
+        <div class="p-1 text-gray-600">
           <i class="fas fa-chevron-circle-right"></i>
-          10.2K
-        </button>
+          <%= @song.played_times %> 
+        </div>
         <div class="p-1 text-gray-600">
           <i class="fas fa-heart"></i>
           <span class='liked-count'>
-            <%=@song.liked_users.count %> 
+            <%= @song.liked_users.count %> 
           </span>
         </div>
         <button class="p-1 text-gray-600">
           <i class="fas fa-retweet"></i>
-          <%=@song.reposted_users.count %> 
+          <%= @song.reposted_users.count %> 
         </button>
 
       </div>
@@ -195,7 +195,7 @@
                   </div>
                   <p class=""> <%=reply.content%> </p>
                 </div>
-                <div class="w-2/12 text-gray-400">
+                <div class="w-3/12 text-gray-400">
                   <p><%= time_diff(DateTime.now, reply.created_at) %>
                   <%if is_current_user?(comment.user)%>
                   <button class="border border-gray-400 p-1 rounded"> <%= link_to "Delete", comment_path(song_id: @song.id, id: reply.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%> </button>
@@ -259,18 +259,9 @@
   
 </div>
 
-<!-- @todo-dropdownlist
-<div class="dropdown">
-  <button class="dropbtn">+</button>
-  <div id="myDropdown" class="dropdown-content">
-    <%= link_to "add to play next", '###' , id: 'addtoplay', data: {id: @song.id}  %>
-    <%#= link_to "add to playlist",add_to_playlist_song_path(@song), data: {}  %>
-  </div>
-</div> -->
-
-  <div id="player1" class="aplayer"></div>
 
 <% #以下之後用Vue藏內容應該可以 %>
+
 <template class="share-template">
   <div class="modal-container share-container">
   </div>
@@ -289,27 +280,43 @@
   <div class="modal-container addplaylist-container">
   </div>
   <div class="modal-content">
-    <div class="modal-item">
-      <h2>Add to playlist</h2>
+    <div class="modal-item flex" id="addplaylist-modal">
+      <h2 class="mr-4 text-red-600">Add to playlist</h2>
+      <h2>Create a playlist</h2>
     </div>
-    <div class="modal-item" data-controller="playlist" data-playlist-song="<%= @song.id %>">
-    <% if @playlists %>
-      <% @playlists.each do |playlist| %>
-        <li>Playlist：<%= link_to playlist.name, playlist_path(playlist) %>
-        <% if @song.added_by?(playlist) %>
-          <button class="border border-orange-500 text-red-600 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
-            <span>Added</span>
-          </button>
-        </li>
-        <% else %>
-          <button class="border border-gray-400 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
-            <span>Add to playlist</span>
-          </button>
-        </li>
-        <% end %>
-      <% end %> 
-    <% end %>
-   </div>
+    <div class="modal-item" id="addplaylist-content" data-controller="playlist" data-playlist-song="<%= @song.id %>">
+      <% if @playlists %>
+        <% @playlists.each do |playlist| %>
+          <li>Playlist：<%= link_to playlist.name, playlist_path(playlist) %>
+          <% if @song.added_by?(playlist) %>
+            <button class="border border-orange-500 text-red-600 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
+              <span>Added</span>
+            </button>
+          </li>
+          <% else %>
+            <button class="border border-gray-400 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
+              <span>Add to playlist</span>
+            </button>
+          </li>
+          <% end %>
+        <% end %> 
+      <% end %>
+    </div>
+    <div class="modal-item hidden" id="createplaylist-content">
+    
+      <%= form_for(@playlist, url: playlists_path(song_id: @song.id), remote: true)  do |f| %>
+        <div>
+          <%= f.label :name %>
+          <%= f.text_field :name, class:'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3'%>
+        </div>
+        <div>
+          <%= f.label :intro %>
+          <%= f.text_field :intro, class:'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3' %>
+        </div>
+        <%= f.submit 'Save', class: "w-full px-2 py-2 text-white rounded bg-orange-700 create-submit" %>
+      <% end %>
+
+    </div>
   </div>
 </template>
 <% set_meta_tags og: {

@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :discover]
   before_action :find_song
   before_action :authenticate_user!, only: [:stream]
   

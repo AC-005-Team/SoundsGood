@@ -1,11 +1,12 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy, :play]
   before_action :find_token_key, only: [:show, :play]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /rooms
   # GET /rooms.json
   def index
-    @rooms = Room.all
+    @rooms = Room.all.includes(:user)
   end
 
   # GET /rooms/1
@@ -35,7 +36,7 @@ class RoomsController < ApplicationController
 
     respond_to do |format|
       if @room.save
-        format.html { redirect_to @room, notice: 'Room was successfully created.' }
+        format.html { redirect_to play_room_path(@room), notice: 'Room was successfully created.' }
         format.json { render :show, status: :created, location: @room }
       else
         format.html { render :new }
@@ -49,7 +50,7 @@ class RoomsController < ApplicationController
   def update
     respond_to do |format|
       if @room.update(room_params)
-        format.html { redirect_to @room, notice: 'Room was successfully updated.' }
+        format.html { redirect_to rooms_path, notice: 'Room was successfully updated.' }
         format.json { render :show, status: :ok, location: @room }
       else
         format.html { render :edit }
@@ -80,7 +81,7 @@ class RoomsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def room_params
-      params.require(:room).permit(:name, :session_id).merge(user_id: current_user.id)
+      params.require(:room).permit(:name).merge(user_id: current_user.id)
     end
 
     def find_token_key

@@ -25,8 +25,9 @@ Rails.application.routes.draw do
   end
 
   resources :searches, only:[] do
-    get :like
-    get :follow
+    patch :like
+    patch :follow
+    patch :repost
   end
 
   resources :users, only: [:edit, :update, :show] do
@@ -45,18 +46,21 @@ Rails.application.routes.draw do
         post :like
         post :add_to_playlist
         post :repost
+        patch :add_played_times
       end
       resources :comments, only: [:create, :destroy]
       member do
         get :share
       end
     end
-    resources :playlists, shallow: true do
-      member do 
-        post :like
-        post :repost
-      end  
-    end
+    resources :playlists, only: [:index] 
+  end
+
+  resources :playlists, only: [:create, :show, :edit, :update, :destroy] do
+    member do 
+      post :like
+      post :repost
+    end  
   end
   
   resources :stream, only: [:index]
