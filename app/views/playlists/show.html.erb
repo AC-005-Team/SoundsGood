@@ -1,4 +1,149 @@
+<div class="grid grid-cols-12 bg-gradient-to-r from-red-500 via-white to-orange-700 mx-6">
+  <div class="col-span-8 m-4 flex flex-col justify-between">
+    <div class="flex justify-between">
+      <div class="flex items-center">
+        <div class="">
+          <i class="fas fa-play fa-2x"></i>
+        </div>
+        <div class="">
+          <p class="">user_name</p>
+          <p class=""><%= @playlist.name%></p>
+        </div>
+      </div>
+      <div class="">5 days ago</div>
+    </div>
+    <div class="">
+      <div class="w-full bg-black">
+      1
+      </div>
+      音波專區
+    </div>
+  </div>
 
+  <div class="col-span-4 m-auto my-4 ">
+    <img class="h-64 w-64 overflow-hidden bg-black sm:block hidden" src="" alt="">
+  </div>
+</div>
+
+<div class="grid grid-cols-12 m-6">
+  <div class="col-span-12 md:col-span-9">
+    <%#= 功能專區 %>
+    <div class="flex justify-start m-6">
+      <button class="flex items-center border border-gray-300 px-3 rounded">
+        <svg class="heart" width="15px" viewBox="0 0 500 500" >
+          <path d="M295.706,35.522C295.706,35.522,295.706,35.522,295.706,35.522c-34.43-0.184-67.161,14.937-89.339,41.273
+          c-22.039-26.516-54.861-41.68-89.339-41.273C52.395,35.522,0,87.917,0,152.55C0,263.31,193.306,371.456,201.143,375.636
+          c3.162,2.113,7.286,2.113,10.449,0c7.837-4.18,201.143-110.759,201.143-223.086C412.735,87.917,360.339,35.522,295.706,35.522z"/>
+        </svg>
+        <p class="hidden md:block">Like</p>
+      </button>
+      <button class="flex items-center border border-gray-300 px-3 rounded">
+        <i class="fas fa-share-square"></i>
+        <p class="hidden md:block">Share</p>
+      </button>
+      <button class="flex items-center border border-gray-300 px-3 rounded">
+        <i class="fas fa-pencil-alt"></i>
+        <p class="hidden md:block">Edit</p>
+      </button>
+      <button class="flex items-center border border-gray-300 px-3 rounded">
+        <i class="fas fa-stream"></i>
+        <p class="hidden md:block">Add to Next Up</p>
+      </button>
+      <button class="flex items-center border border-gray-300 px-3 rounded">
+        <i class="fas fa-plus"></i>
+        <p class="hidden md:block">Add to Playlist</p>
+      </button>
+    </div>
+    <%#= 音樂資料專區起始 %>
+    <div class="grid grid-cols-12 mx-6">
+      <div class="col-span-12 md:col-span-2">
+        <img class="w-32 h-32 overflow-hidden bg-black rounded-full"src="" alt="">
+        <p class="">user_name</p>
+        <p class="">follower</p>
+      </div>
+
+      <div class="col-span-12 md:col-span-10">
+        <% @playlist.songs.each do |song| %>
+
+        <div class="flex justify-between">
+          <div class="flex">
+            <div class=""><%= image_tag song.image_url, width: '200px' %></div>
+
+            <div class=""><%= content_tag(:li,song.name, data: {value: song.name} ) %></div>
+            <div class=""><%= content_tag(:li,song.intro, data: {value: song.intro} ) %></div>
+          </div>
+          <div class=""><%= content_tag(:li, 'play ▶', class:'getURL', data: {id: song.id} ) %></div>
+          <div class="dropdown">
+            <button class="dropbtn">+</button>
+            <div id="myDropdown" class="dropdown-content">
+            <%= link_to "add to play next", '###' , id: 'addtoplay', data: {id: song.id}  %>
+            <%#= link_to "add to playlist", list_add_path(song.id), data: {}  %>
+           </div>
+          </div>
+
+        </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-3">
+    <%#= 右邊專區 %>
+    <div class="col-span-3 m-4">
+      <div class="flex justify-between text-gray-500 border-b border-gray-300 text-sm p-2">
+        <div class=""><i class="fas fa-heart"></i>Related Tracks</div>
+        <button class="">view all</button>
+      </div>
+
+      <div class="my-4 flex">
+        <img class="w-1/5" src="https://i1.sndcdn.com/artworks-tzoA3a4voEv4g77c-Z5qUqQ-t120x120.jpg" alt="">
+        <div class="w-4/5 mx-2 text-xs">
+          <div class="text-gray-500">Cherokee Recordings</div>
+          <div class="">Dean Robert - Morning</div>
+          <div class="flex justify-around">
+            <a href="">➡️261K</a>
+            <a href="">❤️3315</a>
+            <a href="">⭕️60</a>
+            <a href="">☁️101</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex border-t border-gray-400">
+        <div class="my-3 text-xs table-row-group">
+
+          <div class="text-gray-500">
+            <span class="hover:text-black"><a href="#">Legal</a></span>
+
+            <span class="hover:text-black"><a href="#">Privacy</a></span>
+
+            <span class="hover:text-black"><a href="#">Cookies</a></span>
+
+            <span class="hover:text-black"><a href="#">Imprint</a></span>
+
+            <span class="hover:text-black"><a href="#">Creator Resources</a></span>
+
+            <span class="hover:text-black"><a href="#">Blog</a></span>
+
+            <span class="hover:text-black"><a href="#">Charts</a></span>
+
+            <span class="hover:text-black"><a href="#">Popular Search</a></span>
+          </div>
+
+            <div class="mt-2 mb-20">
+              Language: English (US)
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+https://soundcloud.com/cy4eroa8bbxx/sets/top-50-all-music-genres
+http://127.0.0.1:3000/playlists/1
 
 <h1><%= @playlist.name%></h1>
 <div>

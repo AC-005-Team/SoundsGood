@@ -1,3 +1,4 @@
+import { renderComments } from './comment'
 import WaveSurfer from 'wavesurfer.js'
 import CursorPlugin from 'wavesurfer.js/src/plugin/cursor.js'
 document.addEventListener('DOMContentLoaded', () => {
@@ -7,36 +8,44 @@ document.addEventListener('DOMContentLoaded', () => {
   if(wavePlace){
     const proxyurl = "https://cors-anywhere.herokuapp.com/" // for accessing s3
     const playingNowPath = document.querySelectorAll(".waveform-wrap")
-    if(wavePlace.classList.contains('waveform-light')){
-      // light
-      playingNowPath.forEach(songEl => {
-        renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb')
-        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#ffffff')
-      });
-    } else {
-      // dark
-      playingNowPath.forEach(songEl => {
-        renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb')
-        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#555555')
-      });
-  }
-
+    const isLight = el => { return el.classList.contains('waveform-light') }
+    const isSmall = el => { return el.classList.contains('waveform-small') }
+    playingNowPath.forEach(songEl=>{
+      if(isLight(songEl) && isSmall(songEl)){
+        console.log('light and small')
+        renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb', 0.2)
+        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#ffffff', 0.5)
+      } else if(isLight(songEl) && !isSmall(songEl)) {
+        console.log('light and not small')
+        renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb', 0.32)
+        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#ffffff', 0.8)
+      } else if(!isLight(songEl) && isSmall(songEl)) {
+        console.log('not light and small')
+        renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb', 0.2)
+        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#555555', 0.5)
+      } else {
+        console.log('not light and not small')
+        renderCommentSpace(songEl.dataset.path, songEl.dataset.filename, songEl, '#bbbbbb', 0.32)
+        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, '#555555', 0.8)
+      }
+      renderComments(songEl)
+    })
     function getPeak(url, songDataName, wavesurfer) {
       fetch(peakStorageRoot+songDataName)
       .then(response => {
         if (!response.ok) {
-          loadDefaultPeak(url, wavesurfer)
+          loadDefaultPeak(url, wavesurfer) // if no peak data, load default
           return
         }
         return response.json()
       })
       .then(peaks => {
         if(peaks.length == 0){
-          loadDefaultPeak(url, wavesurfer)
+          loadDefaultPeak(url, wavesurfer) // if peak data contains error, load default
           return
         }
         console.log('------------------------------')
-        console.log('loaded peaks! sample_rate: ' + peaks.sample_rate)
+        console.log('peaks loaded! sample_rate: ' + peaks.sample_rate)
         console.log('------------------------------')
         // load peaks into wavesurfer.js
         // wavesurferDummy.load(proxyurl+url, peaks.data)
@@ -48,27 +57,29 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     }
     
-    const loadDefaultPeak = (url,wavesurfer) => fetch(peakStorageRoot+'default')
-    .then(response => {
-      if(!response.ok) {
-        throw new Error("HTTP error " + response.status)
-      }
-      return response.json()
-    })
-    .then(peaks => {
-      console.log('------------------------------')
-      console.log('loaded default! sample_rate: ' + peaks.sample_rate)
-      console.log('------------------------------')
-      // load peaks into wavesurfer.js
-      // wavesurferDummy.load(proxyurl+url, peaks.data)
-      wavesurfer.load(proxyurl+url, peaks.data)
-    })
-    .catch((e) => {
-      console.error('error', e)
-      wavesurfer.load(proxyurl+url)
-    })
+    function loadDefaultPeak(url,wavesurfer){
+      fetch(peakStorageRoot+'default')
+      .then(response => {
+        if(!response.ok) {
+          throw new Error("HTTP error " + response.status)
+        }
+        return response.json()
+      })
+      .then(peaks => {
+        console.log('------------------------------')
+        console.log('default loaded! sample_rate: ' + peaks.sample_rate)
+        console.log('------------------------------')
+        // load peaks into wavesurfer.js
+        // wavesurferDummy.load(proxyurl+url, peaks.data)
+        wavesurfer.load(proxyurl+url, peaks.data)
+      })
+      .catch((e) => {
+        console.error('error', e)
+        wavesurfer.load(proxyurl+url)
+      })
+    }
 
-    function renderWaveForm(url, songDataName, parentSelector, waveColor) {
+    function renderWaveForm(url, songDataName, parentSelector, waveColor, size) {
       var domEl = document.createElement('div')
       domEl.classList.add('waveform')
       parentSelector.appendChild(domEl)
@@ -79,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         progressColor: '#ff7626',
         cursorColor: '',
         barWidth: 3,
-        barHeight: 0.8,
+        barHeight: size,
         height: 150,
         barRadius: 2,
         cursorWidth: 1,
@@ -98,11 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
       });
       getPeak(url, songDataName, wavesurfer);
-      console.log('ok');
       return wavesurfer;
     }
 
-    function renderCommentSpace(url, songDataName, parentSelector, waveColor) {
+    function renderCommentSpace(url, songDataName, parentSelector, waveColor, size) {
       var domEl = document.createElement('div')
       domEl.classList.add('waveform-comment-space')
       domEl.setAttribute('data-id', parentSelector.dataset.id)
@@ -113,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
         waveColor: waveColor, //@todo: change color
         progressColor: '#ffcfb5',
         barWidth: 3,
-        barHeight: 0.32,
+        barHeight: size,
         height: 150,
         barRadius: 2,
         cursorWidth: 0,
@@ -132,11 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
       });
       getPeak(url, songDataName, wavesurfer);
-      console.log('ok');
-      
       return wavesurfer;
     }
-    
-
   }
 })

@@ -10,16 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_25_022448) do
+ActiveRecord::Schema.define(version: 2020_10_10_064404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "chatrooms", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
 
   create_table "comments", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -104,6 +98,9 @@ ActiveRecord::Schema.define(version: 2020_09_25_022448) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "image_data"
+    t.integer "reposts_count", default: 0
+    t.integer "comments_count", default: 0
+    t.integer "played_times", default: 0
     t.index ["user_id"], name: "index_songs_on_user_id"
   end
 
@@ -149,6 +146,7 @@ ActiveRecord::Schema.define(version: 2020_09_25_022448) do
     t.string "fb_token"
     t.string "google_uid"
     t.string "google_token"
+    t.integer "songs_count", default: 0
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -1,4 +1,5 @@
 class SongsController < ApplicationController
+
 	before_action :authenticate_user!, except: [:show]
 	before_action :find_song, only: [:show, :destroy, :like, :repost, :add_to_playlist, :share]
 
@@ -33,6 +34,7 @@ class SongsController < ApplicationController
 		@comment = @song.comments.new
 		@comments = @song.comments.includes(:user, replies:[:user]).where(reply_id: nil).order(id: :desc)
 		@related_song = Song.all.limit(3)
+		@playlist = Playlist.new
 		begin
 			@playlists = current_user.playlists
 		rescue
@@ -72,17 +74,19 @@ class SongsController < ApplicationController
 		end
 	end
 
+	def add_played_times
+    @song.played_times += 1
+  end
+
 	def share;end
 
 	private
 
 	def song_params
-		# byebug
 		params.require(:song).permit(:name, :intro, :track, :image, tag_items: [])
 	end
 
 	def find_song
 		@song = Song.find(params[:id])
 	end
-
 end

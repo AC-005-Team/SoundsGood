@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:follow]
-  before_action :find_user, only: [:show, :follow, :followers, :following, :likes, :comments]
+  before_action :find_user, only: [:edit, :update, :show, :follow, :followers, :following, :likes, :comments]
 
-  def show;end
+  def show
+    @all_songs = @user.songs | @user.repost_songs
+    @all_playlists = @user.playlists | @user.repost_playlists
+  end
 
   def follow
     current_user.toggle_follow(@user)
@@ -37,7 +40,7 @@ class UsersController < ApplicationController
   def comments
     @comments = @user.comments.includes(:songs)
   end
-  private
+private
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :display_name, :avatar, :email, :header)
