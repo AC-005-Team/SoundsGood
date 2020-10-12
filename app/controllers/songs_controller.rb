@@ -25,12 +25,12 @@ class SongsController < ApplicationController
     @comment = @song.comments.new
     @comments = @song.comments.includes(:user, replies:[:user]).where(reply_id: nil).order(id: :desc)
     @related_song = Song.all.limit(3)
+    @playlist = Playlist.new
     begin
       @playlists = current_user.playlists
     rescue
       p 'not logged in'
     end
-    @playlist = Playlist.new
   end
 
   def destroy

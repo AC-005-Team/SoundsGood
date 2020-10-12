@@ -187,7 +187,7 @@
                   </div>
                   <p class=""> <%=reply.content%> </p>
                 </div>
-                <div class="w-2/12 text-gray-400">
+                <div class="w-3/12 text-gray-400">
                   <p><%= time_diff(DateTime.now, reply.created_at) %>
                   <%if is_current_user?(comment.user)%>
                   <button class="border border-gray-400 p-1 rounded"> <%= link_to "Delete", comment_path(song_id: @song.id, id: reply.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%> </button>
