@@ -22,6 +22,8 @@ import VueRouter from 'vue-router';
 import { ValidationObserver, ValidationProvider, extend, localize } from 'vee-validate';
 import en from 'vee-validate/dist/locale/en.json';
 import * as rules from 'vee-validate/dist/rules';
+import VueSimpleAlert from "vue-simple-alert";
+
 Object.keys(rules).forEach(rule => {
   extend(rule, rules[rule]);
 });
@@ -32,6 +34,7 @@ localize('en', en);
 Vue.component('ValidationObserver', ValidationObserver);
 Vue.component('ValidationProvider', ValidationProvider);
 
+Vue.use(VueSimpleAlert);
 Vue.config.productionTip = false;
 
 

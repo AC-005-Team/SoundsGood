@@ -161,6 +161,7 @@
                                       </div>
                                       </div>
                                     </form>
+                                    <button type="submit" value="Submit">Submit</button>
                                   </div>
 
   </div>
@@ -244,14 +245,18 @@ export default {
       }
     },
     uploadForm() {
-      let formData = new FormData();
-      formData.append("song[name]", this.name)
-      formData.append("song[intro]", this.intro)
-      formData.append("song[track]", this.track)
-      formData.append("song[image]", this.image)
-      this.getTag.forEach((tag) => {
-        formData.append("song[tag_items][]", tag)
-      })
+      if(this.name && this.intro && thi.strack && this.image){
+        let formData = new FormData();
+        formData.append("song[name]", this.name)
+        formData.append("song[intro]", this.intro)
+        formData.append("song[track]", this.track)
+        formData.append("song[image]", this.image)
+        this.getTag.forEach((tag) => {
+          formData.append("song[tag_items][]", tag)
+        })
+      }else{
+        this.$alert("Hello Vue Simple Alert.");
+      }
       // console.log(this.getTag)
       // for (var pair of formData.entries()) {
       //   console.log(pair[0] + ',' + pair[1])
