@@ -67,7 +67,7 @@ export default new VueRouter({
       props: true,
     },
     {
-      path: '/playlist/:id',
+      path: '/playlists/:id',
       component: 'playlist_page',
       props: true,
       component: () => import(/* webpackChunkName: "Playlist_page" */ './components/page/you/playlists/playlist_page'),
