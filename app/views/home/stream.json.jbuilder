@@ -2,6 +2,7 @@ json.array! @items  do |item|
   json.user_name item.user.display_name #po文的人
   json.user_id item.user.id #po文的人的id
   json.created_at item.created_at #po文的時間
+  json.user_avatar item.user.avatar_url || '/img/user_image.png'
   json.media_id item.id #po的playlist或song的id
   case
   when item.class == Song
