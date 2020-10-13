@@ -1,5 +1,6 @@
 class LibraryController < ApplicationController
-  before_action :authenticate_user!
+  layout "spa"
+  before_action :authenticate_user!, only: [:likes]
 
   def library
     @songs = Song.all.includes(:tags)
