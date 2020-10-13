@@ -30,7 +30,7 @@ export function waveShow(ap){
     const isSmall = el => { return el.classList.contains('waveform-small') }
     playingNowPath.forEach(songEl=>{
       if(isLight(songEl) && !isSmall(songEl)){
-        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, waveLightLarge,waveProgressLarge, 0.8, 120)
+        renderWaveForm(songEl.dataset.path, songEl.dataset.filename, songEl, waveLightLarge,waveProgressLarge, 0.7, 120)
         createCommentSpace(songEl, 'large')
       } else {
         console.log('Dark, small')

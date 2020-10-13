@@ -1,9 +1,12 @@
 .waveform-wrap {
   position: relative;
   height: 150px;
-  opacity: .75;
+  opacity: .85;
   transition: .25s;
   cursor: pointer;
+}
+.waveform-small {
+  opacity: .75;
 }
 .waveform-wrap:hover {
   opacity: 1;
@@ -52,18 +55,33 @@
 }
 .comment-img {
   object-fit: cover;
-  width:20px;
-  height: 20px;
+  width:30px;
+  height: 30px;
   z-index:5;
 }
+.waveform-small>.waveform-comment-space>.comment-avatar>.comment-img {
+  width:20px;
+  height: 20px;
+}
 .comment-user {
-  font-size: 10px;
+  font-size: 16px;
+  font-weight: 600;
   color: rgb(255,118,38);
 }
-.comment-content {
+.waveform-small>.waveform-comment-space>.comment-avatar>.comment-on-wave-wrap>.comment-user {
   font-size: 10px;
+}
+.comment-content {
+  font-size: 16px;
   color: #ffffff
+}
+.waveform-small>.waveform-comment-space>.comment-avatar>.comment-on-wave-wrap>.comment-content {
+  font-size: 10px;
+  color: #000000;
 }
 .comment-on-wave-wrap {
   transition: .5s;
+}
+.comment-line-reverse {
+  margin-right: 18px !important;
 }

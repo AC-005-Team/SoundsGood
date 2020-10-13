@@ -89,7 +89,7 @@ export function renderComments(song, ap){
     domEl.setAttribute('style', `left: ${Math.floor(comment.timepoint/duration*parentWidth)}px`)
     song.appendChild(domEl)
     if (comment.timepoint/duration>0.5){
-      domEl.innerHTML = `<img class ='comment-img' src='${comment.user_img}' style=''><div class="flex flex-row-reverse comment-on-wave-wrap opacity-0 absolute hidden" style="right:0px;min-width:max-content"><div class="comment-line" style="margin-right:18px;margin-left:1px"></div><p class="comment-user pr-1 pt-1">${comment.user_name}</p><p class="pr-1 pt-1 comment-content">${comment.content}</p></div>`
+      domEl.innerHTML = `<img class ='comment-img' src='${comment.user_img}' style=''><div class="flex flex-row-reverse comment-on-wave-wrap opacity-0 absolute hidden" style="right:0px;min-width:max-content"><div class="comment-line comment-line-reverse" style="margin-right:28px;margin-left:1px"></div><p class="comment-user pr-1 pt-1">${comment.user_name}</p><p class="pr-1 pt-1 comment-content">${comment.content}</p></div>`
     }else{
       domEl.innerHTML = `<img class ='comment-img' src='${comment.user_img}' style=''><div class="flex comment-on-wave-wrap opacity-0 hidden absolute" style="min-width: max-content"><div class="comment-line"></div><p class="comment-user pl-1 pt-1">${comment.user_name}</p><p class="pl-1 pt-1 comment-content">${comment.content}</p></div>`
     }
