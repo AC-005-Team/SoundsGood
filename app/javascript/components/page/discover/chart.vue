@@ -30,7 +30,7 @@ slide-multiple
 
             <div class="flex-col justify-between">
               <div class="buttons flex flex-reversed rigt-0 items-center z-10">
-                <i class="fa fa-ellipsis-h mr-2" @click.stop="toggle"></i>
+                <i class="fa fa-ellipsis-h mr-2 " @click.stop="toggle"></i>
                 <i
                   class="fa fa-heart mr-2"
                   @click.stop="like"
@@ -41,10 +41,9 @@ slide-multiple
           </transition>
 
           <img class="h-32 max-w-xl mr-4 object-cover" :src="chart.audio.cover" />
+
         </div>
-
-
-        <div class="dropdown">
+        <div class="dropdown absolute bg-white">
           <div
             id="myDropdown"
             class="dropdown-content "
@@ -59,8 +58,11 @@ slide-multiple
           </div>
         </div>
 
-        <li>{{ chart.audio.name }}</li>
-        <li>{{ chart.audio.artist }}</li>
+      <div class="text-sm text-center cursor-pointer hover:bg-gray-300 hover:text-black" @click="songsShow">
+        <li class="">{{ chart.audio.name }}</li>
+        <li class="">{{ chart.audio.artist }}</li>
+      </div>
+
 
         <!-- <i class="far fa-pause-circle" style="font-size: 60px" ></i> -->
         <!-- <i class="far" :class="[is? 'fa-pause-circle' : 'fa-play-circle']"  style="font-size: 60px"  /> -->
@@ -130,6 +132,11 @@ export default {
     ...mapActions("playlists", ["loadSongs"]),
     ...mapActions("favorite", ["toggleLike"]),
 
+    songsShow(){
+      let id = this.chart.song_id;
+      window.location.href = `/songs/${id}`;
+    },
+
 
 
     playPause() {
@@ -150,8 +157,6 @@ export default {
 
     aaa() {
       var song_id = event.target.getAttribute("song_id");
-      console.log(song_id);
-
       this.$refs.modal.open("tab1");
       Api().get(`/api/v1/songs/${song_id}`)
         // .then((abc) => (this.playlists = abc.data.playlists))

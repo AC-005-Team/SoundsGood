@@ -151,9 +151,9 @@ export function renderComments(song, ap){
     domEl.setAttribute('style', `left: ${Math.floor(timePercent*parentWidth)}px`)
     song.insertAdjacentElement('beforeend', domEl)
     if (imgUrl == ""){
-      domEl.innerHTML = `<img src='https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg' width="20">`
+      domEl.innerHTML = `<img src='https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg' class="comment-img">`
     }else{
-      domEl.innerHTML = `<img src='${imgUrl}' width="20">`
+      domEl.innerHTML = `<img src='${imgUrl}' class="comment-img">`
     }
   }
   function isNowPlaying(e){
