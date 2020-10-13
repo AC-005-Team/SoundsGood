@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SoundClown</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'false' %>
+  </head>
+   <body>
+    <div id="hello"></div>
+    <%= javascript_pack_tag 'hello_vue', 'data-turbolinks-track': 'false'  %>
+    <%= javascript_pack_tag 'player', 'data-turbolinks-track': 'false' %>
+   </body>
+</html>

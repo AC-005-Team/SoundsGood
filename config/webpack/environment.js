@@ -5,6 +5,7 @@ const vue = require('./loaders/vue')
 environment.plugins.prepend('VueLoaderPlugin', new VueLoaderPlugin())
 environment.loaders.prepend('vue', vue)
 const webpack = require('webpack')
+
 environment.plugins.prepend('Provide',
   new webpack.ProvidePlugin({
     $: 'jquery',
@@ -12,5 +13,7 @@ environment.plugins.prepend('Provide',
     moment: 'moment'
   })
 )
+
+
 
 module.exports = environment

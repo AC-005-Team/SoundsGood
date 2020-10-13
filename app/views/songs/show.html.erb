@@ -23,8 +23,8 @@
         </div>
       </div>
 
-        <div class=""> <%#=萱大大專區%>
-          <%= content_tag(:div, '', class:['waveform-wrap waveform-light'], data:{ path: @song.track_url, filename: @song.get_filename, id: @song.id }) do %> 
+        <div> <%#=萱大大專區%>
+          <%= content_tag(:div, '', class:['waveform-wrap waveform-light'], data:{ path: @song.track_url, filename: @song.get_filename, id: @song.id }) do %>
             <div class="waveform-dummy-trigger"></div>
             <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
           <% end %>
@@ -59,7 +59,7 @@
       <div class="flex my-2 p-2 justify-around text-sm" data-controller="toggle" data-toggle-song="<%= @song.id %>">
         <% if @song.favorited_by?(current_user) %>
           <button class="flex items-center border border-orange-500 text-red-600 p-1 rounded" data-target="toggle.likeBtn" data-action="click->toggle#like">
-            <i class="fas fa-heart" data-target="toggle.heart"></i> 
+            <i class="fas fa-heart" data-target="toggle.heart"></i>
             <span class="hidden md:block">Liked</span>
           </button>
         <% else %>
@@ -79,39 +79,38 @@
             <i class="fas fa-retweet"></i>
             <span class="hidden md:block">Repost</span>
           </button>
-        <% end%> 
-        <button class="flex items-center modal-btn share-btn border border-gray-400 p-1 rounded">
+        <% end%>
+        <button class="modal-btn share-btn flex border border-gray-400 p-1 rounded">
           <i class="fas fa-share-square"></i>
-          <p class="hidden md:block">Share</p> 
+          <p class="hidden md:block">Share</p>
         </button>
         <button class="flex items-center border border-gray-400 p-1 rounded">
           <i class="fas fa-stream"></i>
-          <p class="hidden md:block">Add to Next Up</p> 
-          
+          <p class="hidden md:block">Add to Next Up</p>
+
         </button>
-        <button class="flex items-center modal-btn addplaylist-btn border border-gray-400 p-1 rounded">
+        <button class="modal-btn addplaylist-btn flex border border-gray-400 p-1 rounded">
           <i class="fas fa-plus"></i>
-          <p class="hidden md:block">Add to Playlist</p> 
+          <p class="hidden md:block">Add to Playlist</p>
         </button>
-        <% if current_user%>
-          <%=link_to new_user_playlist_path(current_user), class:'flex items-center border border-gray-400 p-1 rounded' do %>
-            <i class="fas fa-bolt"></i>
-            <p class="hidden md:block">Create Playlist</p> 
-          <% end %>
-        <% end %>
+
+        <!-- @todo: 刪掉會跑版，要調整 -->
+        <button class="p-1 text-gray-600 .invisible">
+        </button>
+
         <div class="p-1 text-gray-600">
           <i class="fas fa-chevron-circle-right"></i>
-          <%= @song.played_times %> 
+          <%= @song.played_times %>
         </div>
         <div class="p-1 text-gray-600">
           <i class="fas fa-heart"></i>
           <span class='liked-count'>
-            <%= @song.liked_users.count %> 
+            <%= @song.liked_users.count %>
           </span>
         </div>
         <button class="p-1 text-gray-600">
           <i class="fas fa-retweet"></i>
-          <%= @song.reposted_users.count %> 
+          <%= @song.reposted_users.count %>
         </button>
 
       </div>
@@ -147,14 +146,14 @@
             <i class="fas fa-user-check"></i>
             <p class="mx-2 follow">Follow</p>
           </button>
-        <% end%> 
+        <% end%>
       </div>
       <%#=正中間留言區%>
       <div class="w-full sm:w-4/5">
         <%#=正中間留言總數%>
         <div class="flex text-gray-400 m-4 p-2 border-b border-gray-400">
           <i class="fas fa-comments"></i>
-          <p class="mx-1"><%=@comments.count%></p> 
+          <p class="mx-1"><%=@comments.count%></p>
           <p class="mx-1">comments</p>
         </div>
         <%#=顯示正中間留言區那%>
@@ -168,14 +167,14 @@
                 <div class="flex">
                   <button><%=comment.user.display_name%></button>
                   <p class ="mx-1"> at</p>
-                  <p><%= comment.created_at.strftime("%H:%M") %></p> 
+                  <p><%= comment.created_at.strftime("%H:%M") %></p>
                 </div>
                 <p><%=comment.content%></p>
               </div>
               <div class="col-span-2 text-gray-400">
                 <p><%= time_diff(DateTime.now, comment.created_at) %>
                 <%if is_current_user?(comment.user)%>
-                  <button class="border border-gray-400 p-1 rounded"><%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"}%></button> 
+                  <button class="border border-gray-400 p-1 rounded"><%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"}%></button>
                 <%end%>
               </div>
             </div>
@@ -194,7 +193,7 @@
                   </div>
                   <p class=""> <%=reply.content%> </p>
                 </div>
-                <div class="w-2/12 text-gray-400">
+                <div class="w-3/12 text-gray-400">
                   <p><%= time_diff(DateTime.now, reply.created_at) %>
                   <%if is_current_user?(comment.user)%>
                   <button class="border border-gray-400 p-1 rounded"> <%= link_to "Delete", comment_path(song_id: @song.id, id: reply.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%> </button>
@@ -203,7 +202,7 @@
               </div>
               <% end %>
             </div>
-          
+
             <div class="flex mt-4 ml-6">
             <%= form_with(model: @comment, url:song_comments_path(song_id: @song, reply_id: comment.id), class: "w-11/12 mx-4") do |f|%>
               <%= f.text_field :content, placeholder: "Reply to this comment", class: "w-10/12 py-2 px-4 border border-gray-400 rounded"%>
@@ -225,28 +224,28 @@
       <button class="">view all</button>
     </div>
     <%= render './shared/related_area.html.erb', element: @related_song %>
-  
+
     <div class="flex border-t border-gray-400">
       <div class="my-3 text-xs table-row-group">
 
         <div class="text-gray-500">
           <span class="hover:text-black"><a href="#">Legal</a></span>
-            
+
           <span class="hover:text-black"><a href="#">Privacy</a></span>
-            
+
           <span class="hover:text-black"><a href="#">Cookies</a></span>
-            
+
           <span class="hover:text-black"><a href="#">Imprint</a></span>
 
           <span class="hover:text-black"><a href="#">Creator Resources</a></span>
-            
+
           <span class="hover:text-black"><a href="#">Blog</a></span>
-            
+
           <span class="hover:text-black"><a href="#">Charts</a></span>
-            
+
           <span class="hover:text-black"><a href="#">Popular Search</a></span>
         </div>
-        
+
           <div class="mt-2 mb-20">
             Language: English (US)
           </div>
@@ -255,21 +254,12 @@
     </div>
   </div>
 
-  
+
 </div>
 
-<!-- @todo-dropdownlist
-<div class="dropdown">
-  <button class="dropbtn">+</button>
-  <div id="myDropdown" class="dropdown-content">
-    <%= link_to "add to play next", '###' , id: 'addtoplay', data: {id: @song.id}  %>
-    <%#= link_to "add to playlist",add_to_playlist_song_path(@song), data: {}  %>
-  </div>
-</div> -->
-
-  <div id="player1" class="aplayer"></div>
 
 <% #以下之後用Vue藏內容應該可以 %>
+
 <template class="share-template">
   <div class="modal-container share-container">
   </div>
@@ -288,27 +278,43 @@
   <div class="modal-container addplaylist-container">
   </div>
   <div class="modal-content">
-    <div class="modal-item">
-      <h2>Add to playlist</h2>
+    <div class="modal-item flex" id="addplaylist-modal">
+      <h2 class="mr-4 text-red-600">Add to playlist</h2>
+      <h2>Create a playlist</h2>
     </div>
-    <div class="modal-item" data-controller="playlist" data-playlist-song="<%= @song.id %>">
-    <% if @playlists %>
-      <% @playlists.each do |playlist| %>
-        <li>Playlist：<%= link_to playlist.name, playlist_path(playlist) %>
-        <% if @song.added_by?(playlist) %>
-          <button class="border border-orange-500 text-red-600 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
-            <span>Added</span>
-          </button>
-        </li>
-        <% else %>
-          <button class="border border-gray-400 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
-            <span>Add to playlist</span>
-          </button>
-        </li>
+    <div class="modal-item" id="addplaylist-content" data-controller="playlist" data-playlist-song="<%= @song.id %>">
+      <% if @playlists %>
+        <% @playlists.each do |playlist| %>
+          <li>Playlist：<%= link_to playlist.name, playlist_path(playlist) %>
+          <% if @song.added_by?(playlist) %>
+            <button class="border border-orange-500 text-red-600 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
+              <span>Added</span>
+            </button>
+          </li>
+          <% else %>
+            <button class="border border-gray-400 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
+              <span>Add to playlist</span>
+            </button>
+          </li>
+          <% end %>
         <% end %>
-      <% end %> 
-    <% end %>
-   </div>
+      <% end %>
+    </div>
+    <div class="modal-item hidden" id="createplaylist-content">
+
+      <%= form_for(@playlist, url: playlists_path(song_id: @song.id), remote: true)  do |f| %>
+        <div>
+          <%= f.label :name %>
+          <%= f.text_field :name, class:'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3'%>
+        </div>
+        <div>
+          <%= f.label :intro %>
+          <%= f.text_field :intro, class:'w-full px-2 py-2 focus:outline-none bg-gray-200 border border-black rounded my-3' %>
+        </div>
+        <%= f.submit 'Save', class: "w-full px-2 py-2 text-white rounded bg-orange-700 create-submit" %>
+      <% end %>
+
+    </div>
   </div>
 </template>
 <% set_meta_tags og: {

@@ -10,6 +10,7 @@ showMyImage = function(fileInput) {
   })(img);
   reader.readAsDataURL(file);
 }
+
 showMyAvatar = function(fileInput) {
   let file = fileInput.files[0];
   let img=document.getElementById("avatar");

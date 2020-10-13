@@ -1,7 +1,7 @@
 <% unless params[:controller]=="home" && params[:action]=="index"%>
 
 <div class="bg-gray-800 text-gray-400 w-full flex justify-between text-center items-center text-sm sticky top-0 z-10 mx-auto">
-<%#=Logo區域%>  
+<%#=Logo區域%>
   <button class="hover:text-white ml-6">
     <%= link_to discover_path do %>
     <%= image_pack_tag('logo_14.png', class:'w-48 hidden sm:block') %>
@@ -37,14 +37,12 @@
     <div class="search-result flex flex-col absolute text-left w-1/3"></div>
   </div>
   <% end %>
-<%#=上傳按鈕%>    
   <div class="hover:text-white hidden sm:block">
-    <%= link_to "Upload", new_user_song_path(current_user) if current_user %>
+    <a href="/upload">Upload</a>
   </div>
-  <% if current_user %>
-    <%= link_to new_user_song_path(current_user), class:'block sm:hidden' do %>
+    <%= link_to "upload",url: "/Upload", class:'block sm:hidden' do %>
       <i class="fas fa-cloud-upload-alt"></i>
-    <% end %>
+
   <% end %>
 
 
@@ -82,8 +80,6 @@
     <div class="hover:text-white"><%= link_to "Sign in",new_user_session_path%></div>
     <div class="hover:text-white mr-6"><%= link_to "Create",new_user_registration_path%></div>
   <% end %>
-<%#=後面三點點區域%>  
+<%#=後面三點點區域%>
 </div>
-
 <% end %>
-

@@ -128,8 +128,8 @@ export default {
   text-shadow:2px 2px 4px #626262;
   position: absolute;
   margin: 0 auto;
-  top: 35px;
-  left: 37px;
+  top: 70px;
+  left: 70px;
 }
 
 .child {

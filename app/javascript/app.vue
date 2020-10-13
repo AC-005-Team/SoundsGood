@@ -1,23 +1,41 @@
 <template>
-  <div id="app">
-    <p>{{ message }}</p>
-  </div>
+<div>
+<HeaderComponent />
+<router-view/>
+<!-- <playlist /> -->
+<Player />
+
+</div>
+
+
 </template>
 
 <script>
+import HeaderComponent from './components/shared/header';
+import axios from 'axios';
+import { store } from './store/store'
+// import playlistitems from './components/playlistItem';
+// import playlist from './components/playlist';
+import router from './router'
+import Player from './components/shared/player';
+// import dicover from './components/page/discover';
+// import library from './components/page/library';
+// import stream from './components/page/stream';
+// import upload from './components/page/upload';
+
+
+
 export default {
-  data: function () {
+  data() {
     return {
-      message: "分離的components寫法"
     }
-  }
+  },
+  router,
+  store,
+  components: {
+    HeaderComponent,
+    Player
+
+  },
 }
 </script>
-
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-  color: rgb(124, 107, 231);
-}
-</style>
