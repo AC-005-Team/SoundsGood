@@ -6,7 +6,7 @@
     <div class="flex">
       <button><%=comment.user.display_name%></button>
       <p class ="mx-1"> at</p>
-      <p><%= comment.created_at.strftime("%H:%M") %></p>
+      <p><%= comment.timepoint.to_i >= 3600 ? Time.at(comment.timepoint.to_i).utc.strftime("%H:%M:%S") : Time.at(comment.timepoint.to_i).utc.strftime("%M:%S") %></p>
     </div>
     <p class=""> <%=comment.content%> </p>
   </div>

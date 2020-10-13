@@ -4,6 +4,7 @@
       <div class="sm:w-1/6 w-1/4">
         <%#= 搜尋結果的Song圖片 %>
           <%= link_to image_tag(song.image_url), song_path(song.id) if song.image_url %>
+
       </div>
       <div class="sm:w-5/6 w-3/4 mx-4">
         <div class="flex items-center text-sm text-gray-500">
@@ -57,15 +58,15 @@
               <i class="fas fa-share"></i>
               <p class="hidden md:block">Share</p> 
             </button>
-            <button class="flex border border-gray-300 px-3 mx-1 rounded">
+            <%# <button class="flex border border-gray-300 px-3 mx-1 rounded">
               <i class="fas fa-ellipsis-h"></i>
               <p class="hidden md:block">More</p>
-            </button>
+            </button> %>
           </div>
           <div class="flex w-1/3 justify-end">
             <button class="flex mx-2">
               <i class="fas fa-play"></i>
-              <p class="hidden md:block">31.5M</p>
+              <p class="hidden md:block"><%= song.played_times %></p>
             </button>
             <%= link_to song_path(song.id), class:'flex mx-2' do %>
               <i class="fas fa-comments"></i>

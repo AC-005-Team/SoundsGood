@@ -2,7 +2,7 @@
 
 <%#=圖區一%>
 <div class="flex mx-6 bg-gradient-to-b from-gray-700 via-white to-gray-500">
-  
+
   <div class="w-32 h-32 overflow-hidden m-4">
     <% if @user.avatar_url %>
       <%= image_tag @user.avatar_url, class:'rounded-full' %>
@@ -32,13 +32,14 @@
         <% end %>
       <% else %>
         <div>
-          <%= link_to 'podcast channel', room_path(@user.room.id) %>
+          <%= link_to 'podcast channel', room_path(@user.room.id) if @user.room%>
         </div>
       <% end %>
     </div>
     <% if current_user == @user %>
-      <%= link_to edit_user_path(@user), class: 'text-white bg-orange-600 p-2 rounded' do %>
-        <i class="fas fa-camera"></i>Upload header image
+      <%= link_to edit_user_path(@user), class: 'text-white bg-orange-600 p-2 rounded flex items-center' do %>
+        <i class="fas fa-camera"></i>
+        <p class="hidden sm:block">Upload header image</p> 
       <% end %>
     <% end %>
   </div>
@@ -56,16 +57,16 @@
   <div class="flex justify-between items-center mr-4 text-sm">
     <button class="flex items-center mx-2 p-1 rounded bg-orange-600 text-white">
       <i class="fas fa-chart-bar"></i>
-      <p class="hidden md:block">Your Insights</p> 
+      <p class="hidden md:block">Your Insights</p>
     </button>
     <button class="flex items-center mx-2 p-1 rounded border border-gray-300">
       <i class="fas fa-share-square"></i>
-      <p class="modal-btn share-btn hidden md:block">Share</p> 
+      <p class="modal-btn share-btn hidden md:block">Share</p>
     </button>
     <% if current_user == @user %>
       <%= link_to edit_user_path(current_user), class:'flex items-center mx-2 p-1 rounded border border-gray-300' do %>
         <i class="fas fa-pencil-alt"></i>
-        <p class="hidden md:block"> Edit</p> 
+        <p class="hidden md:block"> Edit</p>
       <% end %>
     <% end %>
   </div>
@@ -91,7 +92,7 @@
     </span>
   </div>
   <%#=左邊專輯專區%>
-  
+
 
 
       <%#=右邊使用者專區%>
@@ -131,19 +132,19 @@
       <div class="my-3 text-xs table-row-group">
         <div class="text-gray-500">
           <span class="hover:text-black"><a href="#">Legal</a></span>
-            
+
           <span class="hover:text-black"><a href="#">Privacy</a></span>
-            
+
           <span class="hover:text-black"><a href="#">Cookies</a></span>
-            
+
           <span class="hover:text-black"><a href="#">Imprint</a></span>
 
           <span class="hover:text-black"><a href="#">Creator Resources</a></span>
-            
+
           <span class="hover:text-black"><a href="#">Blog</a></span>
-            
+
           <span class="hover:text-black"><a href="#">Charts</a></span>
-            
+
           <span class="hover:text-black"><a href="#">Popular Search</a></span>
         </div>
           <div class="mt-2 mb-20">
@@ -153,8 +154,8 @@
     </div>
     </div>
 
-  </div>  
-</div>
+  </div>
+
 
 <template class="share-template">
   <div class="modal-container share-container">

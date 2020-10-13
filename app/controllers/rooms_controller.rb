@@ -6,6 +6,7 @@ class RoomsController < ApplicationController
   # GET /rooms
   # GET /rooms.json
   def index
+    puts 'aaaaaaa'
     @rooms = Room.all.includes(:user)
   end
 

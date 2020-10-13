@@ -4,21 +4,21 @@
     <%= display_meta_tags site: 'SoundsGood' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
-    <%= javascript_pack_tag 'hello_vue' %>
+
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'false' %>
     <%= stylesheet_pack_tag "application", media: 'all', 'data-turbolinks-track': 'false' %>
     <script src="//static.opentok.com/v2/js/opentok.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
    <body>
-    <%= render "shared/navbar" %>
-    <p class="notice text-center"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
-    <div class="pb-20">
-    <%= render "shared/aplayer" %>
-  </body>
-    <%= javascript_pack_tag 'player', 'data-turbolinks-track': 'false' %>
-    <%= stylesheet_pack_tag "player", media: 'all', 'data-turbolinks-track': 'false' %>
+      <%= render "shared/navbar"%>
+     <p class="notice text-center"><%= notice %></p>
+     <p class="alert"><%= alert %></p>
+       <%= yield %>
+     <%= render "shared/aplayer" %>
+     <%# <%= javascript_pack_tag 'hello_vue', 'data-turbolinks-track': 'false'  %> %>
+     <%= javascript_pack_tag 'player', 'data-turbolinks-track': 'false' %>
+     
+   </body>
+
 </html>

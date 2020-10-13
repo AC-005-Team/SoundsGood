@@ -1,6 +1,7 @@
 
 
 //分離component寫法  APP為在這個vue裡使用的名稱 可以置換
+
 // import Vue from 'vue'
 // import App from '../app.vue'
 //
@@ -12,6 +13,59 @@
 //
 //   console.log(app)
 // })
+
+
+import Vue from 'vue'
+import App from '../app.vue'
+import Vuex from 'vuex';
+import VueRouter from 'vue-router';
+import { ValidationObserver, ValidationProvider, extend, localize } from 'vee-validate';
+import en from 'vee-validate/dist/locale/en.json';
+import * as rules from 'vee-validate/dist/rules';
+import VueSimpleAlert from "vue-simple-alert";
+
+Object.keys(rules).forEach(rule => {
+  extend(rule, rules[rule]);
+});
+
+localize('en', en);
+
+// Install components globally
+Vue.component('ValidationObserver', ValidationObserver);
+Vue.component('ValidationProvider', ValidationProvider);
+
+import vSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
+Vue.component("v-select", vSelect);
+
+Vue.use(VueSimpleAlert);
+Vue.config.productionTip = false;
+
+
+
+
+import "select2/dist/css/select2.css"
+import "select2/dist/js/select2.js"
+import jQuery from 'jquery'
+window.$ = window.jQuery = jQuery
+
+Vue.use(Vuex);
+Vue.use(VueRouter);
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const app = new Vue({
+    render: h => h(App),
+    // router,
+  }).$mount("#hello")
+})
+
 
 // 記得  Add <%= javascript_pack_tag 'hello_vue' %> to your layout
 // Then add this markup to your html template:

@@ -6,7 +6,7 @@
     <%#= 左邊的篩選器 %>
   <div class="grid grid-cols-12 m-4">
     <div class="col-span-12 md:col-span-2">
-      <button class="flex items-center bg-orange-500 text-white py-1 px-2 w-full rounded all_btn">
+      <button class="flex items-center w-full all_btn">
         <i class="fas fa-search"></i>
         <p class="mx-4">Everything</p>
       </button>
@@ -23,7 +23,7 @@
         <p class="mx-4 my-1">Playlists</p>
       </button>
       <div class="flex">
-        <div class="my-3 text-xs table-row-group border-t border-gray-300 py-2">
+        <div class="my-3 text-xs hidden sm:block border-t border-gray-300 py-2 mb-4">
           <div class="text-gray-500">
             <span class="hover:text-black"><a href="#">Legal</a></span>
             <span class="hover:text-black"><a href="#">Privacy</a></span>
@@ -43,42 +43,52 @@
     </div>
 
     <%#= 右邊的搜尋結果 %>
-    <div>
-    <span class="template">
-      <% if @users  %>
-        <% @users.each do|user|%>
-          <div class="flex">
-            <% if user.avatar_url %>
-              <%= image_tag user.avatar_url, class: 'w-1/5 rounded-full' %>
-            <% end %>
-            <div class="w-4/5 flex-col items-end">
-              <p class="text-black"><%= user.display_name%></p> 
-              <div class="flex justify-between text-xs">
-                <div>
-                  <i class="fas fa-user-friends"></i>
-                  <span class="user_follower_count">
-                    <%= user.followers.count %>
-                  </span>
-                  <i class="fab fa-soundcloud"></i>
-                    <span>
-                      <%= user.songs.size %>
+    <div class="col-span-12 md:col-span-10">
+      <span class="user_template">
+        <% if @users %>
+          <% @users.each do|user|%>
+            <div class="flex">
+              <% if user.avatar_url %>
+                <%= image_tag user.avatar_url, class: 'w-1/5 rounded-full' %>
+                <% else %>
+                <div class="w-10 h-10 bg-cover bg-center" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
+              <% end %>
+
+              <div class="">
+                <p class="text-black">
+                  <%= user.display_name%>
+                </p> 
+
+                <div class="flex justify-between text-xs">
+
+                  <div class="">
+                    <i class="fas fa-user-friends"></i>
+                    <span class="user_follower_count">
+                      <%= user.followers.count %>
                     </span>
+                    <i class="fab fa-soundcloud"></i>
+                      <span>
+                        <%= user.songs.size %>
+                      </span>
+                  </div>
+
+                  <button class="flex items-center border border-gray-400 rounded px-2 text-black follow_btn" result-follow-id='<%= user.id %>'>
+                    <% if current_user.follows?(user)%>
+                      <i class="fas fa-user-check" style="color: orange"></i>
+                      <p class>Following</p> 
+                    <% else %>
+                      <i class="fas fa-user-check" ></i>
+                      <p class>Follow+</p> 
+                    <% end %>
+                  </button>
+
                 </div>
-                <button class="flex items-center border border-gray-400 rounded px-2 text-black follow_btn" result-follow-id='<%= user.id %>'>
-                  <% if current_user.follows?(user)%>
-                    <i class="fas fa-user-check" style="color: orange"></i>
-                    <p class>Following</p> 
-                  <% else %>
-                    <i class="fas fa-user-check" ></i>
-                    <p class>Follow+</p> 
-                  <% end %>
-                </button>
+
               </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
-      <% end %>
-    </span>
+      </span>
       <span class="track_template">
         <%= render './shared/song_module', songs: @songs %>
       </span>
@@ -86,6 +96,7 @@
         <%= render './shared/playlist_module', playlists: @playlists %>
       </span>
     </div>
+
   </div>
 </div>
 

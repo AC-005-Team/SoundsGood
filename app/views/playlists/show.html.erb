@@ -15,7 +15,7 @@
     <div class="">
       <div class="w-full bg-black">
       1
-      </div> 
+      </div>
       音波專區
     </div>
   </div>
@@ -35,23 +35,23 @@
           c-22.039-26.516-54.861-41.68-89.339-41.273C52.395,35.522,0,87.917,0,152.55C0,263.31,193.306,371.456,201.143,375.636
           c3.162,2.113,7.286,2.113,10.449,0c7.837-4.18,201.143-110.759,201.143-223.086C412.735,87.917,360.339,35.522,295.706,35.522z"/>
         </svg>
-        <p class="hidden md:block">Like</p> 
+        <p class="hidden md:block">Like</p>
       </button>
       <button class="flex items-center border border-gray-300 px-3 rounded">
         <i class="fas fa-share-square"></i>
-        <p class="hidden md:block">Share</p> 
+        <p class="hidden md:block">Share</p>
       </button>
       <button class="flex items-center border border-gray-300 px-3 rounded">
-        <i class="fas fa-pencil-alt"></i> 
-        <p class="hidden md:block">Edit</p> 
+        <i class="fas fa-pencil-alt"></i>
+        <p class="hidden md:block">Edit</p>
       </button>
       <button class="flex items-center border border-gray-300 px-3 rounded">
         <i class="fas fa-stream"></i>
-        <p class="hidden md:block">Add to Next Up</p> 
+        <p class="hidden md:block">Add to Next Up</p>
       </button>
       <button class="flex items-center border border-gray-300 px-3 rounded">
         <i class="fas fa-plus"></i>
-        <p class="hidden md:block">Add to Playlist</p> 
+        <p class="hidden md:block">Add to Playlist</p>
       </button>
     </div>
     <%#= 音樂資料專區起始 %>
@@ -68,7 +68,7 @@
         <div class="flex justify-between">
           <div class="flex">
             <div class=""><%= image_tag song.image_url, width: '200px' %></div>
-            
+
             <div class=""><%= content_tag(:li,song.name, data: {value: song.name} ) %></div>
             <div class=""><%= content_tag(:li,song.intro, data: {value: song.intro} ) %></div>
           </div>
@@ -80,14 +80,14 @@
             <%#= link_to "add to playlist", list_add_path(song.id), data: {}  %>
            </div>
           </div>
-          
+
         </div>
         <% end %>
       </div>
 
     </div>
   </div>
-  
+
   <div class="col-span-12 md:col-span-3">
     <%#= 右邊專區 %>
     <div class="col-span-3 m-4">
@@ -115,22 +115,22 @@
 
           <div class="text-gray-500">
             <span class="hover:text-black"><a href="#">Legal</a></span>
-              
+
             <span class="hover:text-black"><a href="#">Privacy</a></span>
-              
+
             <span class="hover:text-black"><a href="#">Cookies</a></span>
-              
+
             <span class="hover:text-black"><a href="#">Imprint</a></span>
 
             <span class="hover:text-black"><a href="#">Creator Resources</a></span>
-              
+
             <span class="hover:text-black"><a href="#">Blog</a></span>
-              
+
             <span class="hover:text-black"><a href="#">Charts</a></span>
-              
+
             <span class="hover:text-black"><a href="#">Popular Search</a></span>
           </div>
-          
+
             <div class="mt-2 mb-20">
               Language: English (US)
             </div>
@@ -153,13 +153,13 @@ http://127.0.0.1:3000/playlists/1
   <% else %>
     <i class="far fa-heart"></i>
     <%= link_to "Like", like_playlist_path(@playlist), method: "post" %>
-  <% end%>  
+  <% end%>
 
   <% if @playlist.reposted_by?(current_user) %>
     <i class="fas fa-retweet"> <%= link_to "Reposted", repost_playlist_path(@playlist), method: "post" %>  </i>
   <% else %>
     <i class="fas fa-retweet"> <%= link_to "Repost", repost_playlist_path(@playlist), method: "post" %> </i>
-  <% end%>  
+  <% end%>
 </div>
 
 <div>
@@ -193,4 +193,3 @@ http://127.0.0.1:3000/playlists/1
   </div>
 <% end %>
 <%= content_tag(:button, "播放整個清單 ▶", id: 'play_playlist',data: {id: @playlist.id}  ) %>
-
