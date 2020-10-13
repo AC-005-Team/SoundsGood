@@ -5,14 +5,14 @@ class Song < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :playlists_songs
   has_many :playlists, through: :playlists_songs
-  
+
   has_many :favorite_songs, dependent: :destroy
   has_many :liked_users, through: :favorite_songs, source: :user
 
   has_many :reposts, as: :repostable
   has_many :reposted_users, through: :reposts, source: :user
   after_save :create_peak_data
-  
+
   has_many :songs_tags, dependent: :destroy
   has_many :tags, through: :songs_tags
 
@@ -33,11 +33,11 @@ class Song < ApplicationRecord
   def tag_items
     tags.map(&:name)
   end
-  
+
   def tag_items=(names)
     self.tags = names.map do|item|
       next if item.blank?
-      
+
       Tag.where(name: item.strip).first_or_create!
     end.compact
   end
