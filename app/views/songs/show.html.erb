@@ -4,7 +4,7 @@
   <div class="grid grid-cols-12 bg-gradient-to-b from-gray-800 via-white to-gray-400 bg-cover bg-no-repeat bg-transparent" style="background-image: url(<% root_path %>/img/back_1.jpg)">
     <div class="col-span-12 md:col-span-9 flex-col-reverse space-y-32 justify-between m-5">
       <div class="flex">
-        <%= content_tag(:li, '▶', class:'getURL fa-3x rounded-full', data: {id: @song.id} ) %>
+        <%= content_tag(:li, '▶', class:'getURL fa-3x rounded-full  play-btn', data: {id: @song.id} ) %>
         <div class="mx-2">
           <div class="bg-black rounded p-1 text-white m-1">
             <%= @song.user.display_name %>
@@ -36,6 +36,7 @@
           <%= image_tag @song.image_url%> 
         <% end %>
       </div>
+    </div>
     </div>
   </div>
 </div>
@@ -167,7 +168,9 @@
                 <div class="flex">
                   <button><%=comment.user.display_name%></button>
                   <p class ="mx-1"> at</p>
-                  <p><%= comment.created_at.strftime("%H:%M") %></p>
+                  <p>
+                    <%= comment.timepoint.to_i >= 3600 ? Time.at(comment.timepoint.to_i).utc.strftime("%H:%M:%S") : Time.at(comment.timepoint.to_i).utc.strftime("%M:%S") %>
+                  </p> 
                 </div>
                 <p><%=comment.content%></p>
               </div>
@@ -189,7 +192,9 @@
                   <div class="flex">
                     <button> <%=reply.user.display_name%></button>
                     <p class ="mx-1"> at</p>
-                    <p><%= reply.created_at.strftime("%H:%M") %></p>
+                    <p>
+                      <%= comment.timepoint.to_i >= 3600 ? Time.at(comment.timepoint.to_i).utc.strftime("%H:%M:%S") : Time.at(comment.timepoint.to_i).utc.strftime("%M:%S") %>
+                    </p>
                   </div>
                   <p class=""> <%=reply.content%> </p>
                 </div>
@@ -205,7 +210,7 @@
 
             <div class="flex mt-4 ml-6">
             <%= form_with(model: @comment, url:song_comments_path(song_id: @song, reply_id: comment.id), class: "w-11/12 mx-4") do |f|%>
-              <%= f.text_field :content, placeholder: "Reply to this comment", class: "w-10/12 py-2 px-4 border border-gray-400 rounded"%>
+              <%= f.text_field :content, placeholder: "Reply to this comment", class: "w-10/12 py-2 px-4 border border-gray-400 rounded", data:{id:comment.id}%>
               <%= f.submit "Reply", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"%>
             <% end %>
             </div>
