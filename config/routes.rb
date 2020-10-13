@@ -56,6 +56,7 @@ Rails.application.routes.draw do
       get :add_to_playlist
       post :add_to_playlist
       post :repost
+      patch :add_played_times
     end
     resources :comments, only: [:create, :destroy]
     member do
@@ -73,7 +74,6 @@ Rails.application.routes.draw do
         post :like
         post :add_to_playlist
         post :repost
-        patch :add_played_times
       end
       resources :comments, only: [:create, :destroy]
       member do

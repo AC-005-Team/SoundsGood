@@ -1,6 +1,67 @@
+<div class="h-64 bg-cover bg-center rounded" style="background-image: url(<% root_path %>/img/back_3.jpg)">
+
+</div>
+<div class="flex justify-between ">
+  <div class="">
+    <div class="px-2 text-xl text-center text-white bg-orange-600 rounded-full">Podcast Live Room</div>
+  </div>
+  <div class="">
+    <div class="px-2 text-xl text-center text-white bg-orange-600 rounded-full">New Room</div>
+  </div>
+</div>
+<div class="grid grid-cols-12 mx-6 overflow-scroll">
+  <% @rooms.each do |room| %>
+
+    <div class="col-span-4 md:col-span-3 bg-gray-100 h-64 content-center">
+      <div class="text-center px-6">
+        <div class="py-2"><%= room.user.display_name%></div>
+        <div class="h-24 bg-cover bg-center rounded-full" style="background-image: url(<% root_path %>/img/back_1.jpg)"></div>
+        <div class="py-1"><%= room.name %></div>
+
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+
+        <div class="flex justify-between">
+        <% if room.user == current_user %>
+
+
+          <%= link_to play_room_path(room), class:'px-2 flex items-center bg-blue-700 text-white rounded hover:bg-gray-100 hover:text-black' do %>
+          <i class="fas fa-broadcast-tower"></i>
+          <p class="hidden md:block">channel</p>
+          <% end %>
+
+          <%= link_to edit_room_path(room), class:'px-2 flex items-center bg-blue-700 text-white rounded hover:bg-gray-100 hover:text-black' do %>
+          <i class="fas fa-pencil-alt"></i>
+          <p class="hidden md:block">Edit</p>
+          <% end %>
+
+          <%= link_to room, class:'px-2 flex items-center bg-blue-700 text-white rounded hover:bg-gray-100 hover:text-black' do %>
+            <i class="far fa-trash-alt"></i>
+          <p class="hidden md:block">Destroy</p>
+          <% end %>
+
+          <% else %>
+          
+          <button class="px-4 flex items-center bg-blue-700 text-white rounded hover:bg-gray-100 hover:text-black">          
+          <%= link_to 'Show', room %>
+          </button>
+
+        <% end %>
+
+        </div>
+
+      </div>   
+    </div>
+
+  <% end %>
+
+</div>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Rooms</h1>
+<div>Rooms</div>
 
 <table>
   <thead>
@@ -26,6 +87,7 @@
       </tr>
     <% end %>
   </tbody>
+
 </table>
 
 <br>

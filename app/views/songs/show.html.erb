@@ -1,11 +1,11 @@
 <%#=專輯播放頁面%>
 <%#=第一背景色區%>
 <div class="mx-6">
-  <div class="flex bg-gradient-to-b from-gray-800 via-white to-gray-400">
-    <div class="w-2/3 flex-col-reverse space-y-32 justify-between m-5">
+  <div class="grid grid-cols-12 bg-gradient-to-b from-gray-800 via-white to-gray-400 bg-cover bg-no-repeat bg-transparent" style="background-image: url(<% root_path %>/img/back_1.jpg)">
+    <div class="col-span-12 md:col-span-9 flex-col-reverse space-y-32 justify-between m-5">
       <div class="flex">
-        <%= content_tag(:li, '▶', class:'getURL fa-3x rounded-full', data: {id: @song.id} ) %>
-        <div class="">
+        <%= content_tag(:li, '▶', class:'getURL fa-3x rounded-full  play-btn', data: {id: @song.id} ) %>
+        <div class="mx-2">
           <div class="bg-black rounded p-1 text-white m-1">
             <%= @song.user.display_name %>
           </div>
@@ -13,7 +13,7 @@
             <div class="text-2xl text-white m-2"><%= title @song.name %></div>
           </div>
         </div>
-        <div class="m-4 text-xl text-black">
+        <div class="m-4 text-xl text-white">
           <div class="">
             1 month ago
           </div>
@@ -30,13 +30,13 @@
           <% end %>
         </div>
       </div>
-
-    </div>
       <%#=右邊大圖區%>
-    <div class="w-1/3 p-4">
-      <% if @song.image_url %>
-        <%= image_tag @song.image_url%>
-      <% end %>
+      <div class="col-span-6 md:col-span-3 p-4">
+        <% if @song.image_url %>
+          <%= image_tag @song.image_url%> 
+        <% end %>
+      </div>
+    </div>
     </div>
   </div>
 </div>
@@ -49,6 +49,8 @@
       <div class="flex ">
         <% if current_user && current_user.avatar_url %>
           <%= image_tag current_user.avatar_url, class: 'w-auto h-10 current_user-avatar' %>
+          <% else %>
+          <div class="h-8 w-8 bg-cover" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
         <% end %>
         <%= form_with(model:@comment, url:song_comments_path(song_id: @song, timepoint: 0), class: "song-comment-form w-11/12 mx-4") do |f|%>
           <%= f.text_field :content, placeholder: "Write a comment", class: "song-main-comment w-full h-full pl-1 border border-gray-400 rounded", data: {id: @song.id} %>
@@ -114,13 +116,14 @@
 
       </div>
     </div>
+
     <div class="flex text-sm">
   <%#=左邊專區大頭照那%>
       <div class="w-1/5 mr-4" data-controller="follow" data-follow-user="<%= @song.user.id %>">
         <% if @song.user.avatar_url %>
           <%= image_tag @song.user.avatar_url, class: 'rounded-full mt-6 mr-6 w-3/4' %>
         <% else %>
-          <%#= if user no avatar%>
+          <div class="h-12 w-12 bg-cover" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
         <% end %>
         <div class="flex justify-start p-1">
           <div><%=@song.user.display_name%></div>
@@ -135,7 +138,7 @@
         </div>
 
         <% if @song.user.followed_by?(current_user) %>
-          <button class="flex bg-orange-500 text-white border-orange-500 border p-1 rounded" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
+          <button class="flex items-center bg-orange-500 text-white border-orange-500 border p-1 rounded" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
             <i class="fas fa-user-check"></i>
             <p class="mx-2 follow">Following</p>
           </button>
@@ -165,7 +168,9 @@
                 <div class="flex">
                   <button><%=comment.user.display_name%></button>
                   <p class ="mx-1"> at</p>
-                  <p><%= comment.created_at.strftime("%H:%M") %></p>
+                  <p>
+                    <%= comment.timepoint.to_i >= 3600 ? Time.at(comment.timepoint.to_i).utc.strftime("%H:%M:%S") : Time.at(comment.timepoint.to_i).utc.strftime("%M:%S") %>
+                  </p> 
                 </div>
                 <p><%=comment.content%></p>
               </div>
@@ -187,7 +192,9 @@
                   <div class="flex">
                     <button> <%=reply.user.display_name%></button>
                     <p class ="mx-1"> at</p>
-                    <p><%= reply.created_at.strftime("%H:%M") %></p>
+                    <p>
+                      <%= comment.timepoint.to_i >= 3600 ? Time.at(comment.timepoint.to_i).utc.strftime("%H:%M:%S") : Time.at(comment.timepoint.to_i).utc.strftime("%M:%S") %>
+                    </p>
                   </div>
                   <p class=""> <%=reply.content%> </p>
                 </div>
@@ -203,7 +210,7 @@
 
             <div class="flex mt-4 ml-6">
             <%= form_with(model: @comment, url:song_comments_path(song_id: @song, reply_id: comment.id), class: "w-11/12 mx-4") do |f|%>
-              <%= f.text_field :content, placeholder: "Reply to this comment", class: "w-10/12 py-2 px-4 border border-gray-400 rounded"%>
+              <%= f.text_field :content, placeholder: "Reply to this comment", class: "w-10/12 py-2 px-4 border border-gray-400 rounded", data:{id:comment.id}%>
               <%= f.submit "Reply", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"%>
             <% end %>
             </div>
@@ -313,27 +320,6 @@
       <% end %>
 
     </div>
-<<<<<<< HEAD
-    <div class="modal-item" data-controller="playlist" data-playlist-song="<%= @song.id %>">
-    <% if @playlist %>
-      <% @playlists.each do |playlist| %>
-        <li>Playlist：<%= link_to playlist.name, playlist_path(playlist) %>
-        <% if @song.added_by?(playlist) %>
-          <button class="border border-orange-500 text-red-600 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
-            <span>Added</span>
-          </button>
-        </li>
-        <% else %>
-          <button class="border border-gray-400 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
-            <span>Add to playlist</span>
-          </button>
-        </li>
-        <% end %>
-      <% end %>
-    <% end %>
-   </div>
-=======
->>>>>>> master
   </div>
 </template>
 <% set_meta_tags og: {

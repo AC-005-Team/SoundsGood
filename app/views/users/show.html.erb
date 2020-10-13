@@ -37,8 +37,9 @@
       <% end %>
     </div>
     <% if current_user == @user %>
-      <%= link_to edit_user_path(@user), class: 'text-white bg-orange-600 p-2 rounded' do %>
-        <i class="fas fa-camera"></i>Upload header image
+      <%= link_to edit_user_path(@user), class: 'text-white bg-orange-600 p-2 rounded flex items-center' do %>
+        <i class="fas fa-camera"></i>
+        <p class="hidden sm:block">Upload header image</p> 
       <% end %>
     <% end %>
   </div>
