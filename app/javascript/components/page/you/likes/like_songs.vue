@@ -1,7 +1,7 @@
 <template >
 <div>
-  <div class="my-2 mr-2 flex flex-col justify-between parent">
-    <div class="align-top bg-black overflow-hidden w-48 h-48 content-center " @mouseover="mouseOver"  @mouseleave="mouseLeave" @click="playPause" >
+  <div class="my-2 mr-2 flex flex-col justify-between parent text-gray-700">
+    <div class="align-top bg-black overflow-hidden w-48 h-48 " @mouseover="mouseOver"  @mouseleave="mouseLeave" @click="playPause" >
       <!-- :style="{ 'background-image': 'url('+  this.url + ')' }" -->
       <i class="fas z-10 fa-pause" style="font-size: 60px" v-show="playing" />
       <i class="fas z-10 fa-play" style="font-size: 60px" v-show="playBtn && !playing" />
@@ -10,17 +10,12 @@
     <!-- <%#= 歌曲名稱、介紹、TAG標籤 %> -->
 
       <!-- <%#= 歌曲名稱 %> -->
-      <div class="text-xs text-gray-400">
+      <div class="text-xs text-gray-700">
         <li>{{ song.audio.name }}</li>
         <li>{{ song.audio.artist }}</li>
         <!-- <%= content_tag(:li,song.intro, data: {value: song.intro} ) %> -->
       </div>
-
-
-
   </div>
-
-
 </div>
 </template>
 

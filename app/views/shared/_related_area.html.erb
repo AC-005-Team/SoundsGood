@@ -10,9 +10,9 @@
         <div class="flex justify-around text-gray-500">
           <a href=""><i class="fas fa-arrow-right"></i><%= song.played_times %></a>
           <a href=""><i class="fas fa-heart"></i><%= song.liked_users.count%></a>
-          <a href=""><i class="fas fa-history"></i>60</a>
+          <a href=""><i class="fas fa-history"></i><%= song.reposts.size %></a>
           <%= link_to song_path(song) do %>
-            <i class="fas fa-comment-dots"></i><%= song.comments.count%>
+            <i class="fas fa-comment-dots"></i><%= song.comments.size %>
           <% end %>
         </div>
       </div>
