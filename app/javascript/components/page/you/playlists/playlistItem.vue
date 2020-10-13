@@ -11,7 +11,7 @@
         <i class="fas z-10 fa-play" style="font-size: 60px" v-show="playBtn && !playing" />
       </div>
     </div>
-      <router-link :to="`/playlist/${playlist.id}`" @click.native="$event.stopImmediatePropagation()">
+      <router-link :to="`/playlists/${playlist.id}`" @click.native="$event.stopImmediatePropagation()">
     <div class="text-2xl sm:text-sm hover:bg-gray-200 rounded">
       <li>{{playlist.name}}</li>
       <li>{{playlist.intro}}</li>

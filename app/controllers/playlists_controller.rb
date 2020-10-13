@@ -6,6 +6,7 @@ class PlaylistsController < ApplicationController
   end
 
   def show
+    render layout: "spa"
     @playlist = Playlist.find(params[:id])
     @songs = @playlist.songs
   end
@@ -15,7 +16,7 @@ class PlaylistsController < ApplicationController
     @playlists = current_user.playlists
       respond_to do |format|
         if @playlist.save
-          format.js { @song = Song.find(params[:song_id]) 
+          format.js { @song = Song.find(params[:song_id])
           @playlist.songs << @song }
         else
           # render :new
