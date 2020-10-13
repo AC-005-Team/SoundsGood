@@ -7,13 +7,13 @@ json.array! @items  do |item|
   when item.class == Song
     json.media_type 'Song' #po的類別是song
     json.name item.name    #po的內容名字
-    json.cover item.image_url
+    json.cover item.image_url || '/img/music_back.jpeg'
     json.path item.track_url #data-path for waveform
     json.filename item.get_filename #data-filename for waveform
   when item.class == Playlist
     json.media_type 'Playlist'  #po的類別是playlist
     json.name item.name    #po的內容名字
-    json.cover item.songs.first.image_url
+    json.cover item.songs.first.image_url || '/img/music_back.jpeg'
     json.path item.songs[0].track_url #data-path for waveform
     json.filename item.songs[0].get_filename #data-filename for waveform
   else
@@ -25,11 +25,12 @@ json.array! @items  do |item|
     json.owner_id media.user.id #此實體擁有者的id
     if item.repostable_type == 'Song'
       json.path media.track_url #data-path for waveform
-      json.cover media.image_url
+      json.cover media.image_url || '/img/music_back.jpeg'
       json.filename media.get_filename #data-filename for waveform
     else
       json.path media.songs[0].track_url #data-path for waveform
       json.filename media.songs[0].get_filename #data-filename for waveform
+      json.cover media.songs[0].image_url || '/img/music_back.jpeg'
     end
   end
 end
