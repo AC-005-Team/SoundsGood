@@ -121,7 +121,7 @@ class User < ApplicationRecord
   end
 
   def add_avatar
-    self.avatar_data = '{"id":"user/1/avatar/75b54db160fd8c18982c1924751db1ad.png","storage":"store","metadata":{"filename":"user_image.png","size":27632,"mime_type":"image/png"}}' if self.avatar_data == nil
+    self.avatar_data = '{"id":"user/18/avatar/baf5327d1a6cf68c60a709e42af32a53.png","storage":"store","metadata":{"filename":"default_user_image.png","size":19040,"mime_type":"image/png"}}' if self.avatar_data == nil
   end
 
 end
