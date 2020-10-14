@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
   root to: "home#index"
-  # get '/playlists', to: 'home#index'
-  # get '/playlists/:id', to: 'home#index'
   get '/discover', to: "home#discover"
   get '/stream', to: "home#stream"
   get '/upload', to: "songs#upload"
@@ -58,30 +56,13 @@ Rails.application.routes.draw do
       post :repost
       patch :add_played_times
     end
-    resources :comments, only: [:create, :destroy]
+    resources :comments, only: [:create]
     member do
       get :share
     end
   end
 
-  resources :playlists, only: [:create, :show, :edit, :update, :destroy] do
-    member do
-      post :like
-      post :repost
-    end
-    resources :songs, shallow: true do
-      member do
-        post :like
-        post :add_to_playlist
-        post :repost
-      end
-      resources :comments, only: [:create, :destroy]
-      member do
-        get :share
-      end
-    end
-    resources :playlists, only: [:index]
-  end
+  resources :comments, only: [:destroy]
 
   resources :playlists, only: [:create, :show, :edit, :update, :destroy] do
     member do
@@ -97,10 +78,7 @@ Rails.application.routes.draw do
       get :library
       get :likes
       get :sets
-      get :albums
-      get :stations
       get :following
-      get :history
     end
   end
 

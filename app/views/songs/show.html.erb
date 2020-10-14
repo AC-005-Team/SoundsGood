@@ -106,12 +106,14 @@
         <div class="p-1 text-gray-600">
           <i class="fas fa-heart"></i>
           <span class='liked-count'>
-            <%= @song.liked_users.count %>
+            <%= @song.liked_users.size %>
           </span>
         </div>
         <button class="p-1 text-gray-600">
           <i class="fas fa-retweet"></i>
-          <%= @song.reposted_users.count %>
+          <span class='reposted-count'>
+            <%= @song.reposted_users.size %>
+          </span>
         </button>
 
       </div>
@@ -154,13 +156,13 @@
         <%#=正中間留言總數%>
         <div class="flex text-gray-400 m-4 p-2 border-b border-gray-400">
           <i class="fas fa-comments"></i>
-          <p class="mx-1"><%=@comments.count%></p>
+          <p class="mx-1"><%=@song.comments.size%></p>
           <p class="mx-1">comments</p>
         </div>
         <%#=顯示正中間留言區那%>
         <div class="text-xs" id="comments">
           <% @comments.each do |comment| %>
-            <div class="flex main-comment">
+            <div class="flex main-comment comment-id-<%=comment.id%>">
               <% if comment.user.avatar_url %>
                 <%= image_tag comment.user.avatar_url, class: 'w-1/12 rounded-full' %>
               <% end %>
@@ -177,34 +179,14 @@
               <div class="col-span-2 text-gray-400">
                 <p><%= time_diff(DateTime.now, comment.created_at) %>
                 <%if is_current_user?(comment.user)%>
-                  <button class="border border-gray-400 p-1 rounded"><%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"}%></button>
+                  <button class="border border-gray-400 p-1 rounded"><%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id), remote: true, method: "delete", data: {confirm: "Do you really want to remove this comment?"}%></button>
                 <%end%>
               </div>
             </div>
             <%#=顯示正中間針對留言的留言那%>
-            <div id= <%=comment.id%>>
+            <div id= comment-id-<%=comment.id%>>
               <% comment.replies.each do |reply| %>
-              <div class="flex mt-4 ml-6">
-                <% if reply.user.avatar_url %>
-                  <%= image_tag reply.user.avatar_url, class: 'w-1/12 rounded-full' %>
-                <% end %>
-                <div class="w-9/12 mx-2">
-                  <div class="flex">
-                    <button> <%=reply.user.display_name%></button>
-                    <p class ="mx-1"> at</p>
-                    <p>
-                      <%= comment.timepoint.to_i >= 3600 ? Time.at(comment.timepoint.to_i).utc.strftime("%H:%M:%S") : Time.at(comment.timepoint.to_i).utc.strftime("%M:%S") %>
-                    </p>
-                  </div>
-                  <p class=""> <%=reply.content%> </p>
-                </div>
-                <div class="w-3/12 text-gray-400">
-                  <p><%= time_diff(DateTime.now, reply.created_at) %>
-                  <%if is_current_user?(comment.user)%>
-                  <button class="border border-gray-400 p-1 rounded"> <%= link_to "Delete", comment_path(song_id: @song.id, id: reply.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%> </button>
-                  <%end%>
-                </div>
-              </div>
+                <%= render 'comments/reply', comment: comment,reply: reply %>
               <% end %>
             </div>
 

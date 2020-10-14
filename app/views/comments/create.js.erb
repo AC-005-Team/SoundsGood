@@ -3,7 +3,7 @@ if ( "<%= @comment.reply_id%>" == "") {
   comments.innerHTML = "<%= j render("comments/comment", comment: @comment ,song: @song) %>" + comments.innerHTML ;
   document.querySelector("#comment_content").value = "";
 } else {
-  var comments = document.getElementById('<%= @comment.reply_id%>');
+  var comments = document.getElementById('comment-id-<%= @comment.reply_id%>');
   comments.innerHTML = comments.innerHTML + "<%= j render("comments/reply", reply: @comment ,song: @song) %>" ;
   document.querySelectorAll("#comment_content").forEach(reply => reply.value = "");
 }
