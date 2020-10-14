@@ -1,28 +1,21 @@
 <template>
   <div @click='yourClickHandler'>
-    <!-- <vueper-slides class="no-shadow"
-:visible-slides="3"
-slide-multiple
-:gap="3"
-:slide-ratio="1 / 4"
-:dragging-distance="200"
-:breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }">
 
 
-<vueper-slide />
-</vueper-slides> -->
-
-    <div class="flex overflow-scroll text-gray-500 text-xs">
+    <div class="bg-gray-200 plgrid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 py-4 text-gray-500 text-xs parent">
       <div
         class="my-2 mr-2"
         @click="playPause"
         @mouseover="mouseOver"
         @mouseleave="mouseLeave"
       >
-        <!-- :class="[playing? 'fa-pause-circle': '' ]"  -->
-        <div class="cover overflow-hidden w-32 h-32 bg-white">
+
+
+
+
+        <div class="cover overflow-hidden w-32 h-32">
           <i
-            class="far z-10 fa-pause-circle"
+            class="z-10 fas fa-pause"
             style="font-size: 60px"
             v-show="playing"
           />
@@ -39,8 +32,10 @@ slide-multiple
               </div>
             </div>
           </transition>
+          <div class="child">
+            <img class=" object-cover h-32 max-w-xl mr-4 " :src="chart.audio.cover" />
 
-          <img class="h-32 max-w-xl mr-4 object-cover" :src="chart.audio.cover" />
+          </div>
 
         </div>
         <div class="dropdown absolute bg-white">
@@ -58,14 +53,12 @@ slide-multiple
           </div>
         </div>
 
-      <div class="text-sm text-center cursor-pointer hover:bg-gray-300 hover:text-black" @click="songsShow">
+      <div class="text-sm text-black text-center cursor-pointer hover:bg-gray-300 hover:text-black" @click.stop="songsShow">
         <li class="">{{ chart.audio.name }}</li>
         <li class="">{{ chart.audio.artist }}</li>
       </div>
 
 
-        <!-- <i class="far fa-pause-circle" style="font-size: 60px" ></i> -->
-        <!-- <i class="far" :class="[is? 'fa-pause-circle' : 'fa-play-circle']"  style="font-size: 60px"  /> -->
       </div>
 
 
@@ -88,11 +81,6 @@ import {
   mapActions
 } from 'vuex'
 import {
-  VueperSlides,
-  VueperSlide
-} from 'vueperslides'
-import 'vueperslides/dist/vueperslides.css'
-import {
   SweetModal,
   SweetModalTab
 } from 'sweet-modal-vue'
@@ -101,6 +89,7 @@ import myPlaylist from '../../shared/myPlaylist'
 import addPlaylist from '../../shared/addPlaylist'
 
 export default {
+
   name: "chart",
   data() {
     return {
@@ -110,15 +99,14 @@ export default {
       isActive: false,
       playlists: [],
       track_id: null,
-      like_status: null
+      like_status: null,
+
 
     };
   },
   props: ["chart"],
 
   components: {
-    VueperSlides,
-    VueperSlide,
     SweetModal,
     SweetModalTab,
     myPlaylist,
@@ -246,57 +234,46 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.cover {
-  height: 150px; /* [1.1] Set it as per your need */
-  overflow: hidden; /* [1.2] Hide the overflowing of child elements */
-  position: relative;
-  /* box-shadow: 1px 1px 15px -1px rgba(0,0,0,0.75); */
-}
-.cover img {
-  transition: transform 0.2s ease;
-}
-.cover:hover img {
-  transform: scale(1.2);
-  /* box-shadow: inset 0px -10px 10px 3px rgba(0,0,0,.2); */
+.cover{
+  position: relative
 }
 
-.cover:hover {
-  /* box-shadow: inset 0 0 0 1px rgba(0,0,0,.1); */
-  transition: 0.3s;
-  box-shadow: inset 0px -10px 10px 3px rgba(0, 0, 0, 0.2);
-}
+
 
 .buttons {
   position: absolute;
   bottom: 1rem;
   right: 0;
-  color: rgba(110, 105, 105, 0.88);
+  text-shadow:1px 1px 7px #383737;
+  color: rgba(255, 255, 255, 0.88);
 }
 
-.fa-pause-circle,
-.fa-play-circle {
+.fa-pause,
+.fa-play {
   font-size: 65px;
-  color: rgba(247, 66, 2, 0.6);
+  color: rgba(247, 66, 2, 1);
+  text-shadow:4px 4px 4px #626262;
   position: absolute;
   margin: 0 auto;
   top: 25px;
   left: 40px;
 }
+
+
 .fa-ellipsis-h:hover,
 .fa-heart:hover {
-  transform: scale(1.2);
-  color:rgb(251, 171, 171);
+  transform: scale(1.5);
+  color:rgb(251, 171, 176);
   transition:.3s;
-
-  transition: 0.3s;
 }
+
 .fa-ellipsis-h,
 .fa-heart {
   font-size: 18px;
 }
 
 .like {
-  color: rgb(255, 93, 33);
+  color: rgb(255, 59, 59);
 }
 
 .fade-enter-active {
@@ -347,4 +324,49 @@ export default {
   opacity: 1;
   transition: visibility 0s linear 1s, opacity 1s linear;
 }
+
+.parent {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+
+.child {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+}
+
+.parent:hover .child:before, .parent:focus .child:before {
+    display: block;
+}
+
+.parent:hover .child, .parent:focus .child {
+    -ms-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+
+.child:before {
+    content: "";
+    display: none;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(156, 156, 156, 0.32);
+}
+
+
 </style>

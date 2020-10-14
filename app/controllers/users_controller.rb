@@ -15,6 +15,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def unfollow
+    
+
+  end
+
   def edit;end
 
   def update

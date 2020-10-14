@@ -123,15 +123,18 @@ Rails.application.routes.draw do
         end
         resources :users, only: [:show, :index] do
           member do
-            get :reposts
-            get :followers
-            get :following
-            get :comments
-            get :likes
-          end
+             get :reposts
+             get :followers
+             get :following
+             get :comments
+             get :likes
+             get :unfollow
+           end
+           collection do
+             get :unfollow
+           end
+         end
         end
       end
     end
   end
-
-end

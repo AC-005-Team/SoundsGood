@@ -1,32 +1,29 @@
 <template lang="html">
 
 
-    <div class="p-20 bg-cover h-screen" style="background-image: url(/img/27121.png)">
+    <div class="p-20 bg-cover h-screen">
           <form @submit.prevent="uploadForm">
 
 
-            <div class="mt-2 m-auto w-2/3 border border-gray-400 p-4 bg-white shadow-2xl">
-              <div class="text-center">
-                <p class="py-2 text-2xl">Upload Your Music, audio type must be mp3,ogg,mpeg</p>
-
-
-
-                    <ValidationProvider rules="required|ext:mp3,ogg,mpeg"  ref="provider" name="audio"  v-slot="{ errors, validate }">
-
-                    <input class="song_value" type="file" name="song[track]" id="song_track" @change="handleFileChange" >
-                  <!-- <input type="file" @change="validate"> -->
-                     <span class="text-red-600">{{ errors[0] }}</span>
-                     </ValidationProvider>
-
-                  <div class="text-2xl" id="music"></div>
-
-                  </div>
-                </div>
 
 
                   <div class="w-2/3 m-auto text-xs">
-                    <div class="flex justify-between items-center bg-gray-200 p-2 border border-gray-300 rounded">
-                      <div class="flex">
+
+                    <div class="mt-2 m-auto w-2/3 p-4">
+                      <div class="text-center">
+                        <p class="text-2xl">Upload Your Music, audio type must be mp3,ogg,mpeg</p>
+
+
+
+                        <ValidationProvider rules="required|ext:mp3,ogg,mpeg"  ref="provider" name="audio"  v-slot="{ errors, validate }">
+
+                          <input class="song_value" type="file" name="song[track]" id="song_track" @change="handleFileChange" >
+                          <!-- <input type="file" @change="validate"> -->
+                          <span class="text-red-600">{{ errors[0] }}</span>
+                        </ValidationProvider>
+
+                        <div class="text-2xl" id="music"></div>
+
                       </div>
                     </div>
 

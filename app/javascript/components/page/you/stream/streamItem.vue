@@ -11,7 +11,7 @@
     <div class="flex xl:max-h-full">
 
       <div class="w-32 h-32 overflow-hidden bg-black mr-4 mb-4">
-        <a><img :src="this.cover"></a>
+        <a><img :src="this.cover" class="object-cover"></a>
       </div>
 
 

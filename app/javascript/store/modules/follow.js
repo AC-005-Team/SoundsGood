@@ -11,6 +11,7 @@ const follow = {
   state: {
      followees: [],
      following: false,
+     unfollow:[]
 
 
   },
@@ -21,6 +22,9 @@ const follow = {
     },
     LOAD_FOLLOWEES(state,data){
       state.followees = data
+    },
+    FIND_FOLLOWERS(state,data){
+      state.unfollow = data
     },
     UNFOLLOW(state,data) {
       let id = data
@@ -38,12 +42,19 @@ const follow = {
     following(state){
       return state.following;
     },
+    unfollowers(state){
+      return state.unfollow
+    }
   },
 
   actions: {
     async loadFollowees({commit}) {
       let response = await Api().get(`/api/v1/library/following`);
       commit('LOAD_FOLLOWEES', response.data)
+    },
+    async loadUNFollow({commit}) {
+      let response = await Api().get(`api/v1/users/unfollow`);
+      commit('FIND_FOLLOWERS', response.data)
     },
 
 

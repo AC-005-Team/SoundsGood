@@ -1,84 +1,72 @@
 <template>
 <div @click="yourClickHandler">
-  <div class="grid grid-cols-12 bg-gradient-to-b from-gray-700 via-white to-gray-400 mx-6">
-    <div class="col-span-8 m-4 flex flex-col justify-between">
-      <div class="flex justify-between">
-        <div class="flex items-center">
-          <div class="">
-            <svg class="svg-inline--fa fa-play fa-w-14 fa-2x" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="play" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-              <path fill="currentColor" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
-            </svg><!-- <i class="fas fa-play fa-2x"></i> -->
-          </div>
-          <div class="">
-            <router-link :to="{name: 'playlists'}">back to playlists</router-link>
-            <p class="">user_name</p>
-            <p class="">steven_1</p>
-          </div>
-        </div>
-        <div class="">5 days ago</div>
+  <div class="bg-cover bg-center  bg-opacity-50 h-60 pt-16 head">
+    <div class=" mx-64  content-center">
+    <div class="grid grid-cols-12">
+      <div class="col-span-4 m-auto my-4 ">
+        <img class="h-32 w-32 overflow-hidden bg-blue-300 sm:block hidden" :src="listsongs.first_cover">
       </div>
-      <div class="">
+      <div class="col-span-8 m-4 flex flex-col justify-between">
       </div>
     </div>
 
-    <div class="col-span-4 m-auto my-4 ">
-      <img class="h-32 w-32 overflow-hidden bg-blue-300 sm:block hidden" :src="listsongs.first_cover" >
+
+      <div class="flex items-center ">
+        <div class="">
+          <svg class="svg-inline--fa fa-play fa-w-14 fa-2x" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="play" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+            <path fill="currentColor" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
+          </svg><!-- <i class="fas fa-play fa-2x"></i> -->
+        </div>
+        <div class="">
+          <router-link :to="{name: 'playlists'}">back to playlists</router-link>
+        </div>
+      </div>
+      <div class="col-span-12 md:col-span-3 mx-auto">
+        <img class="w-16 h-16 overflow-hidden bg-black rounded-full" :src="listsongs.playlist_user">
+        <p class="">user_name</p>
+        <p class="">follower</p>
+      </div>
+
+      </div>
+  </div>
+
+
+
+
+
+<div class="grid grid-cols-12 ">
+  <div class="col-span-8 md:col-span-12">
+
+    <div class="grid grid-cols-12 mx-8">
+      <div class="col-span-12 md:col-span-8">
+        <div class="my-4 border-b border-gray-200"  >
+
+              <list_songs v-for="(song, index) in listsongs.audio" :key="index" :song="song"  />
+
+
+      </div>
+
     </div>
   </div>
 
-  <div class="grid grid-cols-12 m-6">
-    <div class="col-span-12 md:col-span-9">
-
-      <div class="grid grid-cols-12 mx-6">
-        <div class="col-span-12 md:col-span-3 mx-auto">
-          <img class="w-32 h-32 overflow-hidden bg-black rounded-full" :src="listsongs.playlist_user"  >
-          <p class="">user_name</p>
-          <p class="">follower</p>
-        </div>
-
-        <div class="col-span-12 md:col-span-9">
-          <h1>{{listsongs.name}}</h1>
-          <div v-for="(song, index) in listsongs.audio" :key="index" class="flex justify-between bg-white hover:bg-gray-200 my-4 border-b border-gray-200">
-            <div class="flex items-center">
-              <img :src="song.cover" class="mx-2 h-10 w-10">
-              <div>1</div>
-              <div class="mx-2">{{ song.user }} </div>
-              <div class="mx-2">{{ song.title }} </div>
-            </div>
-            <button :song-id="song.id" @click="playTheSong">play ▶</button>
-            <!-- <div class="dropdown">
-            <button class="dropbtn" @click="toggle">+</button>
-            <div class="">
-              <div id="myDropdown" class='dropdown-content ' :class=" [isActive? 'show' : '']" >
-              <a>add to play next</a>
-              <a>add to playlist</a>
-            </div>
-            </div>
-          </div> -->
-          </div>
-
-        </div>
-
-      </div>
-    </div>
 
 
 
-
-    <div>
-
+  <div>
 
 
-
-    </div>
   </div>
+</div>
+
 
 </div>
+</div>
+
 </template>
 
 <script>
 import Api from '../../../../api/api'
-
+import list_songs from './list_songs'
 import {
   mapState,
   mapGetters,
@@ -90,17 +78,33 @@ export default {
   data() {
     return {
       isActive: false,
+      playBtn: false
     }
+  },
+  components:{
+    list_songs
   },
   // props: ['id'],
 
   computed: {
     ...mapGetters({
-      listsongs: 'playlistsSongs/listsongs'
+      listsongs: 'playlistsSongs/listsongs',
+      playerTracks: 'songs/playerTracks',
+      continue: "songs/continue",
+      isPLAY: "songs/isPLAY",
     }),
-    ...mapGetters({
-      playerTracks: 'songs/playerTracks'
-    }),
+    playing() {
+      var id = event.target.getAttribute('song-id');
+      if (this.playerTracks.id === id) {
+        if (this.isPLAY === false) {
+          return false;
+        }
+        return true;
+      } else {
+        return false;
+      }
+    },
+
 
 
 
@@ -121,6 +125,18 @@ export default {
         this.isActive = false
       }
     },
+    mouseOver: function() {
+      if(this.isPlay === true){
+        this.playBtn = false;
+      }else{
+        this.playBtn = true;
+      }
+    },
+
+    mouseLeave: function() {
+      this.playBtn = false;
+    },
+
     playTheSong() {
       var id = event.target.getAttribute('song-id');
       console.log(id);
@@ -139,7 +155,23 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.head {
+background-size:     cover;
+background-image: url(/img/5497.jpg);
+filter: grayscale(1);
+background-position: center;
+animation: shrink 5s infinite alternate;
+}
+/* @keyframes shrink {
+  0% {
+    background-size: 130% 130%;
+  }
+  100% {
+    background-size: 150% 150%;
+  }
+} */
 .dropbtn {
+
   background-color: #3498DB;
   color: white;
   padding: 3px 3px;
@@ -174,4 +206,13 @@ export default {
 }
 .dropdown a:hover {background-color: #f0c543;}
 .show {display: block;}
+
+.list-bg{
+  background-color: #37353e;
+}
+i.fas{
+  color: rgb(255, 60, 60);
+}
+
+
 </style>
