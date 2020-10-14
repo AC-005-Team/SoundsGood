@@ -14,7 +14,7 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-
+      leego_orange: '#f74304',
       black: '#000',
       white: '#fff',
 
@@ -293,6 +293,9 @@ module.exports = {
     inset: {
       '0': '0',
       auto: 'auto',
+      leego_top: '-5%',
+      leego_top_1: '-50%',
+      fi: '50%',
     },
     letterSpacing: {
       tighter: '-0.05em',

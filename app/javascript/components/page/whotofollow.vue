@@ -6,7 +6,7 @@
       <div class="">people</div>
       <div class="flex justify-between">
         <div class="flex text-gray-400">
-          <div class="">{{ this.unfollower.display_name }}</div>
+          <div class="">{{ unfollower.display_name }}</div>
           <div class="">1919</div>
         </div>
         <button class="border border-gray-400 rounded p-1">

@@ -220,7 +220,7 @@
         </button>
       </div>
 
-      <whotofollow v-for="unfollower in unfollowers.slice(0, 3)"/>
+      <whotofollow v-for="unfollower in unfollowers.slice(0,3)" :unfollower="unfollower"/>
 
 
 
@@ -256,7 +256,6 @@ export default {
   components: {
     chart,
     whotofollow
-
   },
 
   methods: {
