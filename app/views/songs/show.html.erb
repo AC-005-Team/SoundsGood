@@ -168,9 +168,9 @@
               <% end %>
               <div class="w-9/12 mx-2">
                 <div class="flex">
-                  <button><%=comment.user.display_name%></button>
+                  <%= link_to comment.user.display_name, user_path(comment.user.id) %>
                   <p class ="mx-1"> at</p>
-                  <p>
+                  <p class='comment-time'>
                     <%= comment.timepoint.to_i >= 3600 ? Time.at(comment.timepoint.to_i).utc.strftime("%H:%M:%S") : Time.at(comment.timepoint.to_i).utc.strftime("%M:%S") %>
                   </p> 
                 </div>
