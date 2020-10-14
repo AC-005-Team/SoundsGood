@@ -9,6 +9,7 @@
   top: 0;
   height: 100%;
   width: 100%;
+  z-index: 11;
 }
 .modal-fade {
   height: 100%;
@@ -16,7 +17,7 @@
   opacity: 0;
   transition: opacity .8s ease ;
   position: fixed;
-  z-index: 1000;
+  z-index: 12;
 }
 .modal-close-btn {
   position: fixed;
@@ -33,13 +34,19 @@
   opacity: 1;
 }
 .modal-content {
-  width: 560px;
-  z-index: 1300;
+  width: 300px;
+  left: calc(50% - 150px);
+  z-index: 13;
   opacity: 1;
   position: fixed;
   top: -500px;
-  left: calc(50% - 280px);
   transition: .3s;
+}
+@media screen and (min-width: 640px){
+  .modal-content {
+    width: 560px;
+    left: calc(50% - 280px);
+  }
 }
 .modal-item {
   background-color: #fff;
