@@ -1,8 +1,8 @@
 <template>
 <div>
 
-  <div class="bg-gray-100 grid grid-cols-12 mx-5">
-    <div class="col-span-9 bg-white">
+  <div class="grid grid-cols-12 text-white  bg-gray-900">
+    <div class="col-span-9">
 
 
       <div class="border-b border-gray-200 m-4">
@@ -10,7 +10,7 @@
 
 
 
-        <div class="flex overflow-scroll text-gray-500 text-xs">
+        <div class="flex overflow-scroll text-gray-500 text-xs ">
         <chart v-for="chart in index" :chart='chart' />
         </div>
 
@@ -112,7 +112,7 @@
 
 
 
-      <div class="border-b border-gray-200 m-4">
+      <div class="border-b border-gray-200 mb-20">
         <div class="text-2xl">The Upload</div>
         <div class="text-xs text-gray-500 my-2">Newly posted tracks. Just for you</div>
         <div class="flex justify-aroundp-3 p-5 bg-gradient-to-r from-gray-500 via-white to-pink-300">
@@ -159,63 +159,15 @@
 
 
 
-      <div class="p-5">
-        <div class="text-2xl">Relax</div>
-        <div class="text-xs text-gray-500 my-2">Popular playlists from the SoundCloud community</div>
-        <div class="flex my-4 overflow-scroll">
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-        </div>
-      </div>
 
 
 
     </div>
 
-    <div class="col-span-3 bg-white p-5 right-0 border-l boder-gray-200">
+    <div class="col-span-3 p-5 right-0 border-l boder-gray-200">
       <div class="flex justify-between text-gray-500 border-b border-gray-200 text-sm p-2">
 
-        <button class="hover:text-red-700">
+        <button>
           who to follow
         </button>
       </div>
@@ -273,9 +225,8 @@ export default {
 
   },
 
-
+  ...mapActions('follow',['loadUNFollow'],['addFollow']),
   ...mapActions('song', ['song/loadIndex']),
-  ...mapActions('follow', ['follow/loadUNFollow']),
   created() {
     this.$store.dispatch('song/loadIndex');
     this.$store.dispatch('follow/loadUNFollow');
@@ -289,9 +240,10 @@ export default {
 <style lang="css" scoped>
 i.fab {
   position: relative;
+  font-size: 2rem;
 -webkit-animation-name: move; /* Safari 4.0 - 8.0 */
 -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
-animation: move 2s infinite;
+animation: move 1s infinite;
 
 }
 

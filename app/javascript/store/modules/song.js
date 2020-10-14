@@ -52,7 +52,7 @@ const song = {
       let response = await Api().get(`/api/v1/songs`);
       // dispatch("songs/setPlayerTracks", response.data, { root: true }); //塞到module tracks方法
       // dispatch("songs/play", response.data, { root: true });
-      commit("LOAD_INDEX", response.data);
+      commit("LOAD_INDEX", response.data.index);
     },
 
 

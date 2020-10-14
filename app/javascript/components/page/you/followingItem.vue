@@ -4,7 +4,7 @@
                 <div class="align-top w-full" @mouseover="show = true">
                   <img src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg"  class="rounded-full block">
                 </div>
-                <li> id: {{ wee.name }}</li>
+                <li> {{ wee.name }}</li>
                   <transition name="fade">
                   <button class="border border-orange-700 px-1 rounded follow" v-if="show" @click="unfollow">
                     <i class="fas fa-user"></i> following</p>
@@ -32,7 +32,6 @@ export default {
 
   ...mapActions(['follow/unFollow']),
   methods:{
-
         unfollow(){
           this.$store.dispatch('follow/unFollow', this.wee.id);
         }

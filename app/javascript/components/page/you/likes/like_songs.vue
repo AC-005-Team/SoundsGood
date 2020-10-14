@@ -11,9 +11,8 @@
 
       <!-- <%#= 歌曲名稱 %> -->
       <div class="text-xs text-gray-700">
-        <li>{{ song.audio.name }}</li>
-        <li>{{ song.audio.artist }}</li>
-        <!-- <%= content_tag(:li,song.intro, data: {value: song.intro} ) %> -->
+        <li @click.stop="songsShow" >{{ song.audio.name }}</li>
+        <li> {{ song.audio.artist }} </li>
       </div>
   </div>
 </div>
@@ -63,6 +62,11 @@ export default {
       ...mapActions("favorite", ["toggleLike"]),
       ...mapActions("playlists", ["loadSongs"]),
       ...mapActions("song", ["loadSong"]),
+
+      songsShow(){
+        let id = this.song.song_id ;
+        window.location.href = `/songs/${id}`;
+      },
 
 
       playPause() {

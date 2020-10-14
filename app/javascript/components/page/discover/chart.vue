@@ -2,7 +2,7 @@
   <div @click='yourClickHandler'>
 
 
-    <div class="bg-gray-200 plgrid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 py-4 text-gray-500 text-xs parent">
+    <div class="plgrid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6  gap-4 py-4 text-gray-500 text-xs parent">
       <div
         class="my-2 mr-2"
         @click="playPause"
@@ -53,7 +53,7 @@
           </div>
         </div>
 
-      <div class="text-sm text-black text-center cursor-pointer hover:bg-gray-300 hover:text-black" @click.stop="songsShow">
+      <div class="text-sm text-gray-200 text-center cursor-pointer hover:text-white gray" @click.stop="songsShow">
         <li class="">{{ chart.audio.name }}</li>
         <li class="">{{ chart.audio.artist }}</li>
       </div>
@@ -235,7 +235,9 @@ export default {
 
 <style lang="css" scoped>
 .cover{
-  position: relative
+  position: relative;
+  border-top-left-radius:  10px;
+  border-top-right-radius:  10px;
 }
 
 
@@ -304,6 +306,8 @@ export default {
   z-index: 1;
 }
 
+
+
 .dropdown-content a {
   color: black;
   padding: 5px;
@@ -355,7 +359,9 @@ export default {
     -o-transform: scale(1.2);
     transform: scale(1.2);
 }
-
+.gray{
+  background-color: rgba(156, 156, 156, 0.2);
+}
 
 .child:before {
     content: "";

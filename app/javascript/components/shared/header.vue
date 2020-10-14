@@ -1,9 +1,8 @@
 <template>
 <header>
 
-  <div class="bg-black"></div>
 
-  <div class="bg-gray-800 text-gray-400 w-full flex justify-between text-center items-center text-sm sticky top-0 z-10">
+  <div class="bg-black text-gray-400 w-full flex justify-between text-center items-center text-sm sticky top-0 z-10">
     <button class="hover:text-white ml-6">
       <a href="/discover">
         <img class="w-48 hidden sm:block" src="/packs/media/images/logo_14-929fb1cd43f62a5bdca9540d9017df3b.png">

@@ -17,18 +17,24 @@ const follow = {
   },
 
   mutations: {
-    FOLLLOW(state,data){
-      state.following = data
+
+    FOLLOW(state,data){
+      let id = data
+      let foundValue = state.unfollow.find(obj => obj.user_id === id);
+      let i = state.unfollow.indexOf(foundValue)
+      state.unfollow.splice(i, 1);
     },
+
     LOAD_FOLLOWEES(state,data){
       state.followees = data
     },
     FIND_FOLLOWERS(state,data){
       state.unfollow = data
     },
+
     UNFOLLOW(state,data) {
       let id = data
-      var foundValue = state.followees.find(obj => obj.id === id);
+      let foundValue = state.followees.find(obj => obj.id === id);
       let i = state.followees.indexOf(foundValue)
       state.followees.splice(i, 1);
 
@@ -52,14 +58,14 @@ const follow = {
       let response = await Api().get(`/api/v1/library/following`);
       commit('LOAD_FOLLOWEES', response.data)
     },
+
     async loadUNFollow({commit}) {
       let response = await Api().get(`api/v1/users/unfollow`);
       commit('FIND_FOLLOWERS', response.data)
     },
 
 
-    async addFollow({commit}, payload) {
-
+    addFollow({commit}, payload) {
       Rails.ajax({
         url: `/users/${payload}/follow`,
         type: 'post',
@@ -67,8 +73,8 @@ const follow = {
              }
        })
     },
-    async unFollow({commit}, payload) {
 
+    async unFollow({commit}, payload) {
       Rails.ajax({
         url: `/users/${payload}/follow`,
         type: 'post',

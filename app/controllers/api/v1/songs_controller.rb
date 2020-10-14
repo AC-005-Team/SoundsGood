@@ -2,6 +2,7 @@ class Api::V1::SongsController < ApplicationController
   def index
     @songs = Song.all.last(10).reverse!
     @playlists = current_user.playlists
+    @tag1_songs = Tag.find_by(name: "Hip-Hop").songs
   end
 
   def show
