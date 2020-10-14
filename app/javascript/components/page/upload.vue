@@ -1,11 +1,11 @@
 <template lang="html">
-  <div class="">
 
-    <div class="m-4">
+
+    <div class="p-20 bg-cover h-screen" style="background-image: url(/img/27121.png)">
           <form @submit.prevent="uploadForm">
 
 
-            <div class="mt-2 m-auto w-2/3 border border-gray-400 p-4">
+            <div class="mt-2 m-auto w-2/3 border border-gray-400 p-4 bg-white shadow-2xl">
               <div class="text-center">
                 <p class="py-2 text-2xl">Upload Your Music, audio type must be mp3,ogg,mpeg</p>
 
@@ -35,12 +35,11 @@
                       <p class="">Ready. Click Save to post this track.</p>
                     </div> -->
 
-                    <div class="flex justify-between h-2">
-                      <div class="w-1/2 bg-blue-600"></div>
-                      <div class="w-1/2 bg-orange-600"></div>
-                    </div>
 
-                    <div class="px-6 py-2 border border-gray-200">
+                      <div class="bg-blue-600 w-full"></div>
+
+
+                    <div class="px-6 py-2 border border-gray-200 bg-white">
                       <div class="flex text-2xl border-b border-gray-400 mb-6">
                         <button class="mx-2 text-orange-600">Basic Info</button>
                       </div>
@@ -84,9 +83,9 @@
 
 
 
-                                      <div class="flex justify-center items-center p-6 border border-gray-200 rounded">
+                                      <div class="flex justify-center items-center p-6 border border-gray-200 bg-white">
 
-                                        <button type="submit" class="submit" @click.prevent="uploadForm" >Submit</button>
+                                        <button type="submit" class="submit text-2xl px-2 text-white bg-orange-600 rounded border" @click.prevent="uploadForm" >SUBMIT</button>
                                         <div class="text-sm">
 
                                           <div class="animation" v-show="display">
@@ -108,17 +107,13 @@
                                               <span></span>
                                             </div>
                                           </div>
-
-
-
-
                                         </div>
                                       </div>
                                       </div>
                                     </form>
                                   </div>
 
-  </div>
+
 
 
 </template>
@@ -258,12 +253,26 @@ export default {
 
 $orange: #f4c2a8;
 $dark-orange: #b52600;
+$soundsgood: #f4441d;
 $white: #fff;
 $curve: cubic-bezier(0.850, 0.000, 0.550, 1.300);
 $speed: 1.3s;
 
 
 
+.submit{
+  background: $soundsgood;
+  font-size: 2rem;
+  font-family: Helvetica;
+}
+
+.submit:hover{
+  border-color: $soundsgood;
+  background-color: white;
+  color: $soundsgood;
+  font-size: 2rem;
+  font-family: Helvetica;
+}
 // Container
 .animation {
   position: absolute;
