@@ -40,36 +40,38 @@
           <div class="flex w-2/3 my-2 justify-start">
             <button class="flex border border-gray-300 px-3 mx-1 rounded like_btn" result-like-id='<%= song.id %>' >
               <% if song.favorited_by?(current_user) %>
-                <i class="fas fa-heart" style="color: orange"></i>
+                <span class="my-auto mr-1"><i class="fas fa-heart" style="color: orange"></i></span>
               <% else %>
-                <i class="far fa-heart"></i>
+                <span class="my-auto mr-1"><i class="fas fa-heart" style="color: black"></i></span>
               <% end %>
               <p class="hidden md:block like_count"><%= song.liked_users.count %></p> 
             </button>
             <button class="flex border border-gray-300 px-3 mx-1 rounded repost_btn" result-repost-id='<%= song.id %>'>
               <% if song.reposted_by?(current_user)%>
-                <i class="fas fa-redo-alt" style="color: orange"></i>
+                <span class="my-auto mr-1"><i class="fas fa-redo-alt" style="color: orange"></i></span>
               <% else %>
-                <i class="fas fa-redo-alt"></i>
+                <span class="my-auto mr-1"><i class="fas fa-redo-alt" style="color: black"></i></span>
               <% end %>
               <p class="hidden md:block"><%= song.reposts.size %></p>
             </button>
             <button class="modal-btn share-btn flex border border-gray-300 px-3 mx-1 rounded">
-              <i class="fas fa-share"></i>
+              <span class="my-auto mr-1"><i class="fas fa-share"></i></span>
               <p class="hidden md:block">Share</p> 
             </button>
-            <%# <button class="flex border border-gray-300 px-3 mx-1 rounded">
-              <i class="fas fa-ellipsis-h"></i>
-              <p class="hidden md:block">More</p>
-            </button> %>
+            <% if current_user == song.user %>
+              <%= link_to song_path(song.id), method:'delete', class: "flex border border-gray-300 px-3 mx-1 rounded" do %>
+                <span class="my-auto mr-1"><i class="fas fa-trash"></i></span>
+                <p class="hidden md:block">Delete</p>
+              <% end %>
+            <% end %>
           </div>
           <div class="flex w-1/3 justify-end">
-            <button class="flex mx-2">
-              <i class="fas fa-play"></i>
+            <div class="flex mx-2 my-auto">
+              <span class="my-auto mr-1"><i class="fas fa-play"></i></span>
               <p class="hidden md:block played_times_comments<%= song.id %> "><%= song.played_times %></p>
-            </button>
-            <%= link_to song_path(song.id), class:'flex mx-2' do %>
-              <i class="fas fa-comments"></i>
+            </div>
+            <%= link_to song_path(song.id), class:'flex mx-2 my-auto' do %>
+              <span class="my-auto mr-1"><i class="fas fa-comments"></i></span>
               <p class="hidden md:block song_comments"><%= song.comments.size%></p>
             <% end %>
           </div>

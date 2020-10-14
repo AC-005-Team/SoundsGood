@@ -9,7 +9,7 @@ class Song < ApplicationRecord
   has_many :favorite_songs, dependent: :destroy
   has_many :liked_users, through: :favorite_songs, source: :user
 
-  has_many :reposts, as: :repostable
+  has_many :reposts, as: :repostable, dependent: :destroy
   has_many :reposted_users, through: :reposts, source: :user
   after_save :create_peak_data
 

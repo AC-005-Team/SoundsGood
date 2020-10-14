@@ -9,6 +9,7 @@ export default class extends Controller {
       url: `/songs/${song_id}/like.json`,
       type: "post",
       success: (result) => {
+        console.log(this)
         let btnContent = this.likeBtnTarget.lastElementChild;
         let liked_count = document.querySelector('.liked-count')
         let liked_count_number = Number(liked_count.innerText)
