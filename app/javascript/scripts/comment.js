@@ -24,8 +24,13 @@ export function renderComments(song, ap){
     return res.json()
   })
   .then( songAndComments => {
-    currentUserName = songAndComments.current_user.user_name
-    currentUserUrl = songAndComments.current_user.user_url
+    if(songAndComments.current_user){
+      currentUserName = songAndComments.current_user.user_name
+      currentUserUrl = songAndComments.current_user.user_url
+    } else {
+      commentArea.setAttribute('placeholder', 'Log in to write a comment')
+      commentArea.setAttribute('disabled','')
+    }
     let duration = songAndComments.song.duration
     let comments = songAndComments.comments
     appendCommentsToSong(waveCommentSpace, comments, duration)
