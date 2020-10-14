@@ -2,18 +2,18 @@ class Song < ApplicationRecord
   include SongUploader::Attachment[:track]
   include CoverImageUploader::Attachment[:image]
   belongs_to :user, counter_cache: true
-  has_many :comments, dependent: :destroy
+  has_many :comments
   has_many :playlists_songs
-  has_many :playlists, through: :playlists_songs
+  has_many :playlists, through: :playlists_songs, dependent: :destroy
 
-  has_many :favorite_songs, dependent: :destroy
+  has_many :favorite_songs
   has_many :liked_users, through: :favorite_songs, source: :user
 
-  has_many :reposts, as: :repostable, dependent: :destroy
+  has_many :reposts, as: :repostable
   has_many :reposted_users, through: :reposts, source: :user
   after_save :create_peak_data
 
-  has_many :songs_tags, dependent: :destroy
+  has_many :songs_tags
   has_many :tags, through: :songs_tags
 
  

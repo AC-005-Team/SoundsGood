@@ -1,3 +1,5 @@
+const { error } = require("jquery")
+
 document.addEventListener('DOMContentLoaded', ()=>{
   let like_btn = document.querySelectorAll('.like_btn')
   like_btn.forEach(function(btn){
