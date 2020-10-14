@@ -2,7 +2,6 @@ import { renderComments } from './comment'
 import WaveSurfer from 'wavesurfer.js'
 import CursorPlugin from 'wavesurfer.js/src/plugin/cursor.js'
 export function waveShow(ap){
-// document.addEventListener('DOMContentLoaded', () => {
   const wavePlace = document.querySelector(".waveform-wrap") // see if at least a waveform div is present
   const peakStorageRoot = 'https://peaks.soundsgood.world/api/v1/getjson/song_peaks/'
   const ctx = document.createElement('canvas').getContext('2d')
@@ -11,7 +10,7 @@ export function waveShow(ap){
   waveDarkSmall.addColorStop(0.56, 'rgb(255, 255, 255)');
   waveDarkSmall.addColorStop(0.57, 'rgb(215, 215, 215)');
   const waveProgressSmall = ctx.createLinearGradient(900, 0, 900, 200);
-  waveProgressSmall.addColorStop(0.55, 'rgb(255,118,38)');
+  waveProgressSmall.addColorStop(0.55, '#f74304');
   waveProgressSmall.addColorStop(0.56, 'rgb(255, 255, 255)');
   waveProgressSmall.addColorStop(0.57, '#ffcfb5');
   const waveLightLarge = ctx.createLinearGradient(900, 0, 900, 240);
@@ -19,7 +18,7 @@ export function waveShow(ap){
   waveLightLarge.addColorStop(0.56, 'rgba(255, 255, 255, 0)');
   waveLightLarge.addColorStop(0.57, 'rgba(215, 215, 215, 1)');
   const waveProgressLarge = ctx.createLinearGradient(900, 0, 900, 240);
-  waveProgressLarge.addColorStop(0.55, 'rgb(255,118,38)');
+  waveProgressLarge.addColorStop(0.55, '#f74304');
   waveProgressLarge.addColorStop(0.56, 'rgba(255, 255, 255, 0)');
   waveProgressLarge.addColorStop(0.57, '#ffcfb5');
 
@@ -134,5 +133,4 @@ export function waveShow(ap){
       song.appendChild(domEl)
     }
   }
-// })
 }

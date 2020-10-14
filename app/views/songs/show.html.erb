@@ -117,13 +117,13 @@
       </div>
     </div>
 
-    <div class="flex text-sm">
+    <div class="grid grid-cols-12 text-sm">
   <%#=左邊專區大頭照那%>
-      <div class="w-1/5 mr-4" data-controller="follow" data-follow-user="<%= @song.user.id %>">
+      <div class="col-span-12 md:col-span-3 mr-4" data-controller="follow" data-follow-user="<%= @song.user.id %>">
         <% if @song.user.avatar_url %>
-          <%= image_tag @song.user.avatar_url, class: 'rounded-full mt-6 mr-6 w-3/4' %>
+          <%= image_tag @song.user.avatar_url, class: 'rounded-full mt-6 mr-6 object-cover w-32 h-32' %>
         <% else %>
-          <div class="h-12 w-12 bg-cover" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
+          <div class="bg-cover" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
         <% end %>
         <div class="flex justify-start p-1">
           <div><%=@song.user.display_name%></div>
@@ -150,7 +150,7 @@
         <% end%>
       </div>
       <%#=正中間留言區%>
-      <div class="w-full sm:w-4/5">
+      <div class="col-span-12 md:col-span-9">
         <%#=正中間留言總數%>
         <div class="flex text-gray-400 m-4 p-2 border-b border-gray-400">
           <i class="fas fa-comments"></i>
@@ -161,9 +161,11 @@
         <div class="text-xs" id="comments">
           <% @comments.each do |comment| %>
             <div class="flex main-comment">
-              <% if comment.user.avatar_url %>
-                <%= image_tag comment.user.avatar_url, class: 'w-1/12 rounded-full' %>
-              <% end %>
+              <div class="w-1/12 h-auto">
+                <% if comment.user.avatar_url %>
+                  <%= image_tag comment.user.avatar_url, class: 'rounded-full object-cover w-full', style: 'padding-bottom:100%;height:0' %>
+                <% end %>
+              </div>
               <div class="w-9/12 mx-2">
                 <div class="flex">
                   <button><%=comment.user.display_name%></button>
@@ -174,6 +176,7 @@
                 </div>
                 <p><%=comment.content%></p>
               </div>
+
               <div class="col-span-2 text-gray-400">
                 <p><%= time_diff(DateTime.now, comment.created_at) %>
                 <%if is_current_user?(comment.user)%>
