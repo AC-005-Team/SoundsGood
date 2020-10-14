@@ -24,7 +24,9 @@ if(songs){
     song.addEventListener('click', function(e) {
       let playing = ap.container.dataset.playing
       let id = e.currentTarget.dataset.id;
-      waveProgress = document.querySelector(`.waveform-wrap[data-id="${id}"]>.waveform>wave>wave`)
+      if(!waveProgress){
+        waveProgress = document.querySelector(`.waveform-wrap[data-id="${id}"]>.waveform>wave>wave`)
+      }
       getPlay(id).then(val=>{
         if(playing!==id){
           if(waveProgress){
@@ -33,6 +35,7 @@ if(songs){
           }
           playingDuration = val.audio.duration
           secOfFourth = 0
+          waveProgress = document.querySelector(`.waveform-wrap[data-id="${id}"]>.waveform>wave>wave`)
           ap.pause();
           ap.list.clear();
           ap.list.add(val.audio);

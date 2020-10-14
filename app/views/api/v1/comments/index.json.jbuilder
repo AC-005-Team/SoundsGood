@@ -12,6 +12,7 @@ end
 json.comments do
   json.array! @song_and_comments[:comments] do |comment|
     json.comment_id comment.id
+    json.song_id comment.song_id
     json.user_id comment.user_id
     json.user_name comment.user.display_name
     json.user_url user_path(comment.user_id)
