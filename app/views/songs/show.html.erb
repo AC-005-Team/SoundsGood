@@ -50,7 +50,7 @@
         <% if current_user && current_user.avatar_url %>
           <%= image_tag current_user.avatar_url, class: 'w-auto h-10 current_user-avatar' %>
           <% else %>
-          <div class="h-8 w-8 bg-cover" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
+          <div class="h-8 w-8 bg-cover" style="background-image: url(/img/default_user_image.png)"></div>
         <% end %>
         <%= form_with(model:@comment, url:song_comments_path(song_id: @song, timepoint: 0), class: "song-comment-form w-11/12 mx-4") do |f|%>
           <%= f.text_field :content, placeholder: "Write a comment", class: "song-main-comment w-full h-full pl-1 border border-gray-400 rounded", data: {id: @song.id} %>
@@ -121,11 +121,11 @@
       <%#=左邊專區大頭照那%>
       <div class="col-span-12 md:col-span-2 flex sm:block p-4" data-controller="follow" data-follow-user="<%= @song.user.id %>">
         
-        <div class="rounded-full max-w-1/2 w-1/2">
+        <div class="rounded-full">
           <% if @song.user.avatar_url %>
-            <%= image_tag @song.user.avatar_url, class: 'w-32 h-32' %>
+            <%= image_tag @song.user.avatar_url, class: 'rounded-full mt-6 mr-6 object-cover w-32 h-32' %>
           <% else %>
-            <div class="w-32 h-32 sm:w-24 sm:h-24 bg-cover bg-center" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
+            <div class="w-32 h-32 sm:w-24 sm:h-24 bg-cover bg-center" style="background-image: url(/img/default_user_image.png)"></div>
           <% end %>
         </div>
 
@@ -168,15 +168,15 @@
           <% @comments.each do |comment| %>
             <div class="grid grid-cols-12 main-comment">
 
-              <div class="col-span-2 md:col-span-1 rounded-full">
+              <div class="col-span-2 md:col-span-1 rounded-full h-0 overflow-hidden" style="padding-bottom:100%">
                 <% if comment.user.avatar_url %>
                   <%= image_tag comment.user.avatar_url, class: 'rounded-full' %>
                   <% else %>
-                  <div class="w-8 h-8 sm:w-12 sm:h-12 bg-cover bg-center" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
+                  <div class="w-8 h-8 sm:w-12 sm:h-12 bg-cover bg-center" style="background-image: url(/img/default_user_image.png)"></div>
                 <% end %>
               </div>
 
-              <div class="col-span-7 md:col-span-10 mx-2">
+              <div class="col-span-7 md:col-span-8 mx-2">
                 <div class="flex">
                   <button class="">
                     <%=comment.user.display_name%>
@@ -189,8 +189,8 @@
                 <p><%=comment.content%></p>
               </div>
 
-              <div class="col-span-3 md:col-span-1 flex justify-center text-xs">
-                <p><%= time_diff(DateTime.now, comment.created_at) %>
+              <div class="col-span-3 md:col-span-3 flex justify-end text-xs pr-8">
+                <p class="text-right"><%= time_diff(DateTime.now, comment.created_at) %></br>
                 <%if is_current_user?(comment.user)%>
                   <button class="border border-gray-400 p-1 rounded"><%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"}%></button>
                 <%end%>
@@ -203,15 +203,15 @@
               <% comment.replies.each do |reply| %>
               <div class="grid grid-cols-12 mt-4 ml-6">
 
-                <div class="col-span-2 md:col-span-1 rounded-full">
+                <div class="col-span-2 md:col-span-1 rounded-full h-0 overflow-hidden" style="padding-bottom:100%">
                   <% if comment.user.avatar_url %>
                     <%= image_tag comment.user.avatar_url, class: 'rounded-full' %>
                     <% else %>
-                    <div class="w-8 h-8 sm:w-12 sm:h-12 bg-cover bg-center" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
+                    <div class="w-8 h-8 sm:w-12 sm:h-12 bg-cover bg-center" style="background-image: url(/img/default_user_image.png)"></div>
                   <% end %>
                 </div>
 
-                <div class="col-span-7 md:col-span-10 mx-2">
+                <div class="col-span-7 md:col-span-8 mx-2">
                   <div class="flex">
                     <button> <%=reply.user.display_name%></button>
                     <p class ="mx-1">at</p>
@@ -222,8 +222,8 @@
                   <p class=""> <%=reply.content%> </p>
                 </div>
 
-                <div class="col-span-3 md:col-span-1 flex justify-center text-xs">
-                  <p><%= time_diff(DateTime.now, reply.created_at) %>
+                <div class="col-span-3 md:col-span-3 flex justify-end text-xs pr-8">
+                  <p class="text-right"><%= time_diff(DateTime.now, reply.created_at) %></br>
                   <%if is_current_user?(comment.user)%>
                   <button class="border border-gray-400 p-1 rounded"> <%= link_to "Delete", comment_path(song_id: @song.id, id: reply.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%> </button>
                   <%end%>

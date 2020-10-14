@@ -1,8 +1,12 @@
-<div class="flex main-comment">
-  <% if comment.user.avatar_url %>
-    <%= image_tag comment.user.avatar_url, class: 'w-1/12 rounded-full' %>
-  <% end %>
-  <div class="w-9/12 mx-2">
+<div class="grid grid-cols-12 main-comment">
+  <div class="col-span-2 md:col-span-1 rounded-full h-0 overflow-hidden" style="padding-bottom:100%">
+    <% if comment.user.avatar_url %>
+      <%= image_tag comment.user.avatar_url, class: 'rounded-full' %>
+    <% else %>
+      <div class="w-8 h-8 sm:w-12 sm:h-12 bg-cover bg-center" style="background-image: url(/img/default_user_image.png)"></div>
+    <% end %>
+  </div>
+  <div class="col-span-7 md:col-span-8 mx-2">
     <div class="flex">
       <button><%=comment.user.display_name%></button>
       <p class ="mx-1"> at</p>
@@ -10,17 +14,16 @@
     </div>
     <p class=""> <%=comment.content%> </p>
   </div>
-  <div class="w-2/12 text-gray-400">
-    <p><%= time_diff(DateTime.now, comment.created_at) %>
+  <div class="col-span-3 md:col-span-3 flex justify-end text-xs pr-8">
+    <p class="text-right"><%= time_diff(DateTime.now, comment.created_at) %></br>
     <button class="border border-gray-400 p-1 rounded"> <%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(comment.user)%> </button>
   </div>
 </div>
 <div id= <%=comment.id%>>
 </div>
-  <div class="flex mt-4 ml-6">
+<div class="flex justify-end ml-6 mb-6">
   <%= form_with(model: song.comments.new, url:song_comments_path(song_id: song, reply_id: comment.id), class: "w-11/12 mx-4") do |f|%>
     <%= f.text_field :content, placeholder: "Reply to this comment", class: "w-10/12 py-2 px-4 border border-gray-400 rounded"%>
-    <%= f.submit "Reply", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"%>
+    <%= f.submit "Reply", class: "bg-leego_orange border border-leego_orange hover:bg-white hover:text-leego_orange text-white font-bold py-2 px-2 rounded"%>
   <% end %>
-  </div>
-  
+</div>

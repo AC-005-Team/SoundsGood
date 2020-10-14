@@ -29,7 +29,14 @@ export function renderComments(song, ap){
       currentUserUrl = songAndComments.current_user.user_url
     } else {
       commentArea.setAttribute('placeholder', 'Log in to write a comment')
-      commentArea.setAttribute('disabled','')
+      commentArea.setAttribute('disabled', '')
+      const replyArea = document.querySelectorAll('input[placeholder="Reply to this comment"]')
+      replyArea.forEach( area => {
+        area.setAttribute('placeholder', 'Log in to write a comment')
+        area.setAttribute('disabled', '')
+        area.parentNode.querySelector('input[type="submit"]').setAttribute('disabled', '')
+        area.parentNode.querySelector('input[type="submit"]').classList.add('cursor-not-allowed')
+      })
     }
     let duration = songAndComments.song.duration
     let comments = songAndComments.comments
