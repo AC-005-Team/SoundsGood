@@ -1,7 +1,7 @@
 <template>
 <div @click="yourClickHandler">
 
-  <div class="bg-cover bg-center bg-opacity-50 h-60 pt-16 head text-white text-center flex justify-center bg-gray-900">
+  <div class="bg-cover bg-center bg-opacity-50 h-60 pt-16 head text-white text-center flex justify-around bg-gray-900">
 
     <div class="flex m-8">
       <img class="h-32 w-32 overflow-hidden bg-blue-300 border border-white" :src="listsongs.first_cover">
@@ -23,7 +23,7 @@
 
 
   <div class="grid grid-cols-12 bg-gray-900 text-white">
-    <div class="col-span-12 my-4 border-b border-gray-200 mx-8">
+    <div class="col-span-12 my-4 border-b border-gray-200 md:mx-8">
       <list_songs v-for="(song, index) in listsongs.audio" :key="index" :song="song"  />
     <div>
   </div>

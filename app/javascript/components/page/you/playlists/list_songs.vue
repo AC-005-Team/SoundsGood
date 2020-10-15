@@ -1,11 +1,11 @@
 <template lang="html">
-  <div class="flex justify-start items-center bg-gray-900 mx-4" @mouseover="mouseOver"  @mouseleave="mouseLeave" >
-    <div class="flex justify-center w-1/2">
-      <img :src="song.cover" class="mx-4 h-10 w-10">
-      <div class="mx-4">{{ song.user }}</div>
-      <div class="mx-4">{{ song.title }}</div>
+  <div class="flex justify-start items-center bg-gray-900" @mouseover="mouseOver"  @mouseleave="mouseLeave" >
+    <div class="flex justify-start items-center w-3/4 md:w-1/2">
+      <img :src="song.cover" class="h-10 w-10 m-1 md:mx-4">
+      <div class="mx-1 md:mx-4">{{ song.user }}</div>
+      <div class="mx-1 md:mx-4">{{ song.title }}</div>
     </div>
-    <div class="flex justify-center w-1/2">
+    <div class="flex-row justify-center md:justify-start md:w-1/2">
       <i class="fa fa-heart mr-2" @click.stop="like" ></i>
       <i class="fas fa-play cursor-pointer" @click="playTheSong" v-show="playBtn && !playing"></i>
       <i class="fas fa-pause" v-if="playing" @click="playTheSong" ></i>
