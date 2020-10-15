@@ -1,27 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%= display_meta_tags site: 'SoundsGood' %>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'false' %>
+    <%= display_meta_tags site: 'SoundsGood' %> 
+    <%= csrf_meta_tags %> 
+    <%=csp_meta_tag %> <%= javascript_pack_tag 'application','data-turbolinks-track': 'false' %>
     <script src="//static.opentok.com/v2/js/opentok.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-   <body>
-
-    <!-- <div id="hello"></div> -->
-
-      <%= render "shared/navbar"%>
-
-<p class="notice text-center"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-       <%= yield %>
-     <%= render "shared/aplayer" %>
-    <%# <%= javascript_pack_tag 'hello_vue', 'data-turbolinks-track': 'false'  %> 
-     <%= javascript_pack_tag 'player', 'data-turbolinks-track': 'false' %>
-     
-   </body>
-
+  <body>
+    <%= render "shared/navbar"%>
+    <%= yield %> 
+    <%= render "shared/aplayer" %> 
+    <%= javascript_pack_tag 'player', 'data-turbolinks-track': 'false' %>
+  </body>
 </html>

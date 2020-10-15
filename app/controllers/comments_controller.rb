@@ -18,7 +18,6 @@ class CommentsController < ApplicationController
   def destroy
     @comment = @song.comments.find(params[:id])
     @comment.destroy
-    redirect_to @song
   end
 
   private 

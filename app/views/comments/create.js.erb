@@ -3,7 +3,15 @@ if ( "<%= @comment.reply_id%>" == "") {
   comments.innerHTML = "<%= j render("comments/comment", comment: @comment ,song: @song) %>" + comments.innerHTML ;
   document.querySelector("#comment_content").value = "";
 } else {
-  var comments = document.getElementById('<%= @comment.reply_id%>');
-  comments.innerHTML = comments.innerHTML + "<%= j render("comments/reply", reply: @comment ,song: @song) %>" ;
+  var comments = document.getElementById('comment-id-<%= @comment.reply_id%>');
+  comments.innerHTML = comments.innerHTML + "<%= j render("comments/reply", reply: @comment ,comment: @comment.reply || @comment ,song: @song) %>" ;
   document.querySelectorAll("#comment_content").forEach(reply => reply.value = "");
 }
+
+  document.querySelectorAll(".replyBtn").forEach((replyBtn) => {
+    replyBtn.addEventListener("click", (e) => {
+      const commentId = e.currentTarget.dataset.id;
+      let replyForm = document.querySelector(`.comment-id-${commentId}`).lastElementChild;
+      replyForm.classList.remove("hidden");
+    });
+  });
