@@ -1,3 +1,4 @@
+import { timeClickAndSeek } from '../packs/comment_time'
 export function renderComments(song, ap){
   const songId = song.dataset.id
   const hostPath = window.location.origin
@@ -31,6 +32,7 @@ export function renderComments(song, ap){
     appendCommentsToSong(waveCommentSpace, comments, duration)
     if (commentArea){
     getReadyForNewComment(waveCommentSpace, duration)
+    timeClickAndSeek(mmssToSecond, ap, songAndComments.song_id)
     }
   })
   .catch( err => {

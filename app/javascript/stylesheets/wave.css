@@ -85,3 +85,6 @@
 .comment-line-reverse {
   margin-right: 18px !important;
 }
+.comment-time{
+  cursor: pointer;
+}

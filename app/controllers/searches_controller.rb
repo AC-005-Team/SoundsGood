@@ -56,7 +56,6 @@ private
 
   def reposted_by?(user)
     reposted_users.include?(user)
-    byebug
   end
 
   def find_song
