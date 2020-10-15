@@ -1,4 +1,4 @@
-<div class="comment-id-<%=comment.id%>">
+<div class="comment-id-<%=comment.id%> pb-4">
   <div class="grid grid-cols-12 main-comment">
     <div class="col-span-2 md:col-span-1 rounded-full" style="">
       <% if comment.user.avatar_url %>
@@ -11,15 +11,15 @@
     </div>
     <div class="col-span-7 md:col-span-8 mx-2">
       <div class="flex">
-        <button><%=comment.user.display_name%></button>
+        <button><%=link_to comment.user.display_name, user_path(comment.user)%></button>
         <p class ="mx-1"> at</p>
-        <p><%= comment.timepoint.to_i >= 3600 ? Time.at(comment.timepoint.to_i).utc.strftime("%H:%M:%S") : Time.at(comment.timepoint.to_i).utc.strftime("%M:%S") %></p>
+        <p class ='comment-time'><%= comment.timepoint.to_i >= 3600 ? Time.at(comment.timepoint.to_i).utc.strftime("%H:%M:%S") : Time.at(comment.timepoint.to_i).utc.strftime("%M:%S") %></p>
       </div>
       <p class=""> <%=comment.content%> </p>
     </div>
     <div class="col-span-3 md:col-span-3 flex justify-end text-xs pr-8">
       <p class ="text-right"><%= time_diff(DateTime.now, comment.created_at) %></br>
-      <button class="border border-gray-400 p-1 rounded">Reply</button>
+      <button class="border border-gray-400 p-1 rounded replyBtn"  data-id=<%=comment.id%>>Reply</button>
       <% if is_current_user?(comment.user) %>
       <button class="border border-gray-400 p-1 rounded"><%= link_to "Delete", comment_path(song_id: song.id, id: comment.id), remote: true, method: "delete", data: {confirm: "Do you really want to remove this comment?"}%></button>
       <% end %>
@@ -27,11 +27,13 @@
     </div>
   </div>
   <%#=顯示正中間針對留言的留言那%>
-  <% comment.replies.each do |reply| %>
-    <%= render 'comments/reply', comment: comment, reply: reply, song: song %>
-  <% end %>
+  <div id= comment-id-<%= comment.id%>>
+    <% comment.replies.each do |reply| %>
+      <%= render 'comments/reply', comment: comment, reply: reply, song: song %>
+    <% end %>
+  </div>
 
-  <div class="flex justify-end ml-6 mb-6 replyForm">
+  <div class="flex justify-end ml-6 mb-6 hidden replyForm">
     <%= form_with(model: song.comments.new, url:song_comments_path(song_id: song, reply_id: comment.id), class: "w-11/12 mx-4 flex") do |f|%>
       <%= f.text_field :content, placeholder: "Reply to this comment", class: "w-10/12 py-2 px-4 border border-gray-400 rounded-l", data:{id:comment.id}%>
       <%= f.submit "Reply", class: "w-2/12 md:w-1/12 bg-leego_orange border border-leego_orange hover:bg-white hover:text-leego_orange text-white font-bold py-2 px-2 rounded-r"%>

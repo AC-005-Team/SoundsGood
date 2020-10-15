@@ -121,13 +121,14 @@
   <%#=左邊專區大頭照那%>
       <div class="w-1/5 mr-4" data-controller="follow" data-follow-user="<%= @song.user.id %>">
         <% if @song.user.avatar_url %>
-          <%= image_tag @song.user.avatar_url, class: 'rounded-full mt-6 mr-6 w-3/4' %>
+          <%#= image_tag @song.user.avatar_url, class: 'rounded-full mt-6 mr-6 w-3/4' %>
+          <div class="mt-6 mr-6 h-32 w-32 mb-6 rounded-full bg-cover bg-center" style="background-image: url('<%= @song.user.avatar_url %>')">
+          </div>
         <% else %>
           <div class="h-12 w-12 bg-cover" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
         <% end %>
-        <div class="flex justify-start p-1">
+        <div class="flex justify-start p-1 m-2">
           <div><%=@song.user.display_name%></div>
-          <i class="far fa-star"></i>
         </div>
 
         <div class="flex justify-start items-center p-1 m-2">
@@ -138,12 +139,12 @@
         </div>
 
         <% if @song.user.followed_by?(current_user) %>
-          <button class="flex items-center bg-orange-500 text-white border-orange-500 border p-1 rounded" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
+          <button class="flex items-center bg-orange-500 text-white border-orange-500 border p-1 m-2 rounded" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
             <i class="fas fa-user-check"></i>
             <p class="mx-2 follow">Following</p>
           </button>
         <% else %>
-          <button class="flex items-center bg-white text-orange-500 border-orange-500 border rounded m-4" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
+          <button class="flex items-center bg-white text-orange-500 border-orange-500 border rounded p-1 m-2" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
             <i class="fas fa-user-check"></i>
             <p class="mx-2 follow">Follow</p>
           </button>
@@ -158,9 +159,11 @@
           <p class="mx-1">comments</p>
         </div>
         <%#=顯示正中間留言區那%>
-        <% @comments.each do |comment| %>
-          <%= render 'comments/comment', comment: comment, song: @song%>
-        <% end %>
+        <div class="text-xs pb-20" id="comments">
+          <% @comments.each do |comment| %>
+            <%= render 'comments/comment', comment: comment, song: @song%>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
@@ -177,7 +180,7 @@
     <div class="flex border-t border-gray-400">
       <div class="my-3 text-xs table-row-group">
 
-        <div class="text-gray-500">
+        <div class="text-gray-500 invisible">
           <span class="hover:text-black"><a href="#">Legal</a></span>
 
           <span class="hover:text-black"><a href="#">Privacy</a></span>
