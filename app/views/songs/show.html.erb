@@ -106,14 +106,12 @@
         <div class="p-1 text-gray-600">
           <i class="fas fa-heart"></i>
           <span class='liked-count'>
-            <%= @song.liked_users.size %>
+            <%= @song.liked_users.count %>
           </span>
         </div>
         <button class="p-1 text-gray-600">
           <i class="fas fa-retweet"></i>
-          <span class='reposted-count'>
-            <%= @song.reposted_users.size %>
-          </span>
+          <%= @song.reposted_users.count %>
         </button>
 
       </div>
@@ -156,15 +154,13 @@
         <%#=正中間留言總數%>
         <div class="flex text-gray-400 m-4 p-2 border-b border-gray-400">
           <i class="fas fa-comments"></i>
-          <p class="mx-1"><%=@song.comments.size%></p>
+          <p class="mx-1"><%=@comments.count%></p>
           <p class="mx-1">comments</p>
         </div>
         <%#=顯示正中間留言區那%>
-        <div class="text-xs" id="comments">
-          <% @comments.each do |comment| %>
-            <%= render 'comments/comment', comment: comment, song: @song%>
-          <% end %>
-        </div>
+        <% @comments.each do |comment| %>
+          <%= render 'comments/comment', comment: comment, song: @song%>
+        <% end %>
       </div>
     </div>
   </div>

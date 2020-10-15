@@ -45,9 +45,11 @@
 
   <%#這是搜尋or上傳自己的那邊%>
   <div class="container mx-auto flex max-w-3xl items-center my-10">
-    <form action="" class="relative justify-center flex-grow">
-      <input type="search" class="w-full px-2 py-2 focus:outline-none bg-gray-200 rounded" placeholder="Search for artists, bands, tracks, podcasts">
-    </form>
+    <div class="relative justify-center flex-grow">
+      <%= form_with model: @search, url: result_search_path, method: 'get', id: 'search_bar' do |f| %>
+        <%= f.text_field :search, class: "w-full px-2 py-2 focus:outline-none bg-gray-200 rounded", placeholder: "Search for artists, bands, tracks, podcasts" %>
+      <% end %>
+    </div>
     <span class="px-4">or</span>
     <button class="flex items-center px-4 py-2 bg-orange-600 text-white rounded">
       <i class="fas fa-cloud-upload-alt"></i>

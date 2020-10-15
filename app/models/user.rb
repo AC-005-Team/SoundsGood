@@ -12,26 +12,25 @@ class User < ApplicationRecord
   has_one :room
   # 自己追蹤的人
   has_many :followed_users, foreign_key: :follower_id, class_name: "Follow"
-  has_many :followees, through: :followed_users, source: :followee
+  has_many :followees, through: :followed_users, source: :followee, dependent: :destroy
   # 追蹤自己的人
   has_many :following_users, foreign_key: :followee_id, class_name: "Follow"
-  has_many :followers, through: :following_users, source: :follower
+  has_many :followers, through: :following_users, source: :follower, dependent: :destroy
     
-  has_many :songs
-  has_many :playlists
-  has_many :comments
+  has_many :songs, dependent: :destroy
+  has_many :playlists, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   has_many :favorite_songs
-  has_many :like_songs, through: :favorite_songs, source: :song
+  has_many :like_songs, through: :favorite_songs, source: :song, dependent: :destroy
 
   has_many :favorite_playlists
-  has_many :like_playlists, through: :favorite_playlists, source: :playlist
+  has_many :like_playlists, through: :favorite_playlists, source: :playlist, dependent: :destroy
 
   has_many :reposts
-  has_many :repost_songs, through: :reposts, source: :repostable, source_type: "Song"
-  has_many :repost_playlists, through: :reposts, source: :repostable, source_type: "Playlist"
+  has_many :repost_songs, through: :reposts, source: :repostable, source_type: "Song", dependent: :destroy
+  has_many :repost_playlists, through: :reposts, source: :repostable, source_type: "Playlist", dependent: :destroy
 
-  before_create :add_avatar
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
@@ -118,10 +117,6 @@ class User < ApplicationRecord
       google_token: access_token.credentials.token,
       google_uid: access_token.uid
     )
-  end
-
-  def add_avatar
-    self.avatar_data = '{"id":"user/1/avatar/75b54db160fd8c18982c1924751db1ad.png","storage":"store","metadata":{"filename":"user_image.png","size":27632,"mime_type":"image/png"}}' if self.avatar_data == nil
   end
 
 end

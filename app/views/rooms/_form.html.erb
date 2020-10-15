@@ -10,13 +10,14 @@
       </ul>
     </div>
   <% end %>
-
+<div class="">
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label :name %><br>
+    <%= form.text_field :name , class:"px-2 rounded-lg", placeholder:''%>
   </div>
   
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions text-black my-2">
+    <%= form.submit "Create Room", class:"bg-black text-white rounded-lg border border-white px-2"  %>
   </div>
+</div>
 <% end %>

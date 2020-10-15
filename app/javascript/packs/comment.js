@@ -1,3 +1,4 @@
+import { timeClickAndSeek } from './comment_time'
 export function renderComments(song){
   console.log('start')
   const songId = song.dataset.id
@@ -27,6 +28,7 @@ export function renderComments(song){
     appendCommentsToSong(waveCommentSpace, comments, duration)
     if (commentArea){
     getReadyForNewComment(waveCommentSpace, duration)
+    timeClickAndSeek()
     }
   })
   .catch( err => {
