@@ -1,9 +1,9 @@
 <template>
 <div>
 
-  <div class="col-span-9 bg-white">
+  <div class="col-span-9 text-base text-gray-600 m-4">
 
-      <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+      <div class="grid grid-cols-12 gap-4 overflow-x-scroll">
         <playlistItem v-for="playlist in playlists" :playlist="playlist" ></playlistItem>
       </div>
 
