@@ -3,7 +3,7 @@ export function renderComments(song, ap){
   const hostPath = window.location.origin
   const player = document.querySelector('#player1')
   const commentArea = document.querySelector(`.song-main-comment[data-id="${songId}"]`)
-  let parentWidth, commentForm, currentUserName, currentUserUrl, playtimeNow
+  let parentWidth, commentForm, currentUserName, currentUserUrl, playtimeNow, playingNow
   let isCommentShowing = false
   if (commentArea){
     commentForm = commentArea.parentNode
@@ -24,8 +24,20 @@ export function renderComments(song, ap){
     return res.json()
   })
   .then( songAndComments => {
-    currentUserName = songAndComments.current_user.user_name
-    currentUserUrl = songAndComments.current_user.user_url
+    if(songAndComments.current_user){
+      currentUserName = songAndComments.current_user.user_name
+      currentUserUrl = songAndComments.current_user.user_url
+    } else {
+      commentArea.setAttribute('placeholder', 'Log in to write a comment')
+      commentArea.setAttribute('disabled', '')
+      const replyArea = document.querySelectorAll('input[placeholder="Reply to this comment"]')
+      replyArea.forEach( area => {
+        area.setAttribute('placeholder', 'Log in to write a comment')
+        area.setAttribute('disabled', '')
+        area.parentNode.querySelector('input[type="submit"]').setAttribute('disabled', '')
+        area.parentNode.querySelector('input[type="submit"]').classList.add('cursor-not-allowed')
+      })
+    }
     let duration = songAndComments.song.duration
     let comments = songAndComments.comments
     appendCommentsToSong(waveCommentSpace, comments, duration)
@@ -55,6 +67,7 @@ export function renderComments(song, ap){
       commentForm.setAttribute('action', actionValue.split('?')[0].concat(`?timepoint=${timepoint}`))
       const appendWhenSubmit = (e) => {
         let comment = {
+          'song_id': commentForm.querySelector('.song-main-comment').dataset.id,
           'content': commentForm.querySelector('.song-main-comment').value,
           'user_img': userAvatarUrl,
           'user_name': currentUserName,
@@ -128,18 +141,21 @@ export function renderComments(song, ap){
     })
     // when second same, let comment appear for 2s
     ap.on('timeupdate', () => {
-      playtimeNow = document.querySelector('.aplayer-ptime').textContent
-      if (mmssToSecond(playtimeNow)==comment.timepoint && isCommentShowing == false) {
-        commentWrap.classList.remove('hidden')
-        isCommentShowing = true
-        setTimeout(() => {
-          commentWrap.classList.add('opacity-100')
-        }, 10);
-        setTimeout(() => {
-          commentWrap.classList.remove('opacity-100')
-          commentWrap.classList.toggle('hidden')
-          isCommentShowing = false
-        }, 2000);
+      playingNow = ap.container.dataset.playing
+      if(playingNow == comment.song_id){
+        playtimeNow = document.querySelector('.aplayer-ptime').textContent
+        if (mmssToSecond(playtimeNow)==comment.timepoint && isCommentShowing == false) {
+          commentWrap.classList.remove('hidden')
+          isCommentShowing = true
+          setTimeout(() => {
+            commentWrap.classList.add('opacity-100')
+          }, 10);
+          setTimeout(() => {
+            commentWrap.classList.remove('opacity-100')
+            commentWrap.classList.toggle('hidden')
+            isCommentShowing = false
+          }, 3000);
+        }
       }
     })
   }
