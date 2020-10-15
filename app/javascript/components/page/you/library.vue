@@ -1,6 +1,5 @@
 <template lang="html">
-  <div class="m-4">
-
+  <div class="bg-gray-900">
     <following/>
     <playlists/>
     <likes/>

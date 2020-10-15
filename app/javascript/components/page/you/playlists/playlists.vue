@@ -1,13 +1,13 @@
 <template>
 <div>
 
-  <div class="col-span-9 text-base text-gray-600 m-4">
-
-      <div class="grid grid-cols-12 gap-4 overflow-x-scroll">
-        <playlistItem v-for="playlist in playlists" :playlist="playlist" ></playlistItem>
-      </div>
-
+  <div class="bg-gray-900 text-white text-base m-4 border-b border-gray-600">
+    <span class="text-sm bg-leego_orange border border-leego_orange px-2">checkout the playlists you create</span>
+    <div class="flex overflow-x-scroll gap-6">
+      <playlistItem v-for="playlist in playlists" :playlist="playlist" ></playlistItem>
     </div>
+
+  </div>
 
   </div>
 </div>
