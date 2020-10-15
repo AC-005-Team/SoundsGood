@@ -1,19 +1,14 @@
 <template>
-<div>
-  <div class="col-span-9 bg-white">
-    <div class="mx-4 p-5">
-      <div class="flex justify-between text-lg text-gray-500">
-        <div class="">Hear what the people you follow have posted:</div>
-      </div>
 
-      <div class="grid grid-cols-12 gap-4">
-        <followingItem v-for="wee in followees" :wee="wee" />
-      </div>
-    </div>a
-
+  <div class="text-base text-white m-4 bg-gray-900">
+    <span class="text-sm bg-leego_orange border border-leego_orange px-2">Hear the people you follow</span>
+    
+    <div class="grid grid-cols-12 gap-4 overflow-x-scroll border-b border-gray-600">
+      <followingItem v-for="wee in followees" :wee="wee" />
+    </div>
 
   </div>
-</div>
+
 </template>
 
 <script>

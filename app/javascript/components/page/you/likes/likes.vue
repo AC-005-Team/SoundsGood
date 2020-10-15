@@ -1,14 +1,13 @@
 <template >
-<div class="col-span-9 bg-white">
-
-
+  <div class="col-span-9 m-4">
+    <span class="text-sm text-white bg-leego_orange border border-leego_orange px-2">review the song you like</span>
     <div class="flex justify-between">
-      <div class="grid sm:grid-cols-2 md:col-span-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 ">
+      <div class="grid sm:grid-cols-2 md:col-span-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
         <likeSongs v-for="song in songs" :song="song"/>
       </div>
     </div>
   </div>
-</div>
+
 </template>
 
 <script>

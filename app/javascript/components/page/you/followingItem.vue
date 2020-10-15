@@ -1,18 +1,16 @@
 <template lang="html">
 
-              <div class="col-span-2 my-2 mr-2 flex flex-col justify-between items-center"  @mouseleave="show = false">
-                <div class="align-top w-full" @mouseover="show = true">
-                  <img src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg"  class="rounded-full block">
-                </div>
-                <li> {{ wee.name }}</li>
-                  <transition name="fade">
-                  <button class="border border-orange-700 px-1 rounded follow" v-if="show" @click="unfollow">
-                    <i class="fas fa-user"></i> following</p>
-                  </button>
-                </transition>
-
-
-              </div>
+  <div class="col-span-4 md:col-span-2 my-2 mr-2 flex flex-col"  @mouseleave="show = false">
+    <div class="align-top w-32 h-32" @mouseover="show = true">
+      <img class="rounded-full border border-white" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg">
+    </div>
+    <li> {{ wee.name }}</li>
+      <transition name="fade">
+      <button class="border border-orange-700 px-1 rounded follow" v-if="show" @click="unfollow">
+        <i class="fas fa-user"></i> following</p>
+      </button>
+    </transition>
+  </div>
 
 </template>
 

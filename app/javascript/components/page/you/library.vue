@@ -1,11 +1,8 @@
 <template lang="html">
-  <div class="border-b border-gray-200 m-4">
-
-   <following/>
-   <playlists/>
-   <likes/>
-
-
+  <div class="bg-gray-900">
+    <following/>
+    <playlists/>
+    <likes/>
 
   </div>
 
