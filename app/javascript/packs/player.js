@@ -58,7 +58,7 @@ if(waves){
       let id = e.currentTarget.dataset.id;
       let node = e.currentTarget
       waveformWidth = node.parentNode.offsetWidth
-      getPlay(id).then(val=>{ // @todo: 確認api是否有變動
+      getPlay(id).then(val=>{ 
         playingDuration = val.audio.duration
         if(playing!==id){
           if(waveProgress){

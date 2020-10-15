@@ -82,6 +82,6 @@
 .comment-on-wave-wrap {
   transition: .5s;
 }
-.comment-line-reverse {
+.waveform-small>.waveform-comment-space>.comment-avatar>.comment-on-wave-wrap>.comment-line-reverse {
   margin-right: 18px !important;
 }
