@@ -55,10 +55,16 @@
   </div>
 
   <div class="flex justify-between items-center mr-4 text-sm">
-    <button class="flex items-center mx-2 p-1 rounded bg-orange-600 text-white">
-      <i class="fas fa-chart-bar"></i>
-      <p class="hidden md:block">Your Insights</p>
-    </button>
+    <% if current_user != @user %>
+      <button class="flex items-center mx-2 p-1 rounded bg-orange-600 text-white user-follow-btn" result-follow-id='<%= @user.id %>'>
+          <i class="fas fa-user-check" ></i>
+        <% if current_user.follows?(@user)%>
+          <p class>Following</p> 
+        <% else %>
+          <p class>Follow+</p> 
+        <% end %>
+      </button>
+    <% end %>
     <button class="flex items-center mx-2 p-1 rounded border border-gray-300">
       <i class="fas fa-share-square"></i>
       <p class="modal-btn share-btn hidden md:block">Share</p>
@@ -102,7 +108,7 @@
         <div class="mx-2">
           Follower
         </div>
-        <p class="text-center"><%= @user.followers.count%></p>
+        <p class="text-center follow-count"><%= @user.followers.count%></p>
       </div>
       <div>
         <div class="mx-2">

@@ -32,7 +32,7 @@ export function renderComments(song, ap){
     appendCommentsToSong(waveCommentSpace, comments, duration)
     if (commentArea){
     getReadyForNewComment(waveCommentSpace, duration)
-    timeClickAndSeek(mmssToSecond, ap, songAndComments.song_id)
+    timeClickAndSeek(mmssToSecond, ap)
     }
   })
   .catch( err => {
