@@ -8,15 +8,16 @@
       <p class ="mx-1"> at</p>
       <% timepoint = Comment.find(reply.reply_id).timepoint if reply.reply_id %>
       <p>
-        <%= comment.timepoint.to_i >= 3600 ? Time.at(comment.timepoint.to_i).utc.strftime("%H:%M:%S") : Time.at(comment.timepoint.to_i).utc.strftime("%M:%S") %>
+        <%#= comment.timepoint.to_i >= 3600 ? Time.at(comment.timepoint.to_i).utc.strftime("%H:%M:%S") : Time.at(comment.timepoint.to_i).utc.strftime("%M:%S") %>
       </p>
     </div>
     <p class=""> <%=reply.content%> </p>
   </div>
-  <div class="w-3/12 text-gray-400">
-    <p><%= time_diff(DateTime.now, reply.created_at) %>
+  <div class="col-span-2 text-gray-400">
+    <p><%= time_diff(DateTime.now, reply.created_at) %></p>
+    <button class="border border-gray-400 p-1 rounded replyBtn" data-id=<%=comment.id%>>Reply</button>
     <%if is_current_user?(comment.user)%>
-    <button class="border border-gray-400 p-1 rounded"> <%= link_to "Delete", comment_path(song_id: @song.id, id: reply.id), remote:true,method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%> </button>
+      <button class="border border-gray-400 p-1 rounded"> <%= link_to "Delete", comment_path(song_id: song.id, id: reply.id), remote:true,method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%> </button>
     <%end%>
   </div>
 </div>

@@ -4,6 +4,18 @@ if ( "<%= @comment.reply_id%>" == "") {
   document.querySelector("#comment_content").value = "";
 } else {
   var comments = document.getElementById('comment-id-<%= @comment.reply_id%>');
-  comments.innerHTML = comments.innerHTML + "<%= j render("comments/reply", reply: @comment ,comment: @comment,song: @song) %>" ;
+  comments.innerHTML = comments.innerHTML + "<%= j render("comments/reply", reply: @comment ,comment: @comment.reply || @comment ,song: @song) %>" ;
   document.querySelectorAll("#comment_content").forEach(reply => reply.value = "");
 }
+
+  document.querySelectorAll(".replyBtn").forEach((replyBtn) => {
+    replyBtn.addEventListener("click", (e) => {
+      const commentId = e.currentTarget.dataset.id;
+      let replyForms = document.querySelectorAll(".replyForm");
+      let replyForm = document.querySelector(`.comment-id-${commentId}`).lastElementChild;
+      replyForms.forEach((form) => {
+        form.classList.add("hidden");
+      });
+      replyForm.classList.remove("hidden");
+    });
+  });
