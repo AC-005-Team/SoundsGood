@@ -25,10 +25,13 @@ const song = {
     FIND_INDEX(state, data){
       //只更新找到位置陣列的部分
       let y = data.id
+      var foundValueTag = state.Tag_1.find(obj => obj.song_id === y);
       var foundValue = state.Index.find(obj => obj.song_id === y);
       let a = state.Index.indexOf(foundValue)
+      let b = state.Tag_1.indexOf(foundValueTag)
       state.Index[a].likes = !state.Index[a].likes
-      // state.Index[id].likes = !state.Index[id].likes
+      state.Tag_1[b].likes = !state.Tag_1[b].likes
+
     },
     LOAD_LIKES(state, data){
       state.LikesTracks = data

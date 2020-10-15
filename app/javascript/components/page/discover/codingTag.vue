@@ -4,6 +4,11 @@
         <div class="flex justify-around border-b border-gray-600 mx-2  song_list" @mouseover="mouseOver"  @mouseleave="mouseLeave" >
           <div class="w-9/12 m-2 text-base text-gray-white">{{ this.coding.audio.name }} </div>
           <div class="w-3/12 m-2 text-base text-gray-white text-right"></div>
+          <i
+            class="fa fa-heart mr-2"
+            @click.stop="like"
+            :class="[changeColor ? 'like' : '']"
+          ></i>
           <i class="fas fa-play cursor-pointer"  @click="playTheSong" v-show="playBtn && !playing"></i>
           <i class="fas fa-pause" v-show="playing" @click="playTheSong" ></i>
 
@@ -40,7 +45,6 @@ export default {
     }),
 
     playing() {
-
       if (this.playerTracks.song_id === this.coding.song_id) {
         if (this.isPLAY === false) {
           return false;
@@ -50,12 +54,15 @@ export default {
         return false;
       }
     },
+    changeColor() {
+      return !!this.coding.likes
+    }
 
 
 
 
   },
-
+  ...mapActions("favorite", ["toggleLike"]),
   ...mapActions('playlistsSongs', ['loadList', 'loadSong']),
   ...mapActions("songs", ["play", "pause", "continuePlay", "continuePause"]),
   methods: {
@@ -66,6 +73,13 @@ export default {
       if (!event.target.matches('.dropbtn')) {
         this.isActive = false
       }
+    },
+    like() {
+      let payload = {
+        id: this.coding.song_id,
+      }
+      this.$store.dispatch('favorite/toggleLike', payload)
+
     },
     mouseOver: function() {
       if(this.isPlay === true){
@@ -94,7 +108,7 @@ export default {
         }
       }
 
-}
+   }
 }
 }
 </script>
@@ -104,6 +118,10 @@ export default {
 
   transition: 0.3s;
 }
+.like {
+  color: rgb(255, 59, 59);
+}
+
 
 .song_list:hover {
   background-color: rgba(255, 255, 255, 0.15);

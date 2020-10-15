@@ -51,7 +51,7 @@ methods:{
     if(this.isPLAY && !this.continue ){
       this.ap.pause();
       this.ap.list.clear();
-      this.ap.list.add(this.playerTracks.audio);
+      this.ap.list.add(this.playerTracks.audio || this.playerTracks);
       this.ap.play();
       this.$store.dispatch('songs/getDuration', this.playerTracks.audio.duration );
       this.ap.on('timeupdate',() => {

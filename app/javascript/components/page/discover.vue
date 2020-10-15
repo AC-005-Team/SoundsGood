@@ -11,7 +11,7 @@
 
 
         <div class="flex overflow-scroll text-gray-500 text-xs ">
-        <chart v-for="chart in index" :chart='chart' />
+        <chart v-for="chart in index.slice(0,10)" :chart='chart' />
         </div>
 
       </div>
@@ -21,13 +21,14 @@
         <div class="text-2xl">Recommand For Night Owl #coding #chill</div>
         <div class="text-xs text-gray-500 my-2">Suggestions based on what you've liked or played</div>
 
+        <button class="text-center p-1 border border-gray-400 ml-auto my-3 block rounded text-xs"  @click="playTaglist" >Play All</button>
+
         <div class="flex justify-around p-5 bg-leego_orange bg-opacity-50  rounded-lg">
           <div class="w-1/4 bg-cover" :style="{ 'background-image': 'url('+  Cover + ')' }"></div>
           <div class="w-3/4 overflow-auto h-48">
             <codingTag v-for="coding in tag_1" :coding="coding" @clicked="changeCover"/>
           </div>
         </div>
-        <button class="text-center p-1 border border-gray-400 ml-auto my-3 block rounded text-xs">Go to Playlist</button>
       </div>
 
       <div class="border-b border-gray-200 m-4">
@@ -104,13 +105,8 @@ export default {
     whotofollow,
     codingTag,
     topfive,
-    electro
   },
 
-  methods: {
-
-
-  },
 
   computed: {
     ...mapGetters({
@@ -123,9 +119,21 @@ export default {
 
   ...mapActions('follow',['loadUNFollow'],['addFollow']),
   ...mapActions('song', ['song/loadIndex']),
+  ...mapActions("songs", ["play", "pause", "continuePlay", "continuePause",'setPlayerTracks']),
+
   methods:{
     changeCover(value){
       this.Cover = value;
+    },
+    playTaglist(){
+      let codingTag = this.tag_1.map( a => a.audio );
+      console.log(codingTag);
+      this.$store.dispatch('songs/setPlayerTracks', codingTag)
+      this.$store.dispatch('songs/play')
+
+
+
+
     }
 
   },

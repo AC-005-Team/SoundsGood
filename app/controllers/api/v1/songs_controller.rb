@@ -1,6 +1,6 @@
 class Api::V1::SongsController < ApplicationController
   def index
-    @songs = Song.all.last(10).reverse!
+    @songs = Song.all.order(id: :desc)
     @playlists = current_user.playlists
     @tag1_songs = Tag.find_by(name: "coding").songs
   end
