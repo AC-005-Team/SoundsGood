@@ -1,60 +1,31 @@
 <template>
 <div @click="yourClickHandler">
-  <div class="bg-cover bg-center  bg-opacity-50 h-60 pt-16 head">
-    <div class=" mx-64  content-center">
-    <div class="grid grid-cols-12">
-      <div class="col-span-4 m-auto my-4 ">
-        <img class="h-32 w-32 overflow-hidden bg-blue-300 sm:block hidden" :src="listsongs.first_cover">
-      </div>
-      <div class="col-span-8 m-4 flex flex-col justify-between">
-      </div>
-    </div>
 
+  <div class="bg-cover bg-center bg-opacity-50 h-60 pt-16 head text-white text-center flex justify-center bg-gray-900">
 
-      <div class="flex items-center ">
-        <div class="">
-          <svg class="svg-inline--fa fa-play fa-w-14 fa-2x" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="play" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-            <path fill="currentColor" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
-          </svg><!-- <i class="fas fa-play fa-2x"></i> -->
-        </div>
-        <div class="">
-          <router-link :to="{name: 'playlists'}">back to playlists</router-link>
-        </div>
-      </div>
-      <div class="col-span-12 md:col-span-3 mx-auto">
+    <div class="flex m-8">
+      <img class="h-32 w-32 overflow-hidden bg-blue-300 border border-white" :src="listsongs.first_cover">
+      <div class="px-4">
         <img class="w-16 h-16 overflow-hidden bg-black rounded-full" :src="listsongs.playlist_user">
         <p class="">user_name</p>
         <p class="">follower</p>
       </div>
-
-      </div>
-  </div>
-
-
-
-
-
-<div class="grid grid-cols-12 ">
-  <div class="col-span-8 md:col-span-12">
-
-    <div class="grid grid-cols-12 mx-8">
-      <div class="col-span-12 md:col-span-8">
-        <div class="my-4 border-b border-gray-200"  >
-
-              <list_songs v-for="(song, index) in listsongs.audio" :key="index" :song="song"  />
-
-
-      </div>
-
     </div>
+
+    <div class="flex items-end">
+      <button class="border border-white p-2 my-2 rounded-lg">
+        <router-link :to="{name: 'playlists'}">back to playlists</router-link>
+      </button>
+    </div>
+
+ 
   </div>
 
 
-
-
-  <div>
-
-
+  <div class="grid grid-cols-12 bg-gray-900 text-white">
+    <div class="col-span-12 my-4 border-b border-gray-200 mx-8">
+      <list_songs v-for="(song, index) in listsongs.audio" :key="index" :song="song"  />
+    <div>
   </div>
 </div>
 

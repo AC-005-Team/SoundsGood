@@ -1,12 +1,15 @@
 <template lang="html">
-  <div class="flex items-center" @mouseover="mouseOver"  @mouseleave="mouseLeave" >
-  <img :src="song.cover" class="mx-2 h-10 w-10">
-  <div class="mx-2">{{ song.user }} </div>
-  <div class="mx-2">{{ song.title }} </div>
-
-  <i class="fa fa-heart mr-2" @click.stop="like" ></i>
-  <i class="fas fa-play cursor-pointer" @click="playTheSong" v-show="playBtn && !playing"></i>
-  <i class="fas fa-pause" v-show="playing" @click="playTheSong" ></i>
+  <div class="flex justify-start items-center bg-gray-900 mx-4" @mouseover="mouseOver"  @mouseleave="mouseLeave" >
+    <div class="flex justify-center w-1/2">
+      <img :src="song.cover" class="mx-4 h-10 w-10">
+      <div class="mx-4">{{ song.user }}</div>
+      <div class="mx-4">{{ song.title }}</div>
+    </div>
+    <div class="flex justify-center w-1/2">
+      <i class="fa fa-heart mr-2" @click.stop="like" ></i>
+      <i class="fas fa-play cursor-pointer" @click="playTheSong" v-show="playBtn && !playing"></i>
+      <i class="fas fa-pause" v-if="playing" @click="playTheSong" ></i>
+    </div>
   </div>
 
 
