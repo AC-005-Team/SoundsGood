@@ -154,7 +154,7 @@ export function renderComments(song, ap){
             commentWrap.classList.remove('opacity-100')
             commentWrap.classList.toggle('hidden')
             isCommentShowing = false
-          }, 1500);
+          }, 3000);
         }
       }
     })
