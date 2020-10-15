@@ -5,7 +5,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def unfollow
-    @unfollow_users = User.all - current_user.followees
+    @unfollow_users = (User.all - current_user.followees - [current_user]).shuffle
   end
 
 end

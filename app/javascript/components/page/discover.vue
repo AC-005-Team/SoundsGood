@@ -21,10 +21,10 @@
         <div class="text-2xl">Recommand For Night Owl #coding #chill</div>
         <div class="text-xs text-gray-500 my-2">Suggestions based on what you've liked or played</div>
 
-        <div class="flex justify-around p-5 bg-gradient-to-r from-red-500 via-orange-400 to-black rounded-lg">
-          <div class="w-1/4 bg-cover" style="background-image: url(https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg)"></div>
+        <div class="flex justify-around p-5 bg-leego_orange bg-opacity-50  rounded-lg">
+          <div class="w-1/4 bg-cover" :style="{ 'background-image': 'url('+  Cover + ')' }"></div>
           <div class="w-3/4 overflow-auto h-48">
-            <codingTag v-for="coding in tag_1" :coding="coding"/>
+            <codingTag v-for="coding in tag_1" :coding="coding" @clicked="changeCover"/>
           </div>
         </div>
         <button class="text-center p-1 border border-gray-400 ml-auto my-3 block rounded text-xs">Go to Playlist</button>
@@ -92,6 +92,11 @@ import electro from './discover/electro';
 
 
 export default {
+  data(){
+    return{
+      Cover:  '/img/night.jpg',
+    }
+  },
 
   // name: "chart",
   components: {
@@ -114,12 +119,16 @@ export default {
       unfollowers: 'follow/unfollowers'
     }),
 
-
-
   },
 
   ...mapActions('follow',['loadUNFollow'],['addFollow']),
   ...mapActions('song', ['song/loadIndex']),
+  methods:{
+    changeCover(value){
+      this.Cover = value;
+    }
+
+  },
   created() {
     this.$store.dispatch('song/loadIndex');
     this.$store.dispatch('follow/loadUNFollow');

@@ -1,7 +1,11 @@
 <template lang="html">
   <div class="">
     <div class="flex flex-start items-center">
-      <i class="fas fa-retweet" v-if="this.repost"></i>
+      <div class="p-2 text-gray-600">
+
+       <i class="fas fa-retweet fa-2x" v-if="this.repost"></i>
+
+       </div>
   <img class="w-8 rounded-full mr-4" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
   <!-- // repost name -->
   <button class="mr-4">{{ this.stream.user_name }}</button>
@@ -52,8 +56,7 @@
             <div class="flex justify-between">
               <div class="flex">
                 <button class="flex items-center border border-gray-300 px-3 rounded">
-                  <i class="fas fa-heart"></i>
-                  <p class="hidden md:block">like</p>
+                  <i class="fas fa-heart" :style= "[like ? {color: 'red'} : {color: 'black'}]" @click="togglelike" ></i>
                 </button>
                 <button class="flex items-center border border-gray-300 px-3 rounded">
                   <i class="fas fa-plus-circle addto"></i>
@@ -87,6 +90,8 @@ export default {
       owner: this.stream.user_name,
       type: this.stream.media_type,
       repost_type: this.stream.repost_type,
+      like: this.stream.likes,
+      changeColor: false,
       click_id :'',
       playBtn: false
 
@@ -112,13 +117,15 @@ export default {
       } else {
         return false;
       }
-    }
+    },
+
+
 
   },
   methods: {
     ...mapActions("songs", ["play", "pause", "continuePlay", "continuePause"]),
     ...mapActions('playlistsSongs', ['loadList']),
-    ...mapActions("favorite", ["toggleLike"]),
+    ...mapActions("favorite", ["toggle"]),
     ...mapActions("playlists", ["loadSongs"]),
     ...mapActions("song", ["loadSong"]),
 
@@ -165,8 +172,16 @@ export default {
 
     mouseLeave() {
       this.playBtn = false;
+    },
+
+    togglelike() {
+    let payload = {
+      id: this.stream.media_id,
     }
-  },
+    this.like = !this.like
+    this.$store.dispatch('favorite/toggle', payload)
+  }
+},
   created:
     function(){
       if(this.stream.owner_id != null){

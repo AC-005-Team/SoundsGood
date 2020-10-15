@@ -15,7 +15,7 @@ class HomeController < ApplicationController
     @users.each do |user|
       @items_all += user.reposts.includes(:user, :repostable).where(repostable_type: "Song") + user.songs
     end
-    @items = @items_all.sort_by!{|item| item.created_at}.reverse!.first(10)
+    @items = @items_all.sort_by!{|item| item.created_at}.reverse!
     respond_to do |format|
       format.json
       format.html
