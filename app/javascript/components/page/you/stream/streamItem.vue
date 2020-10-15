@@ -8,7 +8,7 @@
   <span class="text-gray-500">{{ post }}</span>
 </div>
 
-    <div class="flex xl:max-h-full">
+    <div class="flex xl:max-h-full"  @mouseover="mouseOver"  @mouseleave="mouseLeave">
 
       <div class="overflow-hidden mr-4 mb-4">
         <a><img :src="this.cover" class="object-cover h-32 w-32"></a>
@@ -19,8 +19,11 @@
       <div class="w-5/6 flex flex-col justify-around mx-2">
         <div class="flex justify-between">
           <div class="text-sm flex">
-            <button class="">
-              <i class="fa fa-play fa-w-14 fa-2x" style="color: orange" @click="playPause"></i>
+            <button >
+              <i class="fas fa-play cursor-pointer" @click="playPause" v-show="playBtn && !playing"></i>
+              <i class="fas fa-pause" v-show="playing" @click="playPause" ></i>
+
+              <!-- <i class="fa fa-play fa-w-14 fa-2x" style="color: orange" @click="playPause"></i> -->
             </button>
 
             <div>
@@ -32,16 +35,16 @@
 
           <div class="flex">
             <div class="bg-gray-400 rounded text-xs text-white text-center p-1">
-              ck
+
             </div>
             <div class="bg-gray-400 rounded text-xs text-white text-center p-1">
-              yang
+
             </div>
           </div>
         </div>
 
 
-        <wave :path="this.stream.path" :filename="this.stream.filename" :id="this.stream.media_id"></wave>
+        <wave :path="this.stream.path" :filename="this.stream.filename" :id="this.stream.media_id" :click_id ="click_id"></wave>
 
 
 
@@ -83,7 +86,9 @@ export default {
       cover: '',
       owner: this.stream.user_name,
       type: this.stream.media_type,
-      repost_type: this.stream.repost_type
+      repost_type: this.stream.repost_type,
+      click_id :'',
+      playBtn: false
 
     }
   },
@@ -97,7 +102,17 @@ export default {
       playlistTracks: 'playlistsSongs/listsongs',
       continue: "songs/continue",
       isPLAY: "songs/isPLAY",
-    })
+    }),
+    playing() {
+      if (this.playerTracks.song_id == this.stream.media_id) {
+        if (this.isPLAY === false) {
+          return false;
+        }
+        return true;
+      } else {
+        return false;
+      }
+    }
 
   },
   methods: {
@@ -109,7 +124,8 @@ export default {
 
 
     playPause() {
-      if (this.type === "Playlist" || this.repost_type === "Playlist"){
+      this.click_id = this.stream.media_id;
+      if (this.media_type === "Playlist" || this.repost_type === "Playlist"){
         if (this.playerTracks.id !== this.stream.media_id || !this.playerTracks.id) {
           this.$store.dispatch('songs/pause')
           this.$store.dispatch('playlists/loadSongs', this.stream.media_id)
@@ -126,12 +142,10 @@ export default {
         if (this.playerTracks.song_id  !== this.stream.media_id || !this.playerTracks.song_id) {
           this.$store.dispatch('songs/pause')
           this.$store.dispatch('song/loadSong', this.stream.media_id )
-          console.log(this.stream.media_id)
         } else {
           if (this.playerTracks.song_id  === this.stream.media_id && this.isPLAY === true) {
             this.$store.dispatch("songs/pause");
             this.$store.dispatch("songs/continuePause");
-            console.log(this.stream.media_id)
           } else {
             this.$store.dispatch("songs/continuePlay");
             this.$store.dispatch("songs/play");
@@ -173,4 +187,8 @@ export default {
 </script>
 
 <style lang="css" scoped>
+i.fa-play, i.fa-pause{
+  font-size: 30px;
+  color: rgba(247, 66, 2, 1);
+}
 </style>

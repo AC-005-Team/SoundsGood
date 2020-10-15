@@ -8,6 +8,7 @@ const song = {
   state: {
     Song: {},
     Index: {},
+    Tag_1: {},
     LikesTracks :{}
   },
 
@@ -17,6 +18,9 @@ const song = {
     },
     LOAD_INDEX(state, data){
       state.Index = data;
+    },
+    LOAD_Tag_1(state, data){
+      state.Tag_1 = data;
     },
     FIND_INDEX(state, data){
       //只更新找到位置陣列的部分
@@ -39,6 +43,9 @@ const song = {
     index(state){
       return state.Index;
     },
+    tag_1(state){
+      return state.Tag_1;
+    },
     like_songs(state){
       return state.LikesTracks
     }
@@ -53,6 +60,7 @@ const song = {
       // dispatch("songs/setPlayerTracks", response.data, { root: true }); //塞到module tracks方法
       // dispatch("songs/play", response.data, { root: true });
       commit("LOAD_INDEX", response.data.index);
+      commit("LOAD_Tag_1", response.data.tag1);
     },
 
 

@@ -9,8 +9,10 @@ const songs = {
     isPlay: false,
     continuePlay: false,
     playerTracks: {},
-    playerCurrentTrack: null
-    
+    playerCurrentTrack: null,
+    duration: "",
+    widthCalc:""
+
   },
 
   mutations: {
@@ -31,12 +33,21 @@ const songs = {
     },
     PAUSE_PLAYING(state){
       state.continuePlay = false;
+    },
+    DURATION(state,data){
+      state.duration = data;
+    },
+    WIDTH(state,data){
+      state.widthCalc= data
     }
   },
 
   actions: {
     setPlayerTracks(context, tracks){
      context.commit('SET_SONGS',tracks)
+    },
+    getWidth(context, data){
+      context.commit('WIDTH',data)
     },
     play(context){
       context.commit('PLAY')
@@ -53,6 +64,10 @@ const songs = {
     setCurrentTrack(context, track) {
     context.commit('SET_CURRENT_TRACK', track);
     },
+    getDuration(context, track){
+      context.commit('DURATION', track);
+    }
+
   },
 
   getters:{
@@ -71,6 +86,12 @@ const songs = {
     continue(state){
       return state.continuePlay
     },
+    duration(state){
+      return state.duration
+    },
+    width(state){
+      return state.widthCalc
+    }
 
   }
 }

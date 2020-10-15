@@ -10,7 +10,7 @@ json.index (@songs) do |song|
   end
 end
 
-json.tag (@tag1_songs) do |s|
+json.tag1 (@tag1_songs) do |s|
   json.song_id s.id
   json.likes s.favorited_by?(current_user)
   json.audio do

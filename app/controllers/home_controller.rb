@@ -13,7 +13,7 @@ class HomeController < ApplicationController
     @users = [current_user]+current_user.followees.includes(:songs, :playlists, :reposts).order(created_at: :desc)
     @items_all = []
     @users.each do |user|
-      @items_all += user.songs+user.playlists+user.reposts.includes(:user, :repostable)
+      @items_all += user.reposts.includes(:user, :repostable).where(repostable_type: "Song") + user.songs
     end
     @items = @items_all.sort_by!{|item| item.created_at}.reverse!.first(10)
     respond_to do |format|
