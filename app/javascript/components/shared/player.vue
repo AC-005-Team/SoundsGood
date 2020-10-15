@@ -51,19 +51,19 @@ methods:{
     if(this.isPLAY && !this.continue ){
       this.ap.pause();
       this.ap.list.clear();
-      this.ap.list.add(this.playerTracks.audio || this.playerTracks);
+      this.ap.list.add( this.playerTracks.audio || this.playerTracks );
       this.ap.play();
-      this.$store.dispatch('songs/getDuration', this.playerTracks.audio.duration );
-      this.ap.on('timeupdate',() => {
-        this.secOfFourth += 0.25
-        console.log(this.secOfFourth)
-        this.$store.dispatch('songs/getWidth', this.secOfFourth);
-      })
-      this.ap.on('ended',() => {
-        this.secOfFourth = 0
-        console.log(this.secOfFourth)
-        this.$store.dispatch('songs/getWidth', this.secOfFourth);
-      })
+      // this.$store.dispatch('songs/getDuration', this.playerTracks.audio.duration );
+      // this.ap.on('timeupdate',() => {
+      //   this.secOfFourth += 0.25
+      //   console.log(this.secOfFourth)
+      //   this.$store.dispatch('songs/getWidth', this.secOfFourth);
+      // })
+      // this.ap.on('ended',() => {
+      //   this.secOfFourth = 0
+      //   console.log(this.secOfFourth)
+      //   this.$store.dispatch('songs/getWidth', this.secOfFourth);
+      // })
 
     }else{
       this.ap.pause();

@@ -112,7 +112,10 @@ export default {
     ...mapGetters({
       index: 'song/index',
       tag_1: 'song/tag_1',
-      unfollowers: 'follow/unfollowers'
+      unfollowers: 'follow/unfollowers',
+      isPLAY: 'songs/isPLAY',
+      playerTracks:'songs/playerTracks',
+
     }),
 
   },
@@ -126,13 +129,16 @@ export default {
       this.Cover = value;
     },
     playTaglist(){
-      let codingTag = this.tag_1.map( a => a.audio );
-      console.log(codingTag);
-      this.$store.dispatch('songs/setPlayerTracks', codingTag)
-      this.$store.dispatch('songs/play')
-
-
-
+      var codingTag = this.tag_1.map( a => a.audio );
+      if( codingTag.artist = (this.playerTracks).artist ){
+        console.log('123');
+        this.$store.dispatch('songs/pause')
+      }else{
+        this.$store.dispatch('songs/setPlayerTracks', codingTag)
+        this.$store.dispatch('songs/play')
+      }
+      console.log(codingTag[0])
+      console.log(this.playerTracks[0])
 
     }
 
