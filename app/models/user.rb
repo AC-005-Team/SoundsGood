@@ -31,7 +31,6 @@ class User < ApplicationRecord
   has_many :repost_songs, through: :reposts, source: :repostable, source_type: "Song", dependent: :destroy
   has_many :repost_playlists, through: :reposts, source: :repostable, source_type: "Playlist", dependent: :destroy
 
-  before_create :add_avatar
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
@@ -118,10 +117,6 @@ class User < ApplicationRecord
       google_token: access_token.credentials.token,
       google_uid: access_token.uid
     )
-  end
-
-  def add_avatar
-    self.avatar_data = '{"id":"user/18/avatar/baf5327d1a6cf68c60a709e42af32a53.png","storage":"store","metadata":{"filename":"default_user_image.png","size":19040,"mime_type":"image/png"}}' if self.avatar_data == nil
   end
 
 end
