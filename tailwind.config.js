@@ -14,7 +14,7 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-
+      leego_orange: '#f74304',
       black: '#000',
       white: '#fff',
 

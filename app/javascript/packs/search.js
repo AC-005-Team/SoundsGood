@@ -4,8 +4,10 @@ document.addEventListener("DOMContentLoaded", function() {
       if (e.key === "Enter") {
         result();
       } else {
-        document.querySelector(".search-result").innerHTML = "";
-        search();
+        if (document.querySelector(".search-result")) {
+          document.querySelector(".search-result").innerHTML = "";
+          search();
+        }
       }
     });
   }

@@ -121,13 +121,14 @@
   <%#=左邊專區大頭照那%>
       <div class="w-1/5 mr-4" data-controller="follow" data-follow-user="<%= @song.user.id %>">
         <% if @song.user.avatar_url %>
-          <%= image_tag @song.user.avatar_url, class: 'rounded-full mt-6 mr-6 w-3/4' %>
+          <%#= image_tag @song.user.avatar_url, class: 'rounded-full mt-6 mr-6 w-3/4' %>
+          <div class="mt-6 mr-6 h-32 w-32 mb-6 rounded-full bg-cover bg-center" style="background-image: url('<%= @song.user.avatar_url %>')">
+          </div>
         <% else %>
           <div class="h-12 w-12 bg-cover" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
         <% end %>
-        <div class="flex justify-start p-1">
+        <div class="flex justify-start p-1 m-2">
           <div><%=@song.user.display_name%></div>
-          <i class="far fa-star"></i>
         </div>
 
         <div class="flex justify-start items-center p-1 m-2">
@@ -138,12 +139,12 @@
         </div>
 
         <% if @song.user.followed_by?(current_user) %>
-          <button class="flex items-center bg-orange-500 text-white border-orange-500 border p-1 rounded" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
+          <button class="flex items-center bg-orange-500 text-white border-orange-500 border p-1 m-2 rounded" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
             <i class="fas fa-user-check"></i>
             <p class="mx-2 follow">Following</p>
           </button>
         <% else %>
-          <button class="flex items-center bg-white text-orange-500 border-orange-500 border rounded m-4" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
+          <button class="flex items-center bg-white text-orange-500 border-orange-500 border rounded p-1 m-2" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
             <i class="fas fa-user-check"></i>
             <p class="mx-2 follow">Follow</p>
           </button>
@@ -158,63 +159,9 @@
           <p class="mx-1">comments</p>
         </div>
         <%#=顯示正中間留言區那%>
-        <div class="text-xs" id="comments">
+        <div class="text-xs pb-20" id="comments">
           <% @comments.each do |comment| %>
-            <div class="flex main-comment">
-              <% if comment.user.avatar_url %>
-                <%= image_tag comment.user.avatar_url, class: 'w-1/12 rounded-full' %>
-              <% end %>
-              <div class="w-9/12 mx-2">
-                <div class="flex">
-                  <button><%=comment.user.display_name%></button>
-                  <p class ="mx-1"> at</p>
-                  <p>
-                    <%= comment.timepoint.to_i >= 3600 ? Time.at(comment.timepoint.to_i).utc.strftime("%H:%M:%S") : Time.at(comment.timepoint.to_i).utc.strftime("%M:%S") %>
-                  </p> 
-                </div>
-                <p><%=comment.content%></p>
-              </div>
-              <div class="col-span-2 text-gray-400">
-                <p><%= time_diff(DateTime.now, comment.created_at) %>
-                <%if is_current_user?(comment.user)%>
-                  <button class="border border-gray-400 p-1 rounded"><%= link_to "Delete", comment_path(song_id: @song.id, id: comment.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"}%></button>
-                <%end%>
-              </div>
-            </div>
-            <%#=顯示正中間針對留言的留言那%>
-            <div id= <%=comment.id%>>
-              <% comment.replies.each do |reply| %>
-              <div class="flex mt-4 ml-6">
-                <% if reply.user.avatar_url %>
-                  <%= image_tag reply.user.avatar_url, class: 'w-1/12 rounded-full' %>
-                <% end %>
-                <div class="w-9/12 mx-2">
-                  <div class="flex">
-                    <button> <%=reply.user.display_name%></button>
-                    <p class ="mx-1"> at</p>
-                    <p>
-                      <%= comment.timepoint.to_i >= 3600 ? Time.at(comment.timepoint.to_i).utc.strftime("%H:%M:%S") : Time.at(comment.timepoint.to_i).utc.strftime("%M:%S") %>
-                    </p>
-                  </div>
-                  <p class=""> <%=reply.content%> </p>
-                </div>
-                <div class="w-3/12 text-gray-400">
-                  <p><%= time_diff(DateTime.now, reply.created_at) %>
-                  <%if is_current_user?(comment.user)%>
-                  <button class="border border-gray-400 p-1 rounded"> <%= link_to "Delete", comment_path(song_id: @song.id, id: reply.id),method: "delete", data: {confirm: "Do you really want to remove this comment?"} if is_current_user?(reply.user)%> </button>
-                  <%end%>
-                </div>
-              </div>
-              <% end %>
-            </div>
-
-            <div class="flex mt-4 ml-6">
-            <%= form_with(model: @comment, url:song_comments_path(song_id: @song, reply_id: comment.id), class: "w-11/12 mx-4") do |f|%>
-              <%= f.text_field :content, placeholder: "Reply to this comment", class: "w-10/12 py-2 px-4 border border-gray-400 rounded", data:{id:comment.id}%>
-              <%= f.submit "Reply", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"%>
-            <% end %>
-            </div>
-
+            <%= render 'comments/comment', comment: comment, song: @song%>
           <% end %>
         </div>
       </div>
@@ -233,7 +180,7 @@
     <div class="flex border-t border-gray-400">
       <div class="my-3 text-xs table-row-group">
 
-        <div class="text-gray-500">
+        <div class="text-gray-500 invisible">
           <span class="hover:text-black"><a href="#">Legal</a></span>
 
           <span class="hover:text-black"><a href="#">Privacy</a></span>

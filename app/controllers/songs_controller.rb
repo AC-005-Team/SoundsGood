@@ -44,7 +44,7 @@ class SongsController < ApplicationController
 
 	def destroy
 		@song.destroy
-		redirect_to user_songs_path(current_user.id)
+		redirect_to user_path(current_user.id)
 	end
 
 	def add_to_playlist

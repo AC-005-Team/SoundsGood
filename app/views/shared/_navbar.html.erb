@@ -1,35 +1,38 @@
 <% unless params[:controller]=="home" && params[:action]=="index"%>
 
-<div class="bg-gray-800 text-gray-400 w-full flex justify-between text-center items-center text-sm sticky top-0 z-10 mx-auto">
+<div class="bg-black text-gray-400 w-full flex justify-between text-center items-center text-sm sticky top-0 z-10">
 <%#=Logo區域%>
   <button class="hover:text-white ml-6">
     <%= link_to discover_path do %>
     <%= image_pack_tag('logo_14.png', class:'w-48 hidden sm:block') %>
-    <%= image_pack_tag('logo_10.png', class:'w-12 block sm:hidden') %>
+    <%= image_pack_tag('logo_10.png', class:'w-8 block sm:hidden border border-gray-800 rounded-full bg-white') %>
     <% end %>
   </button>
 
-  <button class="hover:text-white mx-1 hidden sm:block">
-    <%= link_to "Home", discover_path%>
-  </button>
+  <%= link_to discover_path do%>
+  <button class="hover:text-white hidden sm:block md:px-8 py-2">Home</button>
+  <% end %>
 
-  <button class="hover:text-white mx-1">
-    <%= link_to "Stream", stream_path, class:'hidden sm:block'%>
+  <%= link_to stream_path, class:'hidden sm:block' do %>
+    <button class="hover:text-white md:px-8 py-2">Stream</button>
+  <% end %>
+  <button class="hover:text-white md:px-8 py-2 block sm:hidden">
     <%= link_to stream_path, class:'block sm:hidden' do %>
       <i class="fas fa-bolt"></i>
     <% end %>
   </button>
 
-  <button class="hover:text-white mx-1">
-    <%= link_to "Library", library_library_index_path, class:'hidden sm:block'%>
+  <%= link_to library_library_index_path, class:'hidden sm:block' do %>
+    <button class="hover:text-white md:px-8 py-2">Library</button>
+  <% end %>
+  <button class="hover:text-white md:px-8 py-2 block sm:hidden">
     <%= link_to library_library_index_path, class:'block sm:hidden' do %>
       <i class="fas fa-music"></i>
     <% end %>
-
   </button>
 
   <%#=搜尋區域%>
-  <div class="w-4/12">
+  <div class="w-3/12">
   <%= form_with model: @search, url: result_search_path, method: 'get', id: 'search_bar' do |f| %>
     <%= f.text_field :search, class: "px-2 bg-gray-200 rounded w-full", placeholder: "Search" %>
     <%#= 這個灰掉似乎不影響功能 %>
@@ -37,48 +40,52 @@
     <div class="search-result flex flex-col absolute text-left w-1/3"></div>
   </div>
   <% end %>
-  <div class="hover:text-white hidden sm:block">
-    <a href="/upload">Upload</a>
-  </div>
-    <%= link_to "upload",url: "/Upload", class:'block sm:hidden' do %>
+
+  <a href="/upload">
+    <div class="hover:text-white md:px-8 py-2">
       <i class="fas fa-cloud-upload-alt"></i>
+      Upload
+    </div>
+  </a>
 
+  <%= link_to rooms_path, class: 'hidden sm:block' do %>
+    <button class="hover:text-white md:px-8 py-2 hidden sm:block">OnAir</button>
   <% end %>
-    <%= link_to rooms_path, class: 'hover:text-white px-1 hidden sm:block' do %>
-      <i class="fas fa-podcast"></i>
+  <button class="hover:text-white md:px-8 py-2 block sm:hidden">
+    <%= link_to rooms_path, class: 'block sm:hidden' do %>
+      <i class="fas fa-microphone-alt"></i>
     <% end %>
-  
+  </button>
 
 
-  <button class="hover:text-white px-1 hidden sm:block"><i class="fas fa-envelope-open"></i></button>
 
 <%#=使用者大頭貼、名稱區域%>
   <% if user_signed_in? %>
-
-   <% if current_user && current_user.avatar_url %>
-        <%= image_tag current_user.avatar_url, class:'w-8 h-6 object-cover', style:''%>
+    <div class="dropdown inline-block relative md:px-8 py-1 mr-6">
+      <% if current_user && current_user.avatar_url %>
+        <%= image_tag current_user.avatar_url, class:'w-6 h-6 object-cover inline', style:''%>
       <% else %>
         <i class="fas fa-user-secret"></i>
       <% end %>
-    <div class="dropdown inline-block relative mr-6 flex">
-      <button class="text-gray-300 bg-gray-800 py-2 rounded inline-flex items-center">
-        <span class="">
+      <button class="text-gray-300 bg-black py-2 rounded inline-flex items-center">
+        <span class="hidden md:block">
           <%= link_to current_user.display_name, user_path(current_user)%>
         </span>
       </button>
-      <ul class="dropdown-menu absolute hidden text-gray-700 text-left">
-        <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-t"><%= link_to current_user.display_name, user_path(current_user)%></li>
-        <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap"><%= link_to "Likes", likes_library_index_path%></li>
-        <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap"><%= link_to "Playlists", sets_library_index_path%></li>
-        <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap"><%= link_to "Tracks", user_songs_path(current_user) %></li>
-        <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap"><%= link_to 'Edit', edit_user_path(current_user.id) %></li>
-        <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-b"><%= link_to "Sign out", destroy_user_session_path, method: "delete"%></li>
+      <ul class="dropdown-menu absolute hidden text-gray-700 text-left" style="top:44px">
+        <%= link_to user_path(current_user) do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-t">Profile</li><% end %>
+        <%= link_to likes_library_index_path do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Likes</li><% end %>
+        <%= link_to sets_library_index_path do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Playlists</li><% end %>
+        <%= link_to user_songs_path(current_user) do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Tracks</li><% end %>
+        <%= link_to edit_user_path(current_user.id) do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Edit</li><% end %>
+        <%= link_to destroy_user_session_path, method: "delete" do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-b">Sign out</li><% end %>
       </ul>
     </div>
   <% else %>
     <div class="hover:text-white"><%= link_to "Sign in",new_user_session_path%></div>
     <div class="hover:text-white mr-6"><%= link_to "Create",new_user_registration_path%></div>
   <% end %>
+
 <%#=後面三點點區域%>
 </div>
 <% end %>

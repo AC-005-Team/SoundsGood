@@ -2,27 +2,26 @@ import { renderComments } from "./comment";
 import WaveSurfer from "wavesurfer.js";
 import CursorPlugin from "wavesurfer.js/src/plugin/cursor.js";
 export function waveShow(ap) {
-  // document.addEventListener('DOMContentLoaded', () => {
   const wavePlace = document.querySelector(".waveform-wrap"); // see if at least a waveform div is present
   const peakStorageRoot =
     "https://peaks.soundsgood.world/api/v1/getjson/song_peaks/";
   const ctx = document.createElement("canvas").getContext("2d");
-  const waveDarkSmall = ctx.createLinearGradient(900, 0, 900, 100);
-  waveDarkSmall.addColorStop(0.88, "rgb(96, 96, 96)");
-  waveDarkSmall.addColorStop(0.89, "rgb(255, 255, 255)");
-  waveDarkSmall.addColorStop(0.9, "rgb(215, 215, 215)");
-  const waveProgressSmall = ctx.createLinearGradient(900, 0, 900, 100);
-  waveProgressSmall.addColorStop(0.88, "rgb(255,118,38)");
-  waveProgressSmall.addColorStop(0.89, "rgb(255, 255, 255)");
-  waveProgressSmall.addColorStop(0.9, "#ffcfb5");
-  const waveLightLarge = ctx.createLinearGradient(900, 0, 900, 120);
-  waveLightLarge.addColorStop(0.88, "rgba(255, 255, 255, 1)");
-  waveLightLarge.addColorStop(0.89, "rgba(255, 255, 255, 0)");
-  waveLightLarge.addColorStop(0.9, "rgba(215, 215, 215, 1)");
-  const waveProgressLarge = ctx.createLinearGradient(900, 0, 900, 120);
-  waveProgressLarge.addColorStop(0.88, "rgb(255,118,38)");
-  waveProgressLarge.addColorStop(0.89, "rgba(255, 255, 255, 0)");
-  waveProgressLarge.addColorStop(0.9, "#ffcfb5");
+  const waveDarkSmall = ctx.createLinearGradient(0, 0, 0, 200);
+  waveDarkSmall.addColorStop(0.55, "rgb(96, 96, 96)");
+  waveDarkSmall.addColorStop(0.56, "rgb(255, 255, 255)");
+  waveDarkSmall.addColorStop(0.57, "rgb(215, 215, 215)");
+  const waveProgressSmall = ctx.createLinearGradient(0, 0, 0, 200);
+  waveProgressSmall.addColorStop(0.55, "#f74304");
+  waveProgressSmall.addColorStop(0.56, "rgb(255, 255, 255)");
+  waveProgressSmall.addColorStop(0.57, "#ffcfb5");
+  const waveLightLarge = ctx.createLinearGradient(0, 0, 0, 240);
+  waveLightLarge.addColorStop(0.55, "rgba(255, 255, 255, 1)");
+  waveLightLarge.addColorStop(0.56, "rgba(255, 255, 255, 0)");
+  waveLightLarge.addColorStop(0.57, "rgba(215, 215, 215, 1)");
+  const waveProgressLarge = ctx.createLinearGradient(0, 0, 0, 240);
+  waveProgressLarge.addColorStop(0.55, "#f74304");
+  waveProgressLarge.addColorStop(0.56, "rgba(255, 255, 255, 0)");
+  waveProgressLarge.addColorStop(0.57, "#ffcfb5");
 
   if (wavePlace) {
     const proxyurl = "https://cors-anywhere.herokuapp.com/"; // for accessing s3
@@ -96,11 +95,6 @@ export function waveShow(ap) {
           return response.json();
         })
         .then((peaks) => {
-          console.log("------------------------------");
-          console.log("default loaded! sample_rate: " + peaks.sample_rate);
-          console.log("------------------------------");
-          // load peaks into wavesurfer.js
-          // wavesurferDummy.load(proxyurl+url, peaks.data)
           wavesurfer.load(proxyurl + url, peaks.data);
         })
         .catch((e) => {
@@ -163,5 +157,4 @@ export function waveShow(ap) {
       song.appendChild(domEl);
     }
   }
-  // })
 }
