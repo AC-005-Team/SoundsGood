@@ -9,13 +9,13 @@ document.addEventListener('DOMContentLoaded', function(){
         method: 'PATCH',
         headers: {
           'x-csrf-token': csrfToken
-        }})
+      }})
       .then(response => { 
         if (response.ok){
           let icon = btn.children[0]
           let status = btn.children[1]
           let count = btn.parentNode.children[0].children[1]
-          if (icon.style.color == '' || icon.getAttribute('style') == 'color: black;' ){
+          if (icon.style.color == '' || icon.getAttribute('style') == 'color: black;'){
             let num = Number(count.textContent)
             status.textContent = 'Following'
             icon.setAttribute('style', 'color: orange;')

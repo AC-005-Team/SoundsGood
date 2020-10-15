@@ -116,6 +116,12 @@ function addPlayedTime(id){
   })
   .then(response => {
     if(response.ok){
+      const result_played_times = document.querySelectorAll(`.played_times_comments${id}`)
+      if(result_played_times){
+        result_played_times.forEach((num)=>{
+          num.textContent++
+        })
+      }
     }else{
       console.error('error')
     }
