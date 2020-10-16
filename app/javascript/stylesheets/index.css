@@ -1,6 +1,10 @@
 @import 'player.css';
 /* @import 'dropdown_heart.css'; */
 
-/* .dropdown:hover .dropdown-menu {
+.dropdown:hover .dropdown-menu {
   display: block;
-} */
+
+}
+.dropdown {
+  cursor: pointer;
+}

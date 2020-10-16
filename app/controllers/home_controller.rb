@@ -1,15 +1,18 @@
 class HomeController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :discover]
+  before_action :authenticate_user!, except: [:index]
   before_action :find_song
 
-  def index;end
+  def index
+    if user_signed_in?
+      redirect_to discover_path
+    end
+  end
 
   def discover
     render layout: "spa"
   end
 
   def stream
-
     @users = [current_user]+current_user.followees.includes(:songs, :playlists, :reposts).order(created_at: :desc)
     @items_all = []
     @users.each do |user|
@@ -28,6 +31,5 @@ class HomeController < ApplicationController
   def find_song
     @songs = Song.all.includes(:tags)
   end
-
 
 end

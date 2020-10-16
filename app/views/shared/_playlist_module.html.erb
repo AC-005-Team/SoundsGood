@@ -13,6 +13,12 @@
             </div>
           </div>
         <% end %>
+        <% if current_user == playlist.user %>
+              <%= link_to playlist_path(playlist.id), method:'delete', class: "flex border border-gray-300 px-3 mx-1 rounded" do %>
+                <span class="my-auto mr-1"><i class="fas fa-trash"></i></span>
+                <p class="hidden md:block">Delete</p>
+              <% end %>
+            <% end %>
       </div>
     <% end %>
   <% end %>

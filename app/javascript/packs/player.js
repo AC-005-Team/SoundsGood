@@ -24,7 +24,9 @@ if(songs){
     song.addEventListener('click', function(e) {
       let playing = ap.container.dataset.playing
       let id = e.currentTarget.dataset.id;
-      waveProgress = document.querySelector(`.waveform-wrap[data-id="${id}"]>.waveform>wave>wave`)
+      if(!waveProgress){
+        waveProgress = document.querySelector(`.waveform-wrap[data-id="${id}"]>.waveform>wave>wave`)
+      }
       getPlay(id).then(val=>{
         if(playing!==id){
           if(waveProgress){
@@ -33,6 +35,7 @@ if(songs){
           }
           playingDuration = val.audio.duration
           secOfFourth = 0
+          waveProgress = document.querySelector(`.waveform-wrap[data-id="${id}"]>.waveform>wave>wave`)
           ap.pause();
           ap.list.clear();
           ap.list.add(val.audio);
@@ -55,7 +58,7 @@ if(waves){
       let id = e.currentTarget.dataset.id;
       let node = e.currentTarget
       waveformWidth = node.parentNode.offsetWidth
-      getPlay(id).then(val=>{ // @todo: 確認api是否有變動
+      getPlay(id).then(val=>{ 
         playingDuration = val.audio.duration
         if(playing!==id){
           if(waveProgress){
@@ -113,6 +116,12 @@ function addPlayedTime(id){
   })
   .then(response => {
     if(response.ok){
+      const result_played_times = document.querySelectorAll(`.played_times_comments${id}`)
+      if(result_played_times){
+        result_played_times.forEach((num)=>{
+          num.textContent++
+        })
+      }
     }else{
       console.error('error')
     }
