@@ -6,7 +6,11 @@ class Api::V1::SongsController < ApplicationController
 
   def show
     @song = Song.find(params[:id])
-    @playlists = current_user.playlists
+    if current_user 
+      @playlists = current_user.playlists 
+    else
+      @playlists = []
+    end
   end
 
   def add_to_playlist

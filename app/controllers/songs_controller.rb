@@ -1,6 +1,6 @@
 class SongsController < ApplicationController
 
-	before_action :authenticate_user!, except: [:show]
+	before_action :authenticate_user!, except: [:show, :add_played_times]
 	before_action :find_song, only: [:show, :destroy, :like, :repost, :add_to_playlist, :share, :add_played_times]
 
 	def index
@@ -36,7 +36,7 @@ class SongsController < ApplicationController
 		@related_song = Song.all.limit(3)
 		@playlist = Playlist.new
 		begin
-			@playlists = current_user.playlists
+			@playlists = current_user.playlists 
 		rescue
 			p 'not logged in'
 		end
