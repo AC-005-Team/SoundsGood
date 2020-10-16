@@ -2,7 +2,11 @@ class Api::V1::SongsController < ApplicationController
   def index
     @songs = Song.all.order(id: :desc)
     @playlists = current_user.playlists
-    @tag1_songs = Tag.find_by(name: "coding").songs
+    if Tag.find_by(name: "coding")  
+      @tag1_songs = Tag.find_by(name: "coding").songs 
+    else
+      @tag1_songs = []
+    end
   end
 
   def show
