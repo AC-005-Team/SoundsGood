@@ -1,12 +1,14 @@
 <div class="grid grid-cols-12 mt-4 ml-6 comment-id-<%=reply.id%>">
-  <div class="col-span-2 md:col-span-1 rounded-full h-0 overflow-hidden" style="padding-bottom:100%">
+  
+  <div class="col-span-2 md:col-span-1" >
     <% if reply.user.avatar_url %>
-      <div class="w-16 h-16 rounded-full bg-cover bg-center" style="background-image: url('<%= reply.user.avatar_url %>')">
+      <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-cover bg-center" style="background-image: url('<%= reply.user.avatar_url %>')">
       </div>
       <% else %>
         <div class="w-8 h-8 sm:w-12 sm:h-12 bg-cover bg-center" style="background-image: url(/img/default_user_image.png)"></div>
     <% end %>
   </div>
+
   <div class="col-span-7 md:col-span-8 mx-2">
     <div class="flex">
       <button> <%=link_to reply.user.display_name ,user_path(reply.user)%></button>
@@ -18,12 +20,16 @@
     </div>
     <p class=""> <%=reply.content%> </p>
   </div>
-  <div class="col-span-3 md:col-span-3 flex justify-end text-xs pr-8">
-    <p><%= time_diff(DateTime.now, reply.created_at) %></br>
-    <button class="border border-gray-400 p-1 rounded replyBtn" data-id=<%=comment.id%>>Reply</button>
-    <%if is_current_user?(reply.user) %>
-      <button class="border border-gray-400 p-1 rounded"> <%= link_to "Delete", comment_path(song_id: song.id, id: reply.id), remote:true,method: "delete", data: {confirm: "Do you really want to remove this comment?"}%> </button>
-    <% end %>
-    </p>
+
+  <div class="col-span-3 md:col-span-3 flex justify-end text-xs">
+    <div class="">
+      <div class="flex justify-end"><%= time_diff(DateTime.now, reply.created_at) %></div>
+      <div class="flex justify-end">
+        <button class="border border-gray-400 p-1 rounded mr-1 replyBtn" data-id=<%=comment.id%>>Reply</button>
+        <%if is_current_user?(reply.user) %>
+        <button class="border border-gray-400 p-1 rounded"> <%= link_to "Delete", comment_path(song_id: song.id, id: reply.id), remote:true,method: "delete", data: {confirm: "Do you really want to remove this comment?"}%> </button>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
