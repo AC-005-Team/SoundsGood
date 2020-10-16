@@ -63,9 +63,13 @@ export default {
 
   },
 
+
+
   ...mapActions('playlistsSongs', ['loadList', 'loadSong']),
   ...mapActions("songs", ["play", "pause", "continuePlay", "continuePause"]),
   created() {
+          console.log('ccccccccccccc')
+      document.body.classList.add("bg-gray-900")
     console.log("create", this.$route.params.id)
     this.$store.dispatch('playlistsSongs/loadList', this.$route.params.id)
   },
