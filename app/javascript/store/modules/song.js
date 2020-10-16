@@ -8,6 +8,7 @@ const song = {
   state: {
     Song: {},
     Index: {},
+    Tag_1: {},
     LikesTracks :{}
   },
 
@@ -18,13 +19,19 @@ const song = {
     LOAD_INDEX(state, data){
       state.Index = data;
     },
+    LOAD_Tag_1(state, data){
+      state.Tag_1 = data;
+    },
     FIND_INDEX(state, data){
       //只更新找到位置陣列的部分
       let y = data.id
+      var foundValueTag = state.Tag_1.find(obj => obj.song_id === y);
       var foundValue = state.Index.find(obj => obj.song_id === y);
       let a = state.Index.indexOf(foundValue)
+      let b = state.Tag_1.indexOf(foundValueTag)
       state.Index[a].likes = !state.Index[a].likes
-      // state.Index[id].likes = !state.Index[id].likes
+      state.Tag_1[b].likes = !state.Tag_1[b].likes
+
     },
     LOAD_LIKES(state, data){
       state.LikesTracks = data
@@ -39,6 +46,9 @@ const song = {
     index(state){
       return state.Index;
     },
+    tag_1(state){
+      return state.Tag_1;
+    },
     like_songs(state){
       return state.LikesTracks
     }
@@ -52,7 +62,8 @@ const song = {
       let response = await Api().get(`/api/v1/songs`);
       // dispatch("songs/setPlayerTracks", response.data, { root: true }); //塞到module tracks方法
       // dispatch("songs/play", response.data, { root: true });
-      commit("LOAD_INDEX", response.data);
+      commit("LOAD_INDEX", response.data.index);
+      commit("LOAD_Tag_1", response.data.tag1);
     },
 
 

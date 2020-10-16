@@ -1,9 +1,8 @@
 <template>
 <header>
 
-  <div class="bg-black"></div>
 
-  <div class="bg-gray-800 text-gray-400 w-full flex justify-between text-center items-center text-sm sticky top-0 z-10">
+  <div class="bg-black text-gray-400 w-full flex justify-between text-center items-center text-sm sticky top-0 z-10">
     <button class="hover:text-white ml-6">
       <a href="/discover">
         <img class="w-48 hidden sm:block" src="/packs/media/images/logo_14-929fb1cd43f62a5bdca9540d9017df3b.png">
@@ -29,8 +28,10 @@
       <router-link :to="{ name: 'upload' }" class="block sm:hidden"><i class="fas fa-arrow-circle-up fa-2x"></i></router-link>
     </div>
     <div class="hover:text-white flex items-center">
-      <a href="/rooms"> <i class="fas fa-microphone-alt fa-2x"></i>On Air </a>
-      <router-link to="/rooms" class="block sm:hidden"><i class="fas fa-microphone-alt fa-2x"></i></router-link>
+      <a href="/rooms" class="flex">
+        <i class="fas fa-microphone-alt fa-2x"></i>
+        <div class="hidden sm:block">On Air</div>
+      </a>
     </div>
 
     <div class="dropdown inline-block relative ml-4 mr-6">

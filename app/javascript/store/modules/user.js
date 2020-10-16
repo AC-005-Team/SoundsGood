@@ -21,7 +21,6 @@ const user= {
       return state.User.user_id;
     },
     user_name(state){
-      console.log(state.User)
       return state.User.display_name;
     }
   },

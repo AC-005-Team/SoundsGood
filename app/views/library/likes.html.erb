@@ -14,8 +14,8 @@
       <div class="">Hear the tracks you’ve liked:</div>
       <div class="flex w-1/3">
         <span class="mx-2">View</span>
-        <button class="mx-2"><i class="fas fa-th-large"></i></button> 
-        <button class="mx-2"><i class="fas fa-th-list"></i></button> 
+        <button class="mx-2"><i class="fas fa-th-large"></i></button>
+        <button class="mx-2"><i class="fas fa-th-list"></i></button>
         <input class="mx-2 border rounded w-full" type="text" placeholder="Fillter">
       </div>
     </div>
@@ -32,7 +32,7 @@
               <%#= 歌曲名稱 %>
               <%= content_tag(:li,content_tag(:a, song.name, href: song_path(song)), data: {value: song.name} ) %>
               <%= content_tag(:li,song.intro, data: {value: song.intro} ) %>
-              <%#= 歌曲TAG區 %>                           
+              <%#= 歌曲TAG區 %>
               <% if song.tags.length > 0 %>
                 <% song.tags.each do |tag| %>
                   <%= tag.name %>
@@ -41,7 +41,7 @@
             </div>
           </div>
         <% end %>
-      <% end %>  
+      <% end %>
     </div>
   </div>
 <%#=左邊區域結束%>
@@ -65,7 +65,7 @@
           -
         <span class="hover:text-black"><a href="#">Popular Search</a></span>
       </div>
-      
+
         <div class="mt-2 mb-20">
           Language: English (US)
         </div>

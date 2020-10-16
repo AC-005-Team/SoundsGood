@@ -1,8 +1,7 @@
 <template>
-  <div>
-    <div id="player1" class="aplayer"></div>
-  </div>
-
+<div>
+  <div id="player1" class="aplayer"></div>
+</div>
 </template>
 
 <script>
@@ -18,7 +17,9 @@ import {
 export default {
   data() {
     return {
-      ap: null}
+      ap: null,
+      secOfFourth: ''
+    }
   },
   mounted() {
     //畫面一開始的播放器
@@ -39,53 +40,66 @@ export default {
     ...mapGetters({
       isPLAY: 'songs/isPLAY',
       continue: 'songs/continue',
-      playerTracks:'songs/playerTracks'
-    })
-  // getSong() {
-  //   return this.$store.getters['playing'];
-  // },
-},
-methods:{
-  ...mapActions('songs', [ 'play','pause']),
-  handlePlayPause(){
-    if(this.isPLAY && !this.continue ){
-      this.ap.pause();
-      this.ap.list.clear();
-      this.ap.list.add(this.playerTracks.audio);
-      this.ap.play();
-    }else{
-      this.ap.pause();
-    }
-  },
-  handleContinue(){
-    if(this.continue){
-      this.ap.play();
-      // this.$store.dispatch('songs/pause');
-    }else{
-      this.ap.pause();
-    }
-  }
+      playerTracks: 'songs/playerTracks',
+      duration: 'songs/duration'
+    }),
 
-},
-watch:{
+    sendName(){
+      if(this.isPLAY){
+        return this.ap.audio.name
+      }
+    },
+
+  },
+  methods: {
+    ...mapActions('songs', ['play', 'pause', 'getDuration', 'getWidth', 'getName']),
+    handlePlayPause() {
+      if (this.isPLAY && !this.continue) {
+        this.ap.pause();
+        this.ap.list.clear();
+        this.ap.list.add(this.playerTracks.audio || this.playerTracks);
+        this.ap.play();
+        // this.$store.dispatch('songs/getDuration', this.playerTracks.audio.duration );
+        // this.ap.on('timeupdate',() => {
+        //   this.secOfFourth += 0.25
+        //   console.log(this.secOfFourth)
+        //   this.$store.dispatch('songs/getWidth', this.secOfFourth);
+        // })
+        // this.ap.on('ended',() => {
+        //   this.secOfFourth = 0
+        //   console.log(this.secOfFourth)
+        //   this.$store.dispatch('songs/getWidth', this.secOfFourth);
+        // })
+
+      } else {
+        this.ap.pause();
+      }
+    },
+    handleContinue() {
+      if (this.continue) {
+        this.ap.play();
+        // this.$store.dispatch('songs/pause');
+      } else {
+        this.ap.pause();
+      }
+    }
+
+  },
+  watch: {
     isPLAY(newValue, oldValue) {
-      if(newValue !== oldValue){
+      if (newValue !== oldValue) {
         this.handlePlayPause();
       }
     },
 
-    continue(newValue,oldValue){
-      if(newValue !== oldValue){
+    continue (newValue, oldValue) {
+      if (newValue !== oldValue) {
         this.handleContinue();
       }
-
+    },
+    sendName(){
+      this.$store.dispatch('songs/getName', this.ap.audio.name );
     }
-
-    }
+  }
 }
-
-
-
-
-
 </script>
