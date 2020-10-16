@@ -1,9 +1,9 @@
 <template>
 <div @click='yourClickHandler'>
 
-  <div class="my-2 mr-2 flex sm:flex-col justify-between flex-row">
+  <div class="my-2 mr-2 flex-col justify-between bg-gray-900">
 
-    <div class="align-top w-32 h-32  overflow-hidden rounded cover parent" :style="{ 'background-image': 'url('+  url + ')' }"
+    <div class="align-top w-32 h-32 overflow-hidden rounded cover parent" :style="{ 'background-image': 'url('+  url + ')' }"
     @mouseover="mouseOver"  @mouseleave="mouseLeave" @click="playPause">
       <div class="child">
         <img class="object-cover h-32 max-w-xl w-full mr-4" :src="url">
@@ -12,7 +12,7 @@
       </div>
     </div>
       <router-link :to="`/playlists/${playlist.id}`" @click.native="$event.stopImmediatePropagation()">
-    <div class="text-2xl sm:text-sm hover:bg-gray-200 rounded">
+    <div class="text-base sm:text-sm hover:bg-gray-200 rounded">
       <li>{{playlist.name}}</li>
       <li>{{playlist.intro}}</li>
     </div>

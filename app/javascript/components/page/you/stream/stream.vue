@@ -2,7 +2,7 @@
   <div class="">
     <div class="grid grid-cols-12 mx-8 mt-6">
   <div class="col-span-12 md:col-span-9 mx-4">
-    <div class="text-lg text-gray-600 mb-4">Hear the latest posts from the people youâ€™re following:</div>
+    <div class="text-lg text-gray-600 mb-4">Hear the latest posts from the people you're following:</div>
 
           <streamItem v-for="stream in streamData" :stream="stream"/>
         </div>
