@@ -63,8 +63,10 @@ export default {
       name: null,
       intro: null,
       display: false
+
     }
   },
+  props: ["track_id"],
   methods:{
     uploadForm() {
       let formData = new FormData();
@@ -81,7 +83,8 @@ export default {
       // const config = {
       //   onUploadProgress: progressEvent => console.log(progressEvent.loaded)
       // }
-      Api().post('/playlists', formData,config, {
+      let song_id =  this.track_id;
+      Api().post(`/playlists.json?song_id=${song_id}`,formData, {
         withCredentials: true
       }).then(response => {
         this.$emit('after_add', { name: this.name, intro: this.intro} )

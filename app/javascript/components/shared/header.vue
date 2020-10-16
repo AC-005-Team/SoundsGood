@@ -28,8 +28,10 @@
       <router-link :to="{ name: 'upload' }" class="block sm:hidden"><i class="fas fa-arrow-circle-up fa-2x"></i></router-link>
     </div>
     <div class="hover:text-white flex items-center">
-      <a href="/rooms"> <i class="fas fa-microphone-alt fa-2x"></i>On Air </a>
-      <router-link to="/rooms" class="block sm:hidden"><i class="fas fa-microphone-alt fa-2x"></i></router-link>
+      <a href="/rooms" class="flex">
+        <i class="fas fa-microphone-alt fa-2x"></i>
+        <div class="hidden sm:block">On Air</div>
+      </a>
     </div>
 
     <div class="dropdown inline-block relative ml-4 mr-6">

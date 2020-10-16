@@ -1,8 +1,7 @@
 <template>
-  <div>
-    <div id="player1" class="aplayer"></div>
-  </div>
-
+<div>
+  <div id="player1" class="aplayer"></div>
+</div>
 </template>
 
 <script>
@@ -41,63 +40,66 @@ export default {
     ...mapGetters({
       isPLAY: 'songs/isPLAY',
       continue: 'songs/continue',
-      playerTracks:'songs/playerTracks',
-      duration:'songs/duration'
-    })
-},
-methods:{
-  ...mapActions('songs', [ 'play','pause','getDuration','getWidth']),
-  handlePlayPause(){
-    if(this.isPLAY && !this.continue ){
-      this.ap.pause();
-      this.ap.list.clear();
-      this.ap.list.add( this.playerTracks.audio || this.playerTracks );
-      this.ap.play();
-      // this.$store.dispatch('songs/getDuration', this.playerTracks.audio.duration );
-      // this.ap.on('timeupdate',() => {
-      //   this.secOfFourth += 0.25
-      //   console.log(this.secOfFourth)
-      //   this.$store.dispatch('songs/getWidth', this.secOfFourth);
-      // })
-      // this.ap.on('ended',() => {
-      //   this.secOfFourth = 0
-      //   console.log(this.secOfFourth)
-      //   this.$store.dispatch('songs/getWidth', this.secOfFourth);
-      // })
+      playerTracks: 'songs/playerTracks',
+      duration: 'songs/duration'
+    }),
 
-    }else{
-      this.ap.pause();
-    }
+    sendName(){
+      if(this.isPLAY){
+        return this.ap.audio.name
+      }
+    },
+
   },
-  handleContinue(){
-    if(this.continue){
-      this.ap.play();
-      // this.$store.dispatch('songs/pause');
-    }else{
-      this.ap.pause();
-    }
-  }
+  methods: {
+    ...mapActions('songs', ['play', 'pause', 'getDuration', 'getWidth', 'getName']),
+    handlePlayPause() {
+      if (this.isPLAY && !this.continue) {
+        this.ap.pause();
+        this.ap.list.clear();
+        this.ap.list.add(this.playerTracks.audio || this.playerTracks);
+        this.ap.play();
+        // this.$store.dispatch('songs/getDuration', this.playerTracks.audio.duration );
+        // this.ap.on('timeupdate',() => {
+        //   this.secOfFourth += 0.25
+        //   console.log(this.secOfFourth)
+        //   this.$store.dispatch('songs/getWidth', this.secOfFourth);
+        // })
+        // this.ap.on('ended',() => {
+        //   this.secOfFourth = 0
+        //   console.log(this.secOfFourth)
+        //   this.$store.dispatch('songs/getWidth', this.secOfFourth);
+        // })
 
-},
-watch:{
+      } else {
+        this.ap.pause();
+      }
+    },
+    handleContinue() {
+      if (this.continue) {
+        this.ap.play();
+        // this.$store.dispatch('songs/pause');
+      } else {
+        this.ap.pause();
+      }
+    }
+
+  },
+  watch: {
     isPLAY(newValue, oldValue) {
-      if(newValue !== oldValue){
+      if (newValue !== oldValue) {
         this.handlePlayPause();
       }
     },
 
-    continue(newValue,oldValue){
-      if(newValue !== oldValue){
+    continue (newValue, oldValue) {
+      if (newValue !== oldValue) {
         this.handleContinue();
       }
-
+    },
+    sendName(){
+      this.$store.dispatch('songs/getName', this.ap.audio.name );
     }
-
-    }
+  }
 }
-
-
-
-
-
 </script>

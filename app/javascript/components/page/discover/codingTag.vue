@@ -1,9 +1,10 @@
 <template lang="html">
   <div class="">
 
-        <div class="flex justify-around border-b border-gray-600 mx-2  song_list" @mouseover="mouseOver"  @mouseleave="mouseLeave" >
-          <div class="w-9/12 m-2 text-base text-gray-white">{{ this.coding.audio.name }} </div>
-          <div class="w-3/12 m-2 text-base text-gray-white text-right"></div>
+        <div class="flex justify-around border-b border-gray-600 mx-2  song_list" :class="[playing ? 'dark' : '']" @mouseover="mouseOver"  @mouseleave="mouseLeave" >
+          <div class="w-8/12 m-2 text-base text-gray-white cursor-pointer" @click.stpp="user" >{{ this.coding.user.display_name }} </div>
+          <div class="w-8/12 m-2 text-base text-gray-white cursor-pointer" @click.stpp="songsShow">{{ this.coding.audio.name }} </div>
+          <div class="w-4/12 m-2 text-base text-gray-white text-right"></div>
           <i
             class="fa fa-heart mr-2"
             @click.stop="like"
@@ -42,6 +43,8 @@ export default {
       playerTracks: 'songs/playerTracks',
       continue: "songs/continue",
       isPLAY: "songs/isPLAY",
+      name: "songs/name",
+      playing: "false"
     }),
 
     playing() {
@@ -56,6 +59,11 @@ export default {
     },
     changeColor() {
       return !!this.coding.likes
+    },
+    bbb(){
+      if ( this.name = this.coding.audio.name ){
+          this.playing = true;
+      }
     }
 
 
@@ -66,6 +74,15 @@ export default {
   ...mapActions('playlistsSongs', ['loadList', 'loadSong']),
   ...mapActions("songs", ["play", "pause", "continuePlay", "continuePause"]),
   methods: {
+    user(){
+    let id = this.coding.user.user_id
+    window.location.href = `/users/${id}`;
+  },
+  songsShow(){
+    let id = this.coding.song_id;
+    window.location.href = `/songs/${id}`;
+  },
+
     toggle() {
       return this.isActive = !this.isActive
     },
@@ -122,6 +139,9 @@ export default {
   color: rgb(255, 59, 59);
 }
 
+.dark{
+  background-color: rgba(187, 170, 149, 0.45);
+}
 
 .song_list:hover {
   background-color: rgba(255, 255, 255, 0.15);

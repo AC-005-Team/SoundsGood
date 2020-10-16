@@ -11,7 +11,8 @@ const songs = {
     playerTracks: {},
     playerCurrentTrack: null,
     duration: "",
-    widthCalc:""
+    widthCalc:"",
+    name:""
 
   },
 
@@ -39,6 +40,9 @@ const songs = {
     },
     WIDTH(state,data){
       state.widthCalc= data
+    },
+    NAME(state,data){
+      state.name= data
     }
   },
 
@@ -66,6 +70,9 @@ const songs = {
     },
     getDuration(context, track){
       context.commit('DURATION', track);
+    },
+    getName(context, track){
+      context.commit('NAME', track);
     }
 
   },
@@ -91,6 +98,9 @@ const songs = {
     },
     width(state){
       return state.widthCalc
+    },
+    name(state){
+      return state.name
     }
 
   }

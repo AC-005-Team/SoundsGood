@@ -26,7 +26,7 @@
         <div class="flex justify-around p-5 bg-leego_orange bg-opacity-50  rounded-lg">
           <div class="w-1/4 bg-cover" :style="{ 'background-image': 'url('+  Cover + ')' }"></div>
           <div class="w-3/4 overflow-auto h-48">
-            <codingTag v-for="coding in tag_1" :coding="coding" @clicked="changeCover"/>
+            <codingTag v-for="coding in tag_1" :coding="coding" @clicked="changeCover" :passarray="passarray"/>
           </div>
         </div>
       </div>
@@ -54,9 +54,9 @@
     <div class="col-span-3 p-5 right-0 border-l boder-gray-200">
       <div class="flex justify-between text-gray-500 border-b border-gray-200 text-sm p-2">
 
-        <button>
-          who to follow
-        </button>
+
+          <i class="fas fa-user-plus" style="font-size: 20px"></i> who to follow
+
       </div>
 
       <whotofollow v-for="unfollower in unfollowers.slice(0,3)" :unfollower="unfollower"/>
@@ -96,6 +96,7 @@ export default {
   data(){
     return{
       Cover:  '/img/night.jpg',
+      passarray: ''
     }
   },
 
@@ -130,15 +131,18 @@ export default {
     },
     playTaglist(){
       var codingTag = this.tag_1.map( a => a.audio );
-      if( codingTag.artist = (this.playerTracks).artist ){
-        console.log('123');
-        this.$store.dispatch('songs/pause')
+      this.passarray = codingTag
+
+      if( this.playerTracks[0] && (codingTag[0].artist === this.playerTracks[0].artist)){
+        if(this.isPLAY == true){
+          this.$store.dispatch('songs/pause')
+        }else{
+          this.$store.dispatch('songs/play')
+        }
       }else{
         this.$store.dispatch('songs/setPlayerTracks', codingTag)
         this.$store.dispatch('songs/play')
       }
-      console.log(codingTag[0])
-      console.log(this.playerTracks[0])
 
     }
 

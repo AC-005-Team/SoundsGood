@@ -23,7 +23,8 @@
 
             <div class="flex-col justify-between">
               <div class="buttons flex flex-reversed rigt-0 items-center z-10">
-                <i class="fa fa-ellipsis-h mr-2 " @click.stop="toggle"></i>
+
+                <i class="fas fa-plus mr-2 " style="font-size: 20px" @click.stop="aaa" :song_id="this.chart.song_id"></i>
                 <i
                   class="fa fa-heart mr-2"
                   @click.stop="like"
@@ -38,24 +39,24 @@
           </div>
 
         </div>
-        <div class="dropdown absolute bg-white">
+        <!-- <div class="dropdown absolute bg-white">
           <div
             id="myDropdown"
             class="dropdown-content "
             :class="[isActive ? 'show' : '']"
-          >
-            <a><i class="fas fa-headphones-alt addto">
+          > -->
+            <!-- <a><i class="fas fa-headphones-alt addto">
 
-            </i>add to play next</a>
-            <a @click.stop="aaa" :song_id="this.chart.song_id">
-              <i class="fas fa-plus-circle addto"></i> add to playlist</a
+            </i>add to play next</a> -->
+            <!-- <a @click.stop="aaa" :song_id="this.chart.song_id">
+              <i class="fas fa-plus-circle addto text-lg"></i> add to playlist </a
             >
-          </div>
+          </div> -->
         </div>
 
-      <div class="text-sm text-gray-200 text-center cursor-pointer hover:text-white gray" @click.stop="songsShow">
+      <div class="text-sm text-gray-200 text-center cursor-pointer hover:text-white gray info" @click.stop="songsShow">
+        <li class="text-lg">{{ chart.user.display_name }}</li>
         <li class="">{{ chart.audio.name }}</li>
-        <li class="">{{ chart.audio.artist }}</li>
       </div>
 
 
@@ -67,7 +68,7 @@
       <myPlaylist v-for="playlist in playlists" :playlist="playlist" :track_id="track_id"></myPlaylist >
       </sweet-modal-tab>
       <sweet-modal-tab title="Create Playlist" id="tab2">
-        <addPlaylist @after_add="addPlaylist"/>
+        <addPlaylist :track_id="track_id" @after_add="addPlaylist"/>
       </sweet-modal-tab>
     </sweet-modal>
   </div>
@@ -240,6 +241,10 @@ export default {
   border-top-right-radius:  10px;
 }
 
+.info{
+  border-bottom-left-radius:  10px;
+  border-bottom-right-radius:  10px;
+}
 
 
 .buttons {
@@ -262,10 +267,10 @@ export default {
 }
 
 
-.fa-ellipsis-h:hover,
+.fa-plus:hover,
 .fa-heart:hover {
   transform: scale(1.5);
-  color:rgb(251, 171, 176);
+  color:rgba(255, 171, 176, 1);
   transition:.3s;
 }
 
@@ -288,8 +293,9 @@ export default {
 
 .dropdown {
   display: inline-block;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
   border-radius: 10px;
+  color: rgb(255, 255, 255);
 }
 
 .addto {
@@ -360,8 +366,10 @@ export default {
     transform: scale(1.2);
 }
 .gray{
-  background-color: rgba(156, 156, 156, 0.2);
+  background-color: rgba(156, 156, 156, 0.05);
 }
+
+
 
 .child:before {
     content: "";

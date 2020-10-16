@@ -10,9 +10,9 @@
     <!-- <%#= 歌曲名稱、介紹、TAG標籤 %> -->
 
       <!-- <%#= 歌曲名稱 %> -->
-      <div class="text-xs text-white">
-        <li @click.stop="songsShow" >{{ song.audio.name }}</li>
-        <li> {{ song.audio.artist }} </li>
+      <div class="text-xs text-white" >
+        <li> {{ song.user.display_name}} </li>
+        <li @click.stop="songsShow" class="text-lg" >{{ song.audio.name }}</li>
       </div>
   </div>
 

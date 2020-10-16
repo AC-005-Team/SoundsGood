@@ -1,12 +1,12 @@
 <template lang="html">
 
   <div class="my-4 flex border-b boder-gray-200 p-2 text-gray-500">
-    <img class="w-1/5 rounded-full" src="https://i1.sndcdn.com/artworks-tzoA3a4voEv4g77c-Z5qUqQ-t120x120.jpg" alt="">
+    <img class="w-1/5 rounded-full" :src="unfollower.cover" alt="">
     <div class="w-4/5 mx-2 text-xs">
       <div class="">{{ unfollower.display_name }}</div>
       <div class="flex justify-between">
         <div class="flex text-gray-400">
-          <div class="">{{ unfollower.display_name }}</div>
+          <div class="">{{ unfollower.user_id }}</div>
         </div>
 
         <button class="border border-gray-400 rounded p-1 hover:bg-leego_orange hover:text-white" @click="follow" >

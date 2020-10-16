@@ -1,12 +1,13 @@
 <template lang="html">
 
-  <div class="col-span-4 md:col-span-2 my-2 mr-2 flex flex-col"  @mouseleave="show = false">
-    <div class="align-top w-32 h-32" @mouseover="show = true">
-      <img class="rounded-full border border-white" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg">
+  <div class="col-span-4 md:col-span-2 my-2 mr-2 flex flex-col items-center"  @mouseleave="show = false">
+    <div class="align-top w-32 h-32" @mouseover="show = true" @click="user">
+      <img class="rounded-full border border-white" :src="wee.image">
     </div>
     <li> {{ wee.name }}</li>
+    <li> {{ wee.id }}</li>
       <transition name="fade">
-      <button class="border border-orange-700 px-1 rounded follow" v-if="show" @click="unfollow">
+      <button class="border border-orange-700 px-1 rounded follow w-1/2" v-if="show" @click="unfollow">
         <i class="fas fa-user"></i> following</p>
       </button>
     </transition>
@@ -32,8 +33,11 @@ export default {
   methods:{
         unfollow(){
           this.$store.dispatch('follow/unFollow', this.wee.id);
-        }
-
+        },
+        user(){
+        let id = this.wee.id
+        window.location.href = `/users/${id}`;
+      }
 
     }
 
