@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    <div class="waveform-wrap waveform-small" :ref="this.click_id" >
+    <div class="waveform-wrap waveform-small " :ref="this.click_id" >
 
 
       <div class="waveform" ref="waveform">
@@ -70,14 +70,11 @@ export default {
           loadDefaultPeak(this.p, this.wavesurfer) // if peak data contains error, load default
           return
         }
-        console.log('------------------------------')
-        console.log('peaks loaded! sample_rate: ' + peaks.sample_rate)
         // load peaks into wavesurfer.js
         // wavesurferDummy.load(proxyurl+url, peaks.data)
         this.wavesurfer.load(this.proxyurl+this.p, peaks.data)
       })
       .catch((e) => {
-        console.error('error', e)
       })
     },
     loadDefaultPeak(url,wavesurfer){
@@ -119,10 +116,10 @@ export default {
   },
   mounted(){
     var ctx = document.createElement('canvas').getContext('2d');
-    const waveDarkSmall = ctx.createLinearGradient(900, 0, 900, 200);
-    waveDarkSmall.addColorStop(0.55, 'rgb(96, 96, 96)');
-    waveDarkSmall.addColorStop(0.56, 'rgb(255, 255, 255)');
-    waveDarkSmall.addColorStop(0.57, 'rgb(215, 215, 215)');
+    const waveLightSmall = ctx.createLinearGradient(900, 0, 900, 200);
+    waveLightSmall.addColorStop(0.55, 'rgba(252, 130, 69, 0.87)');
+    waveLightSmall.addColorStop(0.56, 'rgba(255, 255, 255, 0)');
+    waveLightSmall.addColorStop(0.57, 'rgba(231, 230, 230, 1)');
     const waveProgressSmall = ctx.createLinearGradient(900, 0, 900, 200);
     waveProgressSmall.addColorStop(0.55, '#f74304');
     waveProgressSmall.addColorStop(0.56, 'rgb(255, 255, 255)');
@@ -134,7 +131,7 @@ export default {
         container: this.$refs.waveform,
         cursorColor: '',
         barWidth: 3,
-        waveColor: waveDarkSmall,
+        waveColor: waveLightSmall,
         progressColor: waveProgressSmall,
         barHeight: 0.5,
         height: 100,
@@ -173,7 +170,7 @@ export default {
 <style lang="css" scoped>
 .waveform-wrap {
   position: relative;
-  height: 150px;
+  height: 100px;
   opacity: .75;
   transition: .25s;
   cursor: pointer;

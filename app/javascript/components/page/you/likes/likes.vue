@@ -84,7 +84,6 @@ created(){
 .card {
   height: 100px;
   width: 100px;
-  background-image: linear-gradient(to top, #c25700 0%, #f45742 100%);
   border-radius: 10px;
   position: relative;
   transition: transform 0.5s ease-in-out;

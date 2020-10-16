@@ -1,16 +1,22 @@
 <template lang="html">
-  <div class="flex items-center" @mouseover="mouseOver"  @mouseleave="mouseLeave" >
-  <img :src="song.cover" class="mx-2 h-10 w-10">
-  <div class="mx-2">{{ song.user }} </div>
-  <div class="mx-2">{{ song.title }} </div>
-
-  <i class="fa fa-heart mr-2" @click.stop="like" ></i>
-  <i class="fas fa-play cursor-pointer" @click="playTheSong" v-show="playBtn && !playing"></i>
-  <i class="fas fa-pause" v-show="playing" @click="playTheSong" ></i>
-  </div>
 
 
-<!-- <button :song-id="song.id" @click="playTheSong" class="mx-2">▶</button> -->
+      <div class="flex justify-start items-center bg-gray-900 " @mouseover="mouseOver"  @mouseleave="mouseLeave" >
+        <div class="flex justify-start items-center w-3/4 md:w-8/12">
+          <img :src="song.cover" class="h-10 w-10 m-1 md:mx-4">
+          <div class="mx-1 md:mx-4">{{ song.user }}</div>
+          <div class="mx-1 md:mx-4">{{ song.title }}</div>
+        </div>
+        <div class="flex-row justify-center md:justify-start md:w-1/12">
+          <i class="fas fa-play cursor-pointer" @click="playTheSong" v-if="playBtn && !playing"></i>
+          <i class="fas fa-pause" v-if="playing" @click="playTheSong" ></i>
+        </div>
+        <button @click="remove">Remove</button>
+      </div>
+
+
+
+<!-- <button :song-id="song.id" @click="playTheSong" class="mx-2">â–¶</button> -->
 <!-- <div class="dropdown">
   <button class="dropbtn" @click="toggle">+</button>
   <div class="">
@@ -31,12 +37,12 @@ import {
 } from 'vuex'
 
 export default {
-  data(){
-    return{
+  data() {
+    return {
       playBtn: false
     }
   },
-  props:['song'],
+  props: ['song','playlist_id'],
   computed: {
     ...mapGetters({
       listsongs: 'playlistsSongs/listsongs',
@@ -58,15 +64,31 @@ export default {
 
 
 
+
   },
 
-  ...mapActions('playlistsSongs', ['loadList', 'loadSong']),
+
+
+  ...mapActions('playlistsSongs', ['loadList', 'loadSong', 'remove']),
   ...mapActions("songs", ["play", "pause", "continuePlay", "continuePause"]),
   created() {
-    console.log("create", this.$route.params.id)
+    document.body.classList.add("bg-gray-900")
     this.$store.dispatch('playlistsSongs/loadList', this.$route.params.id)
   },
   methods: {
+    remove() {
+      this.$store.dispatch('playlistsSongs/remove', this.song.id)
+
+      let payload = {
+        id: this.song.id,
+        playlist_id: this.playlist_id
+      };
+      this.$store.dispatch('playlistsSongs/toggleList', payload)
+
+
+
+
+    },
     toggle() {
       return this.isActive = !this.isActive
     },
@@ -76,9 +98,9 @@ export default {
       }
     },
     mouseOver: function() {
-      if(this.isPlay === true){
+      if (this.isPlay === true) {
         this.playBtn = false;
-      }else{
+      } else {
         this.playBtn = true;
       }
     },
@@ -86,6 +108,7 @@ export default {
     mouseLeave: function() {
       this.playBtn = false;
     },
+
 
     playTheSong() {
       if (this.playerTracks.song_id !== this.song.id || !this.playerTracks) {
@@ -103,8 +126,8 @@ export default {
         }
       }
     }
-    }
   }
+}
 </script>
 
 <style lang="css" scoped>
@@ -132,39 +155,17 @@ animation: shrink 5s infinite alternate;
   border: none;
   cursor: pointer;
 }
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #18689d;
-}
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  left: 20px;
-  top:0;
-  background-color: rgba(#f1f1f1, 0.55);
-  min-width: 150px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-.dropdown-content a {
-  color: black;
-  padding: 5px;
-  font-size: 12px;
-  text-align: center;
-  display: block;
-}
-.dropdown a:hover {background-color: #f0c543;}
-.show {display: block;}
+
 
 .list-bg{
   background-color: #37353e;
 }
 i.fas{
   color: rgb(255, 60, 60);
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
 }
 
 

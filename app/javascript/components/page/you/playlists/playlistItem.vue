@@ -11,25 +11,14 @@
         <i class="fas z-10 fa-play" style="font-size: 60px" v-show="playBtn && !playing" />
       </div>
     </div>
-      <router-link :to="`/playlists/${playlist.id}`" @click.native="$event.stopImmediatePropagation()">
-    <div class="text-base sm:text-sm hover:bg-gray-200 rounded">
+      <router-link :to="`/playlists/${playlist.id}`" :id="this.playlist.id" @click.native="$event.stopImmediatePropagation()">
+    <div class="text-base sm:text-sm hover:bg-gray-800 rounded">
       <li>{{playlist.name}}</li>
       <li>{{playlist.intro}}</li>
     </div>
     </router-link>
   </div>
 
-
-
-  <!-- <button @click="playPause" :id="playlist.id" :class="">play ▶</button> -->
-  <!-- <router-link :to="`/playlist/${playlist.id}`">show playlist</router-link> -->
-  <!-- <div class="dropdown">
-    <button class="dropbtn" @click="toggle">+</button>
-    <div id="myDropdown" class='dropdown-content ' :class=" [isActive? 'show' : '']">
-      <a>add to play next</a>
-      <a>add to playlist</a>
-    </div>
-  </div> -->
 </div>
 </template>
 
@@ -191,43 +180,11 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(167, 190, 213, 0.25);
+    background-color: rgba(167, 190, 213, 0.45);
 }
 
 
-.dropbtn {
-  background-color: #3498DB;
-  color: white;
-  padding: 3px 3px;
-  font-size: 15px;
-  border: none;
-  cursor: pointer;
-}
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #18689d;
-}
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  left: 20px;
-  top:0;
-  background-color: rgba(#f1f1f1, 0.55);
-  min-width: 150px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-.dropdown-content a {
-  color: black;
-  padding: 5px;
-  font-size: 12px;
-  text-align: center;
-  display: block;
-}
+
 .dropdown a:hover {background-color: #f0c543;}
 .show {display: block;}
 

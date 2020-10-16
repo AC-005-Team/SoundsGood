@@ -1,7 +1,7 @@
 <template lang="html">
 
   <div class="my-4 flex border-b boder-gray-200 p-2 text-gray-500">
-    <img class="w-1/5 rounded-full" :src="unfollower.cover" alt="">
+    <img class="w-1/5 rounded-full" :src="unfollower.avatar" alt="">
     <div class="w-4/5 mx-2 text-xs">
       <div class="">{{ unfollower.display_name }}</div>
       <div class="flex justify-between">
