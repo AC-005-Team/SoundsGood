@@ -1,12 +1,8 @@
 <template lang="html">
-  <div class="border-b border-gray-200 m-4">
-    <div class="text-2xl">Charts: New &amp; hot</div>
-    <div class="text-xs text-gray-500 my-2">Up-and-coming tracks on SoundCloud</div>
-
-    <div class="flex overflow-scroll text-gray-500 text-xs">
-      <chart v-for="chart in index" :chart='chart' />
-
-    </div>
+  <div class="bg-gray-900">
+    <following/>
+    <playlists/>
+    <likes/>
 
   </div>
 
@@ -18,12 +14,17 @@ import {
   mapGetters,
   mapActions
 } from 'vuex'
-import chart from '../discover/chart';
+// import chart from '../discover/chart';
+import likes from './likes/likes';
+import playlists from './playlists/playlists';
+import following from './following'
 
 export default {
   // name: "chart",
   components: {
-    chart,
+    likes,
+    playlists,
+    following
   },
 
   computed: {

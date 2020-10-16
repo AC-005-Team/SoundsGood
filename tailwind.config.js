@@ -293,6 +293,9 @@ module.exports = {
     inset: {
       '0': '0',
       auto: 'auto',
+      leego_top: '-5%',
+      leego_top_1: '-50%',
+      fi: '50%',
     },
     letterSpacing: {
       tighter: '-0.05em',

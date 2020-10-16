@@ -1,109 +1,42 @@
 <template>
 <div>
 
-  <div class="bg-gray-100 grid grid-cols-12 mx-5">
-    <div class="col-span-9 bg-white">
+  <div class="grid grid-cols-12 text-white  bg-gray-900">
+    <div class="col-span-9">
 
 
       <div class="border-b border-gray-200 m-4">
-        <div class="text-2xl">Charts: New &amp; hot</div>
-        <div class="text-xs text-gray-500 my-2">Up-and-coming tracks on SoundCloud</div>
+        <div class="text-2xl">New tracks on SoundsGood <i class="fab fa-hotjar"></i></div>
 
-        <div class="flex overflow-scroll text-gray-500 text-xs">
-            <chart v-for="chart in index" :chart='chart' />
+
+
+        <div class="flex overflow-scroll text-gray-500 text-xs ">
+        <chart v-for="chart in index.slice(0,10)" :chart='chart' />
         </div>
 
       </div>
 
       <div class="border-b border-gray-200 m-4">
-        <div class="text-2xl">More of what you like</div>
+
+        <div class="text-2xl">Recommand For Night Owl #coding #chill</div>
         <div class="text-xs text-gray-500 my-2">Suggestions based on what you've liked or played</div>
-        <div class="flex justify-around p-5 bg-gradient-to-r from-red-500 via-orange-400 to-black rounded-lg">
-          <div class="w-1/4 bg-cover" style="background-image: url(https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg)"></div>
+
+        <button class="text-center p-1 border border-gray-400 ml-auto my-3 block rounded text-xs"  @click="playTaglist" >Play All</button>
+
+        <div class="flex justify-around p-5 bg-leego_orange bg-opacity-50  rounded-lg">
+          <div class="w-1/4 bg-cover" :style="{ 'background-image': 'url('+  Cover + ')' }"></div>
           <div class="w-3/4 overflow-auto h-48">
-
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
-
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
-
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
-
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
-
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
-
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
-
+            <codingTag v-for="coding in tag_1" :coding="coding" @clicked="changeCover" :passarray="passarray"/>
           </div>
-
         </div>
-        <button class="text-center p-1 border border-gray-400 ml-auto my-3 block rounded text-xs">Go to Playlist</button>
       </div>
 
       <div class="border-b border-gray-200 m-4">
-        <div class="text-2xl">Charts: Top 50</div>
-        <div class="text-xs text-gray-500 my-2">The most played tracks on SoundCloud this week</div>
+        <div class="text-2xl">Weeky Top 5</div>
         <div class="flex my-4 overflow-scroll">
 
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
+        <topfive/>
 
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
 
         </div>
       </div>
@@ -111,173 +44,24 @@
 
 
 
-      <div class="border-b border-gray-200 m-4">
-        <div class="text-2xl">The Upload</div>
-        <div class="text-xs text-gray-500 my-2">Newly posted tracks. Just for you</div>
-        <div class="flex justify-aroundp-3 p-5 bg-gradient-to-r from-gray-500 via-white to-pink-300">
-          <div class="w-1/4 bg-cover" style="background-image: url(https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg)"></div>
-          <div class="w-3/4 overflow-auto h-48">
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
 
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
 
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
-
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
-
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
-
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
-
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
-          </div>
-        </div>
-        <button class="text-center p-1 border border-gray-400 ml-auto my-3 block rounded text-xs">Go to Playlist</button>
-      </div>
-
-      <div class="border-b border-gray-200 m-4">
-        <div class="text-2xl">SoundCloud Weekly</div>
-        <div class="text-xs text-gray-500 my-2">All of SoundCloud. Just for you</div>
-        <div class="flex justify-aroundp-3 p-5 bg-gradient-to-r from-gray-400 via-white to-red-400">
-          <div class="w-1/4 bg-cover" style="background-image: url(https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg)"></div>
-          <div class="w-3/4 overflow-auto h-48">
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
-
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
-
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
-
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
-
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
-
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
-
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500">Tipsy Records — Toniia &amp; Geena Fontanella - Psychic</div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right">375K</div>
-            </div>
-          </div>
-        </div>
-        <button class="text-center p-1 border border-gray-400 ml-auto my-3 block rounded text-xs">Go to Playlist</button>
-      </div>
-
-      <div class="p-5">
-        <div class="text-2xl">Relax</div>
-        <div class="text-xs text-gray-500 my-2">Popular playlists from the SoundCloud community</div>
-        <div class="flex my-4 overflow-scroll">
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-          <div class="my-2 mr-2">
-            <img class="h-48 max-w-3xl" src="https://i1.sndcdn.com/artworks-LPiPCego5LCeQz9V-0Vg0sg-t500x500.jpg" alt="">
-            <div class="">All music genres</div>
-            <div class="text-xs text-gray-500">New &amp; Hot</div>
-          </div>
-
-        </div>
-      </div>
 
 
 
     </div>
 
-    <div class="col-span-3 bg-white p-5 right-0 border-l boder-gray-200">
+    <div class="col-span-3 p-5 right-0 border-l boder-gray-200">
       <div class="flex justify-between text-gray-500 border-b border-gray-200 text-sm p-2">
 
-        <button class="hover:text-red-700">
-          who to follow
-        </button>
+
+          <i class="fas fa-user-plus" style="font-size: 20px"></i> who to follow
+
       </div>
 
-      <div class="my-4 flex border-b border-gray-400 p-2 text-gray-500">
-        <img class="w-1/5 rounded-full" src="https://i1.sndcdn.com/artworks-tzoA3a4voEv4g77c-Z5qUqQ-t120x120.jpg" alt="">
-        <div class="w-4/5 mx-2 text-xs">
-          <div class="">people</div>
-          <div class="flex justify-between">
-            <div class="flex text-gray-400">
-              <div class="">peopleiCon1</div>
-              <div class="">1919</div>
-            </div>
-            <button class="border border-gray-400 rounded p-1">
-              follow1
-            </button>
-          </div>
+      <whotofollow v-for="unfollower in unfollowers.slice(0,3)" :unfollower="unfollower"/>
 
-        </div>
-      </div>
+
 
 
 
@@ -294,52 +78,79 @@
 </template>
 
 <script>
+
+
 import {
   mapState,
   mapGetters,
   mapActions
 } from 'vuex'
 import chart from './discover/chart';
-import {
-  VueperSlides,
-  VueperSlide
-} from 'vueperslides'
-import 'vueperslides/dist/vueperslides.css'
+import topfive from './discover/topfive';
+import whotofollow from './whotofollow';
+import codingTag from './discover/codingTag';
+import electro from './discover/electro';
 
 
 export default {
-  data: () => ({
-  slides: [
-    {
-      title: 'Slide #1',
-      content: 'Slide content.'
+  data(){
+    return{
+      Cover:  '/img/night.jpg',
+      passarray: ''
     }
-  ]
-}),
+  },
+
   // name: "chart",
   components: {
     chart,
-    VueperSlides,
-    VueperSlide,
+    whotofollow,
+    codingTag,
+    topfive,
   },
 
-  methods: {
-
-  },
 
   computed: {
     ...mapGetters({
-      index: 'song/index'
+      index: 'song/index',
+      tag_1: 'song/tag_1',
+      unfollowers: 'follow/unfollowers',
+      isPLAY: 'songs/isPLAY',
+      playerTracks:'songs/playerTracks',
+
     }),
-
-
 
   },
 
-
+  ...mapActions('follow',['loadUNFollow'],['addFollow']),
   ...mapActions('song', ['song/loadIndex']),
+  ...mapActions("songs", ["play", "pause", "continuePlay", "continuePause",'setPlayerTracks']),
+
+  methods:{
+    changeCover(value){
+      this.Cover = value;
+    },
+    playTaglist(){
+      var codingTag = this.tag_1.map( a => a.audio );
+      this.passarray = codingTag
+
+      if( this.playerTracks[0] && (codingTag[0].artist === this.playerTracks[0].artist)){
+        if(this.isPLAY == true){
+          this.$store.dispatch('songs/pause')
+        }else{
+          this.$store.dispatch('songs/play')
+        }
+      }else{
+        this.$store.dispatch('songs/setPlayerTracks', codingTag)
+        this.$store.dispatch('songs/play')
+      }
+
+    }
+
+  },
   created() {
-    this.$store.dispatch('song/loadIndex')
+    this.$store.dispatch('song/loadIndex');
+    this.$store.dispatch('follow/loadUNFollow');
+
     // this.$store.dispatch("favorite/loadLikes");
 
   }
@@ -347,8 +158,19 @@ export default {
 </script>
 
 <style lang="css" scoped>
+i.fab {
+  position: relative;
+  font-size: 2rem;
+-webkit-animation-name: move; /* Safari 4.0 - 8.0 */
+-webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+animation: move 1s infinite;
 
-.fa-play-circle{
-  color: rgb(247, 137, 35);
 }
+
+@keyframes move {
+  0% { color: #e73d3d;}
+  20% { color: #e73d3d;}
+  70% {color: #e73d3d;}
+}
+
 </style>

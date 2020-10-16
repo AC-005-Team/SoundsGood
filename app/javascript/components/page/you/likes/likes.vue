@@ -1,58 +1,21 @@
 <template >
-<div class="col-span-9 bg-white">
-  <div class="mx-4 p-5">
-
-    <div class="flex justify-between text-lg text-gray-500">
-      <div class="">Hear the tracks you’ve liked:</div>
-      <div class="flex w-1/3">
-        <input class="mx-2 border border-gray-200 rounded w-3/4" type="text" placeholder="Fillter">
-        <button class="border border-orange-600 text-orange-600 w-1/4 flex justify-between items-center px-2">
-          <p>All</p>
-          <i class="fas fa-arrow-down"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- <div class="flex overflow-scroll">
-      <likeSongs v-for="song in songs" :song="song"/>
-    </div> -->
-
+  <div class="col-span-9 m-4">
+    <span class="text-sm text-white bg-leego_orange border border-leego_orange px-2">review the song you like</span>
     <div class="flex justify-between">
-      <div class="grid sm:grid-cols-2 md:col-span-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 ">
-        <likeSongs v-for="song in songs" :song="song"/>
-      </div>
-    </div>
+      <div class="grid sm:grid-cols-2 md:col-span-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 mb-10">
+        <div class="wrapper">
+          <div class="card text-center flex items-center justify-center" @click="playLikelist">
+            <i class="fas z-10 fa-play" style="font-size: 30px"/>
+            <p>ALL</p>
+          </div>
+ <!-- <img class="object-cover card" src="/img/night.jpg" @click="playLikelist"> -->
 
-
-    <div class="flex border-t border-gray-500 mx-4">
-      <div class="my-3 text-xs table-row-group">
-
-        <div class="text-gray-500">
-          <span class="hover:text-black"><a href="#">Legal</a></span>
-          -
-          <span class="hover:text-black"><a href="#">Privacy</a></span>
-          -
-          <span class="hover:text-black"><a href="#">Cookies</a></span>
-          -
-          <span class="hover:text-black"><a href="#">Imprint</a></span>
-          -
-          <span class="hover:text-black"><a href="#">Creator Resources</a></span>
-          -
-          <span class="hover:text-black"><a href="#">Blog</a></span>
-          -
-          <span class="hover:text-black"><a href="#">Charts</a></span>
-          -
-          <span class="hover:text-black"><a href="#">Popular Search</a></span>
         </div>
-
-        <div class="mt-2 mb-20">
-          Language: English (US)
-        </div>
-
+        <likeSongs v-for="song in songs" :song="song" :songs="songs"/>
       </div>
     </div>
   </div>
-</div>
+
 </template>
 
 <script>
@@ -70,28 +33,72 @@ import {
 export default {
   data(){
     return{
-      songs:null
+      songs:null,
     }
   },
   components: {
     likeSongs
     },
-    computed:{
+  computed:{
       ...mapGetters({
-        like_songs: 'song/like_songs'
-      })
+        like_songs: 'song/like_songs',
+        isPLAY: 'songs/isPLAY',
+        playerTracks:'songs/playerTracks',
+
+      }),
+
+    },
+    ...mapActions("songs", ["play", "pause", "continuePlay", "continuePause",'setPlayerTracks']),
+    methods:{
+      playLikelist(){
+        var likeTag = this.songs.map( a => a.audio );
+
+        if( this.playerTracks[0] && (likeTag[0].artist === this.playerTracks[0].artist)){
+          if(this.isPLAY == true){
+            this.$store.dispatch('songs/pause')
+          }else{
+            this.$store.dispatch('songs/play')
+          }
+        }else{
+          this.$store.dispatch('songs/setPlayerTracks', likeTag)
+          this.$store.dispatch('songs/play')
+        }
+
+      }
     },
 //為什麼會失敗！！！！！！
 // ...mapActions('song', ['song/loadlikeSongs']),
-created() {
+created(){
   Api().get('/api/v1/library/likes')
       .then(response => (this.songs = response.data))
-
-
   // this.$store.dispatch('song/loadlikesongs')
   }
 }
 </script>
 
 <style lang="css" scoped>
+.wrapper {
+  transition: transform 0.3s ease-in-out;
+  transform: scale(0.9);
+}
+.card {
+  height: 100px;
+  width: 100px;
+  background-image: linear-gradient(to top, #c25700 0%, #f45742 100%);
+  border-radius: 10px;
+  position: relative;
+  transition: transform 0.5s ease-in-out;
+  color:rgb(255, 255, 255);
+}
+
+
+.wrapper:hover,
+.card:hover,
+.card:hover::before,
+.card:hover::after {
+  transform: none;
+  box-shadow: none;
+}
+
+
 </style>

@@ -46,7 +46,7 @@ export default new VueRouter({
           component: () => import(/* webpackChunkName: "Likes" */ './components/page/you/likes/likes'),
         },
         {
-          path:'set',
+          path:'sets',
           name:'playlists',
           component: () => import(/* webpackChunkName: "Playlists" */ './components/page/you/playlists/playlists'),
         },

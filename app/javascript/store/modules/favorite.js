@@ -55,6 +55,19 @@ const favorite = {
        })
 
 
+    },
+    
+    async toggle({commit,dispatch}, payload ) {
+
+      Rails.ajax({
+        url: `/songs/${payload.id}/like.json`,
+        type: 'post',
+        success: (result) => { commit('TOGGLE', result.status);
+       }
+
+       })
+
+
     }
 
   }

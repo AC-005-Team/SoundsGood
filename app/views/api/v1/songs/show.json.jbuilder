@@ -1,4 +1,10 @@
 json.song_id @song.id
+json.user do
+  json.id @song.user.id
+  json.display_name @song.user.display_name
+  json.avatar  @song.user.avatar_url
+end
+
 json.audio do
   json.name @song.name
   json.artist @song.intro

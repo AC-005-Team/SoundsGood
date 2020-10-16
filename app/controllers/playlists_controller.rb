@@ -16,8 +16,11 @@ class PlaylistsController < ApplicationController
     @playlists = current_user.playlists
       respond_to do |format|
         if @playlist.save
-          format.js { @song = Song.find(params[:song_id])
-          @playlist.songs << @song }
+          @song = Song.find(params[:song_id])
+          @playlist.songs << @song
+          p '1----------------'
+          format.json { render json: @playlist }
+          format.js { render :create }
         else
           # render :new
         end
