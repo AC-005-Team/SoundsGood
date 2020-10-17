@@ -13,6 +13,7 @@ json.audio do
   json.url @song.track_url
   json.duration @song.track.metadata['duration']
 end
+
 json.playlists @playlists do |playlist|
     json.playlist_id playlist.id
     json.name playlist.name

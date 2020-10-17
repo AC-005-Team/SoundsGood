@@ -1,24 +1,12 @@
 <template lang="html">
 
-  <!-- <div class="grid grid-cols-12">
-    <li class="my-4 col-span-6 w-full">{{ playlist.name }}</li>
-    <button class="my-2 col-span-6 mx-auto modal-btn addplaylist-btn border border-gray-400 p-1 rounded">
-      <i class="fas fa-bolt"></i>
-      Add to playlist
-    </button>
-</button> -->
+  <div class="flex justify-start border-b border-gray-200">
 
-  <div class="">
-    <li>
+    <li class="w-1/2 text-leego_orange">
     {{ playlist.name }}
     </li>
-      <!-- <button
-        class="border border-orange-500 text-red-600 p-1 rounded"
-      >
-        <span>Added</span>
-      </button> -->
 
-      <button  @click="toggle" :id="this.playlist.playlist_id" class="border border-gray-400 p-1 rounded">
+      <button  @click="toggle" :id="this.playlist.playlist_id" class=" text-black p-1 rounded">
       {{ button.text }}
       </button>
   </div>
@@ -38,18 +26,30 @@ export default {
       id: this.playlist.playlist_id,
       track: this.track_id,
       button: {
-        text: 'Added'
+        text: ''
       },
       add: null,
     }
   },
   props: ["playlist", "track_id"],
   computed: {
-    ...mapGetters({
-      added: 'playlistsSongs/added'
-    }),
 
+    // add() {
+    //   return this.playlist.add_to_playlist
+    // },
+    // button() {
+    //   return {
+    //     text: this.add ? 'Added' : 'Add To Playlist'
+    //   }
+    // }
 
+  },
+
+  watch: {
+    playlist(newValue, oldValue) {
+      this.add = newValue.add_to_playlist;
+      this.button.text = this.add ? 'Added' : 'Add To Playlist'
+    }
   },
 
   mounted(){
@@ -74,4 +74,5 @@ export default {
 }
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+</style>

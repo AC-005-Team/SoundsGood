@@ -15,39 +15,7 @@
 
 </form>
 
-<!-- <div class="animation" v-show="display == 'block' ? true: false" > -->
 
-  <!-- <div class="loader">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div> -->
-      <!-- <form action="/users/2/playlists" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="3oFbc4axURROaJZDOWxYCYu+eDjrYiYaTftwemBnxnWgn+quuOvVQ34LdzLDATb1g3Mh24KaeeW6ZnfIkOZW5A==">
-  <div class="border-b border-teal-500">
-    <label for="playlist_name">Name</label>
-    <input type="text" name="playlist[name]"  id="playlist_name">
-  </div>
-
-  <div class="border-b border-teal-500">
-    <label for="playlist_intro">Intro</label>
-    <input type="text" name="playlist[intro]" id="playlist_intro" >
-  </div>
-
-  <input type="submit" name="commit" class="mt-2 flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" value="Create Playlist" data-disable-with="Create Playlist">
-</form> -->
 
 
   </div>
@@ -62,7 +30,8 @@ export default {
     return {
       name: null,
       intro: null,
-      display: false
+      display: false,
+      id: null
 
     }
   },
@@ -87,7 +56,7 @@ export default {
       Api().post(`/playlists.json?song_id=${song_id}`,formData, {
         withCredentials: true
       }).then(response => {
-        this.$emit('after_add', { name: this.name, intro: this.intro} )
+        this.$emit('after_add', { name: this.name, intro: this.intro })
         this.name = null
         this.intro = null
       }).catch(error => {

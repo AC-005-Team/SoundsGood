@@ -2,10 +2,10 @@
 <div>
 
   <div class="grid grid-cols-12 text-white  bg-gray-900">
-    <div class="col-span-9">
+    <div class="col-span-12 md:col-span-9">
 
 
-      <div class="border-b border-gray-200 m-4">
+      <div class="border-b border-gray-100 border-opacity-25 m-4">
         <div class="text-2xl">New tracks on SoundsGood <i class="fab fa-hotjar"></i></div>
 
 
@@ -16,18 +16,22 @@
 
       </div>
 
-      <div class="border-b border-gray-200 m-4">
+      <div class="m-4">
 
         <div class="text-2xl">Recommand For Night Owl #coding #chill</div>
         <div class="text-xs text-gray-500 my-2">Suggestions based on what you've liked or played</div>
 
-        <button class="text-center p-1 border border-gray-400 ml-auto my-3 block rounded text-xs"  @click="playTaglist" >Play All</button>
+        <button class="text-center p-1 border border-gray-400 ml-auto my-3 block rounded text-xs"  @click="playTaglist" >
+          <i class="fas fa-play cursor-pointer"></i>
+          Play All</button>
 
-        <div class="flex justify-around p-5 bg-leego_orange bg-opacity-50  rounded-lg">
+        <div class="flex justify-around bg-leego_orange bg-opacity-50  p-2 rounded-lg  coding">
           <div class="w-1/4 bg-cover" :style="{ 'background-image': 'url('+  Cover + ')' }"></div>
+
           <div class="w-3/4 overflow-auto h-48">
             <codingTag v-for="coding in tag_1" :coding="coding" @clicked="changeCover" :passarray="passarray"/>
           </div>
+
         </div>
       </div>
 
@@ -35,7 +39,7 @@
         <div class="text-2xl">Weeky Top 5</div>
         <div class="flex my-4 overflow-scroll">
 
-        <topfive/>
+        <topfive v-for="top in top_5" :top="top"/>
 
 
         </div>
@@ -51,15 +55,19 @@
 
     </div>
 
-    <div class="col-span-3 p-5 right-0 border-l boder-gray-200">
-      <div class="flex justify-between text-gray-500 border-b border-gray-200 text-sm p-2">
+    <div class="col-span-12 md:col-span-3 mb-12   border-gray-100 border-opacity-25 right-0 border-l ">
+      <div class="flex justify-between text-gray-500 border-b border-gray-200 border-opacity-25 text-sm p-2">
 
 
           <i class="fas fa-user-plus" style="font-size: 20px"></i> who to follow
 
       </div>
 
-      <whotofollow v-for="unfollower in unfollowers.slice(0,3)" :unfollower="unfollower"/>
+      <transition-group name="list">
+        <whotofollow v-for="unfollower in unfollowers.slice(0,3)" :unfollower="unfollower" :key="unfollower.user_id"/>
+      </transition-group>
+
+
 
 
 
@@ -96,7 +104,9 @@ export default {
   data(){
     return{
       Cover:  '/img/night.jpg',
-      passarray: ''
+      passarray: '',
+      playlists: [],
+
     }
   },
 
@@ -113,6 +123,7 @@ export default {
     ...mapGetters({
       index: 'song/index',
       tag_1: 'song/tag_1',
+      top_5: 'song/top_5',
       unfollowers: 'follow/unfollowers',
       isPLAY: 'songs/isPLAY',
       playerTracks:'songs/playerTracks',
@@ -143,7 +154,6 @@ export default {
         this.$store.dispatch('songs/setPlayerTracks', codingTag)
         this.$store.dispatch('songs/play')
       }
-
     }
 
   },
@@ -166,11 +176,26 @@ i.fab {
 animation: move 1s infinite;
 
 }
+.coding {
+    background-image:
+    linear-gradient(to bottom, rgba(57, 55, 55, 1), rgba(56, 56, 56, 0.64)),
+    url('/img/live-music.jpg');
+    background-size: cover;
+}
+
 
 @keyframes move {
   0% { color: #e73d3d;}
   20% { color: #e73d3d;}
   70% {color: #e73d3d;}
+}
+
+.list-enter-active, .list-leave-active {
+  transition: all 0.3s;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateX(40px);
 }
 
 </style>

@@ -1,12 +1,20 @@
-<h1 class="room">publisher</h1>
-<p>
-  <strong>Name:</strong>
-  <%= @room.name %>
-</p>
-<p>
-  <strong>Session:</strong>
-  <%= @room.session_id %>
-</p>
-<div id="publisher"></div>
+<div class="h-screen bg-cover bg-center rounded text-center bg-fixed overflow-scroll text-white" style="background-image: url(<% root_path %>/img/leego_2.jpg)">
+  <div class="text-2xl text-white p-8">Who's On Air</div>
 
-<%= link_to 'Back', rooms_path %>
+    <h1 class="room">publisher</h1>
+    <p class="m-4">
+      <strong>Name:</strong>
+      <%= @room.name %>
+    </p>
+    <p class="text-xs m-4 hidden">
+      <strong>Session:</strong>
+      <%= @room.session_id %>
+    </p>
+    <div class="flex justify-center  m-4">
+      <div id="publisher"></div>
+    </div>
+    <button class="bg-leego_orange rounded-lg px-2 m-4">
+      <%= link_to 'Back', rooms_path %>
+    </button>
+  </div>
+</div>

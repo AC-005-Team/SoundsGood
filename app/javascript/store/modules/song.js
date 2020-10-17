@@ -9,6 +9,7 @@ const song = {
     Song: {},
     Index: {},
     Tag_1: {},
+    Top_5:{},
     LikesTracks :{}
   },
 
@@ -21,6 +22,9 @@ const song = {
     },
     LOAD_Tag_1(state, data){
       state.Tag_1 = data;
+    },
+    LOAD_TOP_5(state, data){
+      state.Top_5 = data;
     },
     FIND_INDEX(state, data){
       //只更新找到位置陣列的部分
@@ -49,6 +53,9 @@ const song = {
     tag_1(state){
       return state.Tag_1;
     },
+    top_5(state){
+      return state.Top_5;
+    },
     like_songs(state){
       return state.LikesTracks
     }
@@ -64,6 +71,7 @@ const song = {
       // dispatch("songs/play", response.data, { root: true });
       commit("LOAD_INDEX", response.data.index);
       commit("LOAD_Tag_1", response.data.tag1);
+      commit("LOAD_TOP_5", response.data.top_songs);
     },
 
 
