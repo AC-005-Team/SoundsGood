@@ -1,7 +1,8 @@
 class Api::V1::SongsController < ApplicationController
   def index
     @songs = Song.all.order(id: :desc)
-    @playlists = current_user.playlists
+    @playlists = current_user.playlists || []
+    @top_songs = @songs.max_by(5) {|song| song.liked_users.size}
     if Tag.find_by(name: "coding")
       @tag1_songs = Tag.find_by(name: "coding").songs
     else
@@ -26,10 +27,5 @@ class Api::V1::SongsController < ApplicationController
       # format.html {redirect_to @song}
       format.json {render json: {status: @song.added_by?(@playlist)}}
     end
-  end
-
-  def test
-    @songs = Song.all
-    @song_top5 = @songs.select {|x| x.liked_users.size}.max(5)
   end
 end
