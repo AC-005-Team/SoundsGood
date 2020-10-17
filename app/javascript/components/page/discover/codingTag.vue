@@ -5,15 +5,14 @@
           <div class="w-1/12 m-2 text-base text-gray-white cursor-pointer" @click.stpp="user" >{{ this.coding.user.display_name }} </div>
           <div class="w-2/12 m-2 text-base text-gray-white cursor-pointer" @click.stpp="songsShow">{{ this.coding.audio.name }} </div>
           <div class="w-9/12  text-base text-gray-white text-right cursor-pointer" @click="playTheSong"></div>
-
-          <i class="fas fa-play cursor-pointer"  @click="playTheSong" v-show="playBtn && !playing"></i>
-          <i class="fas fa-pause" v-show="playing" @click="playTheSong" ></i>
+          <i class="fas fa-play cursor-pointer mr-1"  @click="playTheSong" v-show="playBtn && !playing"></i>
+          <i class="fas fa-pause mr-1" v-show="playing" @click="playTheSong" ></i>
           <i
             class="fa fa-heart ml-3"
             @click.stop="like"
             :class="[changeColor ? 'like' : '']"
           ></i>
-          <i class="fas fa-plus" @click.stop="showmodal" :song_id="this.coding.song_id" ></i>
+          <i class="fas fa-plus ml-1" @click.stop="showmodal" :song_id="this.coding.song_id" ></i>
 
           <sweet-modal ref="modal">
             <sweet-modal-tab title="Add To Playlist" id="tab1" class="overscroll-auto">
