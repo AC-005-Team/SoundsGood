@@ -21,7 +21,7 @@
       <!-- <div class="search-result flex flex-col absolute mx-auto"></div> -->
     </form>
 
-    <div class="hover:text-white mx-2 md:px-8 py-2">
+    <div class="hover:text-white md:px-8 py-2">
       <router-link :to="{ name: 'upload' }" class="hidden sm:block">Upload</router-link>
       <router-link :to="{ name: 'upload' }" class="block sm:hidden"><i class="fas fa-cloud-upload-alt"></i></router-link>
     </div>
@@ -36,9 +36,9 @@
 
     <div class="dropdown inline-block relative ml-4 mr-6">
 
-    <button class="text-gray-300 bg-gray-800 py-2 rounded inline-flex item-center md:px-8">
+    <button class="text-gray-300 py-2 rounded inline-flex item-center md:px-8">
       <span class="mr-1 hidden sm:block"><a :href="`/users/${this.user_id}`"><img class="w-6 h-6 object-cover inline mr-1"  :src="this.user_avatar"></i>{{ this.user_name }}</a></span>
-      <span class="mr-1 block sm:hidden"><a :href="`/users/${this.user_id}`"><i class="fas fa-user-circle fa-2x"></i></a></span>
+      <span class="mr-1 block sm:hidden"><a :href="`/users/${this.user_id}`"><img class="w-6 h-6 object-cover inline mr-1"  :src="this.user_avatar"></a></span>
     </button>
 
     <ul class="dropdown-menu absolute right-0 hidden text-gray-700 text-left">
