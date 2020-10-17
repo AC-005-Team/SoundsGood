@@ -24,7 +24,7 @@
             <div class="flex-col justify-between">
               <div class="buttons flex flex-reversed rigt-0 items-center z-10">
 
-                <i class="fas fa-plus mr-2 " style="font-size: 20px" @click.stop="aaa" :song_id="this.chart.song_id"></i>
+                <i class="fas fa-plus mr-2 " style="font-size: 20px" @click.stop="showmodal" :song_id="this.chart.song_id"></i>
                 <i
                   class="fa fa-heart mr-2"
                   @click.stop="like"
@@ -54,7 +54,7 @@
           </div> -->
         </div>
 
-      <div class="text-sm text-gray-200 text-center cursor-pointer hover:text-white gray info" @click.stop="songsShow">
+      <div class="text-sm text-gray-200 text-center cursor-pointer mr-2 hover:text-white gray info " @click.stop="songsShow">
         <li class="text-lg">{{ chart.user.display_name }}</li>
         <li class="">{{ chart.audio.name }}</li>
       </div>
@@ -144,21 +144,23 @@ export default {
       }
     },
 
-    aaa() {
+    showmodal() {
       var song_id = event.target.getAttribute("song_id");
+      console.log(song_id);
+      Api().get(`/api/v1/songs/${song_id}`)
+      // .then((abc) => (this.playlists = abc.data.playlists))
+      .then((response) => (this.track_id = response.data.song_id))
+      .catch(function(error) {
+        console.log(error);
+      });
+
+      Api().get(`/api/v1/songs/${song_id}`)
+      .then((abc) => (this.playlists = abc.data.playlists))
+
+
+
+
       this.$refs.modal.open("tab1");
-      Api().get(`/api/v1/songs/${song_id}`)
-        // .then((abc) => (this.playlists = abc.data.playlists))
-        .then((response) => (this.track_id = response.data.song_id))
-        .catch(function(error) {
-          console.log(error);
-        });
-      Api().get(`/api/v1/songs/${song_id}`)
-          .then((abc) => (this.playlists = abc.data.playlists))
-          // .then((response) => (this.track_id = response.data.song_id))
-          .catch(function(error) {
-            console.log(error);
-          });
     },
 
     mouseOver: function() {
@@ -186,8 +188,10 @@ export default {
       this.$store.dispatch('favorite/toggleLike', payload)
 
     },
-    addPlaylist(obj) {
-      this.playlists.push(obj)
+    addPlaylist(x) {
+      this.playlists.push(x);
+      this.$refs.modal.close("tab1");
+
     },
 
   },
@@ -223,11 +227,6 @@ export default {
       return !!this.chart.likes
     }
   },
-  created(){
-    // this.changeColor= this.chart.likes
-
-
-  }
 
 
 
@@ -381,6 +380,7 @@ export default {
     left: 0;
     background-color: rgba(156, 156, 156, 0.32);
 }
+
 
 
 </style>

@@ -3,23 +3,29 @@
 <div class="sm:mx-6">
   <div class="grid grid-cols-12 bg-gradient-to-b from-gray-800 via-white to-gray-400 bg-cover bg-no-repeat bg-transparent" style="background-image: url(<% root_path %>/img/back_1.jpg)">
     <div class="col-span-12 md:col-span-9 flex-col-reverse space-y-32 justify-between m-5">
-      <div class="flex">
-        <%= content_tag(:li, '▶', class:'getURL fa-3x rounded-full  play-btn', data: {id: @song.id} ) %>
-        <div class="mx-2">
-          <div class="bg-black rounded p-1 text-white m-1">
-            <%= @song.user.display_name %>
-          </div>
-          <div class="flex bg-gray-900 rounded">
-            <div class="text-2xl text-white m-2"><%= title @song.name %></div>
+      <div class="flex justify-between">
+        <div class="flex mx-2">
+          <%= content_tag(:li, '▶', class:'getURL fa-3x rounded-full  play-btn', data: {id: @song.id} ) %>
+          <div class="">
+            <div class="bg-black rounded p-1 text-white m-1">
+              <%= @song.user.display_name %>
+            </div>
+            <div class="flex bg-gray-900 rounded">
+              <div class="text-2xl text-white md:m-2"><%= title @song.name %></div>
+            </div>
           </div>
         </div>
-        <div class="m-4 text-xl text-white">
+        <div class="flex flex-col justify-end md:m-4 md:block text-xl text-white">
           <div class="">
-            1 month ago
+            <%=time_diff(DateTime.now, @song.created_at) %>
           </div>
-          <div class="">
-            #Dance & EDM
-          </div>
+          <% if @song.tags %> 
+            <% @song.tags.each do |tag| %>
+              <span class="bg-gray-500 rounded-lg md:px-2 my-1 md:my-0 mx-1 text-center ">
+                # <%= tag.name %>
+              </span>
+            <% end %>
+          <% end %>
         </div>
       </div>
 
@@ -53,7 +59,7 @@
           <div class="h-8 w-8 bg-cover" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
         <% end %>
         <%= form_with(model:@comment, url:song_comments_path(song_id: @song, timepoint: 0), class: "song-comment-form w-10/12 sm:w-11/12 ml-2 sm:ml-4 flex-grow") do |f|%>
-          <%= f.text_field :content, placeholder: "Write a comment", class: "song-main-comment w-full h-full pl-1 border border-gray-400 rounded", data: {id: @song.id} %>
+          <%= f.text_field :content, placeholder: "Write a comment", class: "song-main-comment w-full h-full pl-1 border border-gray-400 rounded", data: {id: @song.id}, autocomplete: 'off' %>
           <%= f.submit type: "hidden", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold rounded"%>
         <% end %>
       </div>
@@ -85,14 +91,13 @@
           <i class="fas fa-share-square"></i>
           <p class="hidden md:block">Share</p>
         </button>
-        <button class="flex items-center border border-gray-400 p-1 rounded">
-          <i class="fas fa-stream"></i>
-          <p class="hidden md:block">Add to Next Up</p>
-
-        </button>
         <button class="modal-btn addplaylist-btn flex border border-gray-400 p-1 rounded">
           <i class="fas fa-plus"></i>
           <p class="hidden md:block">Add to Playlist</p>
+        </button>
+        <button class="flex items-center border border-gray-400 p-1 rounded invisible">
+          <i class="fas fa-stream"></i>
+          <p class="hidden md:block">Add to Next Up</p>
         </button>
 
         <!-- @todo: 刪掉會跑版，要調整 -->
@@ -111,49 +116,58 @@
         </div>
         <button class="p-1 text-gray-600">
           <i class="fas fa-retweet"></i>
-          <%= @song.reposted_users.count %>
+          <span class='reposted-count'>
+            <%= @song.reposted_users.count %>
+          </span>
         </button>
 
       </div>
     </div>
 
-    <div class="flex text-sm">
+    <div class="flex flex-wrap sm:flex-no-wrap text-sm">
   <%#=左邊專區大頭照那%>
-      <div class="w-1/5 mr-4" data-controller="follow" data-follow-user="<%= @song.user.id %>">
-        <% if @song.user.avatar_url %>
-          <%#= image_tag @song.user.avatar_url, class: 'rounded-full mt-6 mr-6 w-3/4' %>
-          <div class="mt-6 mr-6 h-32 w-32 mb-6 rounded-full bg-cover bg-center" style="background-image: url('<%= @song.user.avatar_url %>')">
+      <div class="w-full sm:w-1/5 mr-4 flex justify-start md:flex-col md:justify-start" data-controller="follow" data-follow-user="<%= @song.user.id %>">
+        <div class=""> 
+          <% if @song.user.avatar_url %>
+            <%#= image_tag @song.user.avatar_url, class: 'rounded-full mt-6 mr-6 w-3/4' %>
+            <div class="w-16 h-16 mt-2 mb-2 sm:mt-6 mr-6 sm:h-32 sm:w-32 sm:mb-6 rounded-full bg-cover bg-center" style="background-image: url('<%= @song.user.avatar_url %>')">
+            </div>
+          <% else %>
+            <div class="h-12 w-12 bg-cover" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
+          <% end %>
+        </div>
+
+        <div class="items-center">
+          <div class="flex justify-start p-1 m-2">
+            <div><%=@song.user.display_name%></div>
           </div>
-        <% else %>
-          <div class="h-12 w-12 bg-cover" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
-        <% end %>
-        <div class="flex justify-start p-1 m-2">
-          <div><%=@song.user.display_name%></div>
-        </div>
 
-        <div class="flex justify-start items-center p-1 m-2">
-          <i class="fas fa-user-friends"></i>
-          <p class="text-gray-400 mx-2 followers-count"><%=@song.user.followers.count%></p>
-          <i class="fab fa-soundcloud"></i>
-          <p class="text-gray-400 mx-2"><%=@song.user.songs.count%></p>
+          <div class="flex justify-start items-center p-1 m-2">
+            <i class="fas fa-user-friends"></i>
+            <p class="text-gray-400 mx-2 followers-count"><%=@song.user.followers.count%></p>
+            <i class="fab fa-soundcloud"></i>
+            <p class="text-gray-400 mx-2"><%=@song.user.songs.count%></p>
+          </div>
         </div>
-
-        <% if @song.user.followed_by?(current_user) %>
-          <button class="flex items-center bg-orange-500 text-white border-orange-500 border p-1 m-2 rounded" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
-            <i class="fas fa-user-check"></i>
-            <p class="mx-2 follow">Following</p>
-          </button>
-        <% else %>
-          <button class="flex items-center bg-white text-orange-500 border-orange-500 border rounded p-1 m-2" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
-            <i class="fas fa-user-check"></i>
-            <p class="mx-2 follow">Follow</p>
-          </button>
-        <% end%>
+        
+        <div class="flex items-center">
+          <% if @song.user.followed_by?(current_user) %>
+            <button class="flex items-center bg-orange-500 text-white border-orange-500 border p-1 m-2 rounded" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
+              <i class="fas fa-user-check"></i>
+              <p class="mx-2 follow">Following</p>
+            </button>
+          <% else %>
+            <button class="flex items-center bg-white text-orange-500 border-orange-500 border rounded p-1 m-2" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
+              <i class="fas fa-user-check"></i>
+              <p class="mx-2 follow">Follow</p>
+            </button>
+          <% end%>
+        </div>
       </div>
       <%#=正中間留言區%>
       <div class="w-full sm:w-4/5">
         <%#=正中間留言總數%>
-        <div class="flex text-gray-400 m-4 p-2 border-b border-gray-400">
+        <div class="flex text-gray-400 m-2 mb-4 sm:m-4 p-2 border-b border-gray-400">
           <i class="fas fa-comments"></i>
           <p class="mx-1"><%=@comments.count%></p>
           <p class="mx-1">comments</p>

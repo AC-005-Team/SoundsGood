@@ -79,7 +79,7 @@ export function waveShow(ap){
         console.error('error', e)
       })
     }
-    
+
     function loadDefaultPeak(url,wavesurfer){
       fetch(peakStorageRoot+'default')
       .then(response => {
@@ -106,7 +106,7 @@ export function waveShow(ap){
       var domEl = document.createElement('div')
       domEl.classList.add('waveform')
       parentSelector.appendChild(domEl)
-      
+
       var wavesurfer = WaveSurfer.create({
         container: domEl,
         waveColor: waveColor,

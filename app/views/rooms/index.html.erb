@@ -18,14 +18,14 @@
         </div>
       </div>
       <div class="text-leego_orange pl-6 text-sm"><%= room.user.display_name%></div>
-      <div class="text-2xl pl-6 -mt-3"><%= room.name %></div>
+      <div class="text-2xl pl-6 -mt-1"><%= room.name %></div>
 
 
       <div class="flex justify-around my-4">
         <% if room.user == current_user %>
           <%= link_to play_room_path(room), class:'rounded px-2 flex items-center' do %>
-          <i class="fas fa-phone-volume"></i>
-          <% end %>
+          <i class="fas fa-sign-in-alt"></i>
+        <% end %>
 
           <%= link_to edit_room_path(room), class:'rounded px-2 flex items-center' do %>
           <i class="fas fa-pencil-alt"></i>
@@ -35,12 +35,12 @@
           <i class="fas fa-trash-alt"></i>
           <% end %>
 
-        <button class="rounded border border-leego_orange px-4 py-2 my-1 ml-6">ENTER</button>
+
 
           <% else %>
 
           <button class="rounded border border-leego_orange px-4 py-2 my-1 ml-6">
-          <%= link_to 'ENTER', room %>
+            <%= link_to 'ENTER', room%>
           </button>
 
         <% end %>
@@ -48,230 +48,3 @@
       </div>
     </div>
     <% end %>
-
-
-
-    <div class="col-span-12 md:col-span-6 xl:col-span-4 m-16 pb-2 rounded-lg bg-gray-900">
-      <div class="h-56 bg-cover bg-center bg-opacity-25 rounded-lg relative" style="background-image: url(<% root_path %>/img/back_1.jpg)">
-        <button class="flex items-center bg-leego_orange rounded-md px-2 absolute top-leego_top left-fi transform -translate-x-1/2">
-          <i class="fas fa-bolt"></i>
-
-          <p class="px-2"> On Air</p>
-        </button>
-      </div>
-      <div class="text-leego_orange pl-6 text-sm">displya_name<%#= room.user.display_name%></div>
-      <div class="text-2xl pl-6 -mt-3">room_name<%#= room.name %></div>
-
-      <button class="rounded border border-leego_orange px-4 py-2 my-1 ml-6">ENTER</button>
-
-      <div class="flex justify-around my-4">
-        <button class="rounded px-2 flex items-center">
-          <i class="fas fa-phone-volume"></i>
-        </button>
-        <button class="rounded px-2 flex items-center">
-          <i class="fas fa-pencil-alt"></i>
-        </button>
-
-        <button class="rounded px-2 flex items-center">
-          <i class="fas fa-trash-alt"></i>
-        </button>
-      </div>
-    </div>
-
-    <div class="col-span-12 md:col-span-6 xl:col-span-4 m-16 pb-2 border border-gray-400 rounded-lg bg-gray-900">
-      <div class="h-56 bg-cover bg-center bg-opacity-25 rounded-lg relative" style="background-image: url(<% root_path %>/img/back_1.jpg)">
-        <button class="bg-leego_orange rounded-md px-2 absolute top-leego_top left-fi transform -translate-x-1/2">On Air</button>
-      </div>
-      <div class="text-leego_orange pl-6 text-sm">displya_name<%#= room.user.display_name%></div>
-      <div class="text-2xl pl-6 -mt-3">room_name<%#= room.name %></div>
-
-      <button class="rounded border border-leego_orange px-4 py-2 my-1 ml-6">ENTER</button>
-
-      <div class="flex justify-around my-4">
-        <button class="rounded px-2 flex items-center">
-          <i class="fas fa-phone-volume"></i>
-        </button>
-        <button class="rounded px-2 flex items-center">
-          <i class="fas fa-pencil-alt"></i>
-        </button>
-
-        <button class="rounded px-2 flex items-center">
-          <i class="fas fa-trash-alt"></i>
-        </button>
-      </div>
-    </div>
-
-    <div class="col-span-12 md:col-span-6 xl:col-span-4 m-16 pb-2 border border-gray-400 rounded-lg bg-gray-900">
-      <div class="h-56 bg-cover bg-center bg-opacity-25 rounded-lg relative" style="background-image: url(<% root_path %>/img/back_1.jpg)">
-        <button class="bg-leego_orange rounded-md px-2 absolute top-leego_top left-fi transform -translate-x-1/2">On Air</button>
-      </div>
-      <div class="text-leego_orange pl-6 text-sm">displya_name<%#= room.user.display_name%></div>
-      <div class="text-2xl pl-6 -mt-3">room_name<%#= room.name %></div>
-
-      <button class="rounded border border-leego_orange px-4 py-2 my-1 ml-6">ENTER</button>
-
-      <div class="flex justify-around my-4">
-        <button class="rounded px-2 flex items-center">
-          <i class="fas fa-phone-volume"></i>
-        </button>
-        <button class="rounded px-2 flex items-center">
-          <i class="fas fa-pencil-alt"></i>
-        </button>
-
-        <button class="rounded px-2 flex items-center">
-          <i class="fas fa-trash-alt"></i>
-        </button>
-      </div>
-    </div>
-
-    <div class="col-span-12 md:col-span-6 xl:col-span-4 m-16 pb-2 border border-gray-400 rounded-lg bg-gray-900">
-      <div class="h-56 bg-cover bg-center bg-opacity-25 rounded-lg relative" style="background-image: url(<% root_path %>/img/back_1.jpg)">
-        <button class="bg-leego_orange rounded-md px-2 absolute top-leego_top left-fi transform -translate-x-1/2">On Air</button>
-      </div>
-      <div class="text-leego_orange pl-6 text-sm">displya_name<%#= room.user.display_name%></div>
-      <div class="text-2xl pl-6 -mt-3">room_name<%#= room.name %></div>
-
-      <button class="rounded border border-leego_orange px-4 py-2 my-1 ml-6">ENTER</button>
-
-      <div class="flex justify-around my-4">
-        <button class="rounded px-2 flex items-center">
-          <i class="fas fa-phone-volume"></i>
-        </button>
-        <button class="rounded px-2 flex items-center">
-          <i class="fas fa-pencil-alt"></i>
-        </button>
-
-        <button class="rounded px-2 flex items-center">
-          <i class="fas fa-trash-alt"></i>
-        </button>
-      </div>
-    </div>
-
-    <div class="col-span-12 md:col-span-6 xl:col-span-4 m-16 pb-2 border border-gray-400 rounded-lg bg-gray-900">
-      <div class="h-56 bg-cover bg-center bg-opacity-25 rounded-lg relative" style="background-image: url(<% root_path %>/img/back_1.jpg)">
-        <button class="bg-leego_orange rounded-md px-2 absolute top-leego_top left-fi transform -translate-x-1/2">On Air</button>
-      </div>
-      <div class="text-leego_orange pl-6 text-sm">displya_name<%#= room.user.display_name%></div>
-      <div class="text-2xl pl-6 -mt-3">room_name<%#= room.name %></div>
-
-      <button class="rounded border border-leego_orange px-4 py-2 my-1 ml-6">ENTER</button>
-
-      <div class="flex justify-around my-4">
-        <button class="rounded px-2 flex items-center">
-          <i class="fas fa-phone-volume"></i>
-        </button>
-        <button class="rounded px-2 flex items-center">
-          <i class="fas fa-pencil-alt"></i>
-        </button>
-
-        <button class="rounded px-2 flex items-center">
-          <i class="fas fa-trash-alt"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-<div class="flex justify-center">
-  <div class="m-2">
-    <div class="px-2 text-xl text-center text-white bg-orange-600 rounded-full"></div>
-  </div>
-  <div class="m-2">
-    <div class="px-2 text-xl text-center text-white bg-orange-600 rounded-full">
-      <% if current_user && !current_user.room.present? %>
-        <%= link_to '', new_room_path, params: current_user %>
-      <% end %>
-    </div>
-  </div>
-</div>
-<div class="grid grid-cols-12 mx-6 overflow-scroll">
-  <% @rooms.each do |room| %>
-
-    <div class="col-span-4 md:col-span-3 bg-gray-100 h-64 content-center">
-      <div class="text-center px-6">
-        <div class="py-2"><%= room.user.display_name%></div>
-        <div class="h-24 bg-cover bg-center rounded-full" style="background-image: url(<% root_path %>/img/back_1.jpg)"></div>
-        <div class="py-1"><%= room.name %></div>
-
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-
-        <div class="flex justify-between">
-        <% if room.user == current_user %>
-
-
-          <%= link_to play_room_path(room), class:'px-2 flex items-center bg-blue-700 text-white rounded hover:bg-gray-100 hover:text-black' do %>
-          <i class="fas fa-broadcast-tower"></i>
-          <p class="hidden md:block">channel</p>
-          <% end %>
-
-          <%= link_to edit_room_path(room), class:'px-2 flex items-center bg-blue-700 text-white rounded hover:bg-gray-100 hover:text-black' do %>
-          <i class="fas fa-pencil-alt"></i>
-          <p class="hidden md:block">Edit</p>
-          <% end %>
-
-          <%= link_to room, method: :delete, data: { confirm: 'Are you sure?' }, class:'px-2 flex items-center bg-blue-700 text-white rounded hover:bg-gray-100 hover:text-black' do %>
-            <i class="far fa-trash-alt"></i>
-          <p class="hidden md:block">Destroy</p>
-          <% end %>
-
-          <% else %>
-
-          <button class="px-4 flex items-center bg-blue-700 text-white rounded hover:bg-gray-100 hover:text-black">
-          <%= link_to 'Show', room %>
-          </button>
-
-        <% end %>
-
-        </div>
-
-      </div>
-    </div>
-
-  <% end %>
-
-</div>
-
-
-<!-- <div>Rooms</div>
-
-<table>
-  <thead>
-    <tr>
-      <th>Host</th>
-      <th>All Channels</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @rooms.each do |room| %>
-      <tr>
-        <td><%= room.user.display_name%></td>
-        <td><%= room.name %></td>
-        <% if room.user == current_user %>
-          <td><%= link_to 'channel', play_room_path(room) %></td>
-          <td><%= link_to 'Edit', edit_room_path(room) %></td>
-          <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% else %>
-          <td><%= link_to 'Show', room %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-
-</table> -->
-
-<br>
-<p id="notice"><%= notice %></p>

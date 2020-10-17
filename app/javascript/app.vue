@@ -1,7 +1,11 @@
 <template>
 <div>
 <HeaderComponent />
-<router-view/>
+<transition name="fade" mode="out-in" >
+  <router-view/>
+
+</transition>
+
 <!-- <playlist /> -->
 <Player />
 
@@ -37,5 +41,21 @@ export default {
     Player
 
   },
+  created(){
+    document.body.classList.add("bg-gray-900")
+
+  }
 }
 </script>
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.4s;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+  transform: translateX(-60px);
+}
+</style>

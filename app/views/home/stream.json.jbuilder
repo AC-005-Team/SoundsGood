@@ -11,6 +11,9 @@ json.array! @items  do |item|
     json.cover item.image_url || '/img/music_back.jpeg'
     json.path item.track_url #data-path for waveform
     json.filename item.get_filename #data-filename for waveform
+    if item.tags
+      json.tags item.tags.first(2).map{|x|x.name}
+    end
       json.likes item.liked_users.include?(current_user)
   when item.class == Playlist
     json.media_type 'Playlist'  #po的類別是playlist
@@ -29,6 +32,9 @@ json.array! @items  do |item|
       json.path media.track_url #data-path for waveform
       json.cover media.image_url || '/img/music_back.jpeg'
       json.filename media.get_filename #data-filename for waveform
+      if media.tags
+        json.tags media.tags.first(2).map{|x|x.name}
+      end
         json.likes media.liked_users.include?(current_user)
     else
       json.path media.songs[0].track_url #data-path for waveform
