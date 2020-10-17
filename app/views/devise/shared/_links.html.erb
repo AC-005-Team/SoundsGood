@@ -21,9 +21,9 @@
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
     <% if provider == :google_oauth2 %>
-      <%= link_to "Continue with Google", omniauth_authorize_path(resource_name, provider), class: 'w-full px-2 py-2 rounded my-2 text-center border border-gray-700'%>
+      <%= link_to "Continue with Google", omniauth_authorize_path(resource_name, provider), class: 'w-full px-2 py-2 rounded my-2 text-center border border-gray-700 text-black'%>
     <% elsif provider == :facebook %>
-      <%= link_to "Continue with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: 'w-full px-2 py-2 text-white rounded bg-blue-600 text-center my-2' %>
+      <%#= link_to "Continue with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: 'w-full px-2 py-2 text-white rounded bg-blue-600 text-center my-2' %>
     <% end %>
   <% end %>
 <% end %>

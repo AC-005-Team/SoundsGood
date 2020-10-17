@@ -14,13 +14,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
         if(response.ok){
           let icon = btn.children[0]
           let count = btn.children[1]
-          if(icon.style.color == '' || icon.getAttribute('style') == 'color: black;'){
+          if(icon.style.color == '' || icon.getAttribute('style') == 'color: white;'){
             let num = Number(count.textContent)
             icon.style.color = "orange"
             count.innerHTML = num + 1
           }else{
             let num = Number(count.textContent)
-            icon.style.color = "black"
+            icon.style.color = "white"
             count.innerHTML = num - 1
           }
         }

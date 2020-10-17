@@ -3,21 +3,20 @@ import APlayer from "aplayer";
 import { waveShow } from "../scripts/wave";
 let waveProgress, playingDuration, waveformWidth, secOfFourth;
 //畫面一開始的播放器
+
 const ap = new APlayer({
   container: document.getElementById("player1"),
   listFolded: true,
-  audio: [
-    {
-      autoplay: true,
-      theme: "#f18b00",
-      cover: "", //required,
-      title: "", // Required, music title
-      author: "", // Required, music author
-      url:
-        "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/Music_for_Video/Blue_Dot_Sessions/Fjell/Blue_Dot_Sessions_-_Kvelden_Trapp.mp3",
-    },
-  ],
+  // audio: [{
+  //   autoplay: true,
+  //   theme: '#f18b00',
+  //   cover: '', //required,
+  //   title: '', // Required, music title
+  //   author: '', // Required, music author
+  //   url: ""
+  // }]
 });
+
 waveShow(ap);
 //立即點播放單首歌
 const songs = document.querySelectorAll(".play-btn");
@@ -210,3 +209,11 @@ window.onclick = function(event) {
     }
   }
 };
+ap.on("playing", () => {
+  const btn = document.querySelector(".play-btn");
+  btn.innerHTML = '<i class="fas fa-pause"></i>';
+});
+ap.on("pause", () => {
+  const btn = document.querySelector(".play-btn");
+  btn.innerHTML = '<i class="fas fa-play"></i>';
+});

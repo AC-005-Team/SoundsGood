@@ -9,27 +9,27 @@ class User < ApplicationRecord
   
   validates :display_name, presence: true, allow_blank: false
   
-  has_one :room
+  has_one :room, dependent: :destroy
   # 自己追蹤的人
-  has_many :followed_users, foreign_key: :follower_id, class_name: "Follow"
-  has_many :followees, through: :followed_users, source: :followee, dependent: :destroy
+  has_many :followed_users, foreign_key: :follower_id, class_name: "Follow", dependent: :destroy
+  has_many :followees, through: :followed_users, source: :followee
   # 追蹤自己的人
-  has_many :following_users, foreign_key: :followee_id, class_name: "Follow"
-  has_many :followers, through: :following_users, source: :follower, dependent: :destroy
+  has_many :following_users, foreign_key: :followee_id, class_name: "Follow",dependent: :destroy
+  has_many :followers, through: :following_users, source: :follower
     
   has_many :songs, dependent: :destroy
   has_many :playlists, dependent: :destroy
   has_many :comments, dependent: :destroy
 
-  has_many :favorite_songs
-  has_many :like_songs, through: :favorite_songs, source: :song, dependent: :destroy
+  has_many :favorite_songs, dependent: :destroy
+  has_many :like_songs, through: :favorite_songs, source: :song
 
-  has_many :favorite_playlists
-  has_many :like_playlists, through: :favorite_playlists, source: :playlist, dependent: :destroy
+  has_many :favorite_playlists, dependent: :destroy
+  has_many :like_playlists, through: :favorite_playlists, source: :playlist
 
-  has_many :reposts
-  has_many :repost_songs, through: :reposts, source: :repostable, source_type: "Song", dependent: :destroy
-  has_many :repost_playlists, through: :reposts, source: :repostable, source_type: "Playlist", dependent: :destroy
+  has_many :reposts, dependent: :destroy
+  has_many :repost_songs, through: :reposts, source: :repostable, source_type: "Song"
+  has_many :repost_playlists, through: :reposts, source: :repostable, source_type: "Playlist"
 
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)

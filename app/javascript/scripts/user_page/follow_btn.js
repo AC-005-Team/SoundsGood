@@ -14,13 +14,11 @@ document.addEventListener('DOMContentLoaded', function(){
         if (response.ok){
           const followCount = document.querySelector('.follow-count')
           const followText = follow_btn.children[1]
-          console.log(followText.textContent)
           if(followText.textContent == 'Follow+'){
             followText.textContent = 'Following'
             followCount.textContent++
           }else{
             followText.textContent = 'Follow+'
-            console.log(followText.textContent)
             followCount.textContent--
           }
         }

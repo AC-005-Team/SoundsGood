@@ -1,23 +1,23 @@
 <template lang="html">
 
 
-    <div class="p-20 bg-cover h-screen">
+    <div class="md:p-20 bg-cover h-screen">
           <form @submit.prevent="uploadForm">
 
 
 
 
-                  <div class="w-2/3 m-auto text-xs">
+                  <div class="w-full md:w-2/3 m-auto text-xs">
 
-                    <div class="mt-2 m-auto w-2/3 p-4">
+                    <div class="mt-2 m-auto md:w-2/3 p-4">
                       <div class="text-center">
-                        <p class="text-2xl">Upload Your Music, audio type must be mp3,ogg,mpeg</p>
+                        <p class="text-2xl text-white">Upload Your Music, audio type must be mp3,ogg,mpeg</p>
 
 
 
                         <ValidationProvider rules="required|ext:mp3,ogg,mpeg"  ref="provider" name="audio"  v-slot="{ errors, validate }">
 
-                          <input class="song_value" type="file" name="song[track]" id="song_track" @change="handleFileChange" >
+                          <input class="song_value text-white" type="file" name="song[track]" id="song_track" @change="handleFileChange" >
                           <!-- <input type="file" @change="validate"> -->
                           <span class="text-red-600">{{ errors[0] }}</span>
                         </ValidationProvider>
@@ -39,12 +39,12 @@
             <button class="mx-2 text-orange-600">Basic Info</button>
           </div>
 
-          <div class="flex my-2">
+          <div class="md:flex my-2">
             <div
               class="w-1/3 max-h-full bg-cover bg-top bg-gradient-to-b from-gray-500 via-white to-orange-300"
               :style="{ 'background-image': 'url(' + url + ')' }"
             >
-              <div class="w-full max-h-full rounded p-2 bg-gray-200 relative">
+              <div class="md:w-1/3 w-full max-h-full rounded p-2">
                 <i class="fas fa-camera-retro"></i>
                 Upload Image
                 <ValidationProvider
@@ -65,7 +65,7 @@
               </div>
             </div>
 
-            <div class="w-2/3 mx-4 text-sm">
+            <div class="md:w-2/3 w-full text-sm">
               <label for="song_name">Name</label>
               <ValidationProvider
                 rules="required"
@@ -117,7 +117,7 @@
         </div>
 
         <div
-          class="flex justify-center items-center p-6 border border-gray-200 bg-white"
+          class="flex justify-center items-center p-6 border border-gray-200 bg-white mb-20"
         >
           <button
             type="submit"

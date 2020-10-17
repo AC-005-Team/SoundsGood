@@ -1,24 +1,40 @@
 <% if playlists %>
   <% playlists.each do |playlist|%>
+  
     <% if playlist.songs.any? %>
-      <div class="flex justify-aroundp-3 p-5 bg-gradient-to-r from-gray-500 via-white to-pink-300"> <%#=專輯內圖、取名、hover愛心、播放%>
+      <div class="flex flex-col md:flex-row md:justify-around p-5 bg-leego_orange bg-opacity-50 rounded-lg mb-4"> <%#=專輯內圖、取名、hover愛心、播放%>
         <% if playlist.songs.first %>
           <%= image_tag playlist.songs.first.image_url, class: 'w-1/4 bg-cover' %>
         <% end %>
-        <% playlist.songs.each do |song| %>
-          <div class="w-3/4 overflow-auto h-48"> <%#=曲名區域%>
-            <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
-              <div class="w-9/12 m-2 text-base text-gray-500"><%= song.name %>></div>
-              <div class="w-3/12 m-2 text-base text-gray-500 text-right"><%= song.played_times %></div>
-            </div>
-          </div>
-        <% end %>
+        <div class="w-full md:w-3/4 overflow-auto md:h-48 h-24"> 
+          <% playlist.songs.each do |song| %>
+            <%#=曲名區域%>
+              <div class="flex justify-around hover:bg-gray-100 border-b border-gray-100 mx-2">
+                <div class="w-11/12 m-2 text-base text-gray-500"><%= song.name %>></div>
+                  <div class="w-1/12 m-2 text-base text-gray-500 flex justify-between items-center">
+                    <div class="" style="width: 0;height: 0;border-style: solid;border-width: 5px 0 5px 8px;border-color: transparent transparent transparent #a0aec0;"></div>
+                    <%= song.played_times %>
+                  </div>
+                </div>
+          <% end %>
+        </div>
+      <div class="flex md:flex-col justify-between mt-2 md:mt-4">
+        <button class="flex justify-start mb-2 invisible">
+          <%= link_to playlist_path(playlist.id), method:'delete', class: "flex border border-gray-300 px-3 mx-1 rounded " do %>
+            <span class="my-auto mr-1 block"><i class="fas fa-trash"></i></span>
+            <p class="hidden md:block">Delete</p>
+          <% end %>
+        </button>
+
         <% if current_user == playlist.user %>
-              <%= link_to playlist_path(playlist.id), method:'delete', class: "flex border border-gray-300 px-3 mx-1 rounded" do %>
-                <span class="my-auto mr-1"><i class="fas fa-trash"></i></span>
-                <p class="hidden md:block">Delete</p>
-              <% end %>
+          <button class="flex justify-start">
+            <%= link_to playlist_path(playlist.id), data: { confirm: "Are you sure?" }, method:'delete', class: "flex border border-gray-300 px-3 mx-1 rounded " do %>
+              <span class="my-auto mr-1 block"><i class="fas fa-trash"></i></span>
+              <p class="hidden md:block">Delete</p>
             <% end %>
+          </button>
+        <% end %>
+        </div>
       </div>
     <% end %>
   <% end %>

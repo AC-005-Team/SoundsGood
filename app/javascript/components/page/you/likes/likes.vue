@@ -5,8 +5,8 @@
       <div class="grid sm:grid-cols-2 md:col-span-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 mb-10">
         <div class="wrapper">
           <div class="card text-center flex items-center justify-center" @click="playLikelist">
-            <i class="fas z-10 fa-play" style="font-size: 30px"/>
-            <p>ALL</p>
+            <i class="fas z-10 fa-play" style="font-size: 40px"/>
+            <p style="font-size: 20px">ALL</p>
           </div>
  <!-- <img class="object-cover card" src="/img/night.jpg" @click="playLikelist"> -->
 
@@ -84,7 +84,6 @@ created(){
 .card {
   height: 100px;
   width: 100px;
-  background-image: linear-gradient(to top, #c25700 0%, #f45742 100%);
   border-radius: 10px;
   position: relative;
   transition: transform 0.5s ease-in-out;

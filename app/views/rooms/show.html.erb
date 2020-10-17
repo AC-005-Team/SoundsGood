@@ -1,3 +1,31 @@
+<div class="flex justify-center items-center h-screen bg-gray-500 bg-cover rounded text-center bg-fixed" style="background-image: url(<% root_path %>/img/back_4.jpg)">
+  <div class="flex justify-center items-center">
+
+    <div class="text-2xl text-white bg-black bg-opacity-50 rounded-lg p-4">
+      <h1>subscriber</h1>
+      <p>
+        <strong>Host:</strong>
+        <%= @room.user.display_name %>
+      </p>
+      <p>
+        <strong>Name:</strong>
+        <%= @room.name %>
+      </p>
+      <div id="subscriber"></div>
+
+      <%= link_to 'Back', rooms_path %>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
 <h1>subscriber</h1>
 <p>
   <strong>Host:</strong>

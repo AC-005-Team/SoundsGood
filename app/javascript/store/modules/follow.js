@@ -37,7 +37,6 @@ const follow = {
       let foundValue = state.followees.find(obj => obj.id === id);
       let i = state.followees.indexOf(foundValue)
       state.followees.splice(i, 1);
-
     }
   },
 
