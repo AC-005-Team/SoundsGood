@@ -8,18 +8,15 @@
       </div>
       <div class="sm:w-5/6 w-3/4 mx-4">
         <div class="flex items-center text-sm text-gray-500">
-
-        <%= content_tag(:li, '▶', class:'getURL text-orange-500 mr-2 play-btn', data: {id: song.id} ) %>
-
-          <div class="flex-col w-9/12">
+            <%= content_tag(:li, '▶', class:'getURL text-orange-500 mr-2 play-btn', data: {id: song.id} ) %>
+          <div>
           <%#= 歌曲名稱 %>
-            <p><%= song.name %></p>
-            <p class=""><%= link_to song.name, song_path(song.id) %></p>
+            <p><%= link_to song.name, song_path(song.id) %></p>
           </div>
-          <div class="w-2/12 flex">
+          <div class="ml-auto flex">
           <%#= 歌曲TAG名稱 %>              
             <% song.tags.each do |tag|%>
-              <div class="text-white bg-gray-400 rounded-full text-center"><%= tag.name %></div>
+              <div class="p-1 m-1 rounded text-white bg-gray-400 text-center"><%= tag.name %></div>
             <% end %> 
           </div>
         </div>

@@ -40,10 +40,12 @@ if(songs){
           ap.list.clear();
           ap.list.add(val.audio);
           ap.play();
+          playBtnChange(ap)
           ap.container.setAttribute('data-playing', id)
           addPlayedTime(id)
         } else {
           ap.toggle()
+          playBtnChange(ap)
         }
       })
     });
@@ -197,5 +199,14 @@ window.onclick = function(event) {
         openDropdown.classList.remove('show');
       }
     }
+  }
+}
+
+function playBtnChange(ap){
+  const btn = document.querySelector('.play-btn')
+  if(ap['paused'] == false){
+    btn.innerHTML = '<i class="fas fa-pause"></i>'
+  }else{
+    btn.innerHTML = '<i class="fas fa-play"></i>'
   }
 }
