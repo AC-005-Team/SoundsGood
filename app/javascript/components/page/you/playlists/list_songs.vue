@@ -4,7 +4,7 @@
       <div class="flex justify-around items-center bg-gray-900 aaa" @mouseover="mouseOver"  @mouseleave="mouseLeave" >
         <div class="flex justify-start items-center w-2/5 md:w-8/12">
           <img :src="song.cover" class="h-10 w-10 m-1 md:mx-4">
-          <div class="mx-1 md:mx-4">{{ song.user }}</div>
+          <div class="mx-1 md:mx-4 hidden md:block">{{ song.user }}</div>
           <div class="mx-1 md:mx-4">{{ song.title }}</div>
         </div>
         <button class=" text-start" @click="remove"><i class="fas fa-window-close"></i>Remove</button>

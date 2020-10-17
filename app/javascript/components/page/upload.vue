@@ -117,7 +117,7 @@
         </div>
 
         <div
-          class="flex justify-center items-center p-6 border border-gray-200 bg-white"
+          class="flex justify-center items-center p-6 border border-gray-200 bg-white mb-20"
         >
           <button
             type="submit"

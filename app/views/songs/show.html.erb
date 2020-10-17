@@ -5,7 +5,7 @@
     <div class="col-span-12 md:col-span-9 flex-col-reverse space-y-32 justify-between m-5">
       <div class="flex justify-between">
         <div class="flex mx-2">
-          <%= content_tag(:li, '▶', class:'getURL fa-3x rounded-full  play-btn', data: {id: @song.id} ) %>
+          <%= content_tag(:li, '▶', class:'getURL fa-2x  md:fa-3x rounded-full play-btn md:w-20 md:h-20 w-10 h-10 text-center', data: {id: @song.id} ) %>
           <div class="">
             <div class="bg-black rounded p-1 text-white m-1">
               <%= @song.user.display_name %>
@@ -59,7 +59,7 @@
           <div class="h-8 w-8 bg-cover" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
         <% end %>
         <%= form_with(model:@comment, url:song_comments_path(song_id: @song, timepoint: 0), class: "song-comment-form w-10/12 sm:w-11/12 ml-2 sm:ml-4 flex-grow") do |f|%>
-          <%= f.text_field :content, placeholder: "Write a comment", class: "song-main-comment w-full h-full pl-1 border border-gray-400 rounded", data: {id: @song.id}, autocomplete: 'off' %>
+          <%= f.text_field :content, placeholder: "Write a comment", class: "song-main-comment w-full h-full pl-1 border border-gray-400 rounded text-gray-800", data: {id: @song.id}, autocomplete: 'off' %>
           <%= f.submit type: "hidden", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold rounded"%>
         <% end %>
       </div>

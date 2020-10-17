@@ -24,7 +24,7 @@
   </div>
 
 
-  <div class="grid grid-cols-12 bg-gray-900 text-white">
+  <div class="grid grid-cols-12 bg-gray-900 text-white overflow-y-scroll pb-20">
     <div class="col-span-12 my-4  md:mx-8">
        <transition-group name="list" tag="p">
       <list_songs v-for="(song, index) in listsongs.audio" :key="song.id" :song="song"  :playlist_id="listsongs.id"/>
