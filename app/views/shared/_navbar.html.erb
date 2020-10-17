@@ -67,19 +67,19 @@
       <% else %>
         <i class="fas fa-user-secret"></i>
       <% end %>
-      <button class="text-gray-300 bg-black py-2 rounded inline-flex items-center">
-        <span class="hidden md:block">
-          <%= link_to current_user.display_name, user_path(current_user)%>
-        </span>
-      </button>
-      <ul class="dropdown-menu absolute hidden text-gray-700 text-left" style="top:44px">
-        <%= link_to user_path(current_user) do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-t">Profile</li><% end %>
-        <%= link_to likes_library_index_path do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Likes</li><% end %>
-        <%= link_to sets_library_index_path do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Playlists</li><% end %>
-        <%= link_to user_songs_path(current_user) do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Tracks</li><% end %>
-        <%= link_to edit_user_path(current_user.id) do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Edit</li><% end %>
-        <%= link_to destroy_user_session_path, method: "delete" do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-b">Sign out</li><% end %>
-      </ul>
+        <button class="text-gray-300 bg-black py-2 rounded inline-flex items-center">
+          <span class="hidden md:block">
+            <%= link_to current_user.display_name, user_path(current_user)%>
+          </span>
+        </button>
+        <ul class="dropdown-menu absolute right-0 hidden text-gray-700 text-left" style="top:44px">
+          <%= link_to user_path(current_user) do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-t">Profile</li><% end %>
+          <%= link_to likes_library_index_path do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Likes</li><% end %>
+          <%= link_to sets_library_index_path do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Playlists</li><% end %>
+          <%= link_to user_songs_path(current_user) do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Tracks</li><% end %>
+          <%= link_to edit_user_path(current_user.id) do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Edit</li><% end %>
+          <%= link_to destroy_user_session_path, method: "delete" do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-b">Sign out</li><% end %>
+        </ul>
     </div>
   <% else %>
     <div class="hover:text-white"><%= link_to "Sign in",new_user_session_path%></div>

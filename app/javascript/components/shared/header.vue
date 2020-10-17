@@ -41,7 +41,7 @@
       <span class="mr-1 block sm:hidden"><a :href="`/users/${this.user_id}`"><i class="fas fa-user-circle fa-2x"></i></a></span>
     </button>
 
-    <ul class="dropdown-menu absolute hidden text-gray-700 text-left">
+    <ul class="dropdown-menu absolute right-0 hidden text-gray-700 text-left">
       <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-t"><a :href="`/users/${this.user_id}`">{{ this.user_name }}</a></li>
       <!-- <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap"><a href="/you/likes">Likes</a>    </li> -->
       <!-- <li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap"><a href="/you/sets">Playlists</a></li> -->
