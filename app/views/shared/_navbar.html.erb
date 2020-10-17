@@ -65,7 +65,7 @@
   <% if user_signed_in? %>
     <div class="dropdown inline-block relative md:px-8 py-1 mr-6">
       <% if current_user && current_user.avatar_url %>
-        <%= image_tag current_user.avatar_url, class:'w-6 h-6 object-cover inline mr-1', style:''%>
+        <%= image_tag current_user.avatar_url, class:'w-6 h-6 object-cover inline mr-1 user-img-current', style:''%>
       <% else %>
         <i class="fas fa-user-secret"></i>
       <% end %>

@@ -16,7 +16,7 @@ export function renderComments(song, ap) {
   if (commentArea) {
     commentForm = commentArea.parentNode;
   }
-  let userAvatar = document.querySelector(".current_user-avatar");
+  let userAvatar = document.querySelector(".user-img-current");
   let userAvatarUrl;
   if (userAvatar) {
     userAvatarUrl = userAvatar.getAttribute("src");

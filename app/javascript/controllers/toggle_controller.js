@@ -17,7 +17,7 @@ export default class extends Controller {
           this.heartTarget.classList.remove("far");
           this.heartTarget.classList.add("fas");
           this.likeBtnTarget.classList.remove("border-grey-400");
-          this.likeBtnTarget.classList.add("text-red-600", "border-orange-500");
+          this.likeBtnTarget.classList.add("text-orange-600", "border-orange-500");
           btnContent.textContent = "Liked";
           liked_count.textContent = liked_count_number + 1;
         } else {
@@ -25,7 +25,7 @@ export default class extends Controller {
           this.heartTarget.classList.remove("fas");
           this.heartTarget.classList.add("far");
           this.likeBtnTarget.classList.remove(
-            "text-red-600",
+            "text-orange-600",
             "border-orange-500"
           );
           this.likeBtnTarget.classList.add("border-grey-400");
@@ -51,14 +51,14 @@ export default class extends Controller {
         if (result["status"] == true) {
           this.repostBtnTarget.classList.remove("border-grey-400");
           this.repostBtnTarget.classList.add(
-            "text-red-600",
+            "text-orange-600",
             "border-orange-500"
           );
           btnContent.textContent = "Reposted";
           repostedCount.textContent = repostedCountNumber + 1;
         } else {
           this.repostBtnTarget.classList.remove(
-            "text-red-600",
+            "text-orange-600",
             "border-orange-500"
           );
           this.repostBtnTarget.classList.add("border-grey-400");

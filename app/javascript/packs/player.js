@@ -8,14 +8,14 @@ let waveProgress, playingDuration, waveformWidth, secOfFourth
 const ap = new APlayer({
   container: document.getElementById('player1'),
   listFolded: true,
-  audio: [{
-    autoplay: true,
-    theme: '#f18b00',
-    cover: '', //required,
-    title: '', // Required, music title
-    author: '', // Required, music author
-    url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/suRRism-Phonoethics/Lomz__Lezet/Mother_Brain/Lomz__Lezet_-_08_-_Cod.mp3"
-  }]
+  // audio: [{
+  //   autoplay: true,
+  //   theme: '#f18b00',
+  //   cover: '', //required,
+  //   title: '', // Required, music title
+  //   author: '', // Required, music author
+  //   url: ""
+  // }]
 });
 
 waveShow(ap)

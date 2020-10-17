@@ -1,15 +1,15 @@
 <%#這是首頁旁邊的留白%>
-<div class="mx-6 bg-white">
+<div class="md:mx-6 bg-white">
 
 <%#這是首頁最上的大圖%>
   <div class="bg-gray-700 text-white w-full bg-cover bg-center bg-no-repeat" style="background-image: url(<% root_path %>/img/back_1.jpg)">
     <div class="">
       <nav class="container mx-auto py-3 flex items-center justify-between ">
 
-        <button class="hover:text-white w-48">
+        <button class="hover:text-white w-36 md:w-48">
           <%= link_to discover_path do %>
           <%= image_pack_tag('logo_14.png', class:'w-48 hidden sm:block') %>
-          <%= image_pack_tag('logo_10.png', class:'w-12 block sm:hidden') %>
+          <%= image_pack_tag('logo_10.png', class:'ml-6 w-12 block sm:hidden') %>
           <% end %>
         </button>
 
@@ -28,8 +28,7 @@
             <% end %>
           </button>
 
-          <button class="px-2 py-2 bg-sladock rounded">
-            <a href="#">for Creator</a>
+          <button class="px-2 py-2 bg-sladock rounded invisible">
           </button>
         </div>
       </nav>
@@ -44,16 +43,16 @@
   </div>
 
   <%#這是搜尋or上傳自己的那邊%>
-  <div class="container mx-auto flex max-w-3xl items-center my-10">
+  <div class="mx-2 md:mx-auto flex max-w-3xl items-center my-10">
     <div class="relative justify-center flex-grow">
       <%= form_with model: @search, url: result_search_path, method: 'get', id: 'search_bar' do |f| %>
         <%= f.text_field :search, class: "w-full px-2 py-2 focus:outline-none bg-gray-200 rounded", placeholder: "Search for artists, bands, tracks, podcasts" %>
       <% end %>
     </div>
-    <span class="px-4">or</span>
+    <span class="md:px-4">or</span>
     <button class="flex items-center px-4 py-2 bg-orange-600 text-white rounded">
       <i class="fas fa-cloud-upload-alt"></i>
-      <a class="hidden sm:block" href="#">Upload your own</a>
+      <a class="ml-1 hidden sm:block" href="#">Upload your own</a>
     </button>
   </div>
 
@@ -63,7 +62,7 @@
 
   <%#音樂區塊%>
   <div class= "w-full overflow-hidden overflow-x-auto">
-      <div class="flex text-gray-500 text-xs" style="width: 2000px;">
+      <div class="flex text-gray-500 text-xs" style="height: 200px; width: max-content">
         <% @songs.each do |song|%>
           <% if song.image_url %>
             <div class="my-2 mr-2" style="height: 150px; width: 150px;">

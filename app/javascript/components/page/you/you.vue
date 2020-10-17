@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="bg-gray-900 h-screen p-4">
-    <div class="flex text-2xl md:text-2xl mx-4 text-white ">
+    <div class="flex md:text-2xl md:text-2xl mx-4 text-white ">
       <button class="mr-4 tab tab-underline"><router-link :to="{name: 'library'}">Overview</router-link></button>
       <button class="mr-4 tab"><router-link :to="{ name: 'likes'}">Likes</router-link></button>
       <button class="mr-4 tab">  <router-link :to="{ name: 'playlists' }">Playlists</router-link></button>
