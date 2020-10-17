@@ -43,13 +43,15 @@
 
   <a href="/upload">
     <div class="hover:text-white md:px-8 py-2">
-      <i class="fas fa-cloud-upload-alt"></i>
-      Upload
+      <span class="sm:hidden">
+        <i class="fas fa-cloud-upload-alt"></i>
+      </span>
+      <span class="hidden sm:block">Upload<span>
     </div>
   </a>
 
   <%= link_to rooms_path, class: 'hidden sm:block' do %>
-    <button class="hover:text-white md:px-8 py-2 hidden sm:block">OnAir</button>
+    <button class="hover:text-white md:px-8 py-2 hidden sm:block">On Air</button>
   <% end %>
   <button class="hover:text-white md:px-8 py-2 block sm:hidden">
     <%= link_to rooms_path, class: 'block sm:hidden' do %>
@@ -63,7 +65,7 @@
   <% if user_signed_in? %>
     <div class="dropdown inline-block relative md:px-8 py-1 mr-6">
       <% if current_user && current_user.avatar_url %>
-        <%= image_tag current_user.avatar_url, class:'w-6 h-6 object-cover inline', style:''%>
+        <%= image_tag current_user.avatar_url, class:'w-6 h-6 object-cover inline mr-1', style:''%>
       <% else %>
         <i class="fas fa-user-secret"></i>
       <% end %>
@@ -74,9 +76,6 @@
         </button>
         <ul class="dropdown-menu absolute right-0 hidden text-gray-700 text-left" style="top:44px">
           <%= link_to user_path(current_user) do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-t">Profile</li><% end %>
-          <%= link_to likes_library_index_path do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Likes</li><% end %>
-          <%= link_to sets_library_index_path do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Playlists</li><% end %>
-          <%= link_to user_songs_path(current_user) do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Tracks</li><% end %>
           <%= link_to edit_user_path(current_user.id) do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap">Edit</li><% end %>
           <%= link_to destroy_user_session_path, method: "delete" do %><li class="bg-gray-200 py-2 px-4 block whitespace-no-wrap rounded-b">Sign out</li><% end %>
         </ul>
