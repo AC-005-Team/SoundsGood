@@ -88,9 +88,9 @@ export function waveShow(ap) {
             loadDefaultPeak(url, wavesurfer); // if peak data contains error, load default
             return;
           }
-          console.log("------------------------------");
-          console.log("peaks loaded! sample_rate: " + peaks.sample_rate);
-          console.log("------------------------------");
+          // console.log("------------------------------");
+          // console.log("peaks loaded! sample_rate: " + peaks.sample_rate);
+          // console.log("------------------------------");
           // load peaks into wavesurfer.js
           // wavesurferDummy.load(proxyurl+url, peaks.data)
           wavesurfer.load(proxyurl + url, peaks.data);
@@ -110,9 +110,9 @@ export function waveShow(ap) {
           return response.json();
         })
         .then((peaks) => {
-          console.log("------------------------------");
-          console.log("default loaded! sample_rate: " + peaks.sample_rate);
-          console.log("------------------------------");
+          // console.log("------------------------------");
+          // console.log("default loaded! sample_rate: " + peaks.sample_rate);
+          // console.log("------------------------------");
           // load peaks into wavesurfer.js
           // wavesurferDummy.load(proxyurl+url, peaks.data)
           wavesurfer.load(proxyurl + url, peaks.data);

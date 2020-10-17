@@ -8,7 +8,7 @@ export default class extends Controller {
     let playlist_id = e.currentTarget.dataset.playlistId;
     let addBtn = e.currentTarget;
     let btnContent = addBtn.lastElementChild;
-    console.log(e.currentTarget);
+    // console.log(e.currentTarget);
     Rails.ajax({
       url: `/songs/${song_id}/add_to_playlist?playlist_id=${playlist_id}.json`,
       type: "post",

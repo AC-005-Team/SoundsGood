@@ -1,7 +1,11 @@
 <template lang="html">
-
-  <div class="my-4 flex border-b border-gray-200 border-opacity-25 p-2 text-gray-500">
-    <div class="w-1/6 rounded-full bg-fit bg-cover bg-center" :style="{ 'background-image': 'url('+  unfollower.avatar + ')' }"></div>
+  <div
+    class="my-4 flex border-b border-gray-200 border-opacity-25 p-2 text-gray-500"
+  >
+    <div
+      class="w-1/6 rounded-full bg-fit bg-cover bg-center"
+      :style="{ 'background-image': 'url(' + unfollower.avatar + ')' }"
+    ></div>
     <div class="w-4/5 mx-2 text-xs">
       <div class="">{{ unfollower.display_name }}</div>
       <div class="flex justify-between">
@@ -9,36 +13,30 @@
           <div class="">{{ unfollower.user_id }}</div>
         </div>
 
-        <button class="border border-gray-400 rounded p-1 hover:bg-leego_orange hover:text-white" @click="follow" >
+        <button
+          class="border border-gray-400 rounded p-1 hover:bg-leego_orange hover:text-white"
+          @click="follow"
+        >
           follow
         </button>
       </div>
-
     </div>
   </div>
-
 </template>
 
 <script>
-import {
-  mapState,
-  mapGetters,
-  mapActions
-} from 'vuex'
+import { mapState, mapGetters, mapActions } from "vuex";
 export default {
-  props:['unfollower'],
+  props: ["unfollower"],
 
-  methods:{
-    ...mapActions('follow', ['addFollow']),
-        follow(){
-          console.log(this.unfollower.user_id)
-          this.$store.dispatch('follow/addFollow', this.unfollower.user_id);
-        }
-
-
-    }
-}
+  methods: {
+    ...mapActions("follow", ["addFollow"]),
+    follow() {
+      // console.log(this.unfollower.user_id)
+      this.$store.dispatch("follow/addFollow", this.unfollower.user_id);
+    },
+  },
+};
 </script>
 
-<style lang="css" scoped>
-</style>
+<style lang="css" scoped></style>

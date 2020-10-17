@@ -191,7 +191,7 @@ const dropDownbtn = document.querySelectorAll("#myDropdown");
 if (dropbtn) {
   for (let i = 0; i < dropbtn.length; i++) {
     dropbtn[i].addEventListener("click", function(e) {
-      console.log("hihihihii");
+      // console.log("hihihihii");
       const $dropDown = e.currentTarget.parentNode;
       $dropDown.querySelector("#myDropdown").classList.toggle("show");
     });

@@ -90,7 +90,7 @@ export default {
     },
     searchRails(){
        var searchItem = this.search
-         console.log(searchItem)
+        //  console.log(searchItem)
         window.location.href = `/search/result?search=${searchItem}`;
       }
     }

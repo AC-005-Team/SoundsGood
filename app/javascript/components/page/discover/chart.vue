@@ -146,7 +146,7 @@ export default {
 
     showmodal() {
       var song_id = event.target.getAttribute("song_id");
-      console.log(song_id);
+      // console.log(song_id);
       Api().get(`/api/v1/songs/${song_id}`)
       // .then((abc) => (this.playlists = abc.data.playlists))
       .then((response) => (this.track_id = response.data.song_id))

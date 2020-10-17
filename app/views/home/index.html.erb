@@ -46,13 +46,13 @@
   <div class="mx-2 md:mx-auto flex max-w-3xl items-center my-10">
     <div class="relative justify-center flex-grow">
       <%= form_with model: @search, url: result_search_path, method: 'get', id: 'search_bar' do |f| %>
-        <%= f.text_field :search, class: "w-full px-2 py-2 focus:outline-none bg-gray-200 rounded", placeholder: "Search for artists, bands, tracks, podcasts" %>
+        <%= f.text_field :search, class: "w-full px-2 py-2 focus:outline-none bg-gray-200 rounded text-black", placeholder: "Search for artists, bands, tracks, podcasts" %>
       <% end %>
     </div>
-    <span class="md:px-4">or</span>
+    <span class="md:px-4 text-black">or</span>
     <button class="flex items-center px-4 py-2 bg-orange-600 text-white rounded">
       <i class="fas fa-cloud-upload-alt"></i>
-      <a class="ml-1 hidden sm:block" href="#">Upload your own</a>
+      <%= link_to "Upload your own", upload_path, class: "ml-1 hidden sm:block" %>
     </button>
   </div>
 
