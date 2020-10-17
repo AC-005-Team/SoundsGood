@@ -1,17 +1,17 @@
 <%#=這是User資訊頁面%>
 
 <%#=圖區一%>
-<div class="flex mx-6 bg-gradient-to-b from-gray-700 via-white to-gray-500">
-
-  <div class="w-32 h-32 overflow-hidden m-4">
+<div class="flex sm:mx-6 bg-gradient-to-b from-gray-700 via-white to-gray-500">
+  <div class="w-24 h-24 sm:w-32 sm:h-32 overflow-hidden ml-4 mr-1 sm:mx-4 my-4">
     <% if @user.avatar_url %>
-      <%= image_tag @user.avatar_url, class:'rounded-full' %>
+      <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-cover bg-center" style="background-image: url('<%= @user.avatar_url %>')">
+        </div>
       <% else %>
       <div class="h-32 w-32 bg-cover" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
     <% end %>
   </div>
 
-  <div class="flex justify-between w-5/6 items-start">
+  <div class="flex justify-between w-4/6 sm:w-5/6 items-start">
     <div class="m-4">
       <div class="bg-black rounded p-1 text-xl text-white m-1">
         <%= @user.display_name %>
@@ -46,7 +46,7 @@
 </div>
 
 <%#=左邊使用者專區%>
-<div class="flex items-center m-4 justify-between border-b border-gray-400">
+<div class="flex items-center my-4 mx-2 sm:m-4 justify-between border-b border-gray-400">
   <div class="ml-4 text-xl hidden md:flex justify-between">
     <button class="mx-2 text-orange-600 all_btn">All</button>
     <button class="mx-2 track_btn">Tracks</button>
@@ -54,7 +54,7 @@
     <button class="mx-2 reposts_btn">Reposts</button>
   </div>
 
-  <div class="flex justify-between items-center mr-4 text-sm">
+  <div class="flex justify-between items-center mr-4 text-sm mb-2 sm:mb-0">
     <% if current_user != @user %>
       <button class="flex items-center mx-2 p-1 rounded bg-orange-600 text-white user-follow-btn" result-follow-id='<%= @user.id %>'>
           <i class="fas fa-user-check" ></i>
@@ -80,8 +80,8 @@
 
 
 
-<div class="grid grid-cols-12 mx-4 ">
-  <div class="col-span-12 md:col-span-9 mx-4">
+<div class="grid grid-cols-12 mx-1 sm:mx-4 ">
+  <div class="col-span-12 md:col-span-9 mx-1 sm:mx-4">
     <span class="all_template">
       <%= render './shared/song_module', songs: @all_songs %>
       <%= render './shared/playlist_module', playlists: @all_playlists %>
@@ -134,7 +134,7 @@
       <%= render './shared/like_area.html.erb', element: @user %>
 
       </div>
-          <div class="flex border-t border-gray-400 m-4">
+          <div class="flex border-t border-gray-400 m-4 invisible">
       <div class="my-3 text-xs table-row-group">
         <div class="text-gray-500">
           <span class="hover:text-black"><a href="#">Legal</a></span>

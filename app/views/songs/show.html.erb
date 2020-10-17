@@ -1,6 +1,6 @@
 <%#=專輯播放頁面%>
 <%#=第一背景色區%>
-<div class="mx-6">
+<div class="sm:mx-6">
   <div class="grid grid-cols-12 bg-gradient-to-b from-gray-800 via-white to-gray-400 bg-cover bg-no-repeat bg-transparent" style="background-image: url(<% root_path %>/img/back_1.jpg)">
     <div class="col-span-12 md:col-span-9 flex-col-reverse space-y-32 justify-between m-5">
       <div class="flex">
@@ -46,20 +46,20 @@
   <div class="col-span-12 md:col-span-9 m-4">
     <%#=左邊專區：最上面的Comment區域%>
     <div class="border-b border-gray-400">
-      <div class="flex ">
+      <div class="flex justify-between">
         <% if current_user && current_user.avatar_url %>
-          <%= image_tag current_user.avatar_url, class: 'w-auto h-10 current_user-avatar' %>
-          <% else %>
+          <div class="h-8 w-8 bg-cover bg-center current_user-avatar rounded-full" style="background-image: url(<%= current_user.avatar_url %>)"></div>
+        <% else %>
           <div class="h-8 w-8 bg-cover" style="background-image: url(<% root_path %>/img/user_image_1.png)"></div>
         <% end %>
-        <%= form_with(model:@comment, url:song_comments_path(song_id: @song, timepoint: 0), class: "song-comment-form w-11/12 mx-4") do |f|%>
+        <%= form_with(model:@comment, url:song_comments_path(song_id: @song, timepoint: 0), class: "song-comment-form w-10/12 sm:w-11/12 ml-2 sm:ml-4 flex-grow") do |f|%>
           <%= f.text_field :content, placeholder: "Write a comment", class: "song-main-comment w-full h-full pl-1 border border-gray-400 rounded", data: {id: @song.id} %>
           <%= f.submit type: "hidden", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold rounded"%>
         <% end %>
       </div>
       <div class="flex my-2 p-2 justify-around text-sm" data-controller="toggle" data-toggle-song="<%= @song.id %>">
         <% if @song.favorited_by?(current_user) %>
-          <button class="flex items-center border border-orange-500 text-red-600 p-1 rounded" data-target="toggle.likeBtn" data-action="click->toggle#like">
+          <button class="flex items-center border border-orange-500 text-orange-600 p-1 rounded" data-target="toggle.likeBtn" data-action="click->toggle#like">
             <i class="fas fa-heart" data-target="toggle.heart"></i>
             <span class="hidden md:block">Liked</span>
           </button>
@@ -71,7 +71,7 @@
         <% end%>
 
         <% if @song.reposted_by?(current_user) %>
-          <button class="flex items-center border border-orange-500 text-red-600 p-1 rounded" data-target="toggle.repostBtn" data-action="click->toggle#repost">
+          <button class="flex items-center border border-orange-500 text-orange-600 p-1 rounded" data-target="toggle.repostBtn" data-action="click->toggle#repost">
             <i class="fas fa-retweet"></i>
             <span class="hidden md:block">Reposted</span>
           </button>
@@ -231,7 +231,7 @@
   </div>
   <div class="modal-content">
     <div class="modal-item flex" id="addplaylist-modal">
-      <h2 class="mr-4 text-red-600">Add to playlist</h2>
+      <h2 class="mr-4 text-orange-600">Add to playlist</h2>
       <h2>Create a playlist</h2>
     </div>
     <div class="modal-item" id="addplaylist-content" data-controller="playlist" data-playlist-song="<%= @song.id %>">
@@ -239,7 +239,7 @@
         <% @playlists.each do |playlist| %>
           <li>Playlist：<%= link_to playlist.name, playlist_path(playlist) %>
           <% if @song.added_by?(playlist) %>
-            <button class="border border-orange-500 text-red-600 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
+            <button class="border border-orange-500 text-orange-600 p-1 rounded" data-playlist-id="<%= playlist.id %>" data-target="playlist.addBtn" data-action="click->playlist#addToPlaylist">
               <span>Added</span>
             </button>
           </li>

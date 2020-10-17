@@ -1,28 +1,35 @@
  <% if songs %>
   <% songs.each do |song| %>
-    <div class="flex mb-6">
-      <div class="sm:w-1/6 w-1/4">
+    <div class="grid grid-cols-12 mb-6">
+
+      <div class="col-span-12 md:col-span-3 flex justify-start md:flex-col md:items-center my-2">
         <%#= 搜尋結果的Song圖片 %>
-          <%= link_to image_tag(song.image_url), song_path(song.id) if song.image_url %>
-
-      </div>
-      <div class="sm:w-5/6 w-3/4 mx-4">
-        <div class="flex items-center text-sm text-gray-500">
-
-        <%= content_tag(:li, '▶', class:'getURL text-orange-500 mr-2 play-btn', data: {id: song.id} ) %>
+        <% if song.image_url %>
+          <%= link_to song_path(song.id) do %>
+            <div class="w-20 h-20 bg-cover bg-center sm:h-32 sm:w-32 ml-2 md:ml-0" style="background-image: url(<%= song.image_url %>)"></div>
+          <% end %>
+        <% end %>
+        <div class="md:w-full flex-wrap flex items-center text-sm text-gray-500 mx-4 md:mx-0 md:justify-center">
+          <%= content_tag(:li, '▶', class:'getURL text-orange-500 mr-2 play-btn', data: {id: song.id} ) %>
 
           <div class="flex-col w-9/12">
           <%#= 歌曲名稱 %>
-            <p><%= song.name %></p>
+            <p><%= link_to song.user.display_name, user_path(song.user) %></p>
             <p class=""><%= link_to song.name, song_path(song.id) %></p>
           </div>
-          <div class="w-2/12 flex">
+          <div class="my-1 sm:my-0 w-full flex md:justify-end">
           <%#= 歌曲TAG名稱 %>              
             <% song.tags.each do |tag|%>
-              <div class="text-white bg-gray-400 rounded-full text-center"><%= tag.name %></div>
+              <div class="text-white bg-gray-400 rounded-lg text-center px-1 mr-1">#<%= tag.name %></div>
             <% end %> 
           </div>
         </div>
+      </div>
+
+      <div class="col-span-12 md:col-span-9 mx-2 md:mx-4">
+
+
+
         <%#=超難的音波專區%>
         <div class="">
           <%= content_tag(:div, '', class:['w-full waveform-wrap waveform-small'], data:{ path: song.track_url, filename: song.get_filename, id: song.id}) do %> 
@@ -30,6 +37,7 @@
             <%= content_tag(:div, '', class:['waveform-dummy song-waveform']) %>
           <% end %>
         </div>
+
         <%#=留言專區%>
         <%# <div class="flex my-2">
           <img class="w-8" src="https://i1.sndcdn.com/artworks-5AGGrdLB22OugKjV-yK2AgQ-t500x500.jpg" alt="">
@@ -42,7 +50,7 @@
               <% if song.favorited_by?(current_user) %>
                 <span class="my-auto mr-1"><i class="fas fa-heart" style="color: orange"></i></span>
               <% else %>
-                <span class="my-auto mr-1"><i class="fas fa-heart" style="color: black"></i></span>
+                <span class="my-auto mr-1"><i class="fas fa-heart" style="color: white"></i></span>
               <% end %>
               <p class="hidden md:block like_count"><%= song.liked_users.count %></p> 
             </button>
@@ -50,7 +58,7 @@
               <% if song.reposted_by?(current_user)%>
                 <span class="my-auto mr-1"><i class="fas fa-redo-alt" style="color: orange"></i></span>
               <% else %>
-                <span class="my-auto mr-1"><i class="fas fa-redo-alt" style="color: black"></i></span>
+                <span class="my-auto mr-1"><i class="fas fa-redo-alt" style="color: white"></i></span>
               <% end %>
               <p class="hidden md:block"><%= song.reposts.size %></p>
             </button>
@@ -76,8 +84,11 @@
             <% end %>
           </div>
         </div>
+
       </div>
+      
     </div>
+
     <template class="share-template">
       <div class="modal-container share-container">
       </div>

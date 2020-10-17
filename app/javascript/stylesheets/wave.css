@@ -7,6 +7,7 @@
 }
 .waveform-small {
   opacity: .75;
+  height: 100px;
 }
 .waveform-wrap:hover {
   opacity: 1;
@@ -87,4 +88,7 @@
 }
 .comment-time{
   cursor: pointer;
+}
+.waveform-small>.waveform {
+  height: 100px;
 }
