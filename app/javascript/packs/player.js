@@ -4,6 +4,7 @@ import APlayer from 'aplayer';
 import { waveShow } from "../scripts/wave";
 let waveProgress, playingDuration, waveformWidth, secOfFourth
 //畫面一開始的播放器
+
 const ap = new APlayer({
   container: document.getElementById('player1'),
   listFolded: true,
@@ -16,6 +17,7 @@ const ap = new APlayer({
     url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/suRRism-Phonoethics/Lomz__Lezet/Mother_Brain/Lomz__Lezet_-_08_-_Cod.mp3"
   }]
 });
+
 waveShow(ap)
 //立即點播放單首歌
 const songs = document.querySelectorAll('.play-btn');
@@ -40,12 +42,10 @@ if(songs){
           ap.list.clear();
           ap.list.add(val.audio);
           ap.play();
-          playBtnChange(ap)
           ap.container.setAttribute('data-playing', id)
           addPlayedTime(id)
         } else {
           ap.toggle()
-          playBtnChange(ap)
         }
       })
     });
@@ -201,12 +201,11 @@ window.onclick = function(event) {
     }
   }
 }
-
-function playBtnChange(ap){
+ap.on('playing',()=>{
   const btn = document.querySelector('.play-btn')
-  if(ap['paused'] == false){
-    btn.innerHTML = '<i class="fas fa-pause"></i>'
-  }else{
-    btn.innerHTML = '<i class="fas fa-play"></i>'
-  }
-}
+  btn.innerHTML = '<i class="fas fa-pause"></i>'
+})
+ap.on('pause',()=>{
+  const btn = document.querySelector('.play-btn')
+  btn.innerHTML = '<i class="fas fa-play"></i>'
+})
