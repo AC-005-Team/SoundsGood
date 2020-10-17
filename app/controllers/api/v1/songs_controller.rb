@@ -6,17 +6,23 @@ class Api::V1::SongsController < ApplicationController
     else
       @playlists = []
     end
+
     if Tag.find_by(name: "coding")
       @tag1_songs = Tag.find_by(name: "coding").songs
     else
       @tag1_songs = []
     end
+    
     @top_songs = @songs.max_by(5) {|song| song.liked_users.size}
   end
 
   def show
     @song = Song.find(params[:id])
-    @playlists = current_user.playlists
+    if current_user
+      @playlists = current_user.playlists
+    else
+      @playlists = []
+    end
   end
 
   def add_to_playlist

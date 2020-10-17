@@ -1,13 +1,12 @@
-import axios from 'axios';
-import Api from '../../api/api';
-import { mapState, mapGetters, mapActions } from 'vuex'
+import axios from "axios";
+import Api from "../../api/api";
+import { mapState, mapGetters, mapActions } from "vuex";
 
-
-const user= {
+const user = {
   namespaced: true,
 
   state: {
-     User: []
+    User: [],
   },
 
   mutations: {
@@ -16,26 +15,24 @@ const user= {
     },
   },
 
-  getters:{
-    user_id(state){
+  getters: {
+    user_id(state) {
       return state.User.user_id;
     },
-    user_name(state){
+    user_name(state) {
       return state.User.display_name;
-    }
+    },
+    user_avatar(state) {
+      return state.User.avatar;
+    },
   },
 
   actions: {
-
-    async loadUser({commit}) {
-      let response = await Api().get('/api/v1/users.json');
-      commit('SAVE_USER', response.data)
+    async loadUser({ commit }) {
+      let response = await Api().get("/api/v1/users.json");
+      commit("SAVE_USER", response.data);
     },
+  },
+};
 
-
-  }
-
-}
-
-
-export default user
+export default user;

@@ -4,6 +4,7 @@ import APlayer from 'aplayer';
 import { waveShow } from "../scripts/wave";
 let waveProgress, playingDuration, waveformWidth, secOfFourth
 //畫面一開始的播放器
+
 const ap = new APlayer({
   container: document.getElementById('player1'),
   listFolded: true,
@@ -16,6 +17,7 @@ const ap = new APlayer({
     url: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/suRRism-Phonoethics/Lomz__Lezet/Mother_Brain/Lomz__Lezet_-_08_-_Cod.mp3"
   }]
 });
+
 waveShow(ap)
 //立即點播放單首歌
 const songs = document.querySelectorAll('.play-btn');
@@ -199,3 +201,11 @@ window.onclick = function(event) {
     }
   }
 }
+ap.on('playing',()=>{
+  const btn = document.querySelector('.play-btn')
+  btn.innerHTML = '<i class="fas fa-pause"></i>'
+})
+ap.on('pause',()=>{
+  const btn = document.querySelector('.play-btn')
+  btn.innerHTML = '<i class="fas fa-play"></i>'
+})
