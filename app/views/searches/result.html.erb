@@ -22,7 +22,7 @@
         <i class="fas fa-book"></i>
         <p class="mx-4 my-1">Playlists</p>
       </button>
-      <div class="flex">
+      <div class="flex hidden">
         <div class="my-3 text-xs hidden sm:block border-t border-gray-300 py-2 mb-4">
           <div class="text-gray-500">
             <span class="hover:text-black"><a href="#">Legal</a></span>
@@ -55,7 +55,7 @@
               <% end %>
 
               <div class="">
-                <p class="text-black">
+                <p class="">
                   <%= link_to user.display_name, user_path(user) %>
                 </p> 
 
@@ -72,7 +72,7 @@
                       </span>
                   </div>
 
-                  <button class="flex items-center border border-gray-400 rounded px-2 text-black follow_btn" result-follow-id='<%= user.id %>'>
+                  <button class="flex items-center border border-gray-400 rounded px-2 follow_btn" result-follow-id='<%= user.id %>'>
                     <% if current_user.follows?(user)%>
                       <i class="fas fa-user-check" style="color: orange"></i>
                       <p class>Following</p> 

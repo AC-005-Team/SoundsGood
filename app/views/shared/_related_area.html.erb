@@ -9,8 +9,8 @@
         <div class=""><%= song.intro %></div>
         <div class="flex justify-around text-gray-500">
           <span class="played_times_comments<%=@song.id%>"><i class="fas fa-chevron-circle-right"></i><%= song.played_times %></span>
-          <i class="fas fa-heart"></i><%= song.liked_users.size%>
-          <i class="fas fa-retweet"></i><%= song.reposts.size %>
+          <span><i class="fas fa-heart"></i><%= song.liked_users.size%></span>
+          <span><i class="fas fa-retweet"></i><%= song.reposts.size %></span>
           <%= link_to song_path(song) do %>
             <i class="fas fa-comment-dots"></i><%= song.comments.size %>
           <% end %>
