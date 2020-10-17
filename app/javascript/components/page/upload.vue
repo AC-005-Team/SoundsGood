@@ -1,7 +1,7 @@
 <template lang="html">
 
 
-    <div class="p-20 bg-cover h-screen">
+    <div class="p-4 md:p-20 bg-cover h-screen">
           <form @submit.prevent="uploadForm">
 
 
@@ -11,7 +11,7 @@
 
                     <div class="mt-2 m-auto w-2/3 p-4">
                       <div class="text-center">
-                        <p class="text-2xl">Upload Your Music, audio type must be mp3,ogg,mpeg</p>
+                        <p class="text-2xl text-white">Upload Your Music, audio type must be mp3,ogg,mpeg</p>
 
 
 
