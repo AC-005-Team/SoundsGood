@@ -6,16 +6,18 @@
     <div class="flex m-8">
       <img class="h-32 w-32 overflow-hidden bg-blue-300 border border-white" :src="listsongs.first_cover">
       <div class="px-4">
-        <img class="w-16 h-16 overflow-hidden bg-black rounded-full" :src="listsongs.playlist_user">
-        <p class="">user_name</p>
-        <p class="">follower</p>
+        <p class="text-4xl font-semibold text-left">{{this.listsongs.name}}</p>
+        <button class=" p-2 my-6 border border-whiterounded-lg">
+          <router-link :to="{name: 'playlists'}">back to playlists</router-link>
+        </button>
+
       </div>
     </div>
 
     <div class="flex items-end">
-      <button class="border border-white p-2 my-2 rounded-lg">
+      <!-- <button class=" p-2 my-6 border border-whiterounded-lg">
         <router-link :to="{name: 'playlists'}">back to playlists</router-link>
-      </button>
+      </button> -->
     </div>
 
 
@@ -23,7 +25,7 @@
 
 
   <div class="grid grid-cols-12 bg-gray-900 text-white">
-    <div class="col-span-12 my-4 border-b border-gray-200 md:mx-8">
+    <div class="col-span-12 my-4  md:mx-8">
        <transition-group name="list" tag="p">
       <list_songs v-for="(song, index) in listsongs.audio" :key="song.id" :song="song"  :playlist_id="listsongs.id"/>
        </transition-group>

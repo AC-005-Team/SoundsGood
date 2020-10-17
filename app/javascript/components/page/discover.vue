@@ -5,7 +5,7 @@
     <div class="col-span-12 md:col-span-9">
 
 
-      <div class="border-b border-gray-100 border-opacity-50 m-4">
+      <div class="border-b border-gray-100 border-opacity-25 m-4">
         <div class="text-2xl">New tracks on SoundsGood <i class="fab fa-hotjar"></i></div>
 
 
@@ -39,7 +39,7 @@
         <div class="text-2xl">Weeky Top 5</div>
         <div class="flex my-4 overflow-scroll">
 
-        <topfive/>
+        <topfive v-for="top in top_5" :top="top"/>
 
 
         </div>
@@ -55,8 +55,8 @@
 
     </div>
 
-    <div class="col-span-12 md:col-span-3 mb-12 right-0 border-l boder-gray-200">
-      <div class="flex justify-between text-gray-500 border-b border-gray-200 text-sm p-2">
+    <div class="col-span-12 md:col-span-3 mb-12   border-gray-100 border-opacity-25 right-0 border-l ">
+      <div class="flex justify-between text-gray-500 border-b border-gray-200 border-opacity-25 text-sm p-2">
 
 
           <i class="fas fa-user-plus" style="font-size: 20px"></i> who to follow
@@ -123,6 +123,7 @@ export default {
     ...mapGetters({
       index: 'song/index',
       tag_1: 'song/tag_1',
+      top_5: 'song/top_5',
       unfollowers: 'follow/unfollowers',
       isPLAY: 'songs/isPLAY',
       playerTracks:'songs/playerTracks',

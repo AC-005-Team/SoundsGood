@@ -15,7 +15,7 @@
         <span class="text-gray-500">{{ post }}</span>
       </div>
 
-    <div class="flex xl:max-h-full">
+    <div class="md:flex xl:max-h-full">
 
       <div class="overflow-hidden mr-4">
         <a><img :src="this.cover" class="object-cover h-32 w-32"></a>

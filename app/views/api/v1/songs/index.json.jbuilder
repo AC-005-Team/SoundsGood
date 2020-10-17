@@ -31,3 +31,21 @@ json.tag1 (@tag1_songs) do |s|
     json.avatar s.user.avatar_url
   end
 end
+
+json.top_songs (@top_songs) do |s|
+  json.song_id s.id
+  json.likes s.favorited_by?(current_user)
+  json.liked_users s.liked_users.size
+  json.audio do
+      json.name s.name
+      json.artist s.intro
+      json.cover s.image_url
+      json.theme '#ebd0c2'
+      json.url s.track_url
+  end
+  json.user do
+    json.user_id s.user.id
+    json.display_name s.user.display_name
+    json.avatar s.user.avatar_url
+  end
+end

@@ -1,17 +1,18 @@
 <template lang="html">
 
 
-      <div class="flex justify-start items-center bg-gray-900 " @mouseover="mouseOver"  @mouseleave="mouseLeave" >
-        <div class="flex justify-start items-center w-3/4 md:w-8/12">
+      <div class="flex justify-around items-center bg-gray-900 aaa" @mouseover="mouseOver"  @mouseleave="mouseLeave" >
+        <div class="flex justify-start items-center w-2/5 md:w-8/12">
           <img :src="song.cover" class="h-10 w-10 m-1 md:mx-4">
           <div class="mx-1 md:mx-4">{{ song.user }}</div>
           <div class="mx-1 md:mx-4">{{ song.title }}</div>
         </div>
+        <button class=" text-start" @click="remove"><i class="fas fa-window-close"></i>Remove</button>
+
         <div class="flex-row justify-center md:justify-start md:w-1/12">
           <i class="fas fa-play cursor-pointer" @click="playTheSong" v-if="playBtn && !playing"></i>
           <i class="fas fa-pause" v-if="playing" @click="playTheSong" ></i>
         </div>
-        <button @click="remove">Remove</button>
       </div>
 
 
@@ -167,6 +168,13 @@ i.fas{
   opacity: 0;
   transform: translateY(30px);
 }
+
+.aaa:nth-child(odd){
+  background-color: rgba(64, 63, 68, 0.6);
+}
+
+
+
 
 
 </style>
