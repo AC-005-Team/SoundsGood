@@ -7,21 +7,21 @@
 <%# end %>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name) , class: "w-full px-2 py-2 text-white rounded bg-red-700 my-3 text-center"%><br />
+  <%= link_to "Forgot your password?", new_password_path(resource_name) , class: "w-full px-2 py-2 text-white rounded bg-red-700 my-3 text-center hidden"%><br />
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+  <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class:'hidden' %><br />
 <% end %>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-  <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
+  <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name), class:'hidden' %><br />
 <% end %>
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
     <% if provider == :google_oauth2 %>
-      <%= link_to "Continue with Google", omniauth_authorize_path(resource_name, provider), class: 'w-full px-2 py-2 rounded my-2 text-center border border-gray-700 text-black'%>
+      <%= link_to "Continue with Google", omniauth_authorize_path(resource_name, provider), class: 'w-full px-2 py-2 rounded text-center border border-gray-700 text-black'%>
     <% elsif provider == :facebook %>
       <%#= link_to "Continue with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: 'w-full px-2 py-2 text-white rounded bg-blue-600 text-center my-2' %>
     <% end %>
