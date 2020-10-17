@@ -151,17 +151,19 @@
         </div>
         
         <div class="flex items-center">
-          <% if @song.user.followed_by?(current_user) %>
-            <button class="flex items-center bg-orange-500 text-white border-orange-500 border p-1 m-2 rounded" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
-              <i class="fas fa-user-check"></i>
-              <p class="mx-2 follow">Following</p>
-            </button>
-          <% else %>
-            <button class="flex items-center bg-white text-orange-500 border-orange-500 border rounded p-1 m-2" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
-              <i class="fas fa-user-check"></i>
-              <p class="mx-2 follow">Follow</p>
-            </button>
-          <% end%>
+          <% if @song.user != current_user %> 
+            <% if @song.user.followed_by?(current_user) %>
+              <button class="flex items-center bg-orange-500 text-white border-orange-500 border p-1 m-2 rounded" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
+                <i class="fas fa-user-check"></i>
+                <p class="mx-2 follow">Following</p>
+              </button>
+            <% else %>
+              <button class="flex items-center bg-white text-orange-500 border-orange-500 border rounded p-1 m-2" data-song-id="<%= @song.id %>" data-target="follow.followBtn" data-action="click->follow#follow">
+                <i class="fas fa-user-check"></i>
+                <p class="mx-2 follow">Follow</p>
+              </button>
+            <% end%>
+          <% end %>
         </div>
       </div>
       <%#=正中間留言區%>

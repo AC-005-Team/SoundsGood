@@ -40,7 +40,7 @@
 
   <div class="flex justify-end ml-6 mt-2 mb-6 hidden replyForm">
     <%= form_with(model: song.comments.new, url:song_comments_path(song_id: song, reply_id: comment.id), class: "w-11/12 ml-4 sm:mx-4 flex") do |f|%>
-      <%= f.text_field :content, placeholder: "Reply to this comment", class: "w-10/12 py-2 px-4 border border-gray-400 rounded-l", data:{id:comment.id}%>
+      <%= f.text_field :content, placeholder: "Reply to this comment", class: "w-10/12 py-2 px-4 border border-gray-400 rounded-l text-black", data:{id:comment.id}%>
       <%= f.submit "Reply", class: "w-3/12 md:w-1/12 bg-leego_orange border border-leego_orange hover:bg-white hover:text-leego_orange text-white font-bold py-2 px-2 rounded-r"%>
     <% end %>
   </div>

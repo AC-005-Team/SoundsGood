@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="bg-gray-900">
-    <div class="grid grid-cols-12 mx-8">
-      <div class="col-span-12 mx-4">
+    <div class="grid grid-cols-12 mx-8 mb-20">
+      <div class="col-span-12 mx-4 mb-12 overflow-x-scroll">
         <div class="text-lg text-gray-600 mb-4">
           Hear the latest posts from the people you're following:
         </div>
