@@ -1,0 +1,153 @@
+<template lang="html">
+  <div class="">
+
+        <div class="flex justify-around border-b border-gray-600 mx-2  song_list" :class="[playing ? 'dark' : '']" @mouseover="mouseOver"  @mouseleave="mouseLeave" >
+          <div class="w-8/12 m-2 text-base text-gray-white cursor-pointer" @click.stpp="user" >{{ this.coding.user.display_name }} </div>
+          <div class="w-8/12 m-2 text-base text-gray-white cursor-pointer" @click.stpp="songsShow">{{ this.coding.audio.name }} </div>
+          <div class="w-4/12 m-2 text-base text-gray-white text-right"></div>
+          <i
+            class="fa fa-heart mr-2"
+            @click.stop="like"
+            :class="[changeColor ? 'like' : '']"
+          ></i>
+          <i class="fas fa-play cursor-pointer"  @click="playTheSong" v-show="playBtn && !playing"></i>
+          <i class="fas fa-pause" v-show="playing" @click="playTheSong" ></i>
+
+        </div>
+
+  </div>
+  </div>
+
+  </div>
+
+</template>
+
+<script>
+import {
+  mapState,
+  mapGetters,
+  mapActions
+} from 'vuex'
+
+export default {
+  data(){
+    return{
+      playBtn: false,
+      cover: this.coding.audio.cover
+    }
+  },
+  props:['coding'],
+  computed: {
+    ...mapGetters({
+      listsongs: 'playlistsSongs/listsongs',
+      playerTracks: 'songs/playerTracks',
+      continue: "songs/continue",
+      isPLAY: "songs/isPLAY",
+      name: "songs/name",
+      playing: "false"
+    }),
+
+    playing() {
+      if (this.playerTracks.song_id === this.coding.song_id) {
+        if (this.isPLAY === false) {
+          return false;
+        }
+        return true;
+      } else {
+        return false;
+      }
+    },
+    changeColor() {
+      return !!this.coding.likes
+    },
+    bbb(){
+      if ( this.name = this.coding.audio.name ){
+          this.playing = true;
+      }
+    }
+
+
+
+
+  },
+  ...mapActions("favorite", ["toggleLike"]),
+  ...mapActions('playlistsSongs', ['loadList', 'loadSong']),
+  ...mapActions("songs", ["play", "pause", "continuePlay", "continuePause"]),
+  methods: {
+    user(){
+    let id = this.coding.user.user_id
+    window.location.href = `/users/${id}`;
+  },
+  songsShow(){
+    let id = this.coding.song_id;
+    window.location.href = `/songs/${id}`;
+  },
+
+    toggle() {
+      return this.isActive = !this.isActive
+    },
+    yourClickHandler() {
+      if (!event.target.matches('.dropbtn')) {
+        this.isActive = false
+      }
+    },
+    like() {
+      let payload = {
+        id: this.coding.song_id,
+      }
+      this.$store.dispatch('favorite/toggleLike', payload)
+
+    },
+    mouseOver: function() {
+      if(this.isPlay === true){
+        this.playBtn = false;
+      }else{
+        this.playBtn = true;
+      }
+    },
+
+    mouseLeave: function() {
+      this.playBtn = false;
+    },
+
+    playTheSong() {
+      if (this.playerTracks.song_id !== this.coding.song_id || !this.playerTracks) {
+        this.$emit('clicked', this.cover)
+        this.$store.dispatch('songs/pause')
+        this.$store.dispatch('song/loadSong', this.coding.song_id)
+      } else {
+        if (this.isPLAY === true) {
+          this.$store.dispatch("songs/pause");
+          this.$store.dispatch("songs/continuePause");
+        } else {
+          this.$store.dispatch("songs/continuePlay");
+          this.$store.dispatch("songs/play");
+        }
+      }
+
+   }
+}
+}
+</script>
+
+<style lang="css" scoped>
+.song_list {
+
+  transition: 0.3s;
+}
+.like {
+  color: rgb(255, 59, 59);
+}
+
+.dark{
+  background-color: rgba(187, 170, 149, 0.45);
+}
+
+.song_list:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: black;
+}
+
+
+
+</style>

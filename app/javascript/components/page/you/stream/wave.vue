@@ -1,9 +1,9 @@
 <template lang="html">
   <div class="">
-    <div class="waveform-wrap waveform-small" >
+    <div class="waveform-wrap waveform-small" :ref="this.click_id" >
 
 
-      <div id="waveform" ref="waveform">
+      <div class="waveform" ref="waveform">
         <!-- Here be the waveform -->
       </div>
 
@@ -21,6 +21,12 @@
 import WaveSurfer from 'wavesurfer.js'
 import CursorPlugin from 'wavesurfer.js/src/plugin/cursor.js'
 import { renderComments } from '../../../../packs/comment.js'
+import {
+  mapState,
+  mapGetters,
+  mapActions
+} from 'vuex'
+
 
 
 export default {
@@ -29,13 +35,26 @@ export default {
       wavesurfer: null,
       p: this.path,
       f: this.filename,
-      i: this.id,
+      // i: this.id,
       peakStorageRoot: 'https://peaks.soundsgood.world/api/v1/getjson/song_peaks/',
       proxyurl: "https://cors-anywhere.herokuapp.com/",
-      wafesurfer_comment: null
+      wafesurfer_comment: null,
+      waveProgress: '',
+      playingDuration: '',
+      waveformWidth: '',
+      secOfFourth: ''
     };
   },
-  props:['path','filename','id'],
+  computed: {
+    ...mapGetters({
+      isPLAY: 'songs/isPLAY',
+      continue: 'songs/continue',
+      playerTracks:'songs/playerTracks',
+      width: 'songs/width',
+      duration: 'songs/duration'
+    })
+  },
+  props:['path','filename', 'click_id' ],
   methods:{
     getPeak(p, f, wavesurfer) {
       fetch(this.peakStorageRoot+this.f)
@@ -81,30 +100,44 @@ export default {
         console.error('error', e)
         this.wavesurfer.load(this.proxyurl+this.p)
       })
-    }
+    },
+
+
+    handlePlayPause(){
+      if(this.isPLAY){
+        if(this.playerTracks.song_id == this.click_id){
+          let waveProgress = this.$refs[this.click_id]
+          waveProgress.style.width = '';
+          this.waveformWidth = this.$refs[this.click_id].offsetWidth;
+          waveProgress.style.width = (this.waveformWidth/this.duration)*(this.width)
+          console.log(this.duration)
+        }
+      }
+    },
+
 
   },
   mounted(){
     var ctx = document.createElement('canvas').getContext('2d');
-    var linGrad = ctx.createLinearGradient(0, 64, 0, 200);
-    linGrad.addColorStop(0.6, 'rgba(96, 96, 96, 1)');
-    linGrad.addColorStop(0.8, 'rgb(215, 215, 215)');
-    var linGrad2 = ctx.createLinearGradient(0, 64, 0, 200);
-    linGrad2.addColorStop(0.4, 'rgba(251, 128, 49, 0.77)');
-    linGrad2.addColorStop(1, 'rgba(253, 218, 218,0.4)');
+    const waveDarkSmall = ctx.createLinearGradient(900, 0, 900, 200);
+    waveDarkSmall.addColorStop(0.55, 'rgb(96, 96, 96)');
+    waveDarkSmall.addColorStop(0.56, 'rgb(255, 255, 255)');
+    waveDarkSmall.addColorStop(0.57, 'rgb(215, 215, 215)');
+    const waveProgressSmall = ctx.createLinearGradient(900, 0, 900, 200);
+    waveProgressSmall.addColorStop(0.55, '#f74304');
+    waveProgressSmall.addColorStop(0.56, 'rgb(255, 255, 255)');
+    waveProgressSmall.addColorStop(0.57, '#ffcfb5');
 
      // const playingNowPath = document.querySelector(".waveform-wrap")
      // const isSmall = document.querySelector('waveform-small');
      this.wavesurfer = WaveSurfer.create({
         container: this.$refs.waveform,
-        // waveColor: '#555555', //@todo: change color
-        // progressColor: '#ff7626',
         cursorColor: '',
         barWidth: 3,
-        waveColor: linGrad,
-        progressColor: linGrad2,
+        waveColor: waveDarkSmall,
+        progressColor: waveProgressSmall,
         barHeight: 0.5,
-        height: 150,
+        height: 100,
         barRadius: 2,
         cursorWidth: 1,
         barGap: 2,
@@ -122,9 +155,19 @@ export default {
         ]
       });
       this.getPeak(this.p, this.f, this.wavesurfer);
-  }
 
+  },
+
+  watch:{
+      isPLAY(newValue, oldValue) {
+        if(newValue !== oldValue){
+          this.handlePlayPause();
+        }
+      },
+
+   }
 }
+
 </script>
 
 <style lang="css" scoped>
