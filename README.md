@@ -4,7 +4,7 @@ Website: https://www.soundsgood.world/
 
 Demo video : https://www.youtube.com/watch?v=i2ToUGFAsx8
 
-![SoundsGood](https://i.imgur.com/widhZ98.png)
+![SoundsGood](https://imgur.com/2WEJWlL.png)
 
 SoundsGood is a SoundCloud clone, which is known as a social media and music sharing platform. SoundsGood have 3 main functions.
 1. Music : Keep audio playing while changing pages by using Vue.js
