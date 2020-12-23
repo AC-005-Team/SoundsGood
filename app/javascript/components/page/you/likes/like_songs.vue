@@ -1,3 +1,4 @@
+
 <template >
 
   <div class="my-2 mr-2 justify-between parent">
@@ -9,11 +10,11 @@
     </div>
     <!-- <%#= 歌曲名稱、介紹、TAG標籤 %> -->
 
-      <!-- <%#= 歌曲名稱 %> -->
-      <div class="text-xs text-white" >
-        <li> {{ song.user.display_name}} </li>
-        <li @click.stop="songsShow" class="text-lg" >{{ song.audio.name }}</li>
-      </div>
+    <!-- <%#= 歌曲名稱 %> -->
+    <div class="text-xs text-white" >
+      <li> {{ song.user.display_name}} </li>
+      <li @click.stop="songsShow" class="text-lg" >{{ song.audio.name }}</li>
+    </div>
   </div>
 
 </template>
@@ -30,86 +31,86 @@ import {
 export default {
   name: 'likeSongs',
   data(){
-      return {
-        url: this.song.audio.cover,
-        isActive: false,
-        playBtn: false
-      }
+    return {
+      url: this.song.audio.cover,
+      isActive: false,
+      playBtn: false
+    }
   },
   props:['song'],
   computed: {
-      ...mapGetters({
-        playerTracks: 'songs/playerTracks',
-        playlistTracks: 'playlistsSongs/listsongs',
-        continue: "songs/continue",
-        isPLAY: "songs/isPLAY",
-      }),
+    ...mapGetters({
+      playerTracks: 'songs/playerTracks',
+      playlistTracks: 'playlistsSongs/listsongs',
+      continue: "songs/continue",
+      isPLAY: "songs/isPLAY",
+    }),
 
-      playing() {
-        if (this.playerTracks.song_id === this.song.song_id) {
-          if (this.isPLAY === false) {
-            return false;
-          }
-          return true;
-        } else {
+    playing() {
+      if (this.playerTracks.song_id === this.song.song_id) {
+        if (this.isPLAY === false) {
           return false;
         }
-      },
+        return true;
+      } else {
+        return false;
+      }
     },
-    methods: {
-      ...mapActions("songs", ["play", "pause", "continuePlay", "continuePause"]),
-      ...mapActions('playlistsSongs', ['loadList']),
-      ...mapActions("favorite", ["toggleLike"]),
-      ...mapActions("playlists", ["loadSongs"]),
-      ...mapActions("song", ["loadSong"]),
+  },
+  methods: {
+    ...mapActions("songs", ["play", "pause", "continuePlay", "continuePause"]),
+    ...mapActions('playlistsSongs', ['loadList']),
+    ...mapActions("favorite", ["toggleLike"]),
+    ...mapActions("playlists", ["loadSongs"]),
+    ...mapActions("song", ["loadSong"]),
 
-      songsShow(){
-        let id = this.song.song_id ;
-        window.location.href = `/songs/${id}`;
-      },
+    songsShow(){
+      let id = this.song.song_id ;
+      window.location.href = `/songs/${id}`;
+    },
 
 
-      playPause() {
-        if (this.playerTracks.song_id !== this.song.song_id || !this.playerTracks) {
-          this.$store.dispatch('songs/pause')
-          this.$store.dispatch('song/loadSong', this.song.song_id )
+    playPause() {
+      if (this.playerTracks.song_id !== this.song.song_id || !this.playerTracks) {
+        this.$store.dispatch('songs/pause')
+        this.$store.dispatch('song/loadSong', this.song.song_id )
+      } else {
+        if (this.isPLAY === true) {
+          this.$store.dispatch("songs/pause");
+          this.$store.dispatch("songs/continuePause");
         } else {
-          if (this.isPLAY === true) {
-            this.$store.dispatch("songs/pause");
-            this.$store.dispatch("songs/continuePause");
-          } else {
-            this.$store.dispatch("songs/continuePlay");
-            this.$store.dispatch("songs/play");
-          }
+          this.$store.dispatch("songs/continuePlay");
+          this.$store.dispatch("songs/play");
         }
-      },
-      mouseOver() {
-        if(this.isPlay === true){
-          this.playBtn = false;
-        }else{
-          this.playBtn = true;
-        }
-      },
-
-      mouseLeave() {
+      }
+    },
+    mouseOver() {
+      if(this.isPlay === true){
         this.playBtn = false;
-      },
+      }else{
+        this.playBtn = true;
+      }
+    },
+
+    mouseLeave() {
+      this.playBtn = false;
+    },
 
 
 
-      toggle() {
-        return this.isActive = !this.isActive
-      },
-      yourClickHandler() {
-        if (!event.target.matches('.dropbtn')) {
-          this.isActive = false
-        }
-
+    toggle() {
+      return this.isActive = !this.isActive
+    },
+    yourClickHandler() {
+      if (!event.target.matches('.dropbtn')) {
+        this.isActive = false
       }
 
+    }
 
 
-    },
+
+  },
 }
 
 
@@ -120,9 +121,9 @@ export default {
 
 
 .parent {
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
 }
 
 .fa-pause,
@@ -137,39 +138,39 @@ export default {
 }
 
 .child {
-    height: 100%;
-    width: 100%;
-    position: relative;
-    background-size: cover;
-    background-repeat: no-repeat;
-    -webkit-transition: all .5s;
-    -moz-transition: all .5s;
-    -o-transition: all .5s;
-    transition: all .5s;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  -o-transition: all .5s;
+  transition: all .5s;
 }
 
 .parent:hover .child:before, .parent:focus .child:before {
-    display: block;
+  display: block;
 }
 
 .parent:hover .child, .parent:focus .child {
-    -ms-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-    -webkit-transform: scale(1.2);
-    -o-transform: scale(1.2);
-    transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 
 .child:before {
-    content: "";
-    display: none;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(167, 190, 213, 0.25);
+  content: "";
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(167, 190, 213, 0.25);
 }
 
 
